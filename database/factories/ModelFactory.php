@@ -19,3 +19,14 @@ $factory->define(NwManager\User::class, function ($faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(NwManager\Client::class, function ($faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'responsible' => $faker->name,
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'obs' => $faker->sentence,
+    ];
+});
