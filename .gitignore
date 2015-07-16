@@ -1,4 +1,26 @@
+# Laravel
 /vendor
 /node_modules
-Homestead.yaml
+/Homestead.yaml
+/npm-debug.log
 .env
+
+# Composer
+/composer.lock
+/composer.phar
+
+# OS
+.DS_Store
+.idea/
+.project
+.settings
+.buildpath
+/nbproject/
+*.sublime-project
+*.sublime-workspace
+
+# Files tmp
+*~
+*.swp
+[Tt]humbs.db
+_notes/
