@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace NwManager\Events;
 
 abstract class Event
 {

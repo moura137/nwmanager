@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: NwManager
+        psr4_prefix: NwManager
         src_path: app
