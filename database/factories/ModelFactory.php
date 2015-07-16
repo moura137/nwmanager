@@ -11,7 +11,10 @@
 |
 */
 
-$factory->define(NwManager\User::class, function ($faker) {
+use NwManager\User;
+use NwManager\Client;
+
+$factory->define(User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -20,7 +23,7 @@ $factory->define(NwManager\User::class, function ($faker) {
     ];
 });
 
-$factory->define(NwManager\Client::class, function ($faker) {
+$factory->define(Client::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
