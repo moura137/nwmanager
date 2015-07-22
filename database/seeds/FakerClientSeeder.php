@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use NwManager\Client;
+use NwManager\Entities\Client;
 
 class FakerClientSeeder extends Seeder
 {

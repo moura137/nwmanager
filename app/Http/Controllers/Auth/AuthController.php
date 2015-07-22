@@ -2,7 +2,7 @@
 
 namespace NwManager\Http\Controllers\Auth;
 
-use NwManager\User;
+use NwManager\Entities\User;
 use Validator;
 use NwManager\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

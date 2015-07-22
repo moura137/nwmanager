@@ -4,10 +4,17 @@ namespace NwManager\Http\Controllers;
 
 use Illuminate\Http\Request;
 use NwManager\Http\Controllers\Controller;
-use NwManager\Client;
+use NwManager\Repositories\ClientRepository;
 
 class ClientController extends Controller
 {
+    protected $repo;
+
+    public function __construct(ClientRepository $repo)
+    {
+        $this->repo = $repo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::all();
+        return $this->repo->all();
     }
 
     /**
@@ -26,7 +33,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return Client::create($request->all());
+        return $this->repo->create($request->all());
     }
 
     /**
@@ -37,7 +44,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return Client::findOrFail($id);
+        return $this->repo->find($id);
     }
 
     /**
@@ -49,7 +56,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Client::findOrFail($id);
+        $client = $this->repo->find($id);
         $client->update($request->all());
         
         return $client;
@@ -63,7 +70,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::findOrFail($id)->delete();
+        $this->repo->find($id)->delete();
 
         return response()
                 ->json(['error' => null], 204);

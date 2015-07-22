@@ -11,8 +11,8 @@
 |
 */
 
-use NwManager\User;
-use NwManager\Client;
+use NwManager\Entities\User;
+use NwManager\Entities\Client;
 
 $factory->define(User::class, function ($faker) {
     return [

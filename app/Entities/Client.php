@@ -1,10 +1,8 @@
 <?php
 
-namespace NwManager;
+namespace NwManager\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Client extends Model
+class Client extends AbstractModel
 {
     protected $fillable = [
         'name',

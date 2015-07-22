@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => NwManager\User::class,
+    'model' => NwManager\Entities\User::class,
 
     /*
     |--------------------------------------------------------------------------
