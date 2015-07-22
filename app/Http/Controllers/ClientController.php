@@ -4,7 +4,7 @@ namespace NwManager\Http\Controllers;
 
 use Illuminate\Http\Request;
 use NwManager\Http\Controllers\Controller;
-use NwManager\Repositories\ClientRepository;
+use NwManager\Repositories\Contracts\ClientRepository;
 
 class ClientController extends Controller
 {

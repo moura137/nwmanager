@@ -146,6 +146,7 @@ return [
          * Application Service Providers...
          */
         NwManager\Providers\AppServiceProvider::class,
+        NwManager\Providers\RepositoriesServiceProvider::class,
         NwManager\Providers\EventServiceProvider::class,
         NwManager\Providers\RouteServiceProvider::class,
 
