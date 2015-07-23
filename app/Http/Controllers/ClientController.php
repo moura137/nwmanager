@@ -4,14 +4,24 @@ namespace NwManager\Http\Controllers;
 
 use Illuminate\Http\Request;
 use NwManager\Repositories\Contracts\ClientRepository;
+use NwManager\Services\ClientService;
 
 class ClientController extends Controller
 {
+    /**
+     * @var ClientRepository
+     */
     protected $repo;
 
-    public function __construct(ClientRepository $repo)
+    /**
+     * @var ClientService
+     */
+    protected $service;
+
+    public function __construct(ClientRepository $repo, ClientService $service)
     {
         $this->repo = $repo;
+        $this->service = $service;
     }
 
     /**
@@ -32,7 +42,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->repo->create($request->all());
+        $entity = $this->service->create($request->all());
     }
 
     /**
@@ -55,10 +65,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = $this->repo->find($id);
-        $client->update($request->all());
-        
-        return $client;
+        return $this->service->update($id, $request->all());
     }
 
     /**
