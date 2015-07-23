@@ -43,6 +43,13 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $entity = $this->service->create($request->all());
+
+        if (!$entity) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 400);
+        }
+
+        return response()->json($entity, 201);
     }
 
     /**
@@ -65,7 +72,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->service->update($id, $request->all());
+        $entity = $this->service->update($id, $request->all());
+
+        if (!$entity) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 400);
+        }
+
+        return response()->json($entity);
     }
 
     /**
