@@ -9,7 +9,8 @@ use NwManager\Repositories\Eloquent;
 class RepositoriesServiceProvider extends ServiceProvider
 {
     protected $repositories = [
-        Contracts\ClientRepository::class => Eloquent\ClientEloquentRepository::class
+        Contracts\ClientRepository::class => Eloquent\ClientEloquentRepository::class,
+        Contracts\ProjectRepository::class => Eloquent\ProjectEloquentRepository::class,
     ];
 
     /**
@@ -32,6 +33,11 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->registerRepositories();
     }
 
+    /**
+     * Register Contracts Repositories
+     *
+     * @return void
+     */
     protected function registerRepositories()
     {
         foreach ($this->repositories as $abstract => $concrete) {

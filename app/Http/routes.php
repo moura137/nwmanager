@@ -22,5 +22,11 @@ Route::group(['middleware' => 'accept.json'], function(){
     Route::delete('client/{id}', 'ClientController@destroy')->where('id', '\d+');
     Route::put('client/{id}', 'ClientController@update')->where('id', '\d+');
     Route::get('client/{id}', 'ClientController@show')->where('id', '\d+');
+
+    Route::get('project', 'ProjectController@index');
+    Route::post('project', 'ProjectController@store');
+    Route::delete('project/{id}', 'ProjectController@destroy')->where('id', '\d+');
+    Route::put('project/{id}', 'ProjectController@update')->where('id', '\d+');
+    Route::get('project/{id}', 'ProjectController@show')->where('id', '\d+');
     
 });

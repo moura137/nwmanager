@@ -11,10 +11,9 @@
 |
 */
 
-use NwManager\Entities\User;
-use NwManager\Entities\Client;
+use NwManager\Entities;
 
-$factory->define(User::class, function ($faker) {
+$factory->define(Entities\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -23,7 +22,7 @@ $factory->define(User::class, function ($faker) {
     ];
 });
 
-$factory->define(Client::class, function ($faker) {
+$factory->define(Entities\Client::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -31,5 +30,15 @@ $factory->define(Client::class, function ($faker) {
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'obs' => $faker->sentence,
+    ];
+});
+
+$factory->define(Entities\Project::class, function ($faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence,
+        'progress' => $faker->word,
+        'status' => $faker->randomElement(['A', 'I']), // Ativo, Inativo
+        'due_date' => $faker->dateTime,
     ];
 });

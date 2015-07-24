@@ -17,4 +17,14 @@ class Client extends AbstractEntity
         'address',
         'obs',
     ];
+
+    /**
+     * Projects
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects()
+    {
+        return $this->hasMany('NwManager\Entities\Project');
+    }
 }

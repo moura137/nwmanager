@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+use NwManager\Entities;
 
 class FakerSeeder extends Seeder
 {
@@ -11,6 +15,28 @@ class FakerSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(FakerClientSeeder::class);
+        Model::unguard();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        
+        $faker = app('Faker\Generator');
+
+        Entities\User::truncate();
+        factory(Entities\User::class, 5)->create();
+
+        Entities\Client::truncate();
+        factory(Entities\Client::class, 5)->create();
+
+        $users = Entities\User::all()->lists('id')->toArray();
+        Entities\Project::truncate();
+        factory(Entities\Project::class, 5)
+            ->make()
+            ->each(function($project) use ($faker, $users) {
+                $project->owner_id = $faker->randomElement($users);
+                $project->client_id = $faker->randomElement($users);
+                $project->save();
+            });
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Model::reguard();
     }
 }
