@@ -1,0 +1,13 @@
+<?php
+
+$NAMESPACE$
+
+/**
+ * Class $CLASS$
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASS$ extends AbstractEntity
+{
+    protected $fillable = $FILLABLE$;
+}

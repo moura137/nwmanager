@@ -108,11 +108,6 @@ abstract class AbstractService
      */
     public function delete($id)
     {
-        try {
-            return $this->repository->find($id)->delete();
-
-        } catch (Exception $e) {
-            throw $e;
-        }
+        return $this->repository->find($id)->delete();
     }
 }

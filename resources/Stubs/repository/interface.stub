@@ -1,0 +1,13 @@
+<?php
+
+$ROOT_NAMESPACE$Contracts;
+
+/**
+ * Interface $CLASS$Repository
+ *
+ * @package $ROOT_NAMESPACE$Contracts
+ */
+interface $CLASS$Repository extends AbstractRepository
+{
+    //
+}

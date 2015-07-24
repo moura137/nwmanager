@@ -1,0 +1,24 @@
+<?php
+
+$NAMESPACE$
+
+use $ROOT_NAMESPACE$Contracts\$CLASS$Repository;
+use $MODEL$;
+
+/**
+ * Class $CLASS$RepositoryEloquent
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASS$RepositoryEloquent extends AbstractEloquentRepository implements $CLASS$Repository
+{
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        return $CLASS$::class;
+    }
+}
