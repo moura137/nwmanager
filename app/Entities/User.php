@@ -7,6 +7,11 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+/**
+ * Class User Entity
+ *
+ * @package NwManager\Entities;
+ */
 class User extends AbstractEntity implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;

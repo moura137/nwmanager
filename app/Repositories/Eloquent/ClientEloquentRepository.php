@@ -5,6 +5,11 @@ namespace NwManager\Repositories\Eloquent;
 use NwManager\Repositories\Contracts\ClientRepository;
 use NwManager\Entities\Client;
 
+/**
+ * Class ClientEloquentRepository
+ *
+ * @package NwManager\Repositories\Eloquent;
+ */
 class ClientEloquentRepository extends AbstractEloquentRepository implements ClientRepository
 {
     /**

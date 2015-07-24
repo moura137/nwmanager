@@ -2,11 +2,28 @@
 
 namespace NwManager\Services;
 
-use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
+use \Exception;
 
+/**
+ * Class AbstractService
+ *
+ * @package NwManager\Services;
+ * @abstract
+ */
 abstract class AbstractService
 {
+    /**
+     * @var AbstractRepository
+     */
+    protected $repository;
+
+    /**
+     * @var ClientValidator
+     */
+    protected $validator;
+
     /**
      * @var array
      */
@@ -45,7 +62,7 @@ abstract class AbstractService
         } catch (Exception $e) {
             $this->errors = [
                 'error' => 'error_internal',
-                'error_description' => 'Unexpected internal error.',
+                'error_description' => $e->getMessage(),
             ];
             return false;
         }
@@ -78,11 +95,24 @@ abstract class AbstractService
             return false;
 
         } catch (Exception $e) {
-            $this->errors = [
-                'error' => 'error_internal',
-                'error_description' => 'Unexpected internal error.',
-            ];
-            return false;
+            throw $e;
+        }
+    }
+
+    /**
+     * Delete
+     *
+     * @param Entity|int $id
+     *
+     * @return bool
+     */
+    public function delete($id)
+    {
+        try {
+            return $this->repository->find($id)->delete();
+
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 }

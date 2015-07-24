@@ -3,10 +3,25 @@
 namespace NwManager\Repositories\Eloquent;
 
 use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
 use NwManager\Repositories\Contracts\AbstractRepository;
 
+/**
+ * Class AbstractEloquentRepository
+ *
+ * @package NwManager\Repositories\Eloquent;
+ * @abstract
+ */
 abstract class AbstractEloquentRepository extends BaseRepository implements AbstractRepository
 {
+    /**
+     * Boot up the repository, pushing criteria
+     */
+    public function boot()
+    {
+        $this->pushCriteria( app(RequestCriteria::class) );
+    }
+
     /**
      * Get an array with the values of a given column.
      *

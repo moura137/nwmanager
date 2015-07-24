@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use NwManager\Repositories\Contracts\ClientRepository;
 use NwManager\Services\ClientService;
 
+/**
+ * Class ClientController
+ *
+ * @package NwManager\Http\Controllers;
+ */
 class ClientController extends Controller
 {
     /**
@@ -18,6 +23,12 @@ class ClientController extends Controller
      */
     protected $service;
 
+    /**
+     * Construct ClientController
+     *
+     * @param ClientRepository $repo
+     * @param ClientService    $service
+     */
     public function __construct(ClientRepository $repo, ClientService $service)
     {
         $this->repo = $repo;
@@ -46,7 +57,7 @@ class ClientController extends Controller
 
         if (!$entity) {
             $errors = $this->service->errors();
-            return response()->json($errors, 400);
+            return response()->json($errors, 422);
         }
 
         return response()->json($entity, 201);
@@ -76,7 +87,7 @@ class ClientController extends Controller
 
         if (!$entity) {
             $errors = $this->service->errors();
-            return response()->json($errors, 400);
+            return response()->json($errors, 422);
         }
 
         return response()->json($entity);
@@ -90,7 +101,12 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $this->repo->find($id)->delete();
+        $success = $this->service->delete($id);
+
+        if (!$success) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
 
         return response()
                 ->json(['error' => null], 204);

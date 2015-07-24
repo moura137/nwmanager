@@ -5,8 +5,11 @@ namespace NwManager\Services;
 use NwManager\Repositories\Contracts\ClientRepository;
 use NwManager\Validators\ClientValidator;
 
-use \Exception;
-
+/**
+ * Class ClientService
+ *
+ * @package NwManager\Services;
+ */
 class ClientService extends AbstractService
 {
     /**

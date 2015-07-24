@@ -3,9 +3,19 @@
 namespace NwManager\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-abstract class AbstractEntity extends Model
+/**
+ * Class AbstractEntity
+ *
+ * @package NwManager\Entities;
+ * @abstract
+ */
+abstract class AbstractEntity extends Model implements Transformable
 {
+    use TransformableTrait;
+    
     /**
      * Set a given attribute on the model.
      *

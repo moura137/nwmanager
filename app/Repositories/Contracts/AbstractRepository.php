@@ -4,6 +4,11 @@ namespace NwManager\Repositories\Contracts;
 
 use Prettus\Repository\Contracts\RepositoryInterface;
 
+/**
+ * Interface AbstractRepository
+ *
+ * @package NwManager\Repositories\Contracts;
+ */
 interface AbstractRepository extends RepositoryInterface
 {
     /**

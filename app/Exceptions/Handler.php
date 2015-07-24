@@ -63,13 +63,16 @@ class Handler extends ExceptionHandler
      */
     protected function renderJson(Exception $e)
     {
-        $data = ['error' => $e->getMessage()];
+        $statusCode = $this->getStatusCode($e);
+
+        $data = [
+            'error' => ($statusCode==404) ? 'not_found' : 'error_internal',
+            'error_description' => $e->getMessage(),
+        ];
 
         if (config('app.debug')) {
             $data['trace'] = $e->getTrace();
         }
-
-        $statusCode = $this->getStatusCode($e);
         
         return response()->json($data, $statusCode);
     }

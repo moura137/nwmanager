@@ -2,6 +2,11 @@
 
 namespace NwManager\Entities;
 
+/**
+ * Class Client Entity
+ *
+ * @package NwManager\Entities;
+ */
 class Client extends AbstractEntity
 {
     protected $fillable = [

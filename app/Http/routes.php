@@ -19,8 +19,8 @@ Route::group(['middleware' => 'accept.json'], function(){
 
     Route::get('client', 'ClientController@index');
     Route::post('client', 'ClientController@store');
-    Route::delete('client/{id}', 'ClientController@destroy');
-    Route::put('client/{id}', 'ClientController@update');
-    Route::get('client/{id}', 'ClientController@show');
+    Route::delete('client/{id}', 'ClientController@destroy')->where('id', '\d+');
+    Route::put('client/{id}', 'ClientController@update')->where('id', '\d+');
+    Route::get('client/{id}', 'ClientController@show')->where('id', '\d+');
     
 });
