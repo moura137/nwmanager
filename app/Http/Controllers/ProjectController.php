@@ -67,6 +67,8 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
+        $entity = $entity->fresh($this->withRelations);
+
         return response()->json($entity, 201);
     }
 
@@ -99,6 +101,8 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
+        $entity = $entity->fresh($this->withRelations);
+        
         return response()->json($entity);
     }
 
