@@ -45,14 +45,15 @@ class UserService extends AbstractService
         $entity = $this->repository->find($id);
 
         // Valida Se existe Projetos
-        if ($entity->projects()->count() > 1) {
+        $count = $entity->projects()->count();
+        if ($count > 1) {
             $this->errors = [
                 'error' => 'validation_exception',
-                'error_description' => ['projects' => [trans('services.exists_projects')]],
+                'error_description' => ['projects' => [trans('services.exists_projects', ['count' => $count])]],
             ];
             return false;
         }
-
-        return $entity->delete();
+        
+        return $this->repository->delete($entity->id);
     }
 }

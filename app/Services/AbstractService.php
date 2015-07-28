@@ -4,7 +4,6 @@ namespace NwManager\Services;
 
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use \Exception;
 
 /**
  * Class AbstractService
@@ -58,13 +57,6 @@ abstract class AbstractService
         } catch (ValidatorException $e) {
             $this->errors = $e->toArray();
             return false;
-
-        } catch (Exception $e) {
-            $this->errors = [
-                'error' => 'error_internal',
-                'error_description' => $e->getMessage(),
-            ];
-            return false;
         }
     }
 
@@ -93,9 +85,6 @@ abstract class AbstractService
         } catch (ValidatorException $e) {
             $this->errors = $e->toArray();
             return false;
-
-        } catch (Exception $e) {
-            throw $e;
         }
     }
 

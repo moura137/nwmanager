@@ -26,7 +26,7 @@ class Project extends AbstractEntity
      */
 	public function owner()
 	{
-		return $this->belongsTo('NwManager\Entities\Client');
+		return $this->belongsTo('NwManager\Entities\User');
 	}
 
 	/**

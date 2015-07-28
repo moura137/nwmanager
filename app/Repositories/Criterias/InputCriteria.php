@@ -4,6 +4,7 @@ namespace NwManager\Repositories\Criterias;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
+use Illuminate\Database\Query\Expression as QueryExpression;
 
 /**
  * Class InputCriteria
@@ -88,7 +89,7 @@ class InputCriteria implements CriteriaInterface
             // Attributes Valids
             if (in_array(strtolower($key), $columns)) {
                 // if (in_array($key, $model->getDates())) {
-                //     $query = $query->whereDate($key, '=', $value);
+                //     $query = $this->whereDate($query, $key, $value);
                 //     continue;
                 // }
 
@@ -124,9 +125,9 @@ class InputCriteria implements CriteriaInterface
         return $query;
     }
 
-    protected function whereSearch($query, $value, array $fieldsSearchable = array())
+    protected function whereSearch($query, $search, array $fieldsSearchable = array())
     {
-        $query = $query->where(function ($query) use ($fieldsSearchable, $value)
+        $query = $query->where(function ($query) use ($fieldsSearchable, $search)
         {
             foreach ($fieldsSearchable as $field => $condition) {
                 if (is_numeric($field)) {
@@ -136,10 +137,9 @@ class InputCriteria implements CriteriaInterface
 
                 $condition  = trim(strtolower($condition));
 
-                if (!empty($value)) {
-                    $value = in_array($condition, ["like", "ilike"]) ? "%{$value}%" : $value;
-
-                    $query->orWhere($field, $condition, $value);
+                if (!empty($search)) {
+                    $value = in_array($condition, ["like", "ilike"]) ? "%{$search}%" : $search;
+                    $query->orWhere($field, $condition, $search);
                 }
             }
         });

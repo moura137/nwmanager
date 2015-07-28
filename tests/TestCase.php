@@ -25,5 +25,24 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
-    }   
+    }
+    
+    /**
+     * Assert Trait Exists
+     * 
+     * @param  string $expected
+     * @param  Object $object
+     * @param  string $message
+     * 
+     * @return void
+     * @throws
+     */
+    public function assertTraitExists($expected, $object, $message = '')
+    {
+        $this->assertArrayHasKey(
+            $expected,
+            class_uses($object),
+            !empty($message) ? $message :
+            sprintf('Failed asserting not exists Trait instance of interface "%s".', $expected));
+    }
 }
