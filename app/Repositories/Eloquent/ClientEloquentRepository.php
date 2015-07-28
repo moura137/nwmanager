@@ -12,6 +12,10 @@ use NwManager\Entities\Client;
  */
 class ClientEloquentRepository extends AbstractEloquentRepository implements ClientRepository
 {
+    protected $fieldSearchable = [
+        'name' => 'like',
+    ];
+    
     /**
      * Specify Model class name
      *

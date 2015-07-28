@@ -69,11 +69,7 @@ class Handler extends ExceptionHandler
             'error' => ($statusCode==404) ? 'not_found' : 'error_internal',
             'error_description' => $e->getMessage(),
         ];
-
-        if (config('app.debug')) {
-            $data['trace'] = $e->getTrace();
-        }
-        
+                
         return response()->json($data, $statusCode);
     }
 

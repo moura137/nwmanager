@@ -3,6 +3,7 @@
 namespace NwManager\Http\Controllers\Traits;
 
 use Illuminate\Http\Request;
+use NwManager\Repositories\Criterias\InputCriteria;
 
 /**
  * Trait RestFull
@@ -31,9 +32,10 @@ trait RestFullTrait
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return $this->repo
+            ->pushCriteria(new InputCriteria($request->all()))
             ->with($this->withRelations)
             ->all();
     }

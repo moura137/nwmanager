@@ -36,4 +36,32 @@ abstract class AbstractEntity extends Model implements Transformable
         
         parent::setAttribute($key, $value);
     }
+
+    /**
+     * Lista de Colunas
+     *
+     * @return array
+     */
+    public function columns()
+    {
+        if (!$this->_columns) {
+            $table = $this->getTable();
+            $this->_columns = $this->getConnection()->getSchemaBuilder()->getColumnListing($table);
+            $this->_columns = array_map('strtolower', $this->_columns);
+        }
+
+        return $this->_columns;
+    }
+
+    /**
+     * Is Column in Table
+     *
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function isColumn($key)
+    {
+        return in_array(strtolower($key), $this->columns());
+    }
 }

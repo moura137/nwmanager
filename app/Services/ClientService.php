@@ -4,8 +4,6 @@ namespace NwManager\Services;
 
 use NwManager\Repositories\Contracts\ClientRepository;
 use NwManager\Validators\ClientValidator;
-use Prettus\Validator\Exceptions\ValidatorException;
-use Illuminate\Support\MessageBag;
 
 /**
  * Class ClientService

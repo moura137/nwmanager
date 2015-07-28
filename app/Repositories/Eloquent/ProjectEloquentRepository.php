@@ -12,6 +12,10 @@ use NwManager\Entities\Project;
  */
 class ProjectEloquentRepository extends AbstractEloquentRepository implements ProjectRepository
 {
+    protected $fieldSearchable = [
+        'name' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *
