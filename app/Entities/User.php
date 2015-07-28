@@ -36,4 +36,14 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Projects
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function projects()
+    {
+        return $this->hasMany('NwManager\Entities\Project', 'owner_id');
+    }
 }

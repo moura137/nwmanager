@@ -9,6 +9,7 @@ use NwManager\Repositories\Eloquent;
 class RepositoriesServiceProvider extends ServiceProvider
 {
     protected $repositories = [
+        Contracts\UserRepository::class => Eloquent\UserEloquentRepository::class,
         Contracts\ClientRepository::class => Eloquent\ClientEloquentRepository::class,
         Contracts\ProjectRepository::class => Eloquent\ProjectEloquentRepository::class,
     ];
