@@ -25,10 +25,10 @@ class CreateProjectsTable extends Migration
                 ->on('clients');
 
             $table->string('name');
-            $table->string('description');
-            $table->string('progress');
-            $table->string('status');
-            $table->timestamp('due_date');
+            $table->text('description');
+            $table->smallInteger('progress')->unsigned();
+            $table->smallInteger('status')->unsigned();
+            $table->date('due_date');
             $table->timestamps();
         });
     }

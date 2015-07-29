@@ -35,10 +35,10 @@ $factory->define(Entities\Client::class, function ($faker) {
 
 $factory->define(Entities\Project::class, function ($faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->word,
         'description' => $faker->sentence,
-        'progress' => $faker->word,
-        'status' => $faker->randomElement(['A', 'I']), // Ativo, Inativo
-        'due_date' => $faker->dateTime,
+        'progress' => rand(0,100),
+        'status' => $faker->randomElement(['1', '2', '3']),
+        'due_date' => $faker->dateTime('now'),
     ];
 });
