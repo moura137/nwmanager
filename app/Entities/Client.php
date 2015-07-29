@@ -2,6 +2,8 @@
 
 namespace NwManager\Entities;
 
+use NwManager\Entities\Project;
+
 /**
  * Class Client Entity
  *
@@ -25,6 +27,6 @@ class Client extends AbstractEntity
      */
     public function projects()
     {
-        return $this->hasMany('NwManager\Entities\Project');
+        return $this->hasMany(Project::class);
     }
 }

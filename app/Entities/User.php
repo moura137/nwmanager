@@ -6,6 +6,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use NwManager\Entities\Project;
 
 /**
  * Class User Entity
@@ -44,6 +45,6 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
      */
     public function projects()
     {
-        return $this->hasMany('NwManager\Entities\Project', 'owner_id');
+        return $this->hasMany(Project::class, 'owner_id');
     }
 }

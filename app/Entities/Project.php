@@ -2,6 +2,9 @@
 
 namespace NwManager\Entities;
 
+use NwManager\Entities\User;
+use NwManager\Entities\Client;
+
 /**
  * Class Project Entity
  *
@@ -26,7 +29,7 @@ class Project extends AbstractEntity
      */
 	public function owner()
 	{
-		return $this->belongsTo('NwManager\Entities\User');
+		return $this->belongsTo(User::class);
 	}
 
 	/**
@@ -36,6 +39,6 @@ class Project extends AbstractEntity
      */
 	public function client()
 	{
-		return $this->belongsTo('NwManager\Entities\Client');
+		return $this->belongsTo(Client::class);
 	}
 }
