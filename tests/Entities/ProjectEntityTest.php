@@ -47,5 +47,15 @@ class ProjectEntityTest extends TestCase
 
         $this->assertEquals($relation, $project->notes());
     }
+
+    public function testTasks()
+    {
+        $relation = m::mock('Illuminate\Database\Eloquent\Relations\HasMany');
+
+        $project = m::mock('NwManager\Entities\Project[hasMany]');
+        $project->shouldReceive('hasMany')->once()->with('NwManager\Entities\ProjectTask')->andReturn($relation);
+
+        $this->assertEquals($relation, $project->tasks());
+    }
 }
 

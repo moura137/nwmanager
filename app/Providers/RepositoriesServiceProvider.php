@@ -13,6 +13,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         Contracts\ClientRepository::class => Eloquent\ClientEloquentRepository::class,
         Contracts\ProjectRepository::class => Eloquent\ProjectEloquentRepository::class,
         Contracts\ProjectNoteRepository::class => Eloquent\ProjectNoteEloquentRepository::class,
+        Contracts\ProjectTaskRepository::class => Eloquent\ProjectTaskEloquentRepository::class,
     ];
 
     /**

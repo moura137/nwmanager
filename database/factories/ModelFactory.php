@@ -52,3 +52,13 @@ $factory->define(Entities\ProjectNote::class, function ($faker) {
         'note' => $faker->sentence,
     ];
 });
+
+$factory->define(Entities\ProjectTask::class, function ($faker) {
+    return [
+        'project_id' => rand(1,10),
+        'name' => $faker->word,
+        'start_date' => $faker->dateTime('now'),
+        'due_date' => $faker->dateTime('now'),
+        'status' => $faker->randomElement(['1', '2', '3']),
+    ];
+});

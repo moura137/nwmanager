@@ -32,9 +32,13 @@ class FakerSeeder extends Seeder
         Entities\Project::truncate();
         factory(Entities\Project::class, 10)->create();
 
-        // Projects
+        // Projects Note
         Entities\ProjectNote::truncate();
         factory(Entities\ProjectNote::class, 50)->create();
+
+        // Projects Task
+        Entities\ProjectTask::truncate();
+        factory(Entities\ProjectTask::class, 50)->create();
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         Model::reguard();
