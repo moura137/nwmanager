@@ -4,6 +4,7 @@ namespace NwManager\Entities;
 
 use NwManager\Entities\User;
 use NwManager\Entities\Client;
+use NwManager\Entities\ProjectNote;
 
 /**
  * Class Project Entity
@@ -41,4 +42,14 @@ class Project extends AbstractEntity
 	{
 		return $this->belongsTo(Client::class);
 	}
+
+    /**
+     * Notes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes()
+    {
+        return $this->hasMany(ProjectNote::class);
+    }
 }

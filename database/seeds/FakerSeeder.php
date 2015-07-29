@@ -20,22 +20,21 @@ class FakerSeeder extends Seeder
         
         $faker = app('Faker\Generator');
 
+        // Users
         Entities\User::truncate();
         factory(Entities\User::class, 5)->create();
-        $users = Entities\User::all()->lists('id')->toArray();
 
+        // Clients
         Entities\Client::truncate();
         factory(Entities\Client::class, 5)->create();
-        $clients = Entities\Client::all()->lists('id')->toArray();
         
+        // Projects
         Entities\Project::truncate();
-        factory(Entities\Project::class, 5)
-            ->make()
-            ->each(function($project) use ($faker, $users, $clients) {
-                $project->owner_id = $faker->randomElement($users);
-                $project->client_id = $faker->randomElement($clients);
-                $project->save();
-            });
+        factory(Entities\Project::class, 10)->create();
+
+        // Projects
+        Entities\ProjectNote::truncate();
+        factory(Entities\ProjectNote::class, 50)->create();
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         Model::reguard();
