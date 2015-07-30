@@ -12,6 +12,11 @@ use NwManager\Entities\User;
  */
 class ProjectMember extends AbstractEntity
 {
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $tables = 'project_members';
 
     /**
@@ -28,6 +33,11 @@ class ProjectMember extends AbstractEntity
      */
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
 		'project_id',
 		'user_id',

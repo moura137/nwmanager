@@ -54,8 +54,8 @@ abstract class AbstractService
 
             return $this->repository->create($data);
 
-        } catch (ValidatorException $e) {
-            $this->errors = $e->toArray();
+        } catch (\Exception $e) {
+            $this->errors = $this->parseError($e);
             return false;
         }
     }
@@ -82,8 +82,8 @@ abstract class AbstractService
                 
             return $this->repository->update($attributes, $id);
 
-        } catch (ValidatorException $e) {
-            $this->errors = $e->toArray();
+        } catch (\Exception $e) {
+            $this->errors = $this->parseError($e);
             return false;
         }
     }
@@ -97,6 +97,31 @@ abstract class AbstractService
      */
     public function delete($id)
     {
-        return $this->repository->find($id)->delete();
+        try {
+            return $this->repository->delete($id);
+            
+        } catch (\Exception $e) {
+            $this->errors = $this->parseError($e);
+            return false;
+        }
+    }
+
+    /**
+     * Parse Error
+     *
+     * @param  \Exception $e
+     *
+     * @return array
+     */
+    protected function parseError(\Exception $e)
+    {
+        if ($e instanceof ValidatorException) {
+            return $e->toArray();
+        }
+
+        return [
+            'error' => 'error_internal',
+            'error_description' => $e->getMessage(),
+        ];
     }
 }

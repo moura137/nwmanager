@@ -51,8 +51,6 @@ class AbstractServiceTest extends TestCase
 
     public function testCreateThrowException()
     {
-        $this->setExpectedException('\Exception', 'ErroInterno');
-
         $data = ['foo' => 'bar'];
 
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
@@ -67,7 +65,8 @@ class AbstractServiceTest extends TestCase
 
         $serv = new StubAbstract($repo, $validator);
         
-        $serv->create($data);
+        $this->assertFalse($serv->create($data));
+        $this->assertEquals(['error' => 'error_internal', 'error_description' => 'ErroInterno'], $serv->errors());
     }
 
     public function testUpdateSuccess()
@@ -124,8 +123,6 @@ class AbstractServiceTest extends TestCase
 
     public function testUpdateThrowException()
     {
-        $this->setExpectedException('\Exception', 'ErroInterno');
-
         $data = ['foo' => 'bar'];
         $attributes = ['baz' => 'test'];
 
@@ -147,16 +144,14 @@ class AbstractServiceTest extends TestCase
 
         $serv = new StubAbstract($repo, $validator);
         
-        $serv->update(6, $data);
+        $this->assertFalse($serv->update(6, $data));
+        $this->assertEquals(['error' => 'error_internal', 'error_description' => 'ErroInterno'], $serv->errors());
     }
 
     public function testDelete()
     {
-        $entity = m::mock('AbstractEntity');
-        $entity->shouldReceive('delete')->once()->andReturn(true);
-
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
-        $repo->shouldReceive('find')->once()->with(4)->andReturn($entity);
+        $repo->shouldReceive('delete')->once()->with(4)->andReturn(true);
 
         $validator = m::mock('NwManager\Validators\AbstractValidator');
 

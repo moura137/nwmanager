@@ -11,6 +11,18 @@ use NwManager\Entities\Project;
  */
 class Client extends AbstractEntity
 {
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'clients';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'responsible',
