@@ -32,6 +32,13 @@ class FakerSeeder extends Seeder
         Entities\Project::truncate();
         factory(Entities\Project::class, 10)->create();
 
+        // Projects Member Aleatorios
+        $projects = Entities\Project::all();
+        foreach ($projects as $project) {
+            for($x=0;$x<rand(1,5);$x++) $rand[] = rand(1,5);
+            $project->members()->sync($rand);
+        }
+
         // Projects Note
         Entities\ProjectNote::truncate();
         factory(Entities\ProjectNote::class, 50)->create();
@@ -39,7 +46,7 @@ class FakerSeeder extends Seeder
         // Projects Task
         Entities\ProjectTask::truncate();
         factory(Entities\ProjectTask::class, 50)->create();
-
+        
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         Model::reguard();
     }

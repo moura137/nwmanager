@@ -43,8 +43,18 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function projects()
+    public function owner_projects()
     {
         return $this->hasMany(Project::class, 'owner_id');
+    }
+
+    /**
+     * Members
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function member_projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_members');
     }
 }

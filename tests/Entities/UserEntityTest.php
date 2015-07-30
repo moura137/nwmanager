@@ -26,14 +26,27 @@ class UserEntityTest extends TestCase
         $this->assertAttributeEquals($fillable, 'hidden', $user);
     }
 
-    public function testProjects()
+    public function testOwnerProjects()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\HasMany');
 
         $user = m::mock('NwManager\Entities\User[hasMany]');
         $user->shouldReceive('hasMany')->once()->with('NwManager\Entities\Project', 'owner_id')->andReturn($relation);
 
-        $this->assertEquals($relation, $user->projects());
+        $this->assertEquals($relation, $user->owner_projects());
+    }
+
+    public function testMemberProjects()
+    {
+        $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $user = m::mock('NwManager\Entities\User[belongsToMany]');
+        $user->shouldReceive('belongsToMany')
+            ->once()
+            ->with('NwManager\Entities\Project', 'project_members')
+            ->andReturn($relation);
+
+        $this->assertEquals($relation, $user->member_projects());
     }
 }
 

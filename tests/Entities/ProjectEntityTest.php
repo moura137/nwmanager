@@ -57,5 +57,18 @@ class ProjectEntityTest extends TestCase
 
         $this->assertEquals($relation, $project->tasks());
     }
+
+    public function testMembers()
+    {
+        $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsToMany');
+
+        $project = m::mock('NwManager\Entities\Project[belongsToMany]');
+        $project->shouldReceive('belongsToMany')
+            ->once()
+            ->with('NwManager\Entities\User', 'project_members')
+            ->andReturn($relation);
+
+        $this->assertEquals($relation, $project->members());
+    }
 }
 

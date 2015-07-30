@@ -139,7 +139,7 @@ class InputCriteria implements CriteriaInterface
 
                 if (!empty($search)) {
                     $value = in_array($condition, ["like", "ilike"]) ? "%{$search}%" : $search;
-                    $query->orWhere($field, $condition, $search);
+                    $query->orWhere($field, $condition, $value);
                 }
             }
         });

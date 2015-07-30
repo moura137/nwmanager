@@ -26,4 +26,18 @@ class ProjectController extends Controller
         $this->service = $service;
         $this->withRelations = ['client', 'owner'];
     }
+
+    /**
+     * Members
+     *
+     * @param  int $id [description]
+     *
+     * @return JsonResponse
+     */
+    public function members($id)
+    {
+        $project = $this->repo->find($id);
+
+        return $project->members()->get();
+    }
 }

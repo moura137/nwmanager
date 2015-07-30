@@ -63,4 +63,14 @@ class Project extends AbstractEntity
     {
         return $this->hasMany(ProjectTask::class);
     }
+
+    /**
+     * Members
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'project_members');
+    }
 }

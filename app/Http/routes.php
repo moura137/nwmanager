@@ -34,6 +34,7 @@ Route::group(['middleware' => 'accept.json'], function(){
     Route::delete('project/{id}', 'ProjectController@destroy')->where('id', '\d+');
     Route::put('project/{id}', 'ProjectController@update')->where('id', '\d+');
     Route::get('project/{id}', 'ProjectController@show')->where('id', '\d+');
+    Route::get('project/{id}/members', 'ProjectController@members')->where('id', '\d+');
 
     Route::get('project/note', 'ProjectNoteController@index');
     Route::post('project/note', 'ProjectNoteController@store');
