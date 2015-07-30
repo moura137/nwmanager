@@ -36,7 +36,7 @@ $factory->define(Entities\Client::class, function ($faker) {
 $factory->define(Entities\Project::class, function ($faker) {
     return [
         'client_id' => rand(1,5),
-        'owner_id' => rand(1,5),
+        'owner_id' => rand(1,6),
         'name' => $faker->word,
         'description' => $faker->sentence,
         'progress' => rand(0,100),

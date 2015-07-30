@@ -10,6 +10,16 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ExceptionsTest extends TestCase
 {
+    public function setup()
+    {
+        parent::setUp();
+        $authorizer = m::mock('LucaDegasperi\OAuth2Server\Authorizer');
+        $authorizer->shouldReceive('validateAccessToken')->andReturn(true);
+        $authorizer->shouldReceive('hasScope')->andReturn(true);
+        
+        $this->app->instance('oauth2-server.authorizer', $authorizer);
+    }
+
     public function testPageNotFound()
     {
         $this->get('/not-found')

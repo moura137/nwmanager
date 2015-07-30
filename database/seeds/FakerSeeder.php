@@ -15,6 +15,8 @@ class FakerSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(FakerOAuth2Seeder::class);
+        
         Model::unguard();
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         
@@ -22,6 +24,12 @@ class FakerSeeder extends Seeder
 
         // Users
         Entities\User::truncate();
+        factory(Entities\User::class)->create([
+            'name' => 'Administrador',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456'),
+            'remember_token' => str_random(10),
+        ]);
         factory(Entities\User::class, 5)->create();
 
         // Clients
@@ -35,7 +43,7 @@ class FakerSeeder extends Seeder
         // Projects Member Aleatorios
         $projects = Entities\Project::all();
         foreach ($projects as $project) {
-            for($x=0;$x<rand(1,5);$x++) $rand[] = rand(1,5);
+            for($x=0;$x<rand(1,5);$x++) $rand[] = rand(1,6);
             $project->members()->sync($rand);
         }
 
