@@ -39,6 +39,20 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
     protected $hidden = ['password', 'remember_token'];
 
     /**
+     * Set Password somente se não estiver vazio e criptografa
+     *
+     * @param string $value
+     *
+     * @return void
+     */
+    public function setPasswordAttribute($value)
+    {
+        if (! empty($value)) {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

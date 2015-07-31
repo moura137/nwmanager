@@ -28,4 +28,8 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::resource('project/task', 'ProjectTaskController', ['except' => ['create', 'edit']]);
         Route::get('project/{id}/members', ['uses' => 'ProjectController@members', 'as' => 'project.members']);
     });
+    
+    Route::any('/{uri?}', function () {
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException(405, 'Method Not Allowed');
+    })->where('uri', '.*');
 });
