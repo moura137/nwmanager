@@ -47,5 +47,8 @@ Route::group(['middleware' => 'accept.json'], function(){
     Route::delete('project/task/{id}', 'ProjectTaskController@destroy')->where('id', '\d+');
     Route::put('project/task/{id}', 'ProjectTaskController@update')->where('id', '\d+');
     Route::get('project/task/{id}', 'ProjectTaskController@show')->where('id', '\d+');
-    
+
+    Route::any('/{uri?}', function () {
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException(405, 'Method Not Allowed');
+    })->where('uri', '.*');
 });
