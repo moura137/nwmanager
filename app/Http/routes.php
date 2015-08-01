@@ -35,6 +35,8 @@ Route::group(['middleware' => 'accept.json'], function(){
     Route::put('project/{id}', 'ProjectController@update')->where('id', '\d+');
     Route::get('project/{id}', 'ProjectController@show')->where('id', '\d+');
     Route::get('project/{id}/members', 'ProjectController@members')->where('id', '\d+');
+    Route::get('project/{id}/notes', 'ProjectController@notes')->where('id', '\d+');
+    Route::get('project/{id}/tasks', 'ProjectController@tasks')->where('id', '\d+');
 
     Route::get('project/note', 'ProjectNoteController@index');
     Route::post('project/note', 'ProjectNoteController@store');
@@ -49,6 +51,6 @@ Route::group(['middleware' => 'accept.json'], function(){
     Route::get('project/task/{id}', 'ProjectTaskController@show')->where('id', '\d+');
 
     Route::any('/{uri?}', function () {
-        throw new \Symfony\Component\HttpKernel\Exception\HttpException(405, 'Method Not Allowed');
+        throw new \Symfony\Component\HttpKernel\Exception\HttpException(404, 'Method Not Allowed');
     })->where('uri', '.*');
 });

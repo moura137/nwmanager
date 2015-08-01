@@ -19,14 +19,12 @@ class UserValidatorTest extends TestCase
         $rules = [
             'create' => [
                 'name'      => 'required|min:4|max:50',
-                'username'  => 'required|min:4|max:30|regex:/^[a-zA-Z][a-zA-Z0-9_\.]+[a-zA-Z0-9]$/|unique:users,username',
-                'email'     => 'max:255|email|unique:users,email',
+                'email'     => 'required|max:255|email|unique:users,email',
                 'password'  => 'required|alpha_num|min:6|max:12|confirmed',
                 'password_confirmation' => 'required',
             ],
             'update' => [
                 'name'      => 'min:4|max:50',
-                'username'  => 'min:4|max:30|regex:/^[a-zA-Z][a-zA-Z0-9_\.]+[a-zA-Z0-9]$/|unique:users,username',
                 'email'     => 'max:255|email|unique:users,email',
                 'password'  => 'alpha_num|min:6|max:12|confirmed',
             ],

@@ -48,5 +48,21 @@ class UserEntityTest extends TestCase
 
         $this->assertEquals($relation, $user->member_projects());
     }
+
+    public function testSetPassword()
+    {
+        $senhaCript = bcrypt('12345');
+
+        $hash = m::mock('Illuminate\Hashing\BcryptHasher');
+        $hash->shouldReceive('make')->once()->with('12345', [])->andReturn($senhaCript);
+        $this->app->instance('hash', $hash);
+        
+        $user = new \NwManager\Entities\User;
+        $user->password = '12345';
+        $user->password = '';
+
+        $this->assertAttributeEquals(['password' => $senhaCript], 'attributes', $user);
+        $this->assertEquals($senhaCript, $user->password);
+    }
 }
 
