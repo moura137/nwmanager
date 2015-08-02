@@ -15,41 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'accept.json'], function(){
+Route::group(['middleware' => 'accept.json'], function() {
+    
+    Route::group(['middleware' => ['oauth'], 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
 
-    Route::get('user', 'UserController@index');
-    Route::post('user', 'UserController@store');
-    Route::delete('user/{id}', 'UserController@destroy')->where('id', '\d+');
-    Route::put('user/{id}', 'UserController@update')->where('id', '\d+');
-    Route::get('user/{id}', 'UserController@show')->where('id', '\d+');
-
-    Route::get('client', 'ClientController@index');
-    Route::post('client', 'ClientController@store');
-    Route::delete('client/{id}', 'ClientController@destroy')->where('id', '\d+');
-    Route::put('client/{id}', 'ClientController@update')->where('id', '\d+');
-    Route::get('client/{id}', 'ClientController@show')->where('id', '\d+');
-
-    Route::get('project', 'ProjectController@index');
-    Route::post('project', 'ProjectController@store');
-    Route::delete('project/{id}', 'ProjectController@destroy')->where('id', '\d+');
-    Route::put('project/{id}', 'ProjectController@update')->where('id', '\d+');
-    Route::get('project/{id}', 'ProjectController@show')->where('id', '\d+');
-    Route::get('project/{id}/members', 'ProjectController@members')->where('id', '\d+');
-    Route::get('project/{id}/notes', 'ProjectController@notes')->where('id', '\d+');
-    Route::get('project/{id}/tasks', 'ProjectController@tasks')->where('id', '\d+');
-
-    Route::get('project/note', 'ProjectNoteController@index');
-    Route::post('project/note', 'ProjectNoteController@store');
-    Route::delete('project/note/{id}', 'ProjectNoteController@destroy')->where('id', '\d+');
-    Route::put('project/note/{id}', 'ProjectNoteController@update')->where('id', '\d+');
-    Route::get('project/note/{id}', 'ProjectNoteController@show')->where('id', '\d+');
-
-    Route::get('project/task', 'ProjectTaskController@index');
-    Route::post('project/task', 'ProjectTaskController@store');
-    Route::delete('project/task/{id}', 'ProjectTaskController@destroy')->where('id', '\d+');
-    Route::put('project/task/{id}', 'ProjectTaskController@update')->where('id', '\d+');
-    Route::get('project/task/{id}', 'ProjectTaskController@show')->where('id', '\d+');
-
+        Route::resource('user',         'UserController',        ['except' => ['create', 'edit']]);
+        Route::resource('client',       'ClientController',      ['except' => ['create', 'edit']]);
+        Route::resource('project',      'ProjectController',     ['except' => ['create', 'edit']]);
+        Route::resource('project/note', 'ProjectNoteController', ['except' => ['create', 'edit']]);
+        Route::resource('project/task', 'ProjectTaskController', ['except' => ['create', 'edit']]);
+        Route::get('project/{id}/members', ['uses' => 'ProjectController@members', 'as' => 'project.members'])->where('id', '\d+');
+        Route::get('project/{id}/notes',   ['uses' => 'ProjectController@notes',   'as' => 'project.notes'])->where('id', '\d+');
+        Route::get('project/{id}/tasks',   ['uses' => 'ProjectController@tasks',   'as' => 'project.tasks'])->where('id', '\d+');
+    });
+    
     Route::any('/{uri?}', function () {
         throw new \Symfony\Component\HttpKernel\Exception\HttpException(404, 'Method Not Allowed');
     })->where('uri', '.*');
