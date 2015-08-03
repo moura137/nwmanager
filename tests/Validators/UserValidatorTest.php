@@ -27,6 +27,7 @@ class UserValidatorTest extends TestCase
                 'name'      => 'min:4|max:50',
                 'email'     => 'max:255|email|unique:users,email',
                 'password'  => 'alpha_num|min:6|max:12|confirmed',
+                'password_confirmation' => 'required_with:password',
             ],
         ];
         $this->assertAttributeEquals($rules, 'rules', $validator);
