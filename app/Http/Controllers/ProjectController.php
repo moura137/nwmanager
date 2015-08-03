@@ -30,7 +30,7 @@ class ProjectController extends Controller
     /**
      * Members
      *
-     * @param  int $id [description]
+     * @param int $id
      *
      * @return JsonResponse
      */
@@ -39,5 +39,33 @@ class ProjectController extends Controller
         $project = $this->repo->find($id);
 
         return $project->members()->get();
+    }
+
+    /**
+     * Notes
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function notes($id)
+    {
+        $project = $this->repo->find($id);
+
+        return $project->notes()->get();
+    }
+
+    /**
+     * Tasks
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function tasks($id)
+    {
+        $project = $this->repo->find($id);
+
+        return $project->tasks()->get();
     }
 }

@@ -41,6 +41,54 @@ class ProjectControllerTest extends TestCase
             ->seeJsonEquals($return);
     }
 
+    public function testActionNotes()
+    {
+        $return = ['note1', 'note2'];
+        
+        $relation = m::mock('Relation');
+        $relation->shouldReceive('get')
+            ->once()
+            ->andReturn($return);
+
+        $project = m::mock('ProjectEntity');
+        $project->shouldReceive('notes')
+            ->once()
+            ->andReturn($relation);
+
+        $this->repo
+            ->shouldReceive('find')
+            ->once()
+            ->with( 4 )
+            ->andReturn($project);
+
+        $this->visit($this->resource.'/4/notes')
+            ->seeJsonEquals($return);
+    }
+
+    public function testActionTasks()
+    {
+        $return = ['task1', 'task2'];
+        
+        $relation = m::mock('Relation');
+        $relation->shouldReceive('get')
+            ->once()
+            ->andReturn($return);
+
+        $project = m::mock('ProjectEntity');
+        $project->shouldReceive('tasks')
+            ->once()
+            ->andReturn($relation);
+
+        $this->repo
+            ->shouldReceive('find')
+            ->once()
+            ->with( 4 )
+            ->andReturn($project);
+
+        $this->visit($this->resource.'/4/tasks')
+            ->seeJsonEquals($return);
+    }
+
     /**
      * Example:
      */ 
