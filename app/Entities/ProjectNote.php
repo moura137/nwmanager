@@ -3,6 +3,7 @@
 namespace NwManager\Entities;
 
 use NwManager\Entities\Project;
+use NwManager\Entities\User;
 
 /**
  * Class ProjectNote Entity
@@ -24,10 +25,11 @@ class ProjectNote extends AbstractEntity
      * @var array
      */
     protected $fillable = [
-		'project_id',
-		'title',
-		'note',
-	];
+        'project_id',
+        'user_id',
+        'title',
+        'note',
+    ];
     
     /**
      * Projects
@@ -37,5 +39,15 @@ class ProjectNote extends AbstractEntity
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

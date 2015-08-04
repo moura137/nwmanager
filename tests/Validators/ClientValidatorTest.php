@@ -17,21 +17,11 @@ class ClientValidatorTest extends TestCase
         $this->assertInstanceOf('Prettus\Validator\LaravelValidator', $validator);
         
         $rules = [
-            'create' => [
-                'name'          => 'required|max:255',
-                'responsible'   => 'required|max:255',
-                'email'         => 'required|max:255|email',
-                'phone'         => 'required|max:255',
-                'address'       => 'required|max:255',
-                'obs'           => 'required',
-            ],
-            'update' => [
-                'name'          => 'max:255',
-                'responsible'   => 'max:255',
-                'email'         => 'max:255|email',
-                'phone'         => 'max:255',
-                'address'       => 'max:255',
-            ],
+            'name'          => 'required|max:255',
+            'responsible'   => 'required|max:255',
+            'email'         => 'required|max:255|email',
+            'phone'         => 'required|max:255',
+            'address'       => 'required|max:255',
         ];
         $this->assertAttributeEquals($rules, 'rules', $validator);
     }

@@ -14,7 +14,7 @@ class ProjectNoteEntityTest extends TestCase
 
         $this->assertInstanceOf('NwManager\Entities\AbstractEntity', $client);
         
-        $fillable = ['project_id','title','note'];
+        $fillable = ['project_id','user_id', 'title','note'];
         $this->assertAttributeEquals($fillable, 'fillable', $client);
     }
 

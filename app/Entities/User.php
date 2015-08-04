@@ -7,6 +7,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use NwManager\Entities\Project;
+use NwManager\Entities\ProjectNote;
 
 /**
  * Class User Entity
@@ -70,5 +71,15 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
     public function member_projects()
     {
         return $this->belongsToMany(Project::class, 'project_members');
+    }
+
+    /**
+     * Notes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes_projects()
+    {
+        return $this->hasMany(ProjectNote::class, 'user_id');
     }
 }

@@ -14,6 +14,10 @@ use NwManager\Entities\ProjectTask;
  */
 class Project extends AbstractEntity
 {
+    const STATUS_ATIVO = '1';
+    const STATUS_ENCERRADO = '2';
+    const STATUS_PAUSADO = '3';
+
     /**
      * The database table used by the model.
      *
@@ -35,7 +39,24 @@ class Project extends AbstractEntity
 		'status',
 		'due_date',
 	];
-	
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['due_date'];
+
+    /**
+     * Is Ativo
+     *
+     * @return boolean
+     */
+    public function isAtivo()
+    {
+        return (bool) ($this->status == self::STATUS_ATIVO);
+    }
+
     /**
      * Owner
      *

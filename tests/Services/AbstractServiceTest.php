@@ -15,7 +15,12 @@ class AbstractServiceTest extends TestCase
     {
         $data = ['foo' => 'bar'];
 
+        $entity = m::mock('AbstractEntity');
+        $entity->shouldReceive('fill')->once()->with($data)->andReturn($entity);
+        $entity->shouldReceive('toArray')->once()->andReturn([]);
+
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
+        $repo->shouldReceive('makeModel')->andReturn($entity);
         $repo->shouldReceive('create')->once()->with($data)->andReturn(true);
 
         $validator = m::mock('NwManager\Validators\AbstractValidator');
@@ -31,7 +36,12 @@ class AbstractServiceTest extends TestCase
     {
         $data = ['foo' => 'bar'];
 
+        $entity = m::mock('AbstractEntity');
+        $entity->shouldReceive('fill')->once()->with($data)->andReturn($entity);
+        $entity->shouldReceive('toArray')->once()->andReturn([]);
+
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
+        $repo->shouldReceive('makeModel')->andReturn($entity);
         $repo->shouldReceive('create')->never();
 
         $messageBag = new MessageBag(['error_validation']);
@@ -52,8 +62,13 @@ class AbstractServiceTest extends TestCase
     public function testCreateThrowException()
     {
         $data = ['foo' => 'bar'];
+        
+        $entity = m::mock('AbstractEntity');
+        $entity->shouldReceive('fill')->once()->with($data)->andReturn($entity);
+        $entity->shouldReceive('toArray')->once()->andReturn([]);
 
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
+        $repo->shouldReceive('makeModel')->andReturn($entity);
         $repo->shouldReceive('create')->never();
 
         $validator = m::mock('NwManager\Validators\AbstractValidator');
@@ -71,12 +86,13 @@ class AbstractServiceTest extends TestCase
 
     public function testUpdateSuccess()
     {
-        $data = ['foo' => 'bar'];
-        $attributes = ['baz' => 'test'];
+        $data = ['foo' => 'bar', 'name' => 'FullName'];
+        $attr = ['baz' => 'test', 'foo' => 'BAR'];
+        $attributes = ['foo' => 'BAR', 'name' => 'FullName', 'baz' => 'test'];
 
         $entity = m::mock('AbstractEntity');
-        $entity->shouldReceive('fill')->once()->with($data);
-        $entity->shouldReceive('toArray')->once()->andReturn($attributes);
+        $entity->shouldReceive('fill')->once()->with($data)->andReturn($entity);
+        $entity->shouldReceive('toArray')->once()->andReturn($attr);
 
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
         $repo->shouldReceive('find')->once()->with(5)->andReturn($entity);
@@ -94,12 +110,13 @@ class AbstractServiceTest extends TestCase
 
     public function testUpdateValidatorException()
     {
-        $data = ['foo' => 'bar'];
-        $attributes = ['baz' => 'test'];
+        $data = ['foo' => 'bar', 'name' => 'FullName'];
+        $attr = ['baz' => 'test', 'foo' => 'BAR'];
+        $attributes = ['foo' => 'BAR', 'name' => 'FullName', 'baz' => 'test'];
 
         $entity = m::mock('AbstractEntity');
-        $entity->shouldReceive('fill')->once()->with($data);
-        $entity->shouldReceive('toArray')->once()->andReturn($attributes);
+        $entity->shouldReceive('fill')->once()->with($data)->andReturn($entity);
+        $entity->shouldReceive('toArray')->once()->andReturn($attr);
 
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
         $repo->shouldReceive('find')->once()->with(5)->andReturn($entity);
@@ -123,12 +140,13 @@ class AbstractServiceTest extends TestCase
 
     public function testUpdateThrowException()
     {
-        $data = ['foo' => 'bar'];
-        $attributes = ['baz' => 'test'];
+        $data = ['foo' => 'bar', 'name' => 'FullName'];
+        $attr = ['baz' => 'test', 'foo' => 'BAR'];
+        $attributes = ['foo' => 'BAR', 'name' => 'FullName', 'baz' => 'test'];
 
         $entity = m::mock('AbstractEntity');
-        $entity->shouldReceive('fill')->once()->with($data);
-        $entity->shouldReceive('toArray')->once()->andReturn($attributes);
+        $entity->shouldReceive('fill')->once()->with($data)->andReturn($entity);
+        $entity->shouldReceive('toArray')->once()->andReturn($attr);
 
         $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
         $repo->shouldReceive('find')->once()->with(6)->andReturn($entity);

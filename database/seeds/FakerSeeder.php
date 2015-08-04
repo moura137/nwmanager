@@ -27,7 +27,7 @@ class FakerSeeder extends Seeder
         factory(Entities\User::class)->create([
             'name' => 'Administrador',
             'email' => 'admin@admin.com',
-            'password' => bcrypt('123456'),
+            'password' => '123456',
             'remember_token' => str_random(10),
         ]);
         factory(Entities\User::class, 5)->create();

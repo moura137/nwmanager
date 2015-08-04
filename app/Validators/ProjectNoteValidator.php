@@ -12,14 +12,9 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 class ProjectNoteValidator extends AbstractValidator
 {
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'project_id'    => 'required|exists:projects,id',
-            'title'         => 'required|max:255',
-            'note'          => 'required',
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'project_id'    => 'exists:projects,id',
-            'title'         => 'max:255',
-        ],
+        'project_id'    => 'required|exists:projects,id',
+        'user_id'       => 'required|exists:users,id',
+        'title'         => 'required|max:255',
+        'note'          => 'required',
     ];
 }

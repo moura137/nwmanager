@@ -16,6 +16,23 @@ class ProjectEntityTest extends TestCase
         
         $fillable = ['owner_id','client_id','name','description','progress','status','due_date'];
         $this->assertAttributeEquals($fillable, 'fillable', $project);
+
+        $dates = ['due_date'];
+        $this->assertAttributeEquals($dates, 'dates', $project);
+    }
+
+    public function testIsAtivo()
+    {
+        $project = new Project;
+        
+        $project->status = $project::STATUS_ATIVO;
+        $this->assertTrue($project->isAtivo());
+
+        $project->status = $project::STATUS_ENCERRADO;
+        $this->assertFalse($project->isAtivo());
+
+        $project->status = $project::STATUS_PAUSADO;
+        $this->assertFalse($project->isAtivo());
     }
 
     public function testOwner()

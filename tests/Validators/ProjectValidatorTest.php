@@ -17,22 +17,12 @@ class ProjectValidatorTest extends TestCase
         $this->assertInstanceOf('Prettus\Validator\LaravelValidator', $validator);
         
         $rules = [
-            'create' => [
-                'owner_id'      => 'required|exists:users,id',
-                'client_id'     => 'required|exists:clients,id',
-                'name'          => 'required|max:255',
-                'progress'      => 'required|int|min:0|max:100',
-                'status'        => 'required|in:1,2,3',
-                'due_date'      => 'required|date',
-            ],
-            'update' => [
-                'owner_id'      => 'exists:users,id',
-                'client_id'     => 'exists:clients,id',
-                'name'          => 'max:255',
-                'progress'      => 'int|min:0|max:100',
-                'status'        => 'in:1,2,3',
-                'due_date'      => 'date|date_format:d/m/Y',
-            ],
+            'owner_id'      => 'required|exists:users,id',
+            'client_id'     => 'required|exists:clients,id',
+            'name'          => 'required|max:255',
+            'progress'      => 'required|integer|min:0|max:100',
+            'status'        => 'required|in:1,2,3',
+            'due_date'      => 'required|date',
         ];
         $this->assertAttributeEquals($rules, 'rules', $validator);
     }

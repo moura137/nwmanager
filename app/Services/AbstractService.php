@@ -48,6 +48,9 @@ abstract class AbstractService
     public function create(array $data)
     {
         try {
+            $entity = $this->repository->makeModel()->fill($data);
+            $data = array_merge($data, $entity->toArray());
+
             $this->validator
                 ->with($data)
                 ->passesOrFail(ValidatorInterface::RULE_CREATE);
@@ -70,17 +73,17 @@ abstract class AbstractService
      */
     public function update($id, array $data = [])
     {
-        $entity = $this->repository->find($id);
-        $entity->fill($data);
-        $attributes = $entity->toArray();
+        $entity = $this->repository->find($id)->fill($data);
+
+        $data = array_merge($data, $entity->toArray());
 
         try {
             $this->validator
-                ->with($attributes)
+                ->with($data)
                 ->setId($id)
                 ->passesOrFail(ValidatorInterface::RULE_UPDATE);
                 
-            return $this->repository->update($attributes, $id);
+            return $this->repository->update($data, $id);
 
         } catch (\Exception $e) {
             $this->errors = $this->parseError($e);
