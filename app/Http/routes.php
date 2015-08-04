@@ -19,7 +19,7 @@ Route::group(['middleware' => 'accept.json'], function() {
 
     Route::post('oauth/access-token', 'OAuthController@access');
     
-    Route::group(['where' => ['id' => '\d+', 'project' => '\d+']], function() {
+    Route::group(['middleware' => 'oauth', 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
 
         Route::resource('user',         'UserController',        ['except' => ['create', 'edit']]);
         Route::resource('client',       'ClientController',      ['except' => ['create', 'edit']]);
