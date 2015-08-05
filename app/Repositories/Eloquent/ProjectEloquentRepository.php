@@ -36,7 +36,6 @@ class ProjectEloquentRepository extends AbstractEloquentRepository implements Pr
      */
     public function isOwner($projectId, $userId)
     {
-        $where = ['id' => $projectId, 'owner_id' => $userId];
-        return (bool) count($this->findWhere($where));
+        return $this->find($projectId)->isOwner($userId);
     }
 }

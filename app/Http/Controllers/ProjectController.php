@@ -25,6 +25,7 @@ class ProjectController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['client', 'owner'];
+        $this->middleware('project.owner');
     }
 
     /**

@@ -24,9 +24,9 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::resource('project',      'ProjectController',     ['except' => ['create', 'edit']]);
         Route::resource('project/note', 'ProjectNoteController', ['except' => ['create', 'edit']]);
         Route::resource('project/task', 'ProjectTaskController', ['except' => ['create', 'edit']]);
-        Route::get('project/{id}/members', ['uses' => 'ProjectController@members', 'as' => 'project.members'])->where('id', '\d+');
-        Route::get('project/{id}/notes',   ['uses' => 'ProjectController@notes',   'as' => 'project.notes'])->where('id', '\d+');
-        Route::get('project/{id}/tasks',   ['uses' => 'ProjectController@tasks',   'as' => 'project.tasks'])->where('id', '\d+');
+        Route::get('project/{project}/members', ['uses' => 'ProjectController@members', 'as' => 'project.members']);
+        Route::get('project/{project}/notes',   ['uses' => 'ProjectController@notes',   'as' => 'project.notes']);
+        Route::get('project/{project}/tasks',   ['uses' => 'ProjectController@tasks',   'as' => 'project.tasks']);
     });
     
     Route::any('/{uri?}', function () {
