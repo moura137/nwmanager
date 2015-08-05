@@ -58,6 +58,18 @@ class Project extends AbstractEntity
     }
 
     /**
+     * Is Owner
+     *
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isOwner($userId)
+    {
+        return (bool) ($this->owner_id == $userId);
+    }
+
+    /**
      * Owner
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -21,5 +21,15 @@ class ProjectRepositoryTest extends TestCase
 
         $this->assertEquals('NwManager\Entities\Project', $repo->model());
     }
+
+    public function testIsOwner()
+    {
+        $repo = m::mock('NwManager\Repositories\Eloquent\ProjectEloquentRepository[findWhere]', [$this->app]);
+        $repo->shouldReceive('findWhere')->once()->ordered()->with(['id' => 2, 'owner_id' => 3])->andReturn(['project']);
+        $repo->shouldReceive('findWhere')->once()->ordered()->with(['id' => 4, 'owner_id' => 1])->andReturn([]);
+
+        $this->assertTrue($repo->isOwner(2,3));
+        $this->assertFalse($repo->isOwner(4,1));
+    }
 }
 

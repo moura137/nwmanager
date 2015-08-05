@@ -35,6 +35,15 @@ class ProjectEntityTest extends TestCase
         $this->assertFalse($project->isAtivo());
     }
 
+    public function testIsOwner()
+    {
+        $project = new Project;
+        
+        $project->owner_id = 1;
+        $this->assertTrue($project->isOwner(1));
+        $this->assertFalse($project->isOwner(2));
+    }
+
     public function testOwner()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsTo');
