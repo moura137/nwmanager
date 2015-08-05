@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,10 +143,12 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
         LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
+        AdamWathan\BootForms\BootFormsServiceProvider::class,
         
         /*
          * Application Service Providers...
          */
+        NwManager\Providers\CarbonServiceProvider::class,
         NwManager\Providers\AppServiceProvider::class,
         NwManager\Providers\RepositoriesServiceProvider::class,
         NwManager\Providers\EventServiceProvider::class,
@@ -201,6 +203,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
+        'BootForm'   => AdamWathan\BootForms\Facades\BootForm::class,
 
     ],
 
