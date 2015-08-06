@@ -36,5 +36,6 @@ class Kernel extends HttpKernel
         'guest' => \NwManager\Http\Middleware\RedirectIfAuthenticated::class,
         'accept.json' => \NwManager\Http\Middleware\AcceptJson::class,
         'project.owner' => \NwManager\Http\Middleware\CheckProjectOwner::class,
+        'project.member' => \NwManager\Http\Middleware\CheckProjectMember::class,
     ];
 }

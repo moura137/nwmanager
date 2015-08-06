@@ -6,7 +6,7 @@ use Closure;
 use NwManager\Repositories\Contracts\ProjectRepository;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
-class CheckProjectOwner
+class CheckProjectMember
 {
     protected $repository;
 
@@ -32,12 +32,12 @@ class CheckProjectOwner
         $projectId = intval($request->project);
         $userId = Authorizer::getResourceOwnerId();
 
-        $isOwner = $this->repository->isOwner($projectId, $userId);
+        $project = $this->repository->find($projectId);
 
-        if (!$isOwner) {
+        if (!$project->isOwner($userId) && !$project->hasMember($userId)) {
              abort(403, 'Access Forbidden');
         }
-        
+
         return $next($request);
     }
 }

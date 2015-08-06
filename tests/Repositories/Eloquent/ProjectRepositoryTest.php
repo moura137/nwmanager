@@ -25,8 +25,8 @@ class ProjectRepositoryTest extends TestCase
     public function testIsOwner()
     {
         $project = m::mock('ProjectEntitity');
-        $project->shouldReceive('isOwner')->once()->ordered()->andReturn(true);
-        $project->shouldReceive('isOwner')->once()->ordered()->andReturn(false);
+        $project->shouldReceive('isOwner')->once()->with(3)->ordered()->andReturn(true);
+        $project->shouldReceive('isOwner')->once()->with(1)->ordered()->andReturn(false);
 
         $repo = m::mock('NwManager\Repositories\Eloquent\ProjectEloquentRepository[find]', [$this->app]);
         $repo->shouldReceive('find')->once()->ordered()->with(2)->andReturn($project);
@@ -34,6 +34,20 @@ class ProjectRepositoryTest extends TestCase
 
         $this->assertTrue($repo->isOwner(2,3));
         $this->assertFalse($repo->isOwner(4,1));
+    }
+
+    public function testHasMember()
+    {
+        $project = m::mock('ProjectEntitity');
+        $project->shouldReceive('hasMember')->once()->with(3)->ordered()->andReturn(true);
+        $project->shouldReceive('hasMember')->once()->with(1)->ordered()->andReturn(false);
+
+        $repo = m::mock('NwManager\Repositories\Eloquent\ProjectEloquentRepository[find]', [$this->app]);
+        $repo->shouldReceive('find')->once()->ordered()->with(2)->andReturn($project);
+        $repo->shouldReceive('find')->once()->ordered()->with(4)->andReturn($project);
+
+        $this->assertTrue($repo->hasMember(2,3));
+        $this->assertFalse($repo->hasMember(4,1));
     }
 }
 

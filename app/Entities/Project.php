@@ -70,6 +70,18 @@ class Project extends AbstractEntity
     }
 
     /**
+     * Has Member
+     *
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function hasMember($userId)
+    {
+        return (bool) ($this->members()->where('user_id', $userId)->count());
+    }
+
+    /**
      * Owner
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -38,4 +38,17 @@ class ProjectEloquentRepository extends AbstractEloquentRepository implements Pr
     {
         return $this->find($projectId)->isOwner($userId);
     }
+
+    /**
+     * Has Member
+     *
+     * @param int $projectId
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function hasMember($projectId, $userId)
+    {
+        return (bool) ($this->find($projectId)->hasMember($userId));
+    }
 }

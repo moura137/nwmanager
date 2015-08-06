@@ -177,6 +177,23 @@ class AbstractServiceTest extends TestCase
         
         $this->assertTrue($serv->delete(4));
     }
+
+    public function testDeleteThrowException()
+    {
+        $repo = m::mock('NwManager\Repositories\Contracts\AbstractRepository');
+        $repo->shouldReceive('delete')->never();
+        $repo->shouldReceive('delete')
+            ->once()
+            ->with(1)
+            ->andThrow(new \Exception('ErroInterno'));
+
+        $validator = m::mock('NwManager\Validators\AbstractValidator');
+        $serv = new StubAbstract($repo, $validator);
+        
+        $this->assertFalse($serv->delete(1));
+        $this->assertEquals(['error' => 'error_internal', 'error_description' => 'ErroInterno'], $serv->errors());
+    }
+
 }
 
 class StubAbstract extends \NwManager\Services\AbstractService

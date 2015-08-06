@@ -44,6 +44,22 @@ class ProjectEntityTest extends TestCase
         $this->assertFalse($project->isOwner(2));
     }
 
+    public function testHasMamber()
+    {
+        $query = m::mock('QueryBuilder');
+        $query->shouldReceive('where')->once()->ordered()->with('user_id', 1)->andReturn($query);
+        $query->shouldReceive('count')->once()->ordered()->andReturn(1);
+        $query->shouldReceive('where')->once()->ordered()->with('user_id', 2)->andReturn($query);
+        $query->shouldReceive('count')->once()->ordered()->andReturn(0);
+
+        $project = m::mock('NwManager\Entities\Project[members]');
+        $project->shouldReceive('members')->once()->ordered()->andReturn($query);
+        $project->shouldReceive('members')->once()->ordered()->andReturn($query);
+
+        $this->assertTrue($project->hasMember(1));
+        $this->assertFalse($project->hasMember(2));
+    }
+
     public function testOwner()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsTo');
@@ -53,7 +69,7 @@ class ProjectEntityTest extends TestCase
 
         $this->assertEquals($relation, $project->owner());
     }
-
+    
     public function testClient()
     {
         $relation = m::mock('Illuminate\Database\Eloquent\Relations\BelongsTo');

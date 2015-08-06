@@ -4,6 +4,9 @@ namespace NwManager\Http\Controllers;
 
 use NwManager\Repositories\Contracts\ProjectRepository;
 use NwManager\Services\ProjectService;
+use Illuminate\Http\Request;
+use NwManager\Repositories\Criterias\InputCriteria;
+use NwManager\Repositories\Criterias\ProjectMemberCriteria;
 
 /**
  * Class ProjectController
@@ -25,7 +28,22 @@ class ProjectController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['client', 'owner'];
-        $this->middleware('project.owner');
+        $this->middleware('project.member', ['except' => ['index', 'store']]);
+        $this->middleware('project.owner', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        return $this->repo
+            ->pushCriteria(new InputCriteria($request->all()))
+            ->pushCriteria(new ProjectMemberCriteria)
+            ->with($this->withRelations)
+            ->all();
     }
 
     /**
