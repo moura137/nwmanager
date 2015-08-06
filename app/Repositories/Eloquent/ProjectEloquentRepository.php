@@ -4,6 +4,7 @@ namespace NwManager\Repositories\Eloquent;
 
 use NwManager\Repositories\Contracts\ProjectRepository;
 use NwManager\Entities\Project;
+use NwManager\Presenters\ProjectPresenter;
 
 /**
  * Class ProjectEloquentRepository
@@ -12,6 +13,9 @@ use NwManager\Entities\Project;
  */
 class ProjectEloquentRepository extends AbstractEloquentRepository implements ProjectRepository
 {
+    /**
+     * @var array
+     */
     protected $fieldSearchable = [
         'name' => 'like',
     ];
@@ -24,6 +28,16 @@ class ProjectEloquentRepository extends AbstractEloquentRepository implements Pr
     public function model()
     {
         return Project::class;
+    }
+
+    /**
+     * Specify Presenter class name
+     *
+     * @return string
+     */
+    public function presenter()
+    {
+        return ProjectPresenter::class;
     }
 
     /**

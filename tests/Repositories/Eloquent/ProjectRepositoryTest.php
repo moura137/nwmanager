@@ -20,6 +20,7 @@ class ProjectRepositoryTest extends TestCase
         $this->assertAttributeEquals($fieldSearchable, 'fieldSearchable', $repo);
 
         $this->assertEquals('NwManager\Entities\Project', $repo->model());
+        $this->assertEquals('NwManager\Presenters\ProjectPresenter', $repo->presenter());
     }
 
     public function testIsOwner()

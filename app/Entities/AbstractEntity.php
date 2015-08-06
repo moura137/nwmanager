@@ -5,16 +5,18 @@ namespace NwManager\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-
+use Prettus\Repository\Contracts\Presentable;
+use Prettus\Repository\Traits\PresentableTrait;
 /**
  * Class AbstractEntity
  *
  * @package NwManager\Entities;
  * @abstract
  */
-abstract class AbstractEntity extends Model implements Transformable
+abstract class AbstractEntity extends Model implements Transformable, Presentable
 {
     use TransformableTrait;
+    use PresentableTrait;
     
     /**
      * Set a given attribute on the model.

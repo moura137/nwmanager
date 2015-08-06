@@ -38,6 +38,12 @@ trait TraitTestRestFull
             ->andReturn($query)
 
             ->getMock()
+            ->shouldReceive('skipPresenter')
+            ->once()
+            ->with(false)
+            ->andReturn($this->repo)
+
+            ->getMock()
             ->shouldReceive('pushCriteria')
             ->once()
             ->andReturn($this->repo);
@@ -48,9 +54,10 @@ trait TraitTestRestFull
 
     public function testActionStoreSuccess()
     {
-        $fields = ['foobar' => 'test'];
-        $entity = m::mock('ModelEntity');
-        $entity->shouldReceive('fresh')->once()->with( $this->withRelations )->andReturn($fields);
+        $presenter = ['foobar' => 'test'];
+
+        $entity = m::mock('AbstractEntity');
+        $entity->shouldReceive('presenter')->once()->andReturn($presenter);
 
         $input = ['foo' => 'bar'];
 
@@ -66,7 +73,7 @@ trait TraitTestRestFull
 
         $this->post($this->resource, $input)
             ->seeStatusCode(201)
-            ->seeJsonEquals($fields);
+            ->seeJsonEquals($presenter);
     }
 
     public function testActionStoreError()
@@ -92,10 +99,13 @@ trait TraitTestRestFull
 
     public function testActionShow()
     {
-        $model = ['record1', 'record2'];
+        $presenter = ['field1', 'field2'];
+        
+        $entity = m::mock('AbstractEntity');
+        $entity->shouldReceive('presenter')->once()->andReturn($presenter);
 
         $query = m::mock('QueryBuilder');
-        $query->shouldReceive('find')->once()->with(2)->andReturn($model);
+        $query->shouldReceive('find')->once()->with(2)->andReturn($entity);
 
         $this->repo
             ->shouldReceive('with')
@@ -104,14 +114,15 @@ trait TraitTestRestFull
             ->andReturn($query);
 
         $this->visit($this->resource . '/2')
-            ->seeJsonEquals($model);
+            ->seeJsonEquals($presenter);
     }
 
     public function testActionUpdateSuccess()
     {
-        $fields = ['foobar' => 'test'];
-        $entity = m::mock('ModelEntity');
-        $entity->shouldReceive('fresh')->once()->with( $this->withRelations )->andReturn($fields);
+        $presenter = ['foobar' => 'test'];
+
+        $entity = m::mock('AbstractEntity');
+        $entity->shouldReceive('presenter')->once()->andReturn($presenter);
 
         $input = ['foo' => 'bar'];
 
@@ -127,7 +138,7 @@ trait TraitTestRestFull
 
         $this->put($this->resource . '/3', $input)
             ->seeStatusCode(200)
-            ->seeJsonEquals($fields);
+            ->seeJsonEquals($presenter);
     }
 
     public function testActionUpdateError()

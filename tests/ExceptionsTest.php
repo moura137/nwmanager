@@ -31,7 +31,13 @@ class ExceptionsTest extends TestCase
         $repo = m::mock('NwManager\Repositories\Contracts\UserRepository');
         $this->app->instance('NwManager\Repositories\Contracts\UserRepository', $repo);
 
-        $repo->shouldReceive('pushCriteria')
+        $repo->shouldReceive('skipPresenter')
+            ->once()
+            ->with(false)
+            ->andReturn($repo)
+            ->getMock()
+
+            ->shouldReceive('pushCriteria')
             ->once()
             ->andThrow(new \Exception);
 
@@ -44,7 +50,13 @@ class ExceptionsTest extends TestCase
         $repo = m::mock('NwManager\Repositories\Contracts\UserRepository');
         $this->app->instance('NwManager\Repositories\Contracts\UserRepository', $repo);
 
-        $repo->shouldReceive('pushCriteria')
+        $repo->shouldReceive('skipPresenter')
+            ->once()
+            ->with(false)
+            ->andReturn($repo)
+            ->getMock()
+
+            ->shouldReceive('pushCriteria')
             ->once()
             ->andThrow(new ModelNotFoundException);
 
@@ -57,7 +69,13 @@ class ExceptionsTest extends TestCase
         $repo = m::mock('NwManager\Repositories\Contracts\UserRepository');
         $this->app->instance('NwManager\Repositories\Contracts\UserRepository', $repo);
 
-        $repo->shouldReceive('pushCriteria')
+        $repo->shouldReceive('skipPresenter')
+            ->once()
+            ->with(false)
+            ->andReturn($repo)
+            ->getMock()
+
+            ->shouldReceive('pushCriteria')
             ->once()
             ->andThrow(new HttpException(403));
 

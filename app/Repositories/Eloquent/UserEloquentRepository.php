@@ -4,6 +4,7 @@ namespace NwManager\Repositories\Eloquent;
 
 use NwManager\Repositories\Contracts\UserRepository;
 use NwManager\Entities\User;
+use NwManager\Presenters\UserPresenter;
 
 /**
  * Class UserEloquentRepository
@@ -12,6 +13,9 @@ use NwManager\Entities\User;
  */
 class UserEloquentRepository extends AbstractEloquentRepository implements UserRepository
 {
+    /**
+     * @var array
+     */
     protected $fieldSearchable = [
         'username' => 'like',
         'name' => 'like',
@@ -25,5 +29,15 @@ class UserEloquentRepository extends AbstractEloquentRepository implements UserR
     public function model()
     {
         return User::class;
+    }
+
+    /**
+     * Specify Presenter class name
+     *
+     * @return string
+     */
+    public function presenter()
+    {
+        return UserPresenter::class;
     }
 }

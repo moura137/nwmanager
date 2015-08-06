@@ -4,6 +4,7 @@ namespace NwManager\Repositories\Eloquent;
 
 use NwManager\Repositories\Contracts\ClientRepository;
 use NwManager\Entities\Client;
+use NwManager\Presenters\ClientPresenter;
 
 /**
  * Class ClientEloquentRepository
@@ -12,6 +13,9 @@ use NwManager\Entities\Client;
  */
 class ClientEloquentRepository extends AbstractEloquentRepository implements ClientRepository
 {
+    /**
+     * @var array
+     */
     protected $fieldSearchable = [
         'name' => 'like',
     ];
@@ -24,5 +28,15 @@ class ClientEloquentRepository extends AbstractEloquentRepository implements Cli
     public function model()
     {
         return Client::class;
+    }
+
+    /**
+     * Specify Presenter class name
+     *
+     * @return string
+     */
+    public function presenter()
+    {
+        return ClientPresenter::class;
     }
 }

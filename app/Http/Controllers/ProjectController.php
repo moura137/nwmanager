@@ -27,7 +27,7 @@ class ProjectController extends Controller
     {
         $this->repo = $repo;
         $this->service = $service;
-        $this->withRelations = ['client', 'owner'];
+        $this->withRelations = ['client', 'owner', 'members'];
         $this->middleware('project.member', ['except' => ['index', 'store']]);
         $this->middleware('project.owner', ['only' => ['destroy']]);
     }
@@ -40,6 +40,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         return $this->repo
+            ->skipPresenter(false)
             ->pushCriteria(new InputCriteria($request->all()))
             ->pushCriteria(new ProjectMemberCriteria)
             ->with($this->withRelations)

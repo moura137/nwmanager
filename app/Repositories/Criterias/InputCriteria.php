@@ -9,7 +9,7 @@ use Illuminate\Database\Query\Expression as QueryExpression;
 /**
  * Class InputCriteria
  *
- * @package Prettus\Repository\Criteria
+ * @package NwManager\Repositories\Criterias
  */
 class InputCriteria implements CriteriaInterface
 {

@@ -13,6 +13,7 @@ class AbstractEntityTest extends TestCase
 
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Model', $abstract);
         $this->assertInstanceOf('Prettus\Repository\Contracts\Transformable', $abstract);
+        $this->assertInstanceOf('Prettus\Repository\Contracts\Presentable', $abstract);
     }
 
     public function testColumns()

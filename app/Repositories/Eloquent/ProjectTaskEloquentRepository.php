@@ -4,6 +4,7 @@ namespace NwManager\Repositories\Eloquent;
 
 use NwManager\Repositories\Contracts\ProjectTaskRepository;
 use NwManager\Entities\ProjectTask;
+use NwManager\Presenters\ProjectTaskPresenter;
 
 /**
  * Class ProjectTaskEloquentRepository
@@ -12,6 +13,9 @@ use NwManager\Entities\ProjectTask;
  */
 class ProjectTaskEloquentRepository extends AbstractEloquentRepository implements ProjectTaskRepository
 {
+    /**
+     * @var array
+     */
     protected $fieldSearchable = [
         'title' => 'like',
     ];
@@ -24,5 +28,15 @@ class ProjectTaskEloquentRepository extends AbstractEloquentRepository implement
     public function model()
     {
         return ProjectTask::class;
+    }
+
+    /**
+     * Specify Presenter class name
+     *
+     * @return string
+     */
+    public function presenter()
+    {
+        return ProjectTaskPresenter::class;
     }
 }

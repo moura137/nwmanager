@@ -15,7 +15,7 @@ class VerifierTest extends TestCase
 
         Auth::shouldReceive('once')
             ->once()
-            ->with(['username' => 'user@email.com', 'password' => '1234'])
+            ->with(['email' => 'user@email.com', 'password' => '1234'])
             ->andReturn(true);
 
         Auth::shouldReceive('user')

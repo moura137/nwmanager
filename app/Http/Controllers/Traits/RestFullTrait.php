@@ -35,6 +35,7 @@ trait RestFullTrait
     public function index(Request $request)
     {
         return $this->repo
+            ->skipPresenter(false)
             ->pushCriteria(new InputCriteria($request->all()))
             ->with($this->withRelations)
             ->all();
@@ -55,9 +56,7 @@ trait RestFullTrait
             return response()->json($errors, 422);
         }
 
-        $entity = $entity->fresh($this->withRelations);
-        
-        return response()->json($entity, 201);
+        return response()->json($entity->presenter(), 201);
     }
 
     /**
@@ -70,7 +69,8 @@ trait RestFullTrait
     {
         return $this->repo
             ->with($this->withRelations)
-            ->find($id);
+            ->find($id)
+            ->presenter();
     }
 
     /**
@@ -89,9 +89,7 @@ trait RestFullTrait
             return response()->json($errors, 422);
         }
 
-        $entity = $entity->fresh($this->withRelations);
-
-        return response()->json($entity);
+        return response()->json($entity->presenter());
     }
 
     /**

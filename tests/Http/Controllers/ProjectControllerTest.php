@@ -15,7 +15,7 @@ class ProjectControllerTest extends TestCase
 
     protected $nameServ = 'NwManager\Services\ProjectService';
 
-    protected $withRelations = ['client', 'owner'];
+    protected $withRelations = ['client', 'owner', 'members'];
 
     public function testActionIndex()
     {
@@ -29,6 +29,12 @@ class ProjectControllerTest extends TestCase
             ->once()
             ->with( $this->withRelations )
             ->andReturn($query)
+
+            ->getMock()
+            ->shouldReceive('skipPresenter')
+            ->once()
+            ->with(false)
+            ->andReturn($this->repo)
 
             ->getMock()
             ->shouldReceive('pushCriteria')

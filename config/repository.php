@@ -25,16 +25,18 @@ return [
     |
 
     Available serializers:
-    ArraySerializer
-    DataArraySerializer
-    JsonApiSerializer
+    League\Fractal\Serializer\ArraySerializer
+    League\Fractal\Serializer\DataArraySerializer
+    League\Fractal\Serializer\JsonApiSerializer
+    NwManager\Serializers\DefaultSerializer
 
     */
     'fractal'=>[
         'params'=>[
-            'include'=>'include'
+            //'include'=>'include'
+            'include'=>''
         ],
-        'serializer' => League\Fractal\Serializer\DataArraySerializer::class
+        'serializer' => NwManager\Serializers\DefaultSerializer::class
     ],
 
     /*

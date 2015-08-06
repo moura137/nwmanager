@@ -9,7 +9,7 @@ use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 /**
  * Class ProjectMemberCriteria
  *
- * @package Prettus\Repository\Criteria
+ * @package NwManager\Repositories\Criterias
  */
 class ProjectMemberCriteria implements CriteriaInterface
 {
