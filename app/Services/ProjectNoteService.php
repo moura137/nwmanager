@@ -11,17 +11,7 @@ use NwManager\Validators\ProjectNoteValidator;
  * @package NwManager\Services;
  */
 class ProjectNoteService extends AbstractService
-{
-    /**
-     * @var ProjectNoteRepository
-     */
-    protected $repository;
-
-    /**
-     * @var ProjectNoteValidator
-     */
-    protected $validator;
-    
+{    
     /**
      * Construct
      *

@@ -12,17 +12,7 @@ use \Exception;
  * @package NwManager\Services;
  */
 class ProjectService extends AbstractService
-{
-    /**
-     * @var ProjectRepository
-     */
-    protected $repository;
-
-    /**
-     * @var ProjectValidator
-     */
-    protected $validator;
-    
+{   
     /**
      * Construct
      *

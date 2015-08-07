@@ -11,17 +11,7 @@ use NwManager\Validators\ClientValidator;
  * @package NwManager\Services;
  */
 class ClientService extends AbstractService
-{
-    /**
-     * @var ClientRepository
-     */
-    protected $repository;
-
-    /**
-     * @var ClientValidator
-     */
-    protected $validator;
-    
+{    
     /**
      * Construct
      *

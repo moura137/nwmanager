@@ -14,17 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @package NwManager\Services;
  */
 class ProjectTaskService extends AbstractService
-{
-    /**
-     * @var ProjectTaskRepository
-     */
-    protected $repository;
-
-    /**
-     * @var ProjectTaskValidator
-     */
-    protected $validator;
-    
+{    
     /**
      * Construct
      *

@@ -13,16 +13,6 @@ use NwManager\Validators\UserValidator;
 class UserService extends AbstractService
 {
     /**
-     * @var UserRepository
-     */
-    protected $repository;
-
-    /**
-     * @var UserValidator
-     */
-    protected $validator;
-    
-    /**
      * Construct
      *
      * @param UserRepository $repository
