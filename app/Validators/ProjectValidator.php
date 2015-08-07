@@ -17,6 +17,6 @@ class ProjectValidator extends AbstractValidator
         'name'          => 'required|max:255',
         'progress'      => 'required|integer|min:0|max:100',
         'status'        => 'required|in:1,2,3',
-        'due_date'      => 'required|date',
+        'due_date'      => 'date',
     ];
 }

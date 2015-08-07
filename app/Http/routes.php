@@ -22,11 +22,17 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::resource('user',         'UserController',        ['except' => ['create', 'edit']]);
         Route::resource('client',       'ClientController',      ['except' => ['create', 'edit']]);
         Route::resource('project',      'ProjectController',     ['except' => ['create', 'edit']]);
-        Route::resource('project/note', 'ProjectNoteController', ['except' => ['create', 'edit']]);
-        Route::resource('project/task', 'ProjectTaskController', ['except' => ['create', 'edit']]);
         Route::get('project/{project}/members', ['uses' => 'ProjectController@members', 'as' => 'project.members']);
-        Route::get('project/{project}/notes',   ['uses' => 'ProjectController@notes',   'as' => 'project.notes']);
-        Route::get('project/{project}/tasks',   ['uses' => 'ProjectController@tasks',   'as' => 'project.tasks']);
+        
+        Route::get('project/{project}/note',        ['uses' => 'ProjectNoteController@index',   'as' => 'project.note.index']);
+        Route::post('project/{project}/note',       ['uses' => 'ProjectNoteController@store',   'as' => 'project.note.store']);
+        Route::get('project/{project}/note/{note}', ['uses' => 'ProjectNoteController@show',    'as' => 'project.note.show']);
+
+        Route::get('project/{project}/task',            ['uses' => 'ProjectTaskController@index',    'as' => 'project.task.index']);
+        Route::post('project/{project}/task',           ['uses' => 'ProjectTaskController@store',    'as' => 'project.task.store']);
+        Route::get('project/{project}/task/{task}',     ['uses' => 'ProjectTaskController@show',     'as' => 'project.task.show']);
+        Route::put('project/{project}/task/{task}',     ['uses' => 'ProjectTaskController@update',   'as' => 'project.task.update']);
+        Route::delete('project/{project}/task/{task}',  ['uses' => 'ProjectTaskController@destroy',  'as' => 'project.note.delete']);
     });
     
     Route::any('/{uri?}', function () {

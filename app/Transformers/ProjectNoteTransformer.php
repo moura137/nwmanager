@@ -13,7 +13,7 @@ class ProjectNoteTransformer extends AbstractTransformer
 {
     protected $defaultIncludes = [
         'user',
-        'project',
+        //'project',
     ];
 
     /**
@@ -27,14 +27,14 @@ class ProjectNoteTransformer extends AbstractTransformer
     {
         return [
             'id'            => (int) $note->id,
+            'project_id'    => $note->project_id,
             'title'         => $note->title,
             'note'          => $note->note,
             'created_at'    => $this->formatDate($note->created_at, 'Y-m-d H:i:s'),
             'updated_at'    => $this->formatDate($note->updated_at, 'Y-m-d H:i:s'),
             'user_id'       => $note->user_id,
             'user'          => $note->user,
-            'project_id'    => $note->project_id,
-            'project'       => $note->project,
+            //'project'       => $note->project,
         ];
     }
 
