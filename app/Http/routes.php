@@ -32,7 +32,12 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::post('project/{project}/task',           ['uses' => 'ProjectTaskController@store',    'as' => 'project.task.store']);
         Route::get('project/{project}/task/{task}',     ['uses' => 'ProjectTaskController@show',     'as' => 'project.task.show']);
         Route::put('project/{project}/task/{task}',     ['uses' => 'ProjectTaskController@update',   'as' => 'project.task.update']);
-        Route::delete('project/{project}/task/{task}',  ['uses' => 'ProjectTaskController@destroy',  'as' => 'project.note.delete']);
+        Route::delete('project/{project}/task/{task}',  ['uses' => 'ProjectTaskController@destroy',  'as' => 'project.task.delete']);
+
+        Route::get('project/{project}/file',            ['uses' => 'ProjectFileController@index',    'as' => 'project.file.index']);
+        Route::post('project/{project}/file',           ['uses' => 'ProjectFileController@store',    'as' => 'project.file.store']);
+        Route::get('project/{project}/file/{file}',     ['uses' => 'ProjectFileController@show',     'as' => 'project.file.show']);
+        Route::delete('project/{project}/file/{file}',  ['uses' => 'ProjectFileController@destroy',  'as' => 'project.file.delete']);
     });
     
     Route::any('/{uri?}', function () {
