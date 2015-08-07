@@ -37,16 +37,17 @@ class ClientService extends AbstractService
      * Delete
      *
      * @param Entity|int $id
+     * @param array      $data
      *
      * @return bool
      */
-    public function delete($id)
+    public function delete($id, array $data = array())
     {
         $entity = $this->repository->find($id);
 
         // Valida Se existe Projetos
         $count = $entity->projects()->count();
-        if ($count > 1) {
+        if ($count) {
             $this->errors = [
                 'error' => 'validation_exception',
                 'error_description' => ['projects' => [trans('services.exists_projects', ['count' => $count])]],
@@ -54,6 +55,6 @@ class ClientService extends AbstractService
             return false;
         }
 
-        return $this->repository->delete($entity->id);
+        return parent::delete($entity->id, $data);
     }
 }

@@ -4,6 +4,7 @@ namespace NwManager\Services;
 
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class AbstractService
@@ -57,6 +58,9 @@ abstract class AbstractService
 
             return $this->repository->create($data);
 
+        } catch (ModelNotFoundException $e) {
+            throw $e;
+
         } catch (\Exception $e) {
             $this->errors = $this->parseError($e);
             return false;
@@ -85,6 +89,9 @@ abstract class AbstractService
                 
             return $this->repository->update($data, $id);
 
+        } catch (ModelNotFoundException $e) {
+            throw $e;
+
         } catch (\Exception $e) {
             $this->errors = $this->parseError($e);
             return false;
@@ -95,13 +102,17 @@ abstract class AbstractService
      * Delete
      *
      * @param Entity|int $id
+     * @param array      $data
      *
      * @return bool
      */
-    public function delete($id)
+    public function delete($id, array $data = array())
     {
         try {
             return $this->repository->delete($id);
+        
+        } catch (ModelNotFoundException $e) {
+            throw $e;
             
         } catch (\Exception $e) {
             $this->errors = $this->parseError($e);

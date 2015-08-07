@@ -44,7 +44,8 @@ trait RestFullTrait
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -62,7 +63,8 @@ trait RestFullTrait
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function show($id)
@@ -76,8 +78,9 @@ trait RestFullTrait
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return Response
      */
     public function update(Request $request, $id)
@@ -95,12 +98,14 @@ trait RestFullTrait
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $success = $this->service->delete($id);
+        $success = $this->service->delete($id, $request->all());
 
         if (!$success) {
             $errors = $this->service->errors();
