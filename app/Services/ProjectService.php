@@ -28,48 +28,66 @@ class ProjectService extends AbstractService
      * Add Member
      *
      * @param int       $id_project
-     * @param int|array $users
+     * @param int|array $members
      *
      * @return bool
      */
-    public function addMember($id_project, $users)
+    public function addMember($id_project, $members)
     {
         $project = $this->repository->find($id_project);
 
-        $users = (array) $users;
-        $project->members()->attach($users);
+        try {
+            $project->members()->attach((array) $members);
+            return true;
 
-        return true;
+        } catch (\Exception $e) {
+            $this->errors = $this->parseError($e);
+            return false;
+        }
     }
 
     /**
      * Remove Member
      *
      * @param int       $id_project
-     * @param int|array $users
+     * @param int|array $members
      *
      * @return int
      */
-    public function removeMember($id_project, $users)
+    public function removeMember($id_project, $members)
     {
         $project = $this->repository->find($id_project);
 
-        $users = (array) $users;
-        return $project->members()->detach($users);
+        try {
+            $project->members()->detach((array) $members);
+            return true;
+
+        } catch (\Exception $e) {
+            dd($e);
+            $this->errors = $this->parseError($e);
+            return false;
+        }
     }
 
     /**
-     * Is Member
+     * Sync Member
      *
      * @param int       $id_project
-     * @param int|array $users
+     * @param int|array $members
      *
-     * @return bool
+     * @return array
      */
-    public function isMember($id_project, $id_user)
+    public function syncMember($id_project, $members)
     {
         $project = $this->repository->find($id_project);
 
-        return (bool) $project->members()->find($id_user);
+        try {
+            $project->members()->sync((array) $members);
+            return true;
+
+        } catch (\Exception $e) {
+            $this->errors = $this->parseError($e);
+            return false;
+        }
     }
 }

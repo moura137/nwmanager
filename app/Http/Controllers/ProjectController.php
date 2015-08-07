@@ -28,8 +28,8 @@ class ProjectController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['client', 'owner', 'members'];
-        $this->middleware('project.member', ['except' => ['index', 'store', 'destroy']]);
-        $this->middleware('project.owner', ['only' => ['destroy']]);
+        $this->middleware('project.member', ['only' => ['show', 'update', 'members']]);
+        $this->middleware('project.owner', ['only' => ['addMember', 'removeMember', 'syncMember', 'destroy']]);
     }
 
     /**
@@ -57,6 +57,66 @@ class ProjectController extends Controller
     public function members($id)
     {
         $project = $this->repo->find($id);
+
+        return $project->members()->get();
+    }
+
+    /**
+     * Add Members
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function addMember(Request $request, $id)
+    {
+        $project = $this->repo->find($id);
+        $members = $request->get('members');
+
+        if (!$this->service->addMember($id, $members)) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
+
+        return $project->members()->get();
+    }
+
+    /**
+     * Remove Members
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function removeMember(Request $request, $id)
+    {
+        $project = $this->repo->find($id);
+        $members = $request->get('members');
+
+        if (!$this->service->removeMember($id, $members)) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
+
+        return $project->members()->get();
+    }
+
+    /**
+     * Sync Member
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function syncMember(Request $request, $id)
+    {
+        $project = $this->repo->find($id);
+        $members = $request->get('members');
+
+        if (!$this->service->syncMember($id, $members)) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
 
         return $project->members()->get();
     }
