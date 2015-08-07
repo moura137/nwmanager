@@ -15,6 +15,6 @@ class ProjectFileValidator extends AbstractValidator
         'project_id'    => 'required|exists:projects,id',
         'user_id'       => 'required|exists:users,id',
         'file'          => 'required|max:2048|mimes:jpeg,gif,png,jpg',
-        'description'   => 'max:255',
+        'description'   => 'required|max:255',
     ];
 }
