@@ -43,7 +43,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($request->headers->get('Accept') == 'application/json') {
+        if ($request->ajax() || $request->headers->get('Accept') == 'application/json') {
             return $this->renderJson($e);
         }
 
