@@ -11,13 +11,20 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function() {
+    return view('app');
+});
 
+/**
+ * API
+ */
 Route::group(['middleware' => 'accept.json'], function() {
 
     Route::post('oauth/access-token', 'OAuthController@access');
     
     Route::group(['middleware' => 'oauth', 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
+
+        Route::get('oauth/user', 'OAuthController@user');
 
         Route::resource('user',         'UserController',        ['except' => ['create', 'edit']]);
         Route::resource('client',       'ClientController',      ['except' => ['create', 'edit']]);

@@ -14,6 +14,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        return view('home.index');
+    }
+
+    /**
+     * Action Login
+     */
+    public function login()
+    {
+        return view('home.login');
     }
 }

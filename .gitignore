@@ -1,6 +1,7 @@
 # Laravel
 /vendor
 /node_modules
+/bower_components
 /Homestead.yaml
 /npm-debug.log
 .env
