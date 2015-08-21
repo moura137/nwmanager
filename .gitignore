@@ -5,6 +5,7 @@
 /Homestead.yaml
 /npm-debug.log
 .env
+/env-config.json
 
 # Composer
 /composer.lock
