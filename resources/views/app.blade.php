@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NwManager</title>
+    <title>NwManager @yield('title')</title>
 
     <!-- CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" />
 
     @if(config('app.debug'))
         <link href="{{ asset('build/vendor/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/vendor/css/sweetalert.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/animate.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/styles.css') }}" rel="stylesheet" />
     @else
@@ -26,11 +27,12 @@
 </head>
 <body>
     
-    <div ng-view></div>
+    @yield('content')
 
     <!-- Scripts -->
     @if(config('app.debug'))
         <script src="{{ asset('build/vendor/js/jquery.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-route.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-resource.js') }}"></script>
@@ -40,14 +42,29 @@
         <script src="{{ asset('build/vendor/js/navbar.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-cookies.js') }}"></script>
         <script src="{{ asset('build/vendor/js/query-string.js') }}"></script>
-        <script src="{{ asset('build/vendor/js/angular-oauth2.js') }}"></script>
+        <script src="{{ asset('build/js/angular-oauth2.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/angularjs-gravatardirective.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('build/js/env-config.js') }}"></script>
 
         <script src="{{ asset('build/js/app/app.js') }}"></script>
+        <!-- Controllers -->
+        <script src="{{ asset('build/js/app/controllers/ClientListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/ClientNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/ClientEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/ClientDeleteCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
+        <!-- Services -->
+        <script src="{{ asset('build/js/app/services/client.js') }}"></script>
+        <script src="{{ asset('build/js/app/services/user.js') }}"></script>
+        <script src="{{ asset('build/js/app/services/http-buffer.js') }}"></script>
     @else
         <script src="{{ elixir('js/all.js') }}"></script>
+        <script src="{{ asset('build/js/env-config.js') }}"></script>
     @endif
+
+    @yield('scripts')
 </body>
 </html>

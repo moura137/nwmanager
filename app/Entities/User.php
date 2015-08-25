@@ -54,6 +54,20 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
     }
 
     /**
+     * Set Email
+     *
+     * @param string $value
+     *
+     * @return void
+     */
+    public function setEmailAttribute($value)
+    {
+        if (! empty($value)) {
+            $this->attributes['email'] = strtolower($value);
+        }
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

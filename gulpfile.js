@@ -2,6 +2,8 @@ var elixir = require('laravel-elixir');
 var livereload = require('gulp-livereload');
 var rimraf = require('rimraf');
 var gulp = require('gulp');
+var ngConstant = require('gulp-ng-constant');
+var fs = require('fs');
 
 var paths = {
     'build': './public/build',
@@ -15,12 +17,14 @@ var paths = {
 
 paths.vendor_css = [
     paths.bower + '/bootstrap/dist/css/bootstrap.min.css',
+    paths.bower + '/sweetalert/dist/sweetalert.css',
     paths.assets + '/css/animate.css',
     paths.assets + '/css/styles.css'
 ];
 
 paths.vendor_js = [
     paths.bower + '/jquery/dist/jquery.js',
+    paths.bower + '/bootstrap/dist/js/bootstrap.min.js',
     paths.bower + '/angular/angular.js',
     paths.bower + '/angular-route/angular-route.js',
     paths.bower + '/angular-resource/angular-resource.js',
@@ -30,8 +34,31 @@ paths.vendor_js = [
     paths.bower + '/angular-strap/dist/modules/navbar.js',
     paths.bower + '/angular-cookies/angular-cookies.js',
     paths.bower + '/query-string/query-string.js',
-    paths.bower + '/angular-oauth2/dist/angular-oauth2.js',
+    //paths.bower + '/angular-oauth2/dist/angular-oauth2.js',
+    paths.bower + '/angularjs-gravatardirective/dist/angularjs-gravatardirective.js',
+    paths.bower + '/sweetalert/dist/sweetalert.min.js',
 ];
+
+gulp.task('config', function() {
+  var fileEnvConfig = './env-config.json';
+  var constants = {
+    API_URL: 'http://localhost:8000',
+    CLIENT_ID: '',
+    CLIENT_SECRET: ''
+  };
+
+  if( ! fs.existsSync(fileEnvConfig)) {
+    var fd = fs.openSync(fileEnvConfig, 'w');
+    fs.writeSync(fd, JSON.stringify(constants));
+    fs.closeSync(fd);
+  }
+
+  gulp.src(fileEnvConfig)
+    .pipe(ngConstant({
+      name: 'app.env.config'
+    }))
+    .pipe(gulp.dest(paths.build_js));
+});
 
 /**
  * Copia os Style para o Build
@@ -78,7 +105,7 @@ gulp.task('copy-html', function(){
  * Default Dev
  */
 gulp.task('default-dev', ['clean-build'], function(){
-    gulp.start(['copy-css', 'copy-js', 'copy-html']);
+    gulp.start(['config', 'copy-css', 'copy-js', 'copy-html']);
 });
 
 /**
@@ -94,7 +121,7 @@ gulp.task('watch-dev', ['clean-build'], function(){
  * Compile Assets
  */
 gulp.task('default', ['clean-build'], function(){
-    gulp.start(['copy-html']);
+    gulp.start(['config', 'copy-html']);
 
     elixir(function(mix) {
         mix.styles(paths.vendor_css.concat([paths.assets + '/css/**/*.css']),

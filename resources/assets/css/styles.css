@@ -35,6 +35,10 @@ h5 {
   margin-top: 5px;
   font-weight: 600;
 }
+.form-group .help-block {
+  margin-bottom: 0px;
+}
+
 .nav > li > a {
   color: #a7b1c2;
   font-weight: 600;
@@ -155,7 +159,7 @@ h5 {
 }
 .nav-header {
   padding: 33px 25px;
-  background: url("patterns/header-profile.png") no-repeat;
+  background: url("/img/header-profile.png") no-repeat;
 }
 .pace-done .nav-header {
   transition: all 0.5s;

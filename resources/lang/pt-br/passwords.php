@@ -21,5 +21,7 @@ return array(
 
     "sent" => "Email enviado para a recuperação da senha.",
 
-    "reset" => "Senha recuperada com sucesso"
+    "reset" => "Senha recuperada com sucesso",
+
+    "subject_reset_link" => "Recuperação da sua Senha",
 );

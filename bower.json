@@ -11,7 +11,9 @@
     "angular-messages": "~1.4.3",
     "angular-bootstrap": "~0.13.3",
     "angular-strap": "~2.3.1",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "sweetalert": "~1.1.0",
+    "angularjs-gravatardirective": "~1.3.2"
   },
   "description": "NwManager",
   "ignore": [

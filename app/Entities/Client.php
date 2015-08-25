@@ -41,4 +41,18 @@ class Client extends AbstractEntity
     {
         return $this->hasMany(Project::class);
     }
+
+    /**
+     * Set Email
+     *
+     * @param string $value
+     *
+     * @return void
+     */
+    public function setEmailAttribute($value)
+    {
+        if (! empty($value)) {
+            $this->attributes['email'] = strtolower($value);
+        }
+    }
 }

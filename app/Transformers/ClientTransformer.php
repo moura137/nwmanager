@@ -34,6 +34,7 @@ class ClientTransformer extends AbstractTransformer
     {
         $return = [
             'id'            => (int) $client->id,
+            'name'          => $client->name,
             'responsible'   => $client->responsible,
             'email'         => $client->email,
             'phone'         => $client->phone,

@@ -1,101 +1,169 @@
 /** APP-JS */
-var App = angular.module('App', ['app.controllers', 'ngRoute', 'angular-oauth2']);
+var App = angular.module('App', [
+    'app.env.config', 
+    'app.controllers', 
+    'app.services', 
+    'ngRoute', 
+    'angular-oauth2', 
+    'http-auth-interceptor-buffer',
+    'angularjs-gravatardirective']);
 
 /** Modules **/
 angular.module('app.controllers', ['angular-oauth2', 'ngMessages']);
+angular.module('app.services', ['ngResource']);
 
-/** Define Tags **/
-App.config(function($interpolateProvider) {
-  $interpolateProvider.startSymbol('[[');
-  $interpolateProvider.endSymbol(']]');
+/**
+ * ------ Providers ------------
+ */
+App.provider('Settings', function(API_URL, CLIENT_ID, CLIENT_SECRET){
+    var config = {
+        baseUrl: API_URL,
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET
+    };
+
+    return {
+        config: config,
+        $get: function(){
+            return config;
+        }
+    };
 });
- 
-/** Define Requisição Ajax **/
-App.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.headers.common["Accept"] = 'application/json';
-}]);
+
 
 /**
  * ------ Routes ------------
  */
 App.config(['$routeProvider',
     function($routeProvider) { $routeProvider
-        .when('/login', {
-            templateUrl: 'build/views/login.html',
-            controller: 'LoginCtrl',
+        .when('/client', {
+            templateUrl: 'build/views/client/list.html',
+            controller: 'ClientListCtrl'
         })
-        
-        .when('/home', {
+
+        .when('/client/new', {
+            templateUrl: 'build/views/client/new.html',
+            controller: 'ClientNewCtrl'
+        })
+
+        .when('/client/:id/edit', {
+            templateUrl: 'build/views/client/edit.html',
+            controller: 'ClientEditCtrl'
+        })
+
+        .when('/client/:id/delete', {
+            templateUrl: 'build/views/client/delete.html',
+            controller: 'ClientDeleteCtrl'
+        })
+
+        .when('/', {
             templateUrl: 'build/views/home.html',
-            controller: 'HomeCtrl',
+            controller: 'HomeCtrl'
         })
-        
-        .when('/404', {
+
+        .when('/not-found', {
             templateUrl: 'build/views/404.html',
-            controller: 'ErrorCtrl'
+            controller: 'ErrorCtrl',
+            access: { requiredLogin: false }
+        })
+
+        .when('/forbidden', {
+            templateUrl: 'build/views/403.html',
+            controller: 'ErrorCtrl',
+            access: { requiredLogin: false }
         })
 
         .otherwise({
-            redirectTo: '/404'
+            redirectTo: '/not-found',
+            access: { requiredLogin: false }
         });
     }
 ]);
 
+App.config([
+    '$httpProvider', '$interpolateProvider',
+    function($httpProvider, $interpolateProvider) {
+    $httpProvider.defaults.headers.common["Accept"] = 'application/json';
+
+  $interpolateProvider.startSymbol('[[');
+  $interpolateProvider.endSymbol(']]');
+}]);
+
 /**
  * ----- OAUTH2 ---------
  */
-App.config(['OAuthProvider', 'OAuthTokenProvider', function(OAuthProvider, OAuthTokenProvider) {
-    OAuthProvider.configure({
-      baseUrl: '/',
-      clientId: 'ANGULAR_APP',
-      clientSecret: 'bwrc6ZJuT5Z99sn6a3cH', // optional
-      grantPath: '/oauth/access-token',
-      revokePath: '/oauth/access-token'
-    });
-
-    OAuthTokenProvider.configure({
-      name: 'token',
-      options: {
-        secure: false,
-        path: '/'
-      }
-    });
-}]);
-
-App.run(['$rootScope', '$window', '$http', 'OAuthToken', 'OAuth', function($rootScope, $window, $http, OAuthToken, OAuth) {
-    $rootScope.$on('oauth:error', function(event, rejection, deferred) {
-
-      // Refresh token when a `invalid_token` error occurs.
-      if ('access_denied' === rejection.data.error) {
-        OAuth.getRefreshToken().then(function(response){
-            
-            $http(rejection.config).then(function(resp) {
-                deferred.resolve(resp);
-            },function(resp) {
-                deferred.reject();
-            });
-
-        }, function(response) {
-            deferred.reject();
+App.config([
+    'OAuthProvider', 'OAuthTokenProvider', 'SettingsProvider',
+    function(OAuthProvider, OAuthTokenProvider, SettingsProvider)
+    {
+        OAuthProvider.configure({
+          baseUrl: SettingsProvider.config.baseUrl,
+          clientId: SettingsProvider.config.clientId,
+          clientSecret: SettingsProvider.config.clientSecret,
+          grantPath: '/oauth/access-token',
+          revokePath: '/oauth/access-token'
         });
 
-        return deferred.promise;
+        OAuthTokenProvider.configure({
+          name: 'token',
+          options: {
+            secure: false,
+            path: '/'
+          }
+        });
+    }
+]);
 
-      } else {
-          // Redirect to `/login` with the `error_reason`.
-          return $window.location.href = '/#/login?error_reason=' + rejection.data.error;
-      }
-    });
+App.run([
+    '$rootScope', '$window', '$http', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
+    function($rootScope, $window, $http, httpBuffer, OAuthToken, OAuth, Settings)
+    {
+        $rootScope.refreshToken = false;
 
-    $rootScope.logout = function() {
-        OAuthToken.removeToken();
-    };
+        $rootScope.$on('oauth:error', function(event, rejection, deferred) {
+            
+            // Refresh token when a `invalid_token` error occurs.
+            if ('access_denied' === rejection.data.error)
+            {
+                httpBuffer.add(rejection.config, deferred);
 
-    $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
-        if (nextRoute.access === undefined || nextRoute.access.requiredAuth===true) {
-            // $http.get('/oauth/user').then(function(data){
-            //     $rootScope.authUser = data;
-            // });
+                if (!$rootScope.refreshToken) {
+                    $rootScope.refreshToken = true;
+
+                    OAuth.getRefreshToken().then(function(response)
+                    {
+                        httpBuffer.retryAll();
+                        $rootScope.refreshToken = false;
+
+                    }, function(response) {
+                        httpBuffer.rejectAll();
+                        $rootScope.refreshToken = false;
+                    });
+                }
+
+                return deferred.promise;
+
+            } else {
+                httpBuffer.clear();
+                return $window.location.href = '/login?error_reason=' + rejection.data.error;
+            }
+        });
+
+        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+            if ((nextRoute.access === undefined || nextRoute.access.requiredAuth===true) && !OAuth.isAuthenticated()) {
+                return $window.location.href = '/login?error_reason=' + rejection.data.error;
+            }
+        });
+
+        $rootScope.logout = function() {
+            OAuthToken.removeToken();
+        };
+
+        if (OAuth.isAuthenticated())
+        {
+            $http.get(Settings.baseUrl + '/oauth/user').then(function(response){
+                $rootScope.AuthUser = response.data;
+            });
         }
-    });
-}]);
+    }
+]);

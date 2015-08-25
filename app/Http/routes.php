@@ -1,19 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', function() {
-    return view('app');
-});
+/**
+ * FrontEnd
+ */
+Route::get('/',      ['uses' => 'HomeController@index']);
+Route::get('/login', ['uses' => 'HomeController@login']);
 
 /**
  * API
@@ -21,6 +12,8 @@ Route::get('/', function() {
 Route::group(['middleware' => 'accept.json'], function() {
 
     Route::post('oauth/access-token', 'OAuthController@access');
+    Route::post('oauth/forgot', 'OAuthController@forgot');
+    Route::post('oauth/reset', 'OAuthController@reset');
     
     Route::group(['middleware' => 'oauth', 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
 

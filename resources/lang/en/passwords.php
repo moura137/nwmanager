@@ -18,5 +18,5 @@ return [
     'token' => 'This password reset token is invalid.',
     'sent' => 'We have e-mailed your password reset link!',
     'reset' => 'Your password has been reset!',
-
+    "subject_reset_link" => "Your Password Reset Link",
 ];

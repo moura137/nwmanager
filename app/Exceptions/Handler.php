@@ -69,6 +69,10 @@ class Handler extends ExceptionHandler
             'error' => $this->getMessageError($statusCode),
             'error_description' => $e->getMessage(),
         ];
+
+        if (config('app.debug')) {
+            $data['exception'] = sprintf("%s in %s:(%s)", get_class($e), $e->getFile(), $e->getLine());
+        }
                 
         return response()->json($data, $statusCode);
     }

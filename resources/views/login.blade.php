@@ -1,3 +1,13 @@
+@extends('app')
+
+@section('title')
+| Login
+@endsection
+
+@section('content')
+    
+<div ng-controller="LoginCtrl">
+        
 <div class="middle-box loginscreen animated fadeInDown">
     <div>
         <h2>Login</h2>
@@ -23,16 +33,22 @@
             <button type="submit" class="btn btn-primary block full-width m-b">Entrar</button>
 
             <div align="center">
-                <a ng-href="#"><small>Esqueceu sua senha?</small></a>
+                <a href="#"><small>Esqueceu sua senha?</small></a>
             </div>
         </form>
         
         <p class="m-t" align="center"> <small>copyright &copy; 2015</small> </p>
-    </div
+    </div>
 </div>
 
+</div>
+
+@endsection
+
+@section('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
         $('body').addClass('gray-bg');
     });
 </script>
+@endsection
