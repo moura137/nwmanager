@@ -223,12 +223,12 @@ App.run([
                 'messages': []
             };
 
-            var type = typeof data.error_description;
-
-            if (data.error_description == undefined) {
+            if (!data || data.error_description == undefined) {
                 $rootScope.error.messages.push("Algo estranho aconteceu!");
 
             } else {
+                var type = typeof data.error_description;
+
                 switch(type) {
                     default:
                     case 'string':
