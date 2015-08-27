@@ -17,8 +17,8 @@ class UserEloquentRepository extends AbstractEloquentRepository implements UserR
      * @var array
      */
     protected $fieldSearchable = [
-        'username' => 'like',
         'name' => 'like',
+        'email' => '=',
     ];
 
     /**
