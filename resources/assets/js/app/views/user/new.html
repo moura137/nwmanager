@@ -1,0 +1,81 @@
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Usuários</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a ng-href="#/">Home</a>
+                    </li>
+                    <li>
+                        <a ng-href="#/user">Usuários</a>
+                    </li>
+                    <li class="active">
+                        <strong>Novo</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <form name="formUser" class="form-horizontal" ng-submit="save()">
+                        
+                        <div ng-include src="'build/views/_errors.html'"></div>
+
+                        <div class="form-group" ng-class="{'has-error': !formUser.name.$valid && formUser.name.$touched}">
+                            <label class="col-lg-2 control-label">Nome *</label>
+                            <div class="col-lg-10">
+                                <input type="text" required maxlength="255" name="name" class="form-control" placeholder="Nome" ng-model="entity.name" />
+                                <div ng-messages="formUser.name.$error" class="help-block" ng-show="!formUser.name.$valid && formUser.name.$touched">
+                                    <span ng-message="required">Campo obrigatório</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !formUser.email.$valid && formUser.email.$touched}">
+                            <label class="col-lg-2 control-label">E-mail *</label>
+                            <div class="col-lg-10">
+                                <input type="email" required maxlength="255" name="email" class="form-control" placeholder="E-mail" ng-model="entity.email">
+                                <div ng-messages="formUser.email.$error" class="help-block" ng-show="!formUser.email.$valid && formUser.email.$touched">
+                                    <span ng-message="required">Campo obrigatório</span>
+                                    <span ng-message="email">Email Inválido</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !formUser.password.$valid && formUser.password.$touched}">
+                            <label class="col-lg-2 control-label">Senha *</label>
+                            <div class="col-lg-10">
+                                <input type="password" required ng-minlength="6" maxlength="255" name="password" class="form-control" placeholder="Senha" ng-model="entity.password">
+                                <div ng-messages="formUser.password.$error" class="help-block" ng-show="!formUser.password.$valid && formUser.password.$touched">
+                                    <span ng-message="required">Campo obrigatório</span>
+                                    <span ng-message="minlength">Mínimo 6 caracteres.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !formUser.password_confirmation.$valid && formUser.password_confirmation.$touched}">
+                            <label class="col-lg-2 control-label">Confirmar Senha *</label>
+                            <div class="col-lg-10">
+                                <input type="password" required ng-minlength="6" maxlength="255" name="password_confirmation" class="form-control" placeholder="Confirmar Senha" ng-model="entity.password_confirmation">
+                                <div ng-messages="formUser.password_confirmation.$error" class="help-block" ng-show="!formUser.password_confirmation.$valid && formUser.password_confirmation.$touched">
+                                    <span ng-message="required">Campo obrigatório</span>
+                                    <span ng-message="minlength">Mínimo 6 caracteres.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" data-loading-text="Carregando..." class="btn btn-primary">Salvar</button>
+                                <a ng-href="#/user" class="btn btn-white">Cancelar</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>

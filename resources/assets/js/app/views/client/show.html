@@ -1,0 +1,73 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Clientes</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-href="#/">Home</a>
+            </li>
+            <li>
+                <a ng-href="#/client">Clientes</a>
+            </li>
+            <li class="active">
+                <strong>Exibição</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <a ng-href="#/client" class="btn btn-white">Voltar</a>
+            <a ng-href="#/client/[[ entity.id ]]/edit" class="btn btn-primary">Editar</a>
+            <a ng-href="#/client/[[ entity.id ]]/delete" class="btn btn-danger">Excluir</a>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <label class="col-lg-2 control-label">Nome</label>
+                <div class="col-lg-10">
+                    [[ entity.name ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Responsável</label>
+                <div class="col-lg-10">
+                    [[ entity.responsible ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">E-mail</label>
+                <div class="col-lg-10">
+                    [[ entity.email ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Telefone</label>
+                <div class="col-lg-10">
+                    [[ entity.phone ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Endereço</label>
+                <div class="col-lg-10">
+                    [[ entity.address ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Observação</label>
+                <div class="col-lg-10">
+                    [[ entity.obs ]]
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

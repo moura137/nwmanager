@@ -2,6 +2,8 @@
  * Controller Home
  */
 angular.module('app.controllers')
-    .controller('HomeCtrl', ['$scope', function($scope) {
-
-    }]);
+    .controller('HomeCtrl', 
+        ['$scope', '$rootScope', 
+        function($scope, $rootScope) {
+            $rootScope.clearError();
+        }]);

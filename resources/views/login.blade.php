@@ -12,10 +12,7 @@
     <div>
         <h2>Login</h2>
         
-        <div class="alert alert-danger" ng-show="error.error">
-            <strong>Whoops!</strong> Ocorreu erro.<br>
-            &bullet; [[ error.message ]]
-        </div>
+        <div ng-include src="'build/views/_errors.html'"></div>
 
         <form class="m-t" role="form" name="formLogin" ng-submit="login()">
             <div class="form-group" ng-class="{'has-error': !formLogin.username.$valid && formLogin.username.$touched}">

@@ -1,10 +1,10 @@
 /**
- * Controller Client List
+ * Controller User List
  */
 angular.module('app.controllers')
-    .controller('ClientListCtrl', 
-        ['$scope', '$rootScope', 'Client', 
-        function($scope, $rootScope, Client) {
+    .controller('UserListCtrl', 
+        ['$scope', '$rootScope', 'User', 
+        function($scope, $rootScope, User) {
             
             $scope.search = function() {
                 $scope.query({'search': $scope.q});
@@ -19,7 +19,7 @@ angular.module('app.controllers')
 
             $scope.query = function(search) {
                 $rootScope.clearError();
-                $scope.entities = Client.query(search);
+                $scope.entities = User.query(search);
             };
 
             $scope.clear();

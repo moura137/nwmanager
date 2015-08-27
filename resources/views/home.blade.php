@@ -27,6 +27,9 @@
             <li>
                 <a ng-href="#/client"><i class="fa fa-group"></i> <span class="nav-label">Clientes</span></a>
             </li>
+            <li>
+                <a ng-href="#/user"><i class="fa fa-user"></i> <span class="nav-label">Usuário</span></a>
+            </li>
         </ul>
     </div>
     </nav>

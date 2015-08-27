@@ -1,21 +1,21 @@
 /**
- * Controller Client New
+ * Controller User New
  */
 angular.module('app.controllers')
-    .controller('ClientNewCtrl', 
-        ['$scope', '$rootScope', '$location', 'Client', 
-        function($scope, $rootScope, $location, Client)
+    .controller('UserNewCtrl', 
+        ['$scope', '$rootScope', '$location', 'User', 
+        function($scope, $rootScope, $location, User)
         {
             $rootScope.clearError();
-            $scope.entity = new Client();
+            $scope.entity = new User();
 
             $scope.save = function(){
-                if($scope.formClient.$valid)
+                if($scope.formUser.$valid)
                 {
                     $("button[type=submit]").button('loading');
 
                     $scope.entity.$save().then(function(){
-                        $location.path('/client');
+                        $location.path('/user');
 
                     }).catch(function(response){
                         $("button[type=submit]").button('reset');

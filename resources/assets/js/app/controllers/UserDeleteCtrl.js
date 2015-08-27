@@ -1,19 +1,19 @@
 /**
- * Controller Client Delete
+ * Controller User Delete
  */
 angular.module('app.controllers')
-    .controller('ClientDeleteCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'Client', 
-        function($scope, $rootScope, $location, $routeParams, Client)
+    .controller('UserDeleteCtrl', 
+        ['$scope', '$rootScope', '$location', '$routeParams', 'User', 
+        function($scope, $rootScope, $location, $routeParams, User)
         {
             $rootScope.clearError();
-            $scope.entity = new Client.get({id: $routeParams.id});
+            $scope.entity = new User.get({id: $routeParams.id});
 
             $scope.delete = function(){
                 $("button.btn-danger").button('loading');
                 
                 $scope.entity.$delete().then(function(){
-                    $location.path('/client');
+                    $location.path('/user');
 
                 }).catch(function(response){
                     $("button.btn-danger").button('reset');

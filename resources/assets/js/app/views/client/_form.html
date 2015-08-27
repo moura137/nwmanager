@@ -1,10 +1,7 @@
-<div class="alert alert-danger" ng-show="error.error">
-    <strong>Whoops!</strong> Ocorreu erro.<br>
-    <div ng-repeat="message in error.message">&bullet; [[ message ]]</div>
-</div>
+<div ng-include src="'build/views/_errors.html'"></div>
 
 <div class="form-group" ng-class="{'has-error': !formClient.name.$valid && formClient.name.$touched}">
-    <label class="col-lg-2 control-label">Nome</label>
+    <label class="col-lg-2 control-label">Nome *</label>
     <div class="col-lg-10">
         <input type="text" required maxlength="255" name="name" class="form-control" placeholder="Nome" ng-model="entity.name" />
         <div ng-messages="formClient.name.$error" class="help-block" ng-show="!formClient.name.$valid && formClient.name.$touched">
@@ -14,7 +11,7 @@
 </div>
 
 <div class="form-group" ng-class="{'has-error': !formClient.responsible.$valid && formClient.responsible.$touched}">
-    <label class="col-lg-2 control-label">Responsável</label>
+    <label class="col-lg-2 control-label">Responsável *</label>
     <div class="col-lg-10">
         <input type="text" required maxlength="255" name="responsible" class="form-control" placeholder="Responsável" ng-model="entity.responsible">
         <div ng-messages="formClient.responsible.$error" class="help-block" ng-show="!formClient.responsible.$valid && formClient.responsible.$touched">
@@ -24,7 +21,7 @@
 </div>
 
 <div class="form-group" ng-class="{'has-error': !formClient.email.$valid && formClient.email.$touched}">
-    <label class="col-lg-2 control-label">E-mail</label>
+    <label class="col-lg-2 control-label">E-mail *</label>
     <div class="col-lg-10">
         <input type="email" required maxlength="255" name="email" class="form-control" placeholder="E-mail" ng-model="entity.email">
         <div ng-messages="formClient.email.$error" class="help-block" ng-show="!formClient.email.$valid && formClient.email.$touched">
@@ -35,7 +32,7 @@
 </div>
 
 <div class="form-group" ng-class="{'has-error': !formClient.phone.$valid && formClient.phone.$touched}">
-    <label class="col-lg-2 control-label">Telefone</label>
+    <label class="col-lg-2 control-label">Telefone *</label>
     <div class="col-lg-10">
         <input type="text" required maxlength="255" name="phone" class="form-control" placeholder="Telefone" ng-model="entity.phone">
         <div ng-messages="formClient.phone.$error" class="help-block" ng-show="!formClient.phone.$valid && formClient.phone.$touched">
@@ -45,7 +42,7 @@
 </div>
 
 <div class="form-group" ng-class="{'has-error': !formClient.address.$valid && formClient.address.$touched}">
-    <label class="col-lg-2 control-label">Endereço</label>
+    <label class="col-lg-2 control-label">Endereço *</label>
     <div class="col-lg-10">
         <input type="text" required maxlength="255" name="address" class="form-control" placeholder="Endereço" ng-model="entity.address">
         <div ng-messages="formClient.address.$error" class="help-block" ng-show="!formClient.address.$valid && formClient.address.$touched">

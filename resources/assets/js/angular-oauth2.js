@@ -259,7 +259,6 @@
                 }
 
                 if (401 === rejection.status && (rejection.data && "access_denied" === rejection.data.error) || rejection.headers("www-authenticate") && 0 === rejection.headers("www-authenticate").indexOf("Bearer")) {
-                    console.log('401');
                     $rootScope.$emit("oauth:error", rejection, deferred);
                     return deferred.promise;
                 }

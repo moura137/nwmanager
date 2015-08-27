@@ -3,14 +3,17 @@ var App = angular.module('App', [
     'app.env.config', 
     'app.controllers', 
     'app.services', 
+    'app.factories',
+    'app.filters',
     'ngRoute', 
-    'angular-oauth2', 
-    'http-auth-interceptor-buffer',
+    'angular-oauth2',
     'angularjs-gravatardirective']);
 
 /** Modules **/
 angular.module('app.controllers', ['angular-oauth2', 'ngMessages']);
 angular.module('app.services', ['ngResource']);
+angular.module('app.factories', []);
+angular.module('app.filters', []);
 
 /**
  * ------ Providers ------------
@@ -41,6 +44,11 @@ App.config(['$routeProvider',
             controller: 'ClientListCtrl'
         })
 
+        .when('/client/:id/show', {
+            templateUrl: 'build/views/client/show.html',
+            controller: 'ClientShowCtrl'
+        })
+
         .when('/client/new', {
             templateUrl: 'build/views/client/new.html',
             controller: 'ClientNewCtrl'
@@ -54,6 +62,26 @@ App.config(['$routeProvider',
         .when('/client/:id/delete', {
             templateUrl: 'build/views/client/delete.html',
             controller: 'ClientDeleteCtrl'
+        })
+
+        .when('/user', {
+            templateUrl: 'build/views/user/list.html',
+            controller: 'UserListCtrl'
+        })
+
+        .when('/user/new', {
+            templateUrl: 'build/views/user/new.html',
+            controller: 'UserNewCtrl'
+        })
+
+        .when('/user/:id/edit', {
+            templateUrl: 'build/views/user/edit.html',
+            controller: 'UserEditCtrl'
+        })
+
+        .when('/user/:id/delete', {
+            templateUrl: 'build/views/user/delete.html',
+            controller: 'UserDeleteCtrl'
         })
 
         .when('/', {
@@ -83,11 +111,12 @@ App.config(['$routeProvider',
 App.config([
     '$httpProvider', '$interpolateProvider',
     function($httpProvider, $interpolateProvider) {
-    $httpProvider.defaults.headers.common["Accept"] = 'application/json';
+        $httpProvider.defaults.headers.common["Accept"] = 'application/json';
 
-  $interpolateProvider.startSymbol('[[');
-  $interpolateProvider.endSymbol(']]');
-}]);
+        $interpolateProvider.startSymbol('[[');
+        $interpolateProvider.endSymbol(']]');
+    }
+]);
 
 /**
  * ----- OAUTH2 ---------
@@ -150,6 +179,9 @@ App.run([
         });
 
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+            $rootScope.clearError();
+            $rootScope.getAuthUser();
+            
             if ((nextRoute.access === undefined || nextRoute.access.requiredAuth===true) && !OAuth.isAuthenticated()) {
                 return $window.location.href = '/login?error_reason=' + rejection.data.error;
             }
@@ -159,11 +191,55 @@ App.run([
             OAuthToken.removeToken();
         };
 
-        if (OAuth.isAuthenticated())
-        {
-            $http.get(Settings.baseUrl + '/oauth/user').then(function(response){
-                $rootScope.AuthUser = response.data;
+        $rootScope.getAuthUser = function() {
+            if (OAuth.isAuthenticated())
+            {
+                $http.get(Settings.baseUrl + '/oauth/user').then(function(response){
+                    $rootScope.AuthUser = response.data;
+                });
+            }
+        };
+
+        $rootScope.error = null;
+
+        function explodeError(messages) {
+            angular.forEach(messages, function(value, key) {
+                if (typeof value == 'object') {
+                    explodeError(value);
+                } else {
+                    $rootScope.error.messages.push(value);
+                }
             });
         }
+
+        $rootScope.clearError = function() {
+            $rootScope.error = null;
+        }
+
+        $rootScope.showError = function(status, data) {
+            $rootScope.error = {
+                'error': true,
+                'status': status,
+                'messages': []
+            };
+
+            var type = typeof data.error_description;
+
+            if (data.error_description == undefined) {
+                $rootScope.error.messages.push("Algo estranho aconteceu!");
+
+            } else {
+                switch(type) {
+                    default:
+                    case 'string':
+                    case 'number':
+                        $rootScope.error.messages.push(data.error_description);
+                    break;
+                    case 'object':
+                        explodeError(data.error_description);
+                    break;
+                }
+            }
+        };
     }
 ]);

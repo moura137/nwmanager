@@ -1,4 +1,4 @@
-angular.module('http-auth-interceptor-buffer', [])
+angular.module('app.factories')
 .factory('httpBuffer', ['$injector', function($injector) {
     
     //Requests buffer
@@ -8,17 +8,13 @@ angular.module('http-auth-interceptor-buffer', [])
     var $http;
 
     function retryHttpRequest(config, deferred) {
-        console.log('retryHttpRequest');
-
         //Get the http service now
         $http = $http || $injector.get('$http');
 
         //Retry the request
         $http(config).then(function(response) {
-            console.log('successCallback');
             deferred.resolve(response);
         }, function(reason) {
-            console.log('errorCallback');
             deferred.reject(reason);
         });
     }
@@ -29,7 +25,6 @@ angular.module('http-auth-interceptor-buffer', [])
          * Store a new request in the buffer
          */
         add: function(config, deferred) {
-            console.log('add');
             buffer.push({
                 config: config,
                 deferred: deferred
@@ -41,8 +36,6 @@ angular.module('http-auth-interceptor-buffer', [])
          * Retries all the buffered requests clears the buffer.
          */
         retryAll: function() {
-            console.log('retryAll');
-
             for (var i = 0; i < buffer.length; ++i) {
                 retryHttpRequest(buffer[i].config, buffer[i].deferred);
             }
@@ -54,7 +47,6 @@ angular.module('http-auth-interceptor-buffer', [])
          * Clear the buffer (without rejecting requests)
          */
         clear: function() {
-            console.log('clear');
             buffer = [];
         },
 
@@ -62,8 +54,6 @@ angular.module('http-auth-interceptor-buffer', [])
          * Reject all the buffered requests
          */
         rejectAll: function(reason) {
-            console.log('rejectAll');
-            
             //Loop all buffered requests and reject them
             for (var i = 0; i < buffer.length; i++) {
                 buffer[i].deferred.reject(reason);

@@ -48,18 +48,30 @@
         <script src="{{ asset('build/js/env-config.js') }}"></script>
 
         <script src="{{ asset('build/js/app/app.js') }}"></script>
+        
         <!-- Controllers -->
         <script src="{{ asset('build/js/app/controllers/ClientListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/ClientShowCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ClientNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ClientEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ClientDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/UserListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/UserNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/UserEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/UserDeleteCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
+        
         <!-- Services -->
         <script src="{{ asset('build/js/app/services/client.js') }}"></script>
         <script src="{{ asset('build/js/app/services/user.js') }}"></script>
-        <script src="{{ asset('build/js/app/services/http-buffer.js') }}"></script>
+
+        <!-- Factories -->
+        <script src="{{ asset('build/js/app/filters/nl2br-filter.js') }}"></script>
+        <script src="{{ asset('build/js/app/factories/httpErrorInterceptor.js') }}"></script>
+        <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
+
     @else
         <script src="{{ elixir('js/all.js') }}"></script>
         <script src="{{ asset('build/js/env-config.js') }}"></script>
