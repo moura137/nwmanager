@@ -1,21 +1,21 @@
 /**
- * Controller User Edit
+ * Controller Client Edit
  */
 angular.module('app.controllers')
-    .controller('UserEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'User', 
-        function($scope, $rootScope, $location, $routeParams, User)
+    .controller('ClientEditCtrl', 
+        ['$scope', '$rootScope', '$location', '$routeParams', 'Client', 
+        function($scope, $rootScope, $location, $routeParams, Client)
         {
             $rootScope.clearError();
-            $scope.entity = new User.get({id: $routeParams.id});
+            $scope.client = new Client.get({id: $routeParams.id});
 
             $scope.save = function(){
-                if($scope.formUser.$valid)
+                if($scope.formClient.$valid)
                 {
                     $("button[type=submit]").button('loading');
 
-                    User.update({id: $scope.entity.id}, $scope.entity, function(){
-                        $location.path('/user');
+                    Client.update({id: $scope.client.id}, $scope.client, function(){
+                        $location.path('/client');
 
                     }, function(response){
                         $("button[type=submit]").button('reset');

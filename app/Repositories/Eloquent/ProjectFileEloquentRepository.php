@@ -39,4 +39,17 @@ class ProjectFileEloquentRepository extends AbstractEloquentRepository implement
     {
         return ProjectFilePresenter::class;
     }
+
+    /**
+     * IsUser
+     *
+     * @param int $fileId
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isUser($fileId, $userId)
+    {
+        return $this->find($fileId)->isUser($userId);
+    }
 }

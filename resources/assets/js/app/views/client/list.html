@@ -17,7 +17,7 @@
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox">
-                <div class="ibox-content">
+                <div class="ibox-title">
                     <div class="row">
                         <div class="col-sm-1">
                             <a class="btn btn-primary" ng-href="#/client/new"><i class="fa fa-plus"></i> Novo</a>
@@ -36,7 +36,8 @@
                             </form>
                         </div>
                     </div>
-
+                </div>
+                <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
@@ -50,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="entity in entities">
+                            <tr ng-repeat="entity in clients">
                                 <td>[[ entity.id ]]</td>
                                 <td><a ng-href="#/client/[[ entity.id ]]/show" class="text-navy">[[ entity.name ]]</a></td>
                                 <td>[[ entity.responsible ]]</td>
@@ -62,12 +63,12 @@
                                 </td>
                             </tr>
 
-                            <tr ng-hide="entities.length" align="center">
-                                <td colspan="5">NENHUM REGISTRO ENCONTRADO</td>
+                            <tr ng-hide="clients.length" align="center">
+                                <td colspan="6">NENHUM REGISTRO ENCONTRADO</td>
                             </tr>
                             </tbody>
                         </table>
-                        <span class="pull-right">[[ entities.length ]] Clientes(s)</span>
+                        <span class="pull-right">[[ clients.length ]] Clientes(s)</span>
                     </div>
                 </div>
             </div>

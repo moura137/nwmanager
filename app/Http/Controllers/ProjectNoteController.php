@@ -41,7 +41,8 @@ class ProjectNoteController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['project'];
-        $this->middleware('project.member');
+        $this->middleware('project.member', ['except' => ['destroy']]);
+        $this->middleware('project-note.user', ['only' => ['destroy']]);
     }
 
     /**
@@ -61,6 +62,7 @@ class ProjectNoteController extends Controller
             ->skipPresenter(false)
             ->with($this->withRelations)
             ->pushCriteria(new InputCriteria($data))
+            ->orderBy('created_at', 'desc')
             ->all();
     }
 
@@ -88,6 +90,29 @@ class ProjectNoteController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return Response
+     */
+    public function update(Request $request, $project_id, $id)
+    {
+        $data = $request->all();
+        $data['project_id'] = $project_id;
+
+        $entity = $this->service->update($id, $data);
+
+        if (!$entity) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
+
+        return response()->json($entity->presenter());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $project_id
@@ -101,5 +126,30 @@ class ProjectNoteController extends Controller
             ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
             ->find($id)
             ->presenter();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param int     $project_id
+     * @param int     $id
+     *
+     * @return Response
+     */
+    public function destroy(Request $request, $project_id, $id)
+    {
+        $data = $request->all();
+        $data['project_id'] = $project_id;
+
+        $success = $this->service->delete($id, $data);
+
+        if (!$success) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
+
+        return response()
+                ->json(['error' => null], 204);
     }
 }

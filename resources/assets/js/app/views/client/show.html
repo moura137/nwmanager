@@ -9,7 +9,7 @@
                 <a ng-href="#/client">Clientes</a>
             </li>
             <li class="active">
-                <strong>Exibição</strong>
+                <strong>Detalhes</strong>
             </li>
         </ol>
     </div>
@@ -22,49 +22,49 @@
     <div class="ibox">
         <div class="ibox-title">
             <a ng-href="#/client" class="btn btn-white">Voltar</a>
-            <a ng-href="#/client/[[ entity.id ]]/edit" class="btn btn-primary">Editar</a>
-            <a ng-href="#/client/[[ entity.id ]]/delete" class="btn btn-danger">Excluir</a>
+            <a ng-href="#/client/[[ client.id ]]/edit" class="btn btn-primary">Editar</a>
+            <a ng-href="#/client/[[ client.id ]]/delete" class="btn btn-danger">Excluir</a>
         </div>
         <div class="ibox-content">
             <div class="row">
                 <label class="col-lg-2 control-label">Nome</label>
                 <div class="col-lg-10">
-                    [[ entity.name ]]
+                    [[ client.name ]]
                 </div>
             </div>
 
             <div class="row">
                 <label class="col-lg-2 control-label">Responsável</label>
                 <div class="col-lg-10">
-                    [[ entity.responsible ]]
+                    [[ client.responsible ]]
                 </div>
             </div>
 
             <div class="row">
                 <label class="col-lg-2 control-label">E-mail</label>
                 <div class="col-lg-10">
-                    [[ entity.email ]]
+                    [[ client.email ]]
                 </div>
             </div>
 
             <div class="row">
                 <label class="col-lg-2 control-label">Telefone</label>
                 <div class="col-lg-10">
-                    [[ entity.phone ]]
+                    [[ client.phone ]]
                 </div>
             </div>
 
             <div class="row">
                 <label class="col-lg-2 control-label">Endereço</label>
                 <div class="col-lg-10">
-                    [[ entity.address ]]
+                    [[ client.address ]]
                 </div>
             </div>
 
             <div class="row">
                 <label class="col-lg-2 control-label">Observação</label>
                 <div class="col-lg-10">
-                    [[ entity.obs ]]
+                    <span ng-bind-html="client.obs | nl2br"></span>
                 </div>
             </div>
 

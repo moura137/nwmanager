@@ -39,4 +39,17 @@ class ProjectNoteEloquentRepository extends AbstractEloquentRepository implement
     {
         return ProjectNotePresenter::class;
     }
+
+    /**
+     * IsUser
+     *
+     * @param int $noteId
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isUser($noteId, $userId)
+    {
+        return $this->find($noteId)->isUser($userId);
+    }
 }

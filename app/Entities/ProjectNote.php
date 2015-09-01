@@ -50,4 +50,16 @@ class ProjectNote extends AbstractEntity
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Is User
+     *
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isUser($userId)
+    {
+        return (bool) ($this->user_id == $userId);
+    }
 }

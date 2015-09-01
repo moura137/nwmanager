@@ -9,5 +9,13 @@ namespace NwManager\Repositories\Contracts;
  */
 interface ProjectNoteRepository extends AbstractRepository
 {
-    //
+    /**
+     * IsUser
+     *
+     * @param int $noteId
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isUser($noteId, $userId);
 }

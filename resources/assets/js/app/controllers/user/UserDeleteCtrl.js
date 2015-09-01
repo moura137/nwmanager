@@ -7,12 +7,12 @@ angular.module('app.controllers')
         function($scope, $rootScope, $location, $routeParams, User)
         {
             $rootScope.clearError();
-            $scope.entity = new User.get({id: $routeParams.id});
+            $scope.user = new User.get({id: $routeParams.id});
 
             $scope.delete = function(){
                 $("button.btn-danger").button('loading');
                 
-                $scope.entity.$delete().then(function(){
+                $scope.user.$delete().then(function(){
                     $location.path('/user');
 
                 }).catch(function(response){

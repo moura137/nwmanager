@@ -7,6 +7,7 @@ use NwManager\Validators\ProjectFileValidator;
 use NwManager\Upload\Upload;
 use NwManager\Repositories\Criterias\InputCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class ProjectFileService
@@ -124,6 +125,47 @@ class ProjectFileService extends AbstractService
             return $success;
 
         } catch (ModelNotFoundException $e) {
+            throw $e;
+
+        } catch (\Exception $e) {
+            $this->errors = $this->parseError($e);
+            return false;
+        }
+    }
+
+    /**
+     * Delete File
+     *
+     * @param Entity|int $id
+     * @param array      $data
+     *
+     * @return bool
+     */
+    public function getFile($id, array $data = array())
+    {
+        try {
+            $project_id = isset($data['project_id']) ? $data['project_id'] : 0;
+
+            $entity = $this->repository
+                ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
+                ->find($id);
+
+            $folder = $this->setFolder($project_id);
+            $file = $this->upload->getFile($entity->file, $folder);
+
+            if (!$file) {
+                abort(404);
+            }
+
+            $mime = $this->upload->mimeType($entity->file, $folder);
+            $filename = $entity->file;
+
+            return compact('file', 'mime', 'filename');
+
+        } catch (ModelNotFoundException $e) {
+            throw $e;
+            
+        } catch (NotFoundHttpException $e) {
             throw $e;
 
         } catch (\Exception $e) {

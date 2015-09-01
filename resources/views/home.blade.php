@@ -8,7 +8,6 @@
             <li class="nav-header">
                 
                 <div class="dropdown profile-element">
-                    <gravatar-image data-gravatar-email="'[[ AuthUser.email ]]'" data-gravatar-default="mm" data-gravatar-size="60" data-gravatar-secure="true" data-gravatar-css-class="img-circle"></gravatar-image>
 
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <span class="clear">
@@ -28,7 +27,10 @@
                 <a ng-href="#/client"><i class="fa fa-group"></i> <span class="nav-label">Clientes</span></a>
             </li>
             <li>
-                <a ng-href="#/user"><i class="fa fa-user"></i> <span class="nav-label">Usuário</span></a>
+                <a ng-href="#/user"><i class="fa fa-user"></i> <span class="nav-label">Usuários</span></a>
+            </li>
+            <li>
+                <a ng-href="#/project"><i class="fa fa-briefcase"></i> <span class="nav-label">Projetos</span></a>
             </li>
         </ul>
     </div>

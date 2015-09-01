@@ -37,5 +37,7 @@ class Kernel extends HttpKernel
         'accept.json' => \NwManager\Http\Middleware\AcceptJson::class,
         'project.owner' => \NwManager\Http\Middleware\CheckProjectOwner::class,
         'project.member' => \NwManager\Http\Middleware\CheckProjectMember::class,
+        'project-note.user' => \NwManager\Http\Middleware\CheckProjectNoteUser::class,
+        'project-file.user' => \NwManager\Http\Middleware\CheckProjectFileUser::class,
     ];
 }

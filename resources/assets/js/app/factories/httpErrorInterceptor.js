@@ -7,7 +7,7 @@ angular.module('app.factories')
         }
 
         else if(response.status === 403) {
-          $location.url('forbiden');
+          $location.url('forbidden');
         }
         
         return $q.reject(response);

@@ -18,6 +18,7 @@ var paths = {
 paths.vendor_css = [
     paths.bower + '/bootstrap/dist/css/bootstrap.min.css',
     paths.bower + '/sweetalert/dist/sweetalert.css',
+    paths.assets + '/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css',
     paths.assets + '/css/animate.css',
     paths.assets + '/css/styles.css'
 ];
@@ -25,8 +26,10 @@ paths.vendor_css = [
 paths.vendor_js = [
     paths.bower + '/jquery/dist/jquery.js',
     paths.bower + '/bootstrap/dist/js/bootstrap.min.js',
+    paths.assets + '/plugins/jasny-bootstrap/js/jasny-bootstrap.js',
     paths.bower + '/angular/angular.js',
     paths.bower + '/angular-route/angular-route.js',
+    paths.bower + '/angular-sanitize/angular-sanitize.js',
     paths.bower + '/angular-resource/angular-resource.js',
     paths.bower + '/angular-animate/angular-animate.js',
     paths.bower + '/angular-messages/angular-messages.js',
@@ -34,30 +37,35 @@ paths.vendor_js = [
     paths.bower + '/angular-strap/dist/modules/navbar.js',
     paths.bower + '/angular-cookies/angular-cookies.js',
     paths.bower + '/query-string/query-string.js',
+    paths.assets + '/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
+    paths.assets + '/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js',
     //paths.bower + '/angular-oauth2/dist/angular-oauth2.js',
     paths.bower + '/angularjs-gravatardirective/dist/angularjs-gravatardirective.js',
     paths.bower + '/sweetalert/dist/sweetalert.min.js',
+    paths.bower + '/jquery-file-download/src/Scripts/jquery.fileDownload.js',
 ];
 
 gulp.task('config', function() {
   var fileEnvConfig = './env-config.json';
   var constants = {
     API_URL: 'http://localhost:8000',
-    CLIENT_ID: '',
+    CLIENT_ID: 'ANGULAR_APP',
     CLIENT_SECRET: ''
   };
 
   if( ! fs.existsSync(fileEnvConfig)) {
+    
     var fd = fs.openSync(fileEnvConfig, 'w');
     fs.writeSync(fd, JSON.stringify(constants));
     fs.closeSync(fd);
-  }
-
-  gulp.src(fileEnvConfig)
-    .pipe(ngConstant({
-      name: 'app.env.config'
-    }))
-    .pipe(gulp.dest(paths.build_js));
+    
+  } else {
+    gulp.src(fileEnvConfig)
+        .pipe(ngConstant({
+          name: 'app.env.config'
+        }))
+        .pipe(gulp.dest(paths.build_js));
+      }
 });
 
 /**

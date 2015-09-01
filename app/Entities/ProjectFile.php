@@ -52,4 +52,30 @@ class ProjectFile extends AbstractEntity
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Is User
+     *
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isUser($userId)
+    {
+        return (bool) ($this->user_id == $userId);
+    }
+
+    /**
+     * Set Extension
+     *
+     * @param string $value
+     *
+     * @return void
+     */
+    public function setExtensionAttribute($value)
+    {
+        if (! empty($value)) {
+            $this->attributes['extension'] = strtolower($value);
+        }
+    }
 }

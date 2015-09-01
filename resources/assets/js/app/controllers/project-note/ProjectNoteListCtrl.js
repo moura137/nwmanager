@@ -1,10 +1,11 @@
 /**
- * Controller User List
+ * Controller ProjectNote List
  */
 angular.module('app.controllers')
-    .controller('UserListCtrl', 
-        ['$scope', '$rootScope', 'User', 
-        function($scope, $rootScope, User) {
+    .controller('ProjectNoteListCtrl', 
+        ['$scope', '$rootScope', '$routeParams', 'ProjectNote', 
+        function($scope, $rootScope, $routeParams, ProjectNote) {
+            $scope.project_id = $routeParams.id;
             
             $scope.search = function() {
                 $scope.query({'search': $scope.q});
@@ -19,7 +20,7 @@ angular.module('app.controllers')
 
             $scope.query = function(search) {
                 $rootScope.clearError();
-                $scope.entities = User.query(search);
+                $scope.notes = ProjectNote.query(search, {id: $routeParams.id});
             };
 
             $scope.clear();

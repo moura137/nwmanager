@@ -1,0 +1,29 @@
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Projetos - Notas</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a ng-href="#/">Home</a>
+                    </li>
+                    <li>
+                        <a ng-href="#/project/[[ note.project_id ]]/show">Projeto</a>
+                    </li>
+                    <li class="active">
+                        <strong>Nova Nota</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <form name="formProjectNote" class="form-horizontal" ng-submit="save()">
+                        <div ng-include src="'build/views/project-note/_form.html'"></div>
+                    </form>
+                </div>
+            </div>
+        </div>

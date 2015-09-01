@@ -1,0 +1,39 @@
+<div class="row m-b">
+    <div class="col-lg-6">
+        <a ng-href="#/project/[[ project_id ]]/files/new" class="btn btn-primary"><i class="fa fa-plus"></i> Novo Arquivo</a>
+    </div>
+    <div class="col-lg-6" align="right">
+        <span>[[ files.length ]] Arquivos(s)</span>
+    </div>
+</div>
+
+<table class="table" ng-show="files.length">
+<thead>
+    <tr>
+        <th>&nbsp;</th>
+        <th>Descrição</th>
+        <th>Ext.</th>
+        <th>Tam.</th>
+        <th>Criado em. </th>
+        <th>&nbsp;</th>
+    </tr>
+</thead>
+<tbody>
+    <tr ng-repeat="file in files">        
+        <td>
+            <a ng-click="displayFile(file)" style="font-size:30px">
+                <i class="fa [[ file.extension | iconFile ]]"></i>
+            </a>
+        </td>
+        <td>[[ file.description ]]</td>
+        <td>[[ file.extension ]]</td>
+        <td>[[ file.size | displaySize ]]</td>
+        <td>[[ file.created_at | formatDateTime ]]</td>
+        <td><a ng-click="deleteFile(file)" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a></td>
+    </tr>
+</tbody>
+</table>
+
+<div ng-hide="files.length" align="center">
+    NENHUM ARQUIVO
+</div>

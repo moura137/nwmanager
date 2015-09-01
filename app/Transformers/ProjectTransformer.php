@@ -53,6 +53,7 @@ class ProjectTransformer extends AbstractTransformer
             'client_id'     => $project->client_id,
             'client'        => $project->client,
             'members'       => $project->members,
+            'count_tasks'   => $project->tasks()->count(),
         ];
 
         if ($this->timestamps) {

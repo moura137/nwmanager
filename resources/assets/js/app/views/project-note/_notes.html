@@ -1,0 +1,30 @@
+<div class="row m-b">
+    <div class="col-lg-6">
+        <a class="btn btn-primary" ng-href="#/project/[[ project_id ]]/notes/new"><i class="fa fa-plus"></i> Nova Nota</a>
+    </div>
+    <div class="col-lg-6" align="right">
+        <span>[[ notes.length ]] Notas(s)</span>
+    </div>
+</div>
+
+<div class="feed-element" ng-repeat="note in notes">
+
+    <div class="media-body ">
+        <small class="pull-right">
+        [[ note.diff_humans ]] &nbsp; 
+        <a ng-href="#/project/[[ note.project_id ]]/notes/[[ note.id ]]/edit" class="btn btn-xs btn-white" ng-show="AuthUser.id==note.user_id||AuthUser.id==project.owner_id"><i class="fa fa-pencil"></i> Editar</a>
+        <a ng-href="#/project/[[ note.project_id ]]/notes/[[ note.id ]]/delete" class="btn btn-xs btn-danger" ng-show="AuthUser.id==note.user_id||AuthUser.id==project.owner_id"><i class="fa fa-trash"></i> Excluir</a>
+        </small>
+        <strong>[[ note.user.name ]]</strong> -
+        <small class="text-muted">[[ note.updated_at | formatDateTime ]]</small>
+        
+        <div class="well">
+            <h4>[[ note.title ]]</h4>
+            <span ng-bind-html="note.note | nl2br"></span>
+        </div>
+    </div>
+</div>
+
+<div ng-hide="notes.length" align="center">
+    <td colspan="5">NENHUM REGISTRO ENCONTRADO</td>
+</div>

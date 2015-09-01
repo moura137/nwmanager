@@ -1,0 +1,37 @@
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Projetos - Arquivos</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a ng-href="#/">Home</a>
+                    </li>
+                    <li>
+                        <a ng-href="#/project/[[ file.project_id ]]/show">Projeto</a>
+                    </li>
+                    <li class="active">
+                        <strong>Exclusão</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <div ng-include src="'build/views/_errors.html'"></div>
+
+                    <h3>Tem certeza que deseja Excluir?</h3>
+                    
+                    <ul>
+                        <li><strong>Descrição: </strong> [[ file.description ]]</li>
+                    </ul>
+                    
+                    <button type="button" class="btn btn-danger" ng-click="delete()">Excluir</button>
+                    <a ng-href="#/project/[[ file.project_id ]]/show" class="btn btn-white">Cancelar</a>
+                </div>
+            </div>
+        </div>

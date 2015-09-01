@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class FakerOAuth2Seeder extends Seeder
 {
@@ -31,6 +32,9 @@ class FakerOAuth2Seeder extends Seeder
         }
         $this->command->info("APP_ID: {$clientId}");
         $this->command->info("SECRET: {$secret}");
+
+        $constants = '{"API_URL":"http://localhost:8000","CLIENT_ID":"'.$clientId.'","CLIENT_SECRET":"'.$secret.'"}';
+        File::put(base_path('env-config.json'), $constants);
 
         // Grant
         $grantId = 'password';

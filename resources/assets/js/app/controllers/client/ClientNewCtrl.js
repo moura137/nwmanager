@@ -7,14 +7,14 @@ angular.module('app.controllers')
         function($scope, $rootScope, $location, Client)
         {
             $rootScope.clearError();
-            $scope.entity = new Client();
+            $scope.client = new Client();
 
             $scope.save = function(){
                 if($scope.formClient.$valid)
                 {
                     $("button[type=submit]").button('loading');
 
-                    $scope.entity.$save().then(function(){
+                    $scope.client.$save().then(function(){
                         $location.path('/client');
 
                     }).catch(function(response){

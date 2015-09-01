@@ -17,7 +17,7 @@
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox">
-                <div class="ibox-content">
+                <div class="ibox-title">
                     <div class="row">
                         <div class="col-sm-1">
                             <a class="btn btn-primary" ng-href="#/user/new"><i class="fa fa-plus"></i> Novo</a>
@@ -34,8 +34,10 @@
                                     </span>
                                 </div>
                             </form>
-                        </div>                    </div>
-
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
@@ -46,7 +48,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="entity in entities">
+                            <tr ng-repeat="entity in users">
                                 <td>[[ entity.name ]]</td>
                                 <td> <i class="fa fa-envelope"> </i> [[ entity.email ]]</td>
                                 <td>
@@ -55,12 +57,12 @@
                                 </td>
                             </tr>
 
-                            <tr ng-hide="entities.length" align="center">
+                            <tr ng-hide="users.length" align="center">
                                 <td colspan="3">NENHUM REGISTRO ENCONTRADO</td>
                             </tr>
                             </tbody>
                         </table>
-                        <span class="pull-right">[[ entities.length ]] Usuários(s)</span>
+                        <span class="pull-right">[[ users.length ]] Usuários(s)</span>
                     </div>
                 </div>
             </div>

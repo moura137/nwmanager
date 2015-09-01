@@ -28,7 +28,7 @@
                         <div class="form-group" ng-class="{'has-error': !formUser.name.$valid && formUser.name.$touched}">
                             <label class="col-lg-2 control-label">Nome *</label>
                             <div class="col-lg-10">
-                                <input type="text" required maxlength="255" name="name" class="form-control" placeholder="Nome" ng-model="entity.name" />
+                                <input type="text" required maxlength="255" name="name" class="form-control" placeholder="Nome" ng-model="user.name" />
                                 <div ng-messages="formUser.name.$error" class="help-block" ng-show="!formUser.name.$valid && formUser.name.$touched">
                                     <span ng-message="required">Campo obrigatório</span>
                                 </div>
@@ -38,7 +38,7 @@
                         <div class="form-group" ng-class="{'has-error': !formUser.email.$valid && formUser.email.$touched}">
                             <label class="col-lg-2 control-label">E-mail *</label>
                             <div class="col-lg-10">
-                                <input type="email" required maxlength="255" name="email" class="form-control" placeholder="E-mail" ng-model="entity.email">
+                                <input type="email" required maxlength="255" name="email" class="form-control" placeholder="E-mail" ng-model="user.email">
                                 <div ng-messages="formUser.email.$error" class="help-block" ng-show="!formUser.email.$valid && formUser.email.$touched">
                                     <span ng-message="required">Campo obrigatório</span>
                                     <span ng-message="email">Email Inválido</span>
@@ -49,7 +49,7 @@
                         <div class="form-group" ng-class="{'has-error': !formUser.password.$valid && formUser.password.$touched}">
                             <label class="col-lg-2 control-label">Senha *</label>
                             <div class="col-lg-10">
-                                <input type="password" required ng-minlength="6" maxlength="255" name="password" class="form-control" placeholder="Senha" ng-model="entity.password">
+                                <input type="password" required ng-minlength="6" maxlength="255" name="password" class="form-control" placeholder="Senha" ng-model="user.password">
                                 <div ng-messages="formUser.password.$error" class="help-block" ng-show="!formUser.password.$valid && formUser.password.$touched">
                                     <span ng-message="required">Campo obrigatório</span>
                                     <span ng-message="minlength">Mínimo 6 caracteres.</span>
@@ -60,7 +60,7 @@
                         <div class="form-group" ng-class="{'has-error': !formUser.password_confirmation.$valid && formUser.password_confirmation.$touched}">
                             <label class="col-lg-2 control-label">Confirmar Senha *</label>
                             <div class="col-lg-10">
-                                <input type="password" required ng-minlength="6" maxlength="255" name="password_confirmation" class="form-control" placeholder="Confirmar Senha" ng-model="entity.password_confirmation">
+                                <input type="password" required ng-minlength="6" maxlength="255" name="password_confirmation" class="form-control" placeholder="Confirmar Senha" ng-model="user.password_confirmation">
                                 <div ng-messages="formUser.password_confirmation.$error" class="help-block" ng-show="!formUser.password_confirmation.$valid && formUser.password_confirmation.$touched">
                                     <span ng-message="required">Campo obrigatório</span>
                                     <span ng-message="minlength">Mínimo 6 caracteres.</span>

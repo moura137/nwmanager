@@ -13,6 +13,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'illuminate.query' => [
+            'NwManager\Listeners\QueryLogListener',
+        ],
+
         'NwManager\Events\SomeEvent' => [
             'NwManager\Listeners\EventListener',
         ],

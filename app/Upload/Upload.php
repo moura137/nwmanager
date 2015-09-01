@@ -59,6 +59,48 @@ class Upload
     }
 
     /**
+     * Get File
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function getFile($name = null, $folder)
+    {
+        try {
+            $folder = trim($folder, '/');
+            $folder = $folder ? "{$folder}/" : "";
+            $filename = "{$folder}{$name}";
+            
+            return $this->storage->get($filename);
+            
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Get MimeType
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function mimeType($name = null, $folder)
+    {
+        try {
+            $folder = trim($folder, '/');
+            $folder = $folder ? "{$folder}/" : "";
+            $filename = "{$folder}{$name}";
+            
+            return $this->storage->mimeType($filename);
+
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
      * Parse Filename
      *
      * @param UploadedFile  $file

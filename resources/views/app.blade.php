@@ -7,11 +7,12 @@
     <title>NwManager @yield('title')</title>
 
     <!-- CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     @if(config('app.debug'))
         <link href="{{ asset('build/vendor/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/sweetalert.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/vendor/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/animate.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/styles.css') }}" rel="stylesheet" />
     @else
@@ -33,8 +34,10 @@
     @if(config('app.debug'))
         <script src="{{ asset('build/vendor/js/jquery.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/jasny-bootstrap.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-route.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/angular-sanitize.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-resource.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-animate.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-messages.js') }}"></script>
@@ -42,35 +45,62 @@
         <script src="{{ asset('build/vendor/js/navbar.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-cookies.js') }}"></script>
         <script src="{{ asset('build/vendor/js/query-string.js') }}"></script>
-        <script src="{{ asset('build/js/angular-oauth2.js') }}"></script>
-        <script src="{{ asset('build/vendor/js/angularjs-gravatardirective.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/bootstrap-datepicker.pt-BR.min.js') }}"></script>
+        <script src="{{ asset('build/js/app/libraries/angular-oauth2.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/jquery.fileDownload.js') }}"></script>
         <script src="{{ asset('build/js/env-config.js') }}"></script>
 
         <script src="{{ asset('build/js/app/app.js') }}"></script>
         
         <!-- Controllers -->
-        <script src="{{ asset('build/js/app/controllers/ClientListCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/ClientShowCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/ClientNewCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/ClientEditCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/ClientDeleteCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/UserListCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/UserNewCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/UserEditCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/UserDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/client/ClientListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/client/ClientShowCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/client/ClientNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/client/ClientEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/client/ClientDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/user/UserListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/user/UserNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/user/UserEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/user/UserDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectShowCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileDeleteCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
         
         <!-- Services -->
+        <script src="{{ asset('build/js/app/services/auth-user.js') }}"></script>
         <script src="{{ asset('build/js/app/services/client.js') }}"></script>
         <script src="{{ asset('build/js/app/services/user.js') }}"></script>
+        <script src="{{ asset('build/js/app/services/project.js') }}"></script>
+        <script src="{{ asset('build/js/app/services/project-note.js') }}"></script>
+        <script src="{{ asset('build/js/app/services/project-file.js') }}"></script>
 
         <!-- Factories -->
-        <script src="{{ asset('build/js/app/filters/nl2br-filter.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/httpErrorInterceptor.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
+
+        <!-- Directives -->
+        <script src="{{ asset('build/js/app/directives/format-dates.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/file-upload.js') }}"></script>
+
+        <!-- Filters -->
+        <script src="{{ asset('build/js/app/filters/app-filters.js') }}"></script>
+        <script src="{{ asset('build/js/app/filters/project-filters.js') }}"></script>
+
+        <script src="{{ asset('build/js/admin.js') }}"></script>
 
     @else
         <script src="{{ elixir('js/all.js') }}"></script>

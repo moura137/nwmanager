@@ -13,7 +13,6 @@ class ProjectNoteTransformer extends AbstractTransformer
 {
     protected $defaultIncludes = [
         'user',
-        //'project',
     ];
 
     /**
@@ -32,9 +31,9 @@ class ProjectNoteTransformer extends AbstractTransformer
             'note'          => $note->note,
             'created_at'    => $this->formatDate($note->created_at, 'Y-m-d H:i:s'),
             'updated_at'    => $this->formatDate($note->updated_at, 'Y-m-d H:i:s'),
+            'diff_humans'   => diffForHumans($note->updated_at),
             'user_id'       => $note->user_id,
             'user'          => $note->user,
-            //'project'       => $note->project,
         ];
     }
 
@@ -46,15 +45,5 @@ class ProjectNoteTransformer extends AbstractTransformer
     public function includeUser(ProjectNote $note)
     {
         return $this->item($note->user, new UserTransformer);
-    }
-
-    /**
-     * Include Project
-     *
-     * @return League\Fractal\Resource\Item
-     */
-    public function includeProject(ProjectNote $note)
-    {
-        return $this->item($note->project, new ProjectTransformer(false));
     }
 }

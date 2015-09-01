@@ -1,0 +1,134 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Projetos</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-href="#/">Home</a>
+            </li>
+            <li>
+                <a ng-href="#/project">Projetos</a>
+            </li>
+            <li class="active">
+                <strong>Detalhes</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <a ng-href="#/project" class="btn btn-white"><i class="fa fa-arrow-left"></i> Voltar</a>
+            <a ng-href="#/project/[[ project.id ]]/edit" class="btn btn-primary">Editar</a>
+            <a ng-href="#/project/[[ project.id ]]/delete" ng-show="AuthUser.id==project.owner_id" class="btn btn-danger">Excluir</a>
+        </div>
+
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-b-md">
+                        <h2>[[ project.name ]]</h2>
+                    </div>
+                    <dl class="dl-horizontal">
+                        <dt>Status:</dt> <dd><span class="label label-[[ project.status | statusClassProject ]]">[[ project.status | statusProject ]]</span></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <dl class="dl-horizontal">
+
+                        <dt>Responsável:</dt> <dd>[[ project.owner.name ]]</dd>
+                        <dt>Tarefas:</dt> <dd>  [[ project.count_tasks ]]</dd>
+                        <dt>Cliente:</dt> <dd><a ng-href="#/client/[[ project.client.id ]]/show" class="text-navy"> [[ project.client.name ]]</a> </dd>
+                        <dt>Prazo de Entrega:</dt> <dd>[[ project.due_date | formatDate ]] </dd>
+                    </dl>
+                </div>
+                <div class="col-lg-7" id="cluster_info">
+                    <dl class="dl-horizontal" >
+
+                        <dt>Útima Alteração:</dt> <dd>[[ project.updated_at | formatDateTime ]]</dd>
+                        <dt>Criado em :</dt> <dd>  [[ project.created_at | formatDateTime ]] </dd>
+                        <dt>Membros:</dt>
+                        <dd class="project-people">
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <dl class="dl-horizontal">
+                        <dt>Descrição</dt>
+                        <dd ng-bind-html="project.description | nl2br"></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <dl class="dl-horizontal">
+                        <dt>Completado:</dt>
+                        <dd>
+                            <div class="progress m-b-sm">
+                                <div style="width: [[ project.progress ]]%;" class="progress-bar progress-bar-[[ project.status | statusClassProject ]]"></div>
+                            </div>
+                            <small>Project completed in <strong>[[ project.progress ]]%</strong></small>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            
+            
+            <div class="row m-t-sm" ng-controller="ProjectNoteListCtrl">
+                <div class="col-lg-12" ng-controller="ProjectFileListCtrl">
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a ng-click="tab('tab-1')" data-toggle="tab">Anotações ([[ notes.length ]])</a></li>
+                                    <li class=""><a ng-click="tab('tab-2')" data-toggle="tab">Arquivos ([[ files.length ]])</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab-1">
+                                    <div class="feed-activity-list">
+                                        <div ng-include src="'build/views/project-note/_notes.html'"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-2">
+                                    <div ng-include src="'build/views/project-file/_files.html'"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="previewImg">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Imagem</h4>
+      </div>
+      
+      <div class="modal-body">
+        <img ng-src="" id="displayImg" class="img-responsive" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" ng-click="downloadFile(currentFile)">Download</button>
+      </div
+    </div>
+  </div>
+</div>

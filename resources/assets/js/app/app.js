@@ -4,15 +4,17 @@ var App = angular.module('App', [
     'app.controllers', 
     'app.services', 
     'app.factories',
+    'app.directives',
     'app.filters',
+    'ngSanitize',
     'ngRoute', 
-    'angular-oauth2',
-    'angularjs-gravatardirective']);
+    'angular-oauth2']);
 
 /** Modules **/
 angular.module('app.controllers', ['angular-oauth2', 'ngMessages']);
 angular.module('app.services', ['ngResource']);
 angular.module('app.factories', []);
+angular.module('app.directives', []);
 angular.module('app.filters', []);
 
 /**
@@ -84,6 +86,66 @@ App.config(['$routeProvider',
             controller: 'UserDeleteCtrl'
         })
 
+        .when('/project', {
+            templateUrl: 'build/views/project/list.html',
+            controller: 'ProjectListCtrl'
+        })
+
+        .when('/project/:id/show', {
+            templateUrl: 'build/views/project/show.html',
+            controller: 'ProjectShowCtrl'
+        })
+
+        .when('/project/new', {
+            templateUrl: 'build/views/project/new.html',
+            controller: 'ProjectNewCtrl'
+        })
+
+        .when('/project/:id/edit', {
+            templateUrl: 'build/views/project/edit.html',
+            controller: 'ProjectEditCtrl'
+        })
+
+        .when('/project/:id/delete', {
+            templateUrl: 'build/views/project/delete.html',
+            controller: 'ProjectDeleteCtrl'
+        })
+
+        .when('/project/:id/notes', {
+            templateUrl: 'build/views/project-note/list.html',
+            controller: 'ProjectNoteListCtrl'
+        })
+
+        .when('/project/:id/notes/new', {
+            templateUrl: 'build/views/project-note/new.html',
+            controller: 'ProjectNoteNewCtrl'
+        })
+
+        .when('/project/:id/notes/:idNote/edit', {
+            templateUrl: 'build/views/project-note/edit.html',
+            controller: 'ProjectNoteEditCtrl'
+        })
+
+        .when('/project/:id/notes/:idNote/delete', {
+            templateUrl: 'build/views/project-note/delete.html',
+            controller: 'ProjectNoteDeleteCtrl'
+        })
+
+        .when('/project/:id/files', {
+            templateUrl: 'build/views/project-file/list.html',
+            controller: 'ProjectFileListCtrl'
+        })
+
+        .when('/project/:id/files/new', {
+            templateUrl: 'build/views/project-file/new.html',
+            controller: 'ProjectFileNewCtrl'
+        })
+
+        .when('/project/:id/files/:idFile/delete', {
+            templateUrl: 'build/views/project-file/delete.html',
+            controller: 'ProjectFileDeleteCtrl'
+        })
+
         .when('/', {
             templateUrl: 'build/views/home.html',
             controller: 'HomeCtrl'
@@ -144,8 +206,8 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', '$http', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
-    function($rootScope, $window, $http, httpBuffer, OAuthToken, OAuth, Settings)
+    '$rootScope', '$window', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
+    function($rootScope, $window, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
     {
         $rootScope.refreshToken = false;
 
@@ -192,12 +254,9 @@ App.run([
         };
 
         $rootScope.getAuthUser = function() {
-            if (OAuth.isAuthenticated())
-            {
-                $http.get(Settings.baseUrl + '/oauth/user').then(function(response){
-                    $rootScope.AuthUser = response.data;
-                });
-            }
+            AuthUser.user({}, {}, function(data){
+                $rootScope.AuthUser = data;
+            });
         };
 
         $rootScope.error = null;

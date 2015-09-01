@@ -9,5 +9,13 @@ namespace NwManager\Repositories\Contracts;
  */
 interface ProjectFileRepository extends AbstractRepository
 {
-    //
+    /**
+     * IsUser
+     *
+     * @param int $fileId
+     * @param int $userId
+     *
+     * @return boolean
+     */
+    public function isUser($fileId, $userId);
 }
