@@ -6,7 +6,7 @@ use NwManager\Repositories\Contracts\ProjectNoteRepository;
 use NwManager\Services\ProjectNoteService;
 use Illuminate\Http\Request;
 use NwManager\Repositories\Criterias\InputCriteria;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProjectNoteController
@@ -41,6 +41,7 @@ class ProjectNoteController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['project'];
+        $this->orderBy = 'updated_at DESC';
         $this->middleware('project.member', ['except' => ['destroy']]);
         $this->middleware('project-note.user', ['only' => ['destroy']]);
     }
@@ -60,9 +61,9 @@ class ProjectNoteController extends Controller
 
         return $this->repo
             ->skipPresenter(false)
-            ->with($this->withRelations)
             ->pushCriteria(new InputCriteria($data))
-            ->orderBy('created_at', 'desc')
+            ->with($this->withRelations)
+            ->orderBy($this->orderBy)
             ->all();
     }
 
@@ -77,7 +78,7 @@ class ProjectNoteController extends Controller
     {
         $data = $request->all();
         $data['project_id'] = $project_id;
-        $data['user_id'] = Authorizer::getResourceOwnerId();
+        $data['user_id'] = Auth::id();
         
         $entity = $this->service->create($data);
 

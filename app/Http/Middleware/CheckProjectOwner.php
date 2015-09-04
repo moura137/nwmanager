@@ -4,20 +4,33 @@ namespace NwManager\Http\Middleware;
 
 use Closure;
 use NwManager\Repositories\Contracts\ProjectRepository;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use Illuminate\Contracts\Auth\Guard;
 
 class CheckProjectOwner
 {
+    /**
+     * The repository Project
+     *
+     * @var ProjectRepository
+     */
     protected $repository;
+
+    /**
+     * The guard instance.
+     *
+     * @var \Illuminate\Contracts\Auth\Guard
+     */
+    protected $auth;
 
     /**
      * Construct
      *
      * @param ProjectRepository $repository
      */
-    public function __construct(ProjectRepository $repository)
+    public function __construct(ProjectRepository $repository, Guard $auth)
     {
         $this->repository = $repository;
+        $this->auth = $auth;
     }
 
     /**
@@ -30,7 +43,7 @@ class CheckProjectOwner
     public function handle($request, Closure $next)
     {
         $projectId = intval($request->project);
-        $userId = Authorizer::getResourceOwnerId();
+        $userId = $this->auth->id();
 
         $isOwner = $this->repository->isOwner($projectId, $userId);
 

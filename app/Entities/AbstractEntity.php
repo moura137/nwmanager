@@ -3,8 +3,6 @@
 namespace NwManager\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 use Prettus\Repository\Contracts\Presentable;
 use Prettus\Repository\Traits\PresentableTrait;
 /**
@@ -13,9 +11,8 @@ use Prettus\Repository\Traits\PresentableTrait;
  * @package NwManager\Entities;
  * @abstract
  */
-abstract class AbstractEntity extends Model implements Transformable, Presentable
+abstract class AbstractEntity extends Model implements Presentable
 {
-    use TransformableTrait;
     use PresentableTrait;
     
     /**

@@ -4,6 +4,7 @@ namespace NwManager\Services;
 
 use NwManager\Repositories\Contracts\ProjectRepository;
 use NwManager\Validators\ProjectValidator;
+use Illuminate\Contracts\Auth\Guard;
 use \Exception;
 
 /**
@@ -14,14 +15,40 @@ use \Exception;
 class ProjectService extends AbstractService
 {   
     /**
+     * The guard instance.
+     *
+     * @var \Illuminate\Contracts\Auth\Guard
+     */
+    protected $auth;
+
+    /**
      * Construct
      *
      * @param ProjectRepository $repository
      */
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator, Guard $auth)
     {
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->auth = $auth;
+    }
+
+    /**
+     * Create
+     *
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function create(array $data)
+    {
+        $project = parent::create($data);
+        if ($project) {
+            $this->addMember($project->id, $project->owner_id);
+            $this->addMember($project->id, $this->auth->id());
+        }
+
+        return $project;
     }
 
     /**
@@ -34,10 +61,13 @@ class ProjectService extends AbstractService
      */
     public function addMember($id_project, $members)
     {
+        $members = (array) $members;
         $project = $this->repository->find($id_project);
 
         try {
-            $project->members()->attach((array) $members);
+            if (count($members)) {
+                $project->members()->attach($members);
+            }
             return true;
 
         } catch (\Exception $e) {
@@ -57,13 +87,19 @@ class ProjectService extends AbstractService
     public function removeMember($id_project, $members)
     {
         $project = $this->repository->find($id_project);
+        
+        $members = (array) $members;
+        if (($index = array_search($project->owner_id, $members)) !== false){
+            unset($members[$index]);
+        }
 
         try {
-            $project->members()->detach((array) $members);
+            if (count($members)) {
+                $project->members()->detach($members);
+            }
             return true;
 
         } catch (\Exception $e) {
-            dd($e);
             $this->errors = $this->parseError($e);
             return false;
         }
@@ -81,8 +117,13 @@ class ProjectService extends AbstractService
     {
         $project = $this->repository->find($id_project);
 
+        $members = (array) $members;
+        if (($index = array_search($project->owner_id, $members)) === false){
+            array_push($members, $project->owner_id);
+        }
+
         try {
-            $project->members()->sync((array) $members);
+            $project->members()->sync($members);
             return true;
 
         } catch (\Exception $e) {

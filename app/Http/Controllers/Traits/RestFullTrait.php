@@ -22,10 +22,15 @@ trait RestFullTrait
      */
     protected $service;
 
-     /**
+    /**
      * @var array
      */
     protected $withRelations = [];
+
+    /**
+     * @var string
+     */
+    protected $orderBy = "";
 
     /**
      * Display a listing of the resource.
@@ -38,6 +43,7 @@ trait RestFullTrait
             ->skipPresenter(false)
             ->pushCriteria(new InputCriteria($request->all()))
             ->with($this->withRelations)
+            ->orderBy($this->orderBy)
             ->all();
     }
 

@@ -4,20 +4,33 @@ namespace NwManager\Http\Middleware;
 
 use Closure;
 use NwManager\Repositories\Contracts\ProjectFileRepository;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use Illuminate\Contracts\Auth\Guard;
 
 class CheckProjectFileUser
 {
+    /**
+     * The repository Project File
+     *
+     * @var ProjectFileRepository
+     */
     protected $repository;
+
+    /**
+     * The guard instance.
+     *
+     * @var \Illuminate\Contracts\Auth\Guard
+     */
+    protected $auth;
 
     /**
      * Construct
      *
      * @param ProjectFileRepository $repository
      */
-    public function __construct(ProjectFileRepository $repository)
+    public function __construct(ProjectFileRepository $repository, Guard $auth)
     {
         $this->repository = $repository;
+        $this->auth = $auth;
     }
 
     /**
@@ -30,11 +43,12 @@ class CheckProjectFileUser
     public function handle($request, Closure $next)
     {
         $fileId = intval($request->file);
-        $userId = Authorizer::getResourceOwnerId();
+        $userId = $this->auth->id();
 
         $file = $this->repository->find($fileId);
 
-        if (!$file->isUser($userId) && !$file->project->isOwner($userId)) {
+        if (! ($file->project->isOwner($userId) || ($file->isUser($userId) && $file->project->hasMember($userId))))
+        {
              abort(403, 'Access Forbidden');
         }
         

@@ -15,7 +15,7 @@ Route::group(['middleware' => 'accept.json'], function() {
     Route::post('oauth/forgot', 'OAuthController@forgot');
     Route::post('oauth/reset', 'OAuthController@reset');
     
-    Route::group(['middleware' => 'oauth', 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
+    Route::group(['middleware' => 'api.oauth', 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
 
         Route::get('oauth/user', 'OAuthController@user');
 
@@ -23,7 +23,6 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::resource('client',       'ClientController',      ['except' => ['create', 'edit']]);
         Route::resource('project',      'ProjectController',     ['except' => ['create', 'edit']]);
         
-        Route::get('project/{project}/members',         ['uses' => 'ProjectController@members',     'as' => 'project.members']);
         Route::post('project/{project}/members/add',    ['uses' => 'ProjectController@addMember',   'as' => 'project.members.store']);
         Route::post('project/{project}/members/remove', ['uses' => 'ProjectController@removeMember','as' => 'project.members.destroy']);
         Route::post('project/{project}/members/sync',   ['uses' => 'ProjectController@syncMember',  'as' => 'project.members.sync']);
@@ -40,13 +39,15 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::put('project/{project}/task/{task}',     ['uses' => 'ProjectTaskController@update',   'as' => 'project.task.update']);
         Route::delete('project/{project}/task/{task}',  ['uses' => 'ProjectTaskController@destroy',  'as' => 'project.task.destroy']);
 
-        Route::get('project/{project}/file',                 ['uses' => 'ProjectFileController@index',    'as' => 'project.file.index']);
-        Route::post('project/{project}/file',                ['uses' => 'ProjectFileController@store',    'as' => 'project.file.store']);
-        Route::get('project/{project}/file/{file}',          ['uses' => 'ProjectFileController@show',     'as' => 'project.file.show']);
-        Route::delete('project/{project}/file/{file}',       ['uses' => 'ProjectFileController@destroy',  'as' => 'project.file.destroy']);
-        Route::get('project/{project}/file/{file}/display',  ['uses' => 'ProjectFileController@display',  'as' => 'project.file.display']);
+        Route::get('project/{project}/file',                 ['uses' => 'ProjectFileController@index',     'as' => 'project.file.index']);
+        Route::post('project/{project}/file',                ['uses' => 'ProjectFileController@store',     'as' => 'project.file.store']);
+        Route::get('project/{project}/file/{file}',          ['uses' => 'ProjectFileController@show',      'as' => 'project.file.show']);
+        Route::delete('project/{project}/file/{file}',       ['uses' => 'ProjectFileController@destroy',   'as' => 'project.file.destroy']);
+        Route::delete('project/{project}/files',             ['uses' => 'ProjectFileController@destroyAll','as' => 'project.file.destroy_all']);
         Route::get('project/{project}/file/{file}/download', ['uses' => 'ProjectFileController@download',  'as' => 'project.file.download']);
     });
+
+    Route::get('project/{project}/file/{file}/display',  ['uses' => 'ProjectFileController@display',   'as' => 'project.file.display']);
     
     Route::any('/{uri?}', function () {
         throw new \Symfony\Component\HttpKernel\Exception\HttpException(404, 'Method Not Allowed');

@@ -28,8 +28,9 @@ class ProjectController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['client', 'owner', 'members'];
-        $this->middleware('project.member', ['only' => ['show', 'update', 'members']]);
-        $this->middleware('project.owner', ['only' => ['addMember', 'removeMember', 'syncMember', 'destroy']]);
+        $this->orderBy = 'name ASC';
+        $this->middleware('project.member', ['only' => ['show']]);
+        $this->middleware('project.owner', ['only' => ['update', 'addMember', 'removeMember', 'syncMember', 'destroy']]);
     }
 
     /**
@@ -44,21 +45,8 @@ class ProjectController extends Controller
             ->pushCriteria(new InputCriteria($request->all()))
             ->pushCriteria(new ProjectMemberCriteria)
             ->with($this->withRelations)
+            ->orderBy($this->orderBy)
             ->all();
-    }
-
-    /**
-     * Members
-     *
-     * @param int $id
-     *
-     * @return JsonResponse
-     */
-    public function members($id)
-    {
-        $project = $this->repo->find($id);
-
-        return $project->members()->get();
     }
 
     /**
@@ -70,7 +58,6 @@ class ProjectController extends Controller
      */
     public function addMember(Request $request, $id)
     {
-        $project = $this->repo->find($id);
         $members = $request->get('members');
 
         if (!$this->service->addMember($id, $members)) {
@@ -78,7 +65,7 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
-        return $project->members()->get();
+        return $this->repo->find($id)->members;
     }
 
     /**
@@ -90,7 +77,6 @@ class ProjectController extends Controller
      */
     public function removeMember(Request $request, $id)
     {
-        $project = $this->repo->find($id);
         $members = $request->get('members');
 
         if (!$this->service->removeMember($id, $members)) {
@@ -98,7 +84,7 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
-        return $project->members()->get();
+        return $this->repo->find($id)->members;
     }
 
     /**
@@ -110,7 +96,6 @@ class ProjectController extends Controller
      */
     public function syncMember(Request $request, $id)
     {
-        $project = $this->repo->find($id);
         $members = $request->get('members');
 
         if (!$this->service->syncMember($id, $members)) {
@@ -118,6 +103,6 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
-        return $project->members()->get();
+        return $this->repo->find($id)->members;
     }
 }

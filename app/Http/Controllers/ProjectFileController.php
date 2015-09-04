@@ -6,7 +6,7 @@ use NwManager\Repositories\Contracts\ProjectFileRepository;
 use NwManager\Services\ProjectFileService;
 use Illuminate\Http\Request;
 use NwManager\Repositories\Criterias\InputCriteria;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProjectFileController
@@ -28,7 +28,8 @@ class ProjectFileController extends Controller
         $this->repo = $repo;
         $this->service = $service;
         $this->withRelations = ['project'];
-        $this->middleware('project.member', ['except' => ['destroy']]);
+        $this->orderBy = 'description ASC';
+        $this->middleware('project.member', ['except' => ['destroy', 'display']]);
         $this->middleware('project-file.user', ['only' => ['destroy']]);
     }
     
@@ -47,8 +48,9 @@ class ProjectFileController extends Controller
 
         return $this->repo
             ->skipPresenter(false)
-            ->with($this->withRelations)
             ->pushCriteria(new InputCriteria($data))
+            ->with($this->withRelations)
+            ->orderBy($this->orderBy)
             ->all();
     }
 
@@ -63,7 +65,7 @@ class ProjectFileController extends Controller
     {
         $data = $request->all();
         $data['project_id'] = $project_id;
-        $data['user_id'] = Authorizer::getResourceOwnerId();
+        $data['user_id'] = Auth::id();
 
         $entity = $this->service->create($data);
 
@@ -114,6 +116,30 @@ class ProjectFileController extends Controller
 
         return response()
                 ->json(['error' => null], 204);
+    }
+
+    /**
+     * Remove All
+     *
+     * @param Request $request
+     * @param int     $project_id
+     * @param int     $id
+     *
+     * @return Response
+     */
+    public function destroyAll(Request $request, $project_id)
+    {
+        $files = $request->get('files');
+
+        $result = $this->service->deleteAll($files, $project_id);
+
+        if (!$result) {
+            $errors = $this->service->errors();
+            return response()->json($errors, 422);
+        }
+
+        return response()
+                ->json(['result' => $result], 200);
     }
 
     /**

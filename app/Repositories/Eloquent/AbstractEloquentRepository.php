@@ -4,7 +4,6 @@ namespace NwManager\Repositories\Eloquent;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use NwManager\Repositories\Contracts\AbstractRepository;
-use Prettus\Repository\Presenter\ModelFractalPresenter;
 
 /**
  * Class AbstractEloquentRepository
@@ -20,13 +19,12 @@ abstract class AbstractEloquentRepository extends BaseRepository implements Abst
     protected $skipPresenter = true;
 
     /**
-     * Specify Presenter class name
-     * 
-     * @return string
+     * @throws RepositoryException
      */
-    public function presenter()
+    public function resetModel()
     {
-        return ModelFractalPresenter::class;
+        parent::resetModel();
+        return $this;
     }
 
     /**
@@ -56,7 +54,11 @@ abstract class AbstractEloquentRepository extends BaseRepository implements Abst
      */
     public function orderBy($column, $direction = 'asc')
     {
-        $this->model = $this->model->orderBy($column, $direction);
+        if (!empty($column)) {
+            list($column, $sort) = array_pad(explode(' ', $column), 2, '');
+            if (!empty($sort)) $direction = $sort;
+            $this->model = $this->model->orderBy($column, $direction);
+        }
         return $this;
     }
 }

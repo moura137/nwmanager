@@ -24,5 +24,6 @@ class ClientController extends Controller
     {
         $this->repo = $repo;
         $this->service = $service;
+        $this->orderBy = 'name ASC';
     }
 }

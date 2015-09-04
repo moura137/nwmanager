@@ -49,6 +49,7 @@ class ProjectTaskService extends AbstractService
                 ->passesOrFail(ValidatorInterface::RULE_UPDATE);
                 
             return $this->repository
+                ->resetModel()
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
                 ->update($data, $id);
 
@@ -75,6 +76,7 @@ class ProjectTaskService extends AbstractService
             $project_id = isset($data['project_id']) ? $data['project_id'] : 0;
 
             return $this->repository
+                ->resetModel()
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
                 ->delete($id);
             

@@ -60,6 +60,6 @@ $factory->define(Entities\ProjectTask::class, function ($faker) {
         'name' => $faker->word,
         'start_date' => $faker->dateTime('now'),
         'due_date' => $faker->dateTime('now'),
-        'status' => $faker->randomElement(['1', '2', '3']),
+        'status' => $faker->randomElement(['0', '1']),
     ];
 });

@@ -112,6 +112,7 @@ class ProjectFileService extends AbstractService
             $project_id = isset($data['project_id']) ? $data['project_id'] : 0;
 
             $entity = $this->repository
+                ->resetModel()
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
                 ->find($id);
 
@@ -134,6 +135,40 @@ class ProjectFileService extends AbstractService
     }
 
     /**
+     * Delete All
+     *
+     * @param array $files
+     * @param array $project_id
+     *
+     * @return bool
+     */
+    public function deleteAll($files, $project_id)
+    {
+        $result = ['fails' => [], 'success' => []];
+
+        $files = (array) $files;
+        $data = compact('project_id');
+
+        foreach ($files as $idFile):
+            $idFile = intval($idFile);
+
+            try {
+                $success = $this->delete($idFile, $data);
+
+                if ($success) {
+                    array_push($result['success'], $idFile);
+                } else {
+                    array_push($result['fails'], $idFile);
+                }
+            } catch (\Exception $e) {
+                array_push($result['fails'], $idFile);
+            }
+        endforeach;
+
+        return $result;
+    }
+
+    /**
      * Delete File
      *
      * @param Entity|int $id
@@ -147,6 +182,7 @@ class ProjectFileService extends AbstractService
             $project_id = isset($data['project_id']) ? $data['project_id'] : 0;
 
             $entity = $this->repository
+                ->resetModel()
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
                 ->find($id);
 

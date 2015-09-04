@@ -2,6 +2,7 @@
 
 namespace NwManager\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 use NwManager\Repositories\Contracts\UserRepository;
 use Illuminate\Http\Request;
@@ -77,7 +78,6 @@ class OAuthController extends Controller
      */
     public function user()
     {
-        $user = $this->repoUser->find(Authorizer::getResourceOwnerId());
-        return response()->json($user->presenter());
+        return response()->json(Auth::user()->presenter());
     }
 }

@@ -4,7 +4,7 @@ namespace NwManager\Repositories\Criterias;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProjectMemberCriteria
@@ -27,7 +27,7 @@ class ProjectMemberCriteria implements CriteriaInterface
         $query->groupBy('projects.id');
 
         $query->where(function($query) {
-            $userId = Authorizer::getResourceOwnerId();
+            $userId = Auth::id();
             $query->orWhere('projects.owner_id', $userId);
             $query->orWhere('project_members.user_id', $userId);
             return $query;

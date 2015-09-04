@@ -27,7 +27,7 @@ class Verifier
         ];
 
         if (Auth::once($credentials)) {
-            return Auth::user()->id;
+            return Auth::id();
         }
 
         return false;

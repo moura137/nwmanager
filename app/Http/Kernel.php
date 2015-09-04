@@ -30,11 +30,15 @@ class Kernel extends HttpKernel
         'oauth-owner' => \LucaDegasperi\OAuth2Server\Middleware\OAuthOwnerMiddleware::class,
         'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
 
-        'csrf' => \NwManager\Http\Middleware\VerifyCsrfToken::class,
+        'api.oauth' => \NwManager\Http\Middleware\ApiOAuthMiddleware::class,
+
         'auth' => \NwManager\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \NwManager\Http\Middleware\RedirectIfAuthenticated::class,
+
+        'csrf' => \NwManager\Http\Middleware\VerifyCsrfToken::class,
         'accept.json' => \NwManager\Http\Middleware\AcceptJson::class,
+
         'project.owner' => \NwManager\Http\Middleware\CheckProjectOwner::class,
         'project.member' => \NwManager\Http\Middleware\CheckProjectMember::class,
         'project-note.user' => \NwManager\Http\Middleware\CheckProjectNoteUser::class,
