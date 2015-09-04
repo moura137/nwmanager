@@ -13,7 +13,11 @@ angular.module('app.controllers')
             //listen for the file selected event
             $scope.$on("fileSelected", function (event, args) {
                 $scope.$apply(function () {
-                    $scope.file.file = args.file;
+                    if (args.file) {
+                        $scope.file.file = args.file;
+                    } else {
+                        delete $scope.file.file;
+                    }
                 });
             });
 
@@ -23,7 +27,7 @@ angular.module('app.controllers')
                     $("button[type=submit]").button('loading');
 
                     $scope.file.$save({id: $routeParams.id}).then(function(){
-                        $location.path('project/'+$routeParams.id+'/show');
+                        $location.path('project/'+$routeParams.id+'/show').search('tab', 'tab-file');
 
                     }).catch(function(response){
                         $("button[type=submit]").button('reset');

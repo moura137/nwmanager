@@ -39,32 +39,6 @@ angular.module('app.filters')
   };
 })
 
-.filter('displaySize', function() {
-  return function(input) {
-    if (input !== void 0) {
-        prefix = 'bytes';
-        if (input >= 1024) {
-            prefix = 'KB';
-            input = input / 1024;
-        }
-
-        if (input >= 1024) {
-            prefix = 'MB';
-            input = input / 1024;
-        }
-
-        if (input >= 1024) {
-            prefix = 'GB';
-            input = input / 1024;
-        }
-
-        input = Math.round(input * 100) / 100
-
-        return input + prefix;
-    }
-  };
-})
-
 .filter('iconFile', function() {
   return function(extension) {
     icon = 'fa-file-o';

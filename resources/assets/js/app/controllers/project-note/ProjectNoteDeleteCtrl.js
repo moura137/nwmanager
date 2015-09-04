@@ -13,7 +13,7 @@ angular.module('app.controllers')
                 $("button.btn-danger").button('loading');
                 
                 $scope.note.$delete({id: $routeParams.id, idNote: $scope.note.id}).then(function(){
-                    $location.path('project/'+$routeParams.id+'/show');
+                    $location.path('project/'+$routeParams.id+'/show').search('tab', 'tab-note');
 
                 }).catch(function(response){
                     $("button.btn-danger").button('reset');

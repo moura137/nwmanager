@@ -22,7 +22,7 @@
     <div class="ibox">
         <div class="ibox-title">
             <a ng-href="#/project" class="btn btn-white"><i class="fa fa-arrow-left"></i> Voltar</a>
-            <a ng-href="#/project/[[ project.id ]]/edit" class="btn btn-primary">Editar</a>
+            <a ng-href="#/project/[[ project.id ]]/edit"  ng-show="AuthUser.id==project.owner_id" class="btn btn-primary">Editar</a>
             <a ng-href="#/project/[[ project.id ]]/delete" ng-show="AuthUser.id==project.owner_id" class="btn btn-danger">Excluir</a>
         </div>
 
@@ -42,7 +42,6 @@
                     <dl class="dl-horizontal">
 
                         <dt>Responsável:</dt> <dd>[[ project.owner.name ]]</dd>
-                        <dt>Tarefas:</dt> <dd>  [[ project.count_tasks ]]</dd>
                         <dt>Cliente:</dt> <dd><a ng-href="#/client/[[ project.client.id ]]/show" class="text-navy"> [[ project.client.name ]]</a> </dd>
                         <dt>Prazo de Entrega:</dt> <dd>[[ project.due_date | formatDate ]] </dd>
                     </dl>
@@ -53,8 +52,7 @@
                         <dt>Útima Alteração:</dt> <dd>[[ project.updated_at | formatDateTime ]]</dd>
                         <dt>Criado em :</dt> <dd>  [[ project.created_at | formatDateTime ]] </dd>
                         <dt>Membros:</dt>
-                        <dd class="project-people">
-                        </dd>
+                        <dd><a ng-href="#/project/[[ project.id ]]/members" class="text-navy"><i class="fa fa-users"></i> [[ project.members.length | strpad:4 ]] </a></dd>
                     </dl>
                 </div>
             </div>
@@ -87,21 +85,25 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a ng-click="tab('tab-1')" data-toggle="tab">Anotações ([[ notes.length ]])</a></li>
-                                    <li class=""><a ng-click="tab('tab-2')" data-toggle="tab">Arquivos ([[ files.length ]])</a></li>
+                                    <li class="active"><a ng-click="tab('tab-note')" data-toggle="tab" rel="tab-note"><i class="fa fa-file-text-o"></i> Anotações ([[ notes.length ]])</a></li>
+                                    <li class=""><a ng-click="tab('tab-file')" data-toggle="tab" rel="tab-file"><i class="fa fa-file"></i> Arquivos ([[ files.length ]])</a></li>
+                                    <li class=""><a ng-click="tab('tab-task')" data-toggle="tab" rel="tab-task"><i class="fa fa-tasks"></i> Tarefas ([[ project.count_tasks ]])</a></li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="panel-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab-1">
+                                <div class="tab-pane active" id="tab-note">
                                     <div class="feed-activity-list">
                                         <div ng-include src="'build/views/project-note/_notes.html'"></div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="tab-2">
+                                <div class="tab-pane" id="tab-file">
                                     <div ng-include src="'build/views/project-file/_files.html'"></div>
+                                </div>
+                                <div class="tab-pane" id="tab-task">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -127,7 +129,6 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary" ng-click="downloadFile(currentFile)">Download</button>
       </div
     </div>
   </div>

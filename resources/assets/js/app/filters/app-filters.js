@@ -7,6 +7,46 @@ angular.module('app.filters')
   };
 })
 
+.filter('formatSize', function() {
+  return function(input) {
+    if (input !== void 0) {
+        suffix = ' bytes';
+        if (input >= 1024) {
+            suffix = ' KB';
+            input = input / 1024;
+        }
+
+        if (input >= 1024) {
+            suffix = ' MB';
+            input = input / 1024;
+        }
+
+        if (input >= 1024) {
+            suffix = ' GB';
+            input = input / 1024;
+        }
+
+        input = Math.round(input * 100) / 100
+
+        return input + suffix;
+    }
+  };
+})
+
+.filter('strpad', function() {
+  return function(input, n, c) {
+    if (input !== void 0) {
+        n = parseInt(n);
+        if (c == undefined) {
+            c = '0';
+        }
+        var pad = "0".repeat(n);
+        input = (pad + input).slice(-1 * n);
+    }
+    return input;
+  };
+})
+
 .filter('dateToISO', function() {
   return function(input) {
     if (input !== void 0) {

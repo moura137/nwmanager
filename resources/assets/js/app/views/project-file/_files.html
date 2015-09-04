@@ -1,6 +1,7 @@
 <div class="row m-b">
     <div class="col-lg-6">
-        <a ng-href="#/project/[[ project_id ]]/files/new" class="btn btn-primary"><i class="fa fa-plus"></i> Novo Arquivo</a>
+        <a ng-href="#/project/[[ project_id ]]/files/new" class="btn btn-primary"><i class="fa fa-plus"></i> Novo Arquivo
+        </a>
     </div>
     <div class="col-lg-6" align="right">
         <span>[[ files.length ]] Arquivos(s)</span>
@@ -10,16 +11,23 @@
 <table class="table" ng-show="files.length">
 <thead>
     <tr>
+        <th>
+            <input type="checkbox" ng-click="checkedAll($event)">
+        </th>
         <th>&nbsp;</th>
         <th>Descrição</th>
         <th>Ext.</th>
         <th>Tam.</th>
         <th>Criado em. </th>
+        <th>Criado por. </th>
         <th>&nbsp;</th>
     </tr>
 </thead>
 <tbody>
     <tr ng-repeat="file in files">        
+        <td>
+            <input type="checkbox" class="chkfile" ng-model="file.checked" value="[[ file.id ]]" ng-change="chkDelete()" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id">
+        </td>
         <td>
             <a ng-click="displayFile(file)" style="font-size:30px">
                 <i class="fa [[ file.extension | iconFile ]]"></i>
@@ -27,10 +35,19 @@
         </td>
         <td>[[ file.description ]]</td>
         <td>[[ file.extension ]]</td>
-        <td>[[ file.size | displaySize ]]</td>
+        <td>[[ file.size | formatSize ]]</td>
         <td>[[ file.created_at | formatDateTime ]]</td>
-        <td><a ng-click="deleteFile(file)" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a></td>
+        <td>[[ file.user.name ]]</td>
+        <td><button type="button" ng-click="deleteFile(file)" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</button></td>
     </tr>
+
+    <tr ng-show="files.length">
+        <td><i class="fa fa-long-arrow-up"></i></td>
+        <td nowrap colspan="7">
+            <button type="button" ng-click="deleteAll()" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Excluir Seleção ([[ deleting.length ]])</button>
+        </td>
+    </tr>
+
 </tbody>
 </table>
 

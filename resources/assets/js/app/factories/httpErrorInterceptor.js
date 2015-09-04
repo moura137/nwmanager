@@ -1,7 +1,7 @@
 angular.module('app.factories')
 .factory('httpErrorInterceptor', ['$q', '$location', function($q, $location) {
     return {
-      'responseError': function(response) {
+      responseError: function(response) {
         if(response.status === 404) {
           $location.url('not-found');
         }

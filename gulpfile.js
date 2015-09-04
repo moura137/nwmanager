@@ -17,8 +17,10 @@ var paths = {
 
 paths.vendor_css = [
     paths.bower + '/bootstrap/dist/css/bootstrap.min.css',
+    paths.assets + '/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css',
     paths.bower + '/sweetalert/dist/sweetalert.css',
     paths.assets + '/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css',
+    paths.bower + '/nouislider/distribute/nouislider.min.css',
     paths.assets + '/css/animate.css',
     paths.assets + '/css/styles.css'
 ];
@@ -39,8 +41,10 @@ paths.vendor_js = [
     paths.bower + '/query-string/query-string.js',
     paths.assets + '/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
     paths.assets + '/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js',
+    paths.bower + '/nouislider/distribute/nouislider.js',
+    paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js',
+    paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js.map',
     //paths.bower + '/angular-oauth2/dist/angular-oauth2.js',
-    paths.bower + '/angularjs-gravatardirective/dist/angularjs-gravatardirective.js',
     paths.bower + '/sweetalert/dist/sweetalert.min.js',
     paths.bower + '/jquery-file-download/src/Scripts/jquery.fileDownload.js',
 ];

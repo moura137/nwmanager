@@ -11,8 +11,10 @@
 
     @if(config('app.debug'))
         <link href="{{ asset('build/vendor/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/vendor/css/jasny-bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/sweetalert.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/vendor/css/nouislider.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/animate.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/styles.css') }}" rel="stylesheet" />
     @else
@@ -47,6 +49,9 @@
         <script src="{{ asset('build/vendor/js/query-string.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.pt-BR.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/nouislider.js') }}"></script>
+        <script src="{{ asset('build/js/app/libraries/angular-nouislider.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/angular-file-upload.min.js') }}"></script>
         <script src="{{ asset('build/js/app/libraries/angular-oauth2.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/jquery.fileDownload.js') }}"></script>
@@ -69,10 +74,12 @@
         <script src="{{ asset('build/js/app/controllers/project/ProjectNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project/ProjectEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project/ProjectDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-member/ProjectMemberListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileIndexCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileDeleteCtrl.js') }}"></script>
@@ -94,7 +101,8 @@
 
         <!-- Directives -->
         <script src="{{ asset('build/js/app/directives/format-dates.js') }}"></script>
-        <script src="{{ asset('build/js/app/directives/file-upload.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/input-file.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/upload-ng-thumb.js') }}"></script>
 
         <!-- Filters -->
         <script src="{{ asset('build/js/app/filters/app-filters.js') }}"></script>

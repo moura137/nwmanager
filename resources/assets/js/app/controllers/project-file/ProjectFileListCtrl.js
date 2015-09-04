@@ -3,20 +3,19 @@
  */
 angular.module('app.controllers')
     .controller('ProjectFileListCtrl', 
-        ['$scope', '$rootScope', '$routeParams', 'ProjectFile', 
-        function($scope, $rootScope, $routeParams, ProjectFile) {
+        ['$scope', '$rootScope', '$routeParams', '$filter', 'ProjectFile', 
+        function($scope, $rootScope, $routeParams, $filter, ProjectFile) {
             $scope.project_id = $routeParams.id;
             
             $scope.query = function(search) {
                 $rootScope.clearError();
                 $scope.files = ProjectFile.query(search, {id: $routeParams.id});
+                $scope.deleting = [];
             };
 
             $scope.query();
-            
-            $scope.deleteFile = function(file) {
-                console.log('deleteFile');
 
+            $scope.deleteFile = function(file) {
                 window.swal({
                     title: "Deseja excluir o Arquivo?",
                     type: "warning",
@@ -33,6 +32,56 @@ angular.module('app.controllers')
                         window.swal({
                             title: "Excluído!",
                             text: "Arquivo excluído com sucesso!",
+                            type: "success",
+                            timer: 1500,
+                        });
+
+                    }, function(response){
+                        window.swal({
+                            title: "Error!",
+                            text: response.data.error_description,
+                            type: "error"
+                        });
+                    });
+                });
+            };
+
+            $scope.checkedAll = function($event) {
+                var checked = $event.target.checked;
+                $('input.chkfile').prop('checked', !checked).click();
+            }
+
+            $scope.chkDelete = function () {
+                var deleting = [];
+                $('input.chkfile:checked').each(function(k,v){
+                    deleting.push(v.value);
+                });
+                $scope.deleting = deleting;
+            }
+
+            $scope.deleteAll = function() {
+                if ($scope.deleting.length<=0) {
+                    window.swal("Selecione um arquivo para Excluir!", "", "warning");
+                    return;
+                }
+
+                window.swal({
+                    title: "Deseja excluir os Arquivos?",
+                    text: "Selecionados: " + $scope.deleting.length,
+                    type: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+
+                }, function(){
+                    ProjectFile.deleteAll({id: $routeParams.id}, {'_method': 'DELETE', 'files' : $scope.deleting}, function(response){
+                        
+                        $scope.query();
+
+                        window.swal({
+                            title: "Exclusão Finalizada",
+                            text: "Sucessos: " + response.result.success.length + "\nFalhas: " + response.result.fails.length,
                             type: "success",
                             timer: 1500,
                         });

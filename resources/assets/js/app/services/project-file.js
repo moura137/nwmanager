@@ -14,7 +14,17 @@ angular.module('app.services')
                 transformRequest: function (data, headersGetter) {
                     var formData = new FormData();
                     angular.forEach(data, function (value, key) {
-                        formData.append(key, value);
+                        if (value instanceof FileList) {
+                            if (value.length == 1) {
+                              formData.append(key, value[0]);
+                            } else {
+                              angular.forEach(value, function(file, index) {
+                                formData.append(key + '_' + index, file);
+                              });
+                            }
+                        } else {
+                            formData.append(key, value);
+                        }
                     });
                     return formData;
                 },
@@ -40,6 +50,11 @@ angular.module('app.services')
 
             deleteFile: {
                 method: 'DELETE'
+            },
+
+            deleteAll: {
+                url: Settings.baseUrl + '/project/:id/files',
+                method: 'POST',
             }
         });
     }]);

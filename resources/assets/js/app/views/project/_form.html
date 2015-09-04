@@ -36,11 +36,11 @@
     </div>
 </div>
 
-<div class="form-group" ng-class="{'has-error': !formProject.progress.$valid && formProject.due_date.$touched}">
+<div class="form-group" ng-class="{'has-error': !formProject.due_date.$valid && formProject.due_date.$touched}">
     <label class="col-lg-2 control-label">Data Entrega *</label>
     <div class="col-lg-10">
         <div class="input-group date">
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" maxlength="10" value="due_date" class="form-control" placeholder="Data de Entrega" ng-model="project.due_date" data-mask="99/99/9999" format-date />
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" maxlength="10" name="due_date" class="form-control" placeholder="Data de Entrega" ng-model="project.due_date" data-mask="99/99/9999" format-date />
         </div>
         <div ng-messages="formProject.due_date.$error" class="help-block" ng-show="!formProject.due_date.$valid && formProject.due_date.$touched">
             <span ng-message="required">Campo obrigatório</span>
@@ -51,7 +51,10 @@
 <div class="form-group" ng-class="{'has-error': !formProject.progress.$valid && formProject.progress.$touched}">
     <label class="col-lg-2 control-label">Progresso *</label>
     <div class="col-lg-10">
-        <input type="text" maxlength="3" value="progress" class="form-control" placeholder="Progresso" ng-model="project.progress" />
+        
+        <div slider ng-model="project.progress" step=1 start=1 end=100></div>
+        <div class="m-t">Project completed in <strong>[[ project.progress ]]%</strong></div>
+
         <div ng-messages="formProject.progress.$error" class="help-block" ng-show="!formProject.progress.$valid && formProject.progress.$touched">
             <span ng-message="required">Campo obrigatório</span>
         </div>

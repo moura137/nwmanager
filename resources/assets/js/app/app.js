@@ -6,6 +6,8 @@ var App = angular.module('App', [
     'app.factories',
     'app.directives',
     'app.filters',
+    'angularFileUpload',
+    'nouislider',
     'ngSanitize',
     'ngRoute', 
     'angular-oauth2']);
@@ -109,6 +111,11 @@ App.config(['$routeProvider',
         .when('/project/:id/delete', {
             templateUrl: 'build/views/project/delete.html',
             controller: 'ProjectDeleteCtrl'
+        })
+
+        .when('/project/:id/members', {
+            templateUrl: 'build/views/project-member/list.html',
+            controller: 'ProjectMemberListCtrl'
         })
 
         .when('/project/:id/notes', {

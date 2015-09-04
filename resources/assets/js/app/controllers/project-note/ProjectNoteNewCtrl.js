@@ -16,7 +16,7 @@ angular.module('app.controllers')
                     $("button[type=submit]").button('loading');
 
                     $scope.note.$save({id: $routeParams.id}).then(function(){
-                        $location.path('project/'+$routeParams.id+'/show');
+                        $location.path('project/'+$routeParams.id+'/show').search('tab', 'tab-note');
 
                     }).catch(function(response){
                         $("button[type=submit]").button('reset');

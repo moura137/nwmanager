@@ -13,7 +13,7 @@ angular.module('app.controllers')
                 $("button.btn-danger").button('loading');
                 
                 $scope.file.$delete({id: $routeParams.id, idFile: $scope.file.id}).then(function(){
-                    $location.path('project/'+$routeParams.id+'/show');
+                    $location.path('project/'+$routeParams.id+'/show?tab=tab-file');
 
                 }).catch(function(response){
                     $("button.btn-danger").button('reset');
