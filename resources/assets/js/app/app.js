@@ -138,6 +138,11 @@ App.config(['$routeProvider',
             controller: 'ProjectNoteDeleteCtrl'
         })
 
+        .when('/project/:id/files-images', {
+            templateUrl: 'build/views/project-file/images.html',
+            controller: 'ProjectFileImagesCtrl'
+        })
+
         .when('/project/:id/files', {
             templateUrl: 'build/views/project-file/list.html',
             controller: 'ProjectFileListCtrl'

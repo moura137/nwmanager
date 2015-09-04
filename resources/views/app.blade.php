@@ -79,7 +79,7 @@
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-note/ProjectNoteDeleteCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileIndexCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileImagesCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileDeleteCtrl.js') }}"></script>

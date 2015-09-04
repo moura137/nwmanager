@@ -1,0 +1,179 @@
+<style type="text/css">
+#list-upload .list-files table th {
+  clear: both;
+  background-color: #F5F5F6;
+  border-top: 1px solid #DDDDDD !important;
+}
+
+#list-upload .list-files canvas,
+#list-upload .list-files img.preview {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    width: 80px;
+    height: 60px;
+    margin: 6px 0 0 6px;
+}
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Projetos - Imagens</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-href="#/">Home</a>
+            </li>
+            <li>
+                <a ng-href="#/project/[[ project_id ]]/show">Projeto</a>
+            </li>
+            <li class="active">
+                <strong>Imagens</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h2>Imagens</h2>
+        </div>
+        <div class="ibox-content">
+
+            <div id="list-upload">
+                <span class="btn btn-primary fileinput-button" ng-click="clearErrorAdd()">
+                    <i class="fa fa-plus"></i>
+                    <span>Adicionar Arquivos...</span>
+                    <input type="file" nv-file-select="" uploader="uploader" multiple  />
+                </span>
+                <p>Limite Tam: [[ limitSize ]]MB</p>
+
+                <div class="m-t m-b">
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="fa fa-upload"></span> Upload ([[ uploader.queue.length ]])
+                    </button>
+                    <button type="button" class="btn btn-warning btn-sm" ng-click="uploader.cancelAll(); uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                        <span class="fa fa-ban"></span> Cancelar Todos
+                    </button>
+
+                    <div class="pull-right">
+                        Arquivos [[ files.length | strpad:3 ]]
+                    </div>
+                </div>
+
+                <div ng-show="error_add.length" class="alert alert-danger">
+                    <button ng-click="clearErrorAdd()" class="close" type="button" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p ng-repeat="err in error_add" ng-bind-html="err"></p>
+                </div>
+
+                <div ng-hide="files.length || uploader.queue.length" align="center" class="m">
+                    NENHUM ARQUIVO NO MOMENTO
+                </div>
+
+                <div ng-show="files.length || uploader.queue.length" class="list-files">
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="1"><input type="checkbox" ng-click="checkedAll($event)"></th>
+                                <th width="80">&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th width="50" ng-show="uploader.isHTML5">Tam</th>
+                                <th width="130" ng-show="uploader.isHTML5">&nbsp;</th>
+                                <th width="200">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, width: 80, height: 60 }"></div>
+                                </td>
+                                <td>
+                                    <strong>[[ item.file.name ]]</strong>
+                                    <div class="m-t">
+                                        <span class="label label-warning" ng-show="item.isCancel"><i class="fa fa-ban"></i> Cancelado</span>
+                                        <span class="label label-danger" ng-show="item.isError"><i class="fa fa-remove"></i> Error</span>
+                                        [[ item.error_description ]]
+                                    </div>
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap>[[ item.file.size|formatSize:2 ]]</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar active progress-bar-striped" ng-class="[{'progress-bar-striped': item.isUploading}]" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-primary btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="fa fa-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-show="item.isUploading" ng-disabled="!item.isUploading">
+                                        <span class="fa fa-ban"></span> Cancelar
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.remove()" ng-hide="item.isSuccess || item.isUploading">
+                                        <span class="fa fa-ban"></span> Cancelar
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr ng-repeat="file in files">
+                                <td>
+                                    <input type="checkbox" class="chkfile" ng-model="file.checked" value="[[ file.id ]]" ng-change="chkDelete()" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id">
+                                </td>
+                                <td>
+                                    <img class="preview" height="60" width="80" ng-src="/project/[[ file.project_id ]]/file/[[ file.id ]]/display" border="0" />
+                                </td>
+                                <td>
+                                    <strong>[[ file.description ]] ([[ file.file ]])</strong>
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap>[[ file.size | formatSize ]]</td>
+                                <td ng-show="uploader.isHTML5">&nbsp;</td>
+                                <td nowrap>
+                                    <button type="button" ng-click="deleteFile(file)" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</button>
+                                </td>
+                            </tr>
+
+                            <tr ng-show="files.length">
+                                <td><i class="fa fa-long-arrow-up"></i></td>
+                                <td nowrap colspan="5">
+                                    <button type="button" ng-click="deleteAll()" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Excluir Seleção ([[ deleting.length ]])</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
