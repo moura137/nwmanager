@@ -27,7 +27,7 @@ class ProjectFileController extends Controller
     {
         $this->repo = $repo;
         $this->service = $service;
-        $this->withRelations = ['project'];
+        $this->withRelations = ['user', 'project'];
         $this->orderBy = 'description ASC';
         $this->middleware('project.member', ['except' => ['destroy', 'display']]);
         $this->middleware('project-file.user', ['only' => ['destroy']]);

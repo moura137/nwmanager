@@ -40,7 +40,7 @@ class ProjectNoteController extends Controller
     {
         $this->repo = $repo;
         $this->service = $service;
-        $this->withRelations = ['project'];
+        $this->withRelations = ['user', 'project'];
         $this->orderBy = 'updated_at DESC';
         $this->middleware('project.member', ['except' => ['destroy']]);
         $this->middleware('project-note.user', ['only' => ['destroy']]);
