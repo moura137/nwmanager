@@ -35,8 +35,18 @@ h5 {
   margin-top: 5px;
   font-weight: 600;
 }
+
 .form-group .help-block {
   margin-bottom: 0px;
+}
+
+.fileinput.input-group > .form-control {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.fileinput-filename {
+  display: inline;
 }
 
 .nav > li > a {

@@ -22,21 +22,22 @@ angular.module('app.filters', []);
 /**
  * ------ Providers ------------
  */
-App.provider('Settings', function(API_URL, CLIENT_ID, CLIENT_SECRET){
-    var config = {
-        baseUrl: API_URL,
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET
-    };
+App.provider('Settings', 
+    ['API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 
+    function(API_URL, CLIENT_ID, CLIENT_SECRET){
+        var config = {
+            baseUrl: API_URL,
+            clientId: CLIENT_ID,
+            clientSecret: CLIENT_SECRET
+        };
 
-    return {
-        config: config,
-        $get: function(){
-            return config;
-        }
-    };
-});
-
+        return {
+            config: config,
+            $get: function(){
+                return config;
+            }
+        };
+    }]);
 
 /**
  * ------ Routes ------------

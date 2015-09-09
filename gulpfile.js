@@ -6,9 +6,13 @@ var ngConstant = require('gulp-ng-constant');
 var fs = require('fs');
 
 var paths = {
+    'public': 'public',
+    'public_js': 'public/js',
+    'public_css': 'public/css',
     'build': './public/build',
     'build_js': './public/build/js',
     'build_css': './public/build/css',
+    'build_map': './public/build/map',
     'build_html': './public/build/views',
     'build_vendor': './public/build/vendor',
     'assets': './resources/assets',
@@ -17,9 +21,9 @@ var paths = {
 
 paths.vendor_css = [
     paths.bower + '/bootstrap/dist/css/bootstrap.min.css',
-    paths.assets + '/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css',
+    paths.bower + '/jasny-bootstrap/dist/css/jasny-bootstrap.min.css',
     paths.bower + '/sweetalert/dist/sweetalert.css',
-    paths.assets + '/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css',
+    paths.bower + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
     paths.bower + '/nouislider/distribute/nouislider.min.css',
     paths.assets + '/css/animate.css',
     paths.assets + '/css/styles.css'
@@ -28,7 +32,7 @@ paths.vendor_css = [
 paths.vendor_js = [
     paths.bower + '/jquery/dist/jquery.js',
     paths.bower + '/bootstrap/dist/js/bootstrap.min.js',
-    paths.assets + '/plugins/jasny-bootstrap/js/jasny-bootstrap.js',
+    paths.bower + '/jasny-bootstrap/dist/js/jasny-bootstrap.js',
     paths.bower + '/angular/angular.js',
     paths.bower + '/angular-route/angular-route.js',
     paths.bower + '/angular-sanitize/angular-sanitize.js',
@@ -39,15 +43,20 @@ paths.vendor_js = [
     paths.bower + '/angular-strap/dist/modules/navbar.js',
     paths.bower + '/angular-cookies/angular-cookies.js',
     paths.bower + '/query-string/query-string.js',
-    paths.assets + '/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
-    paths.assets + '/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js',
+    paths.bower + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+    paths.bower + '/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js',
     paths.bower + '/nouislider/distribute/nouislider.js',
     paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js',
-    paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js.map',
     //paths.bower + '/angular-oauth2/dist/angular-oauth2.js',
     paths.bower + '/sweetalert/dist/sweetalert.min.js',
     paths.bower + '/jquery-file-download/src/Scripts/jquery.fileDownload.js',
 ];
+
+paths.vendor_js_map = [
+    paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js.map',
+];
+
+paths.vendor_css_map = [];
 
 gulp.task('config', function() {
   var fileEnvConfig = './env-config.json';
@@ -114,10 +123,23 @@ gulp.task('copy-html', function(){
 });
 
 /**
+ * Copia Maps Vendor
+ */
+gulp.task('copy-map', function(){
+    gulp.src(paths.vendor_js_map)
+    .pipe(gulp.dest(paths.build_vendor+'/js'))
+    .pipe(livereload());
+
+    gulp.src(paths.vendor_css_map)
+    .pipe(gulp.dest(paths.build_vendor+'/css'))
+    .pipe(livereload());
+});
+
+/**
  * Default Dev
  */
 gulp.task('default-dev', ['clean-build'], function(){
-    gulp.start(['config', 'copy-css', 'copy-js', 'copy-html']);
+    gulp.start(['config', 'copy-css', 'copy-js', 'copy-html', 'copy-map']);
 });
 
 /**
@@ -133,16 +155,16 @@ gulp.task('watch-dev', ['clean-build'], function(){
  * Compile Assets
  */
 gulp.task('default', ['clean-build'], function(){
-    gulp.start(['config', 'copy-html']);
+    gulp.start(['config', 'copy-html', 'copy-map']);
 
     elixir(function(mix) {
         mix.styles(paths.vendor_css.concat([paths.assets + '/css/**/*.css']),
-            'public/css/all.css', './');
+            paths.public_css + '/all.css', './');
 
-        mix.styles(paths.vendor_js.concat([paths.assets + '/js/**/*.js']),
-            'public/js/all.js', './');
-        
-        mix.version(['public/css/all.css', 'public/js/all.js']);
+        mix.scripts(paths.vendor_js.concat([paths.assets + '/js/**/*.js']),
+            paths.public_js + '/all.js', './');
+
+        mix.version([paths.public_css + '/all.css', paths.public_js + '/all.js']);
     });
 });
 
@@ -160,4 +182,6 @@ gulp.task('watch', ['clean-build'], function(){
  */
 gulp.task('clean-build', function(){
     rimraf.sync(paths.build);
+    rimraf.sync(paths.public_css + '/all.css*');
+    rimraf.sync(paths.public_js + '/all.js*');
 });
