@@ -3,13 +3,14 @@
  */
 angular.module('app.controllers')
     .controller('ProjectEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'Project', 'Client', 'User', 
-        function($scope, $rootScope, $location, $routeParams, Project, Client, User)
+        ['$scope', '$rootScope', '$location', '$routeParams', 'Project', 'Client', 'User', 'Settings', 
+        function($scope, $rootScope, $location, $routeParams, Project, Client, User, Settings)
         {
             $rootScope.clearError();
             $scope.clients = Client.query();
             $scope.users = User.query();
             $scope.project = new Project.get({id: $routeParams.id});
+            $scope.status = Settings.project.status;
 
             $scope.save = function(){
                 if($scope.formProject.$valid)

@@ -3,12 +3,14 @@
  */
 angular.module('app.controllers')
     .controller('ProjectNewCtrl', 
-        ['$scope', '$rootScope', '$location', 'Project', 'Client', 'User', 
-        function($scope, $rootScope, $location, Project, Client, User)
+        ['$scope', '$rootScope', '$location', 'Project', 'Client', 'User', 'Settings', 
+        function($scope, $rootScope, $location, Project, Client, User, Settings)
         {
             $rootScope.clearError();
             $scope.clients = Client.query();
             $scope.users = User.query();
+            $scope.status = Settings.project.status;
+            
             $scope.project = new Project();
 
             $scope.save = function(){

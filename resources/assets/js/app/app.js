@@ -28,7 +28,14 @@ App.provider('Settings',
         var config = {
             baseUrl: API_URL,
             clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET
+            clientSecret: CLIENT_SECRET,
+            project : {
+                status: [
+                    { value: '1', label: 'Aberto', style: 'primary'  },
+                    { value: '2', label: 'Fechado', style: 'danger' },
+                    { value: '3', label: 'Pausado', style: 'warning' }
+                ]
+            }
         };
 
         return {
@@ -43,7 +50,8 @@ App.provider('Settings',
  * ------ Routes ------------
  */
 App.config(['$routeProvider',
-    function($routeProvider) { $routeProvider
+    function($routeProvider) {
+        $routeProvider
         .when('/client', {
             templateUrl: 'build/views/client/list.html',
             controller: 'ClientListCtrl'

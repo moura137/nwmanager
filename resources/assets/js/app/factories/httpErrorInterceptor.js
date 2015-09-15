@@ -11,6 +11,20 @@ angular.module('app.factories')
         }
         
         return $q.reject(response);
+      },
+
+      response : function(response) {
+        var data = response.data;
+        var headers = response.headers();
+
+        if (headers['content-type'] == 'application/json' || headers['content-type'] == 'text/json') {
+          if (data.hasOwnProperty('data')) {
+            data = data.data;
+          }
+          response.data = data;
+        }
+        
+        return response;
       }
     };
 }])

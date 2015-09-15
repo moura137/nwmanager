@@ -64,10 +64,8 @@
 <div class="form-group" ng-class="{'has-error': !formProject.status.$valid && formProject.status.$touched}">
     <label class="col-lg-2 control-label">Status *</label>
     <div class="col-lg-10">
-        <select required name="status" class="form-control" placeholder="Responsável" ng-model="project.status">
-            <option value="1">Aberto</option>
-            <option value="2">Fechado</option>
-            <option value="3">Pausado</option>
+        <select required name="status" class="form-control" ng-model="project.status" ng-options="o.value as o.label for o in status">
+            <option value="">-- Selecione --</option>
         </select>
         <div ng-messages="formProject.status.$error" class="help-block" ng-show="!formProject.status.$valid && formProject.status.$touched">
             <span ng-message="required">Campo obrigatório</span>

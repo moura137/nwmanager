@@ -1,5 +1,5 @@
 angular.module('app.filters')
-.filter('statusClassProject', function() {
+.filter('statusClassProject', ['Settings', function(Settings) {
   return function(input) {
     if (input !== void 0) {
         switch(input) {
@@ -17,9 +17,9 @@ angular.module('app.filters')
         }
     }
   };
-})
+}])
 
-.filter('statusProject', function() {
+.filter('statusProject', ['Settings', function(Settings) {
   return function(input) {
     if (input !== void 0) {
         switch(input) {
@@ -37,7 +37,7 @@ angular.module('app.filters')
         }
     }
   };
-})
+}])
 
 .filter('iconFile', function() {
   return function(extension) {
