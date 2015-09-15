@@ -31,7 +31,7 @@ class Upload
     {
         $data = $this->parseFile($file, $name, $folder);
 
-        $success = $this->storage->put($data['filename'], $this->filesystem->get($file));
+        $success = $this->storage->put($data['filename'], file_get_contents($file));
 
         if ($success) {
             return $data;
@@ -50,9 +50,7 @@ class Upload
     public function deleteFile($name = null, $folder)
     {
         try {
-            $folder = trim($folder, '/');
-            $folder = $folder ? "{$folder}/" : "";
-            $filename = "{$folder}{$name}";
+            $filename = $this->parseFilename($name, $folder);
             
             return $this->storage->delete($filename);
         } catch (\Exception $e) { }
@@ -68,9 +66,7 @@ class Upload
     public function getFile($name = null, $folder)
     {
         try {
-            $folder = trim($folder, '/');
-            $folder = $folder ? "{$folder}/" : "";
-            $filename = "{$folder}{$name}";
+            $filename = $this->parseFilename($name, $folder);
             
             return $this->storage->get($filename);
             
@@ -89,15 +85,49 @@ class Upload
     public function mimeType($name = null, $folder)
     {
         try {
-            $folder = trim($folder, '/');
-            $folder = $folder ? "{$folder}/" : "";
-            $filename = "{$folder}{$name}";
+            $filename = $this->parseFilename($name, $folder);
             
             return $this->storage->mimeType($filename);
 
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * Get Meta Data
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function metaData($name = null, $folder)
+    {
+        try {
+            $filename = $this->parseFilename($name, $folder);
+
+            return $this->storage->getMetadata($filename);
+
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Parse Filename
+     *
+     * @param string $name
+     * @param string $folder
+     *
+     * @return string
+     */
+    protected function parseFilename($name = null, $folder)
+    {
+        $folder = trim($folder, '/');
+        $folder = $folder ? "{$folder}/" : "";
+        $filename = "{$folder}{$name}";
+
+        return $filename;
     }
 
     /**

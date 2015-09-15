@@ -13,7 +13,8 @@
         "lucadegasperi/oauth2-server-laravel": "5.0.*@dev",
         "adamwathan/bootforms": "^0.6.3",
         "guzzlehttp/guzzle": "^6.0",
-        "league/fractal": "^0.12.0"
+        "league/fractal": "^0.12.0",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
