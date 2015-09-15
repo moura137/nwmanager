@@ -23,12 +23,12 @@
                 <div class="ibox-content">
                     <div ng-include src="'build/views/_errors.html'"></div>
 
-                    <form name="formProjectFile" class="form-horizontal" ng-submit="save()">
+                    <form id="formProjectFile" name="formProjectFile" class="form-horizontal" ng-submit="save()">
                         
                         <div class="form-group" ng-class="{'has-error': !formProjectFile.description.$valid && formProjectFile.description.$touched}">
                             <label class="col-lg-3 control-label">Descrição *</label>
                             <div class="col-lg-5">
-                                <input type="text" required maxlength="255" name="description" class="form-control" placeholder="Titulo" ng-model="file.description">
+                                <input type="text" required maxlength="255" name="description" id="description" class="form-control" placeholder="Titulo" ng-model="file.description">
                                 <div ng-messages="formProjectFile.description.$error" class="help-block" ng-show="!formProjectFile.description.$valid && formProjectFile.description.$touched">
                                     <span ng-message="required">Campo obrigatório</span>
                                 </div>
@@ -41,14 +41,15 @@
                                 
                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                   <div class="form-control" data-trigger="fileinput"><i class="fa fa-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                  <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Selecione</span><span class="fileinput-exists">Alterar</span><input input-file type="file" name="file"></span>
+                                  <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Selecione</span><span class="fileinput-exists">Alterar</span><input input-file ng-max-size="2" required type="file" name="file" id="file" ng-model="file.file"></span>
                                   <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
                                 </div>
 
                                 <div ng-messages="formProjectFile.file.$error" class="help-block" ng-show="!formProjectFile.file.$valid && formProjectFile.file.$touched">
                                     <span ng-message="required">Campo obrigatório</span>
-                                    <span ng-message="maxSize"><p>Image is to large, it must be smaller than 2 MB</p></span>
+                                    <span ng-message="maxSize"><p>Arquivo excede o tamanho máximo de 2 MB</p></span>
                                 </div>
+
                             </div>
                         </div>
 

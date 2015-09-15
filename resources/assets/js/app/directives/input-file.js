@@ -1,18 +1,29 @@
 angular.module('app.directives')
 .directive('inputFile', function () {
     return {
-        scope: true, //create a new scope
-        link: function (scope, el, attrs) {
-            el.on('change', function (event) {
-                var files = event.target.files;
-                if (files.length > 0) {
-                    for (var i = 0;i<files.length;i++) {
-                        //emit event upward
-                        scope.$emit("fileSelected", { file: files[i] });
+        require: 'ngModel',
+        link: function (scope, el, attrs, ngModel) {
+            // console.log(scope);
+            el.bind('change', function (event) {
+                scope.$apply(function () {
+                    var files = event.target.files;
+                    var file = null;
+
+                    if (files.length > 0) {
+                        file = files[0];
+                        
+                        // MaxSize in MB
+                        var maxSize = parseInt(attrs.ngMaxSize)||0;
+                        if (file.size > (maxSize * 1024 * 1024)) {
+                            ngModel.$setValidity("maxSize", false);
+                        } else {
+                            ngModel.$setValidity("maxSize", true);
+                        }
                     }
-                } else {
-                    scope.$emit("fileSelected", { file: null });
-                }
+
+                    ngModel.$setViewValue(file);
+                    ngModel.$render();
+                });
             });
         }
     };
