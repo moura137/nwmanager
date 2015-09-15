@@ -2,19 +2,15 @@ angular.module('app.filters')
 .filter('statusClassProject', ['Settings', function(Settings) {
   return function(input) {
     if (input !== void 0) {
-        switch(input) {
-            case '1': //Ativo
-                return 'primary';
+        style = 'default';
+        Settings.project.status.some(function(elem){
+            if (elem.value == input) {
+                style = elem.style;
+                return true;
+            }
+        });
 
-            case '2': // Encerrado
-                return 'danger';
-
-            case '3': // Pausado
-                return 'warning';
-
-            default: // Inativo
-                return 'default';
-        }
+        return style;
     }
   };
 }])
@@ -22,19 +18,15 @@ angular.module('app.filters')
 .filter('statusProject', ['Settings', function(Settings) {
   return function(input) {
     if (input !== void 0) {
-        switch(input) {
-            case '1': //Ativo
-                return 'Ativo';
+        label = 'Inativo';
+        Settings.project.status.some(function(elem){
+            if (elem.value == input) {
+                label = elem.label;
+                return true;
+            }
+        });
 
-            case '2': // Encerrado
-                return 'Encerrado';
-
-            case '3': // Pausado
-                return 'Pausado';
-
-            default: // Inativo
-                return 'Inativo';
-        }
+        return label;
     }
   };
 }])

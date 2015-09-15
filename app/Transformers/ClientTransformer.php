@@ -42,9 +42,9 @@ class ClientTransformer extends AbstractTransformer
             'obs'           => $client->obs,
         ];
 
-        if ($this->timestamps) {
-            $return['created_at'] = $this->formatDate($client->created_at, 'Y-m-d H:i:s');
-            $return['updated_at'] = $this->formatDate($client->updated_at, 'Y-m-d H:i:s');
+        if (!$this->includeData) {
+            $data['created_at'] = $this->formatDate($client->created_at, 'Y-m-d H:i:s');
+            $data['updated_at'] = $this->formatDate($client->updated_at, 'Y-m-d H:i:s');
         }
 
         return $return;

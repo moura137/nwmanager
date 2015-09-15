@@ -52,7 +52,7 @@
                         <dt>Útima Alteração:</dt> <dd>[[ project.updated_at | formatDateTime ]]</dd>
                         <dt>Criado em :</dt> <dd>  [[ project.created_at | formatDateTime ]] </dd>
                         <dt>Membros:</dt>
-                        <dd><a ng-href="#/project/[[ project.id ]]/members" class="text-navy"><i class="fa fa-users"></i> [[ project.members.length | strpad:4 ]] </a></dd>
+                        <dd><a ng-href="#/project/[[ project.id ]]/members" class="text-navy"><i class="fa fa-users"></i> [[ project.members.data.length | strpad:4 ]] </a></dd>
                     </dl>
                 </div>
             </div>

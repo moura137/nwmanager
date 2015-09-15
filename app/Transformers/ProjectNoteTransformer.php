@@ -44,6 +44,6 @@ class ProjectNoteTransformer extends AbstractTransformer
      */
     public function includeUser(ProjectNote $note)
     {
-        return $this->item($note->user, new UserTransformer);
+        return $this->item($note->user, new UserTransformer(true), true);
     }
 }

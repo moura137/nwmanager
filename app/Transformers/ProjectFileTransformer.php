@@ -47,7 +47,7 @@ class ProjectFileTransformer extends AbstractTransformer
      */
     public function includeUser(ProjectFile $file)
     {
-        return $this->item($file->user, new UserTransformer);
+        return $this->item($file->user, new UserTransformer(true), true);
     }
 
     /**
@@ -57,6 +57,6 @@ class ProjectFileTransformer extends AbstractTransformer
      */
     public function includeProject(ProjectFile $file)
     {
-        return $this->item($file->project, new ProjectTransformer(false));
+        return $this->item($file->project, new ProjectTransformer(true), true);
     }
 }

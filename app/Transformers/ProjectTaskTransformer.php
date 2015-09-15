@@ -44,6 +44,6 @@ class ProjectTaskTransformer extends AbstractTransformer
      */
     public function includeProject(ProjectTask $task)
     {
-        return $this->item($task->project, new ProjectTransformer(false));
+        return $this->item($task->project, new ProjectTransformer(true), true);
     }
 }

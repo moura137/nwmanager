@@ -56,9 +56,9 @@ class ProjectTransformer extends AbstractTransformer
             'count_tasks'   => $project->tasks()->count(),
         ];
 
-        if ($this->timestamps) {
-            $return['created_at'] = $this->formatDate($project->created_at, 'Y-m-d H:i:s');
-            $return['updated_at'] = $this->formatDate($project->updated_at, 'Y-m-d H:i:s');
+        if (!$this->includeData) {
+            $data['created_at'] = $this->formatDate($project->created_at, 'Y-m-d H:i:s');
+            $data['updated_at'] = $this->formatDate($project->updated_at, 'Y-m-d H:i:s');
         }
 
         return $return;
@@ -71,7 +71,7 @@ class ProjectTransformer extends AbstractTransformer
      */
     public function includeMembers(Project $project)
     {
-        return $this->collection($project->members, new ProjectMemberTransformer);
+        return $this->collection($project->members, new ProjectMemberTransformer(true), true);
     }
 
     /**
@@ -81,7 +81,7 @@ class ProjectTransformer extends AbstractTransformer
      */
     public function includeOwner(Project $project)
     {
-        return $this->item($project->owner, new UserTransformer(false));
+        return $this->item($project->owner, new UserTransformer(true), true);
     }
 
     /**
@@ -91,6 +91,6 @@ class ProjectTransformer extends AbstractTransformer
      */
     public function includeClient(Project $project)
     {
-        return $this->item($project->client, new ClientTransformer(false));
+        return $this->item($project->client, new ClientTransformer(true), true);
     }
 }

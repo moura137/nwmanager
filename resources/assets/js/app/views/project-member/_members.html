@@ -1,4 +1,4 @@
-<table class="table" ng-show="project.members.length">
+<table class="table" ng-show="project.members.data.length">
 <thead>
     <tr>
         <th>Nome</th>
@@ -7,7 +7,7 @@
     </tr>
 </thead>
 <tbody>
-    <tr ng-repeat="member in project.members">
+    <tr ng-repeat="member in project.members.data">
         <td>[[ member.name ]] <span class="label label-warning" ng-show="project.owner_id==member.member_id">Dono</span></td>
         <td>[[ member.email ]]</td>
         <td><a ng-click="removeMember(member)" class="btn btn-danger btn-xs" ng-hide="project.owner_id==member.member_id||AuthUser.id!=project.owner_id"><i class="fa fa-trash"></i> Excluir</a>
@@ -16,6 +16,6 @@
 </tbody>
 </table>
 
-<div ng-hide="project.members.length" align="center">
+<div ng-hide="project.members.data.length" align="center">
     NENHUM MEMBRO
 </div>
