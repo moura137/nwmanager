@@ -38,9 +38,9 @@ class ProjectFileService extends AbstractService
      *
      * @param string
      */
-    private function setFolder($project_id)
+    private function makeFolder($project_id)
     {
-        return sprintf("project-%d/", $project_id);
+        return sprintf("nwmanager/project-%d/", $project_id);
     }
 
     /**
@@ -61,7 +61,7 @@ class ProjectFileService extends AbstractService
             // Insert Database
             $project_id = $data['project_id'];
             $file       = $data['file'];
-            $folder     = $this->setFolder($project_id);
+            $folder     = $this->makeFolder($project_id);
             $dataFile   = $this->upload->parseFile($file, null, $folder);
 
             $attributes = [
@@ -119,7 +119,7 @@ class ProjectFileService extends AbstractService
             $success = $this->repository->delete($entity->id);
 
             if ($success) {
-                $folder = $this->setFolder($project_id);
+                $folder = $this->makeFolder($project_id);
                 $this->upload->deleteFile($entity->file, $folder);
             }
 
@@ -186,7 +186,7 @@ class ProjectFileService extends AbstractService
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
                 ->find($id);
 
-            $folder = $this->setFolder($project_id);
+            $folder = $this->makeFolder($project_id);
             $file = $this->upload->getFile($entity->file, $folder);
 
             if (!$file) {
