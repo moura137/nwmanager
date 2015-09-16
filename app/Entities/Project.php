@@ -43,6 +43,24 @@ class Project extends AbstractEntity
     protected $dates = ['due_date'];
 
     /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'progress' => 'integer',
+    ];
+
+    /**
+     * The model's attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'progress' => 0,
+    ];
+
+    /**
      * Is Ativo
      *
      * @return boolean
