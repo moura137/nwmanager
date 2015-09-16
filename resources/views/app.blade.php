@@ -44,6 +44,7 @@
         <script src="{{ asset('build/vendor/js/angular-animate.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-messages.js') }}"></script>
         <script src="{{ asset('build/vendor/js/ui-bootstrap.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/ui-bootstrap-tpls.js') }}"></script>
         <script src="{{ asset('build/vendor/js/navbar.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-cookies.js') }}"></script>
         <script src="{{ asset('build/vendor/js/query-string.js') }}"></script>

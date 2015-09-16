@@ -11,19 +11,6 @@ use NwManager\Entities\User;
  */
 class UserTransformer extends AbstractTransformer
 {
-
-    protected $timestamps = true;
-
-    /**
-     * Construct
-     *
-     * @param boolean $timestamps
-     */
-    public function __construct($timestamps = true)
-    {
-        $this->timestamps = $timestamps;
-    }
-
     /**
      * Transform the User entity
      *
@@ -40,8 +27,8 @@ class UserTransformer extends AbstractTransformer
         ];
 
         if (!$this->includeData) {
-            $data['created_at'] = $this->formatDate($user->created_at, 'Y-m-d H:i:s');
-            $data['updated_at'] = $this->formatDate($user->updated_at, 'Y-m-d H:i:s');
+            $return['created_at'] = $this->formatDate($user->created_at, 'Y-m-d H:i:s');
+            $return['updated_at'] = $this->formatDate($user->updated_at, 'Y-m-d H:i:s');
         }
 
         return $return;

@@ -3,7 +3,7 @@
         <a class="btn btn-primary" ng-href="#/project/[[ project_id ]]/notes/new"><i class="fa fa-plus"></i> Nova Nota</a>
     </div>
     <div class="col-lg-6" align="right">
-        <span>[[ notes.length ]] Notas(s)</span>
+        <span>[[ notes_pagination.total ]] Notas(s)</span>
     </div>
 </div>
 
@@ -28,3 +28,17 @@
 <div ng-hide="notes.length" align="center">
     <td colspan="5">NENHUM REGISTRO ENCONTRADO</td>
 </div>
+
+<pagination 
+    ng-show="notes_pagination.total_pages>1"
+    ng-change="pageChanged()"
+    boundary-links="true" 
+    total-items="notes_pagination.total" 
+    items-per-page="notes_pagination.per_page"
+    ng-model="notes_pagination.current_page" 
+    class="pagination-sm" 
+    previous-text="&lsaquo;" 
+    next-text="&rsaquo;" 
+    first-text="&laquo;" 
+    last-text="&raquo;">
+</pagination>

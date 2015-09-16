@@ -61,7 +61,7 @@ class ProjectTaskController extends Controller
             ->skipPresenter(false)
             ->with($this->withRelations)
             ->pushCriteria(new InputCriteria($data))
-            ->all();
+            ->paginate();
     }
 
     /**

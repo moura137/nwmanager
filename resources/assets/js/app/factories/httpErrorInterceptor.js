@@ -18,10 +18,9 @@ angular.module('app.factories')
         var headers = response.headers();
 
         if (headers['content-type'] == 'application/json' || headers['content-type'] == 'text/json') {
-          if (data.hasOwnProperty('data')) {
-            data = data.data;
+          if (data.hasOwnProperty('data') && !data.hasOwnProperty('meta')) {
+            response.data = data.data;
           }
-          response.data = data;
         }
         
         return response;

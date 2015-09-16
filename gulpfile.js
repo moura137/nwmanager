@@ -40,6 +40,7 @@ paths.vendor_js = [
     paths.bower + '/angular-animate/angular-animate.js',
     paths.bower + '/angular-messages/angular-messages.js',
     paths.bower + '/angular-bootstrap/ui-bootstrap.js',
+    paths.bower + '/angular-bootstrap/ui-bootstrap-tpls.js',
     paths.bower + '/angular-strap/dist/modules/navbar.js',
     paths.bower + '/angular-cookies/angular-cookies.js',
     paths.bower + '/query-string/query-string.js',

@@ -19,19 +19,7 @@ class ProjectTransformer extends AbstractTransformer
         'client',
         'members',
     ];
-
-    protected $timestamps = true;
-
-    /**
-     * Construct
-     *
-     * @param boolean $timestamps
-     */
-    public function __construct($timestamps = true)
-    {
-        $this->timestamps = $timestamps;
-    }
-
+    
     /**
      * Transform the Project entity
      *
@@ -57,8 +45,8 @@ class ProjectTransformer extends AbstractTransformer
         ];
 
         if (!$this->includeData) {
-            $data['created_at'] = $this->formatDate($project->created_at, 'Y-m-d H:i:s');
-            $data['updated_at'] = $this->formatDate($project->updated_at, 'Y-m-d H:i:s');
+            $return['created_at'] = $this->formatDate($project->created_at, 'Y-m-d H:i:s');
+            $return['updated_at'] = $this->formatDate($project->updated_at, 'Y-m-d H:i:s');
         }
 
         return $return;

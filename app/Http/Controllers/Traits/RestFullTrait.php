@@ -44,7 +44,7 @@ trait RestFullTrait
             ->pushCriteria(new InputCriteria($request->all()))
             ->with($this->withRelations)
             ->orderBy($this->orderBy)
-            ->all();
+            ->paginate();
     }
 
     /**

@@ -49,6 +49,10 @@ h5 {
   display: inline;
 }
 
+.table-responsive .pagination {
+  margin: 1px 0px;
+}
+
 .nav > li > a {
   color: #a7b1c2;
   font-weight: 600;

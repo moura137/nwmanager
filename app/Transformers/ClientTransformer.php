@@ -11,18 +11,6 @@ use NwManager\Entities\Client;
  */
 class ClientTransformer extends AbstractTransformer
 {
-    protected $timestamps = true;
-
-    /**
-     * Construct
-     *
-     * @param boolean $timestamps
-     */
-    public function __construct($timestamps = true)
-    {
-        $this->timestamps = $timestamps;
-    }
-
     /**
      * Transform the Client entity
      *
@@ -43,8 +31,8 @@ class ClientTransformer extends AbstractTransformer
         ];
 
         if (!$this->includeData) {
-            $data['created_at'] = $this->formatDate($client->created_at, 'Y-m-d H:i:s');
-            $data['updated_at'] = $this->formatDate($client->updated_at, 'Y-m-d H:i:s');
+            $return['created_at'] = $this->formatDate($client->created_at, 'Y-m-d H:i:s');
+            $return['updated_at'] = $this->formatDate($client->updated_at, 'Y-m-d H:i:s');
         }
 
         return $return;

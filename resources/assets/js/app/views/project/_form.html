@@ -26,7 +26,9 @@
 <div class="form-group" ng-class="{'has-error': !formProject.client_id.$valid && formProject.client_id.$touched}">
     <label class="col-lg-2 control-label">Cliente *</label>
     <div class="col-lg-10">
-        <select required name="client_id" class="form-control" ng-model="project.client_id">
+        <input type="text" required name="client_id" class="form-control" ng-model="project.client_id" />
+
+        <select required name="client_id" class="form-control" ng-model="project.client_id" ng-options="c.id as c.name for c in clients">
             <option value="">--Selecione--</option>
             <option ng-repeat="c in clients" value="[[ c.id ]]">[[ c.name ]]</option>
         </select>

@@ -8,6 +8,9 @@ angular.module('app.services')
             id: '@id',
             idNote: '@idNote'
         }, {
+            query: {
+                isArray: false
+            },
             update: {
                 method: 'PUT'
             }

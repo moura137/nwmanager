@@ -7,10 +7,22 @@ angular.module('app.controllers')
         function($scope, $rootScope, $routeParams, $filter, ProjectFile) {
             $scope.project_id = $routeParams.id;
             
+            $scope.search = function(page) {
+                $scope.query({'search': $scope.q, 'page': page});
+                $scope.searched = true;
+            };
+
             $scope.query = function(search) {
                 $rootScope.clearError();
-                $scope.files = ProjectFile.query(search, {id: $routeParams.id});
                 $scope.deleting = [];
+                ProjectFile.query(search, {id: $routeParams.id}, function(res) {
+                    $scope.files = res.data;
+                    $scope.files_pagination = res.meta.pagination;
+                });
+            };
+
+            $scope.pageChanged = function() {
+                $scope.search($scope.files_pagination.current_page);
             };
 
             $scope.query();

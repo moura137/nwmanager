@@ -13,7 +13,7 @@ var App = angular.module('App', [
     'angular-oauth2']);
 
 /** Modules **/
-angular.module('app.controllers', ['angular-oauth2', 'ngMessages']);
+angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap.pagination', 'ui.bootstrap.tpls']);
 angular.module('app.services', ['ngResource']);
 angular.module('app.factories', []);
 angular.module('app.directives', []);

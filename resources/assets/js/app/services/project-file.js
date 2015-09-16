@@ -8,6 +8,9 @@ angular.module('app.services')
             id: '@id',
             idFile: '@idFile'
         }, {
+            query: {
+                isArray: false
+            },
             save: {
                 method: 'POST',
                 headers: { 'Content-Type': undefined },

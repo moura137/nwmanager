@@ -51,7 +51,7 @@ class ProjectFileController extends Controller
             ->pushCriteria(new InputCriteria($data))
             ->with($this->withRelations)
             ->orderBy($this->orderBy)
-            ->all();
+            ->paginate();
     }
 
     /**

@@ -7,8 +7,8 @@ angular.module('app.controllers')
         function($scope, $rootScope, $routeParams, ProjectNote) {
             $scope.project_id = $routeParams.id;
             
-            $scope.search = function() {
-                $scope.query({'search': $scope.q});
+            $scope.search = function(page) {
+                $scope.query({'search': $scope.q, 'page': page});
                 $scope.searched = true;
             };
 
@@ -19,8 +19,15 @@ angular.module('app.controllers')
             };
 
             $scope.query = function(search) {
-                $rootScope.clearError();
-                $scope.notes = ProjectNote.query(search, {id: $routeParams.id});
+                $rootScope.clearError();                
+                ProjectNote.query(search, {id: $routeParams.id}, function(res) {
+                    $scope.notes = res.data;
+                    $scope.notes_pagination = res.meta.pagination;
+                });
+            };
+
+            $scope.pageChanged = function() {
+                $scope.search($scope.notes_pagination.current_page);
             };
 
             $scope.clear();

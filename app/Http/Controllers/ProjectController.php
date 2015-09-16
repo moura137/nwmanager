@@ -46,7 +46,7 @@ class ProjectController extends Controller
             ->pushCriteria(new ProjectMemberCriteria)
             ->with($this->withRelations)
             ->orderBy($this->orderBy)
-            ->all();
+            ->paginate();
     }
 
     /**
