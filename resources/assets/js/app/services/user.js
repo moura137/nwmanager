@@ -10,6 +10,22 @@ angular.module('app.services')
             },
             update: {
                 method: 'PUT'
-            }
+            },
+            all: {
+                url: Settings.baseUrl + '/user',
+                method: 'GET',
+                isArray: true,
+                transformResponse: function(data, headersGetter) {
+                    var headers = headersGetter();
+                    if (headers['content-type'] == 'application/json' || headers['content-type'] == 'text/json') {
+                      dataJson = JSON.parse(data);
+                      if (dataJson.hasOwnProperty('data')) {
+                        dataJson = dataJson.data;
+                      }
+                      return dataJson;
+                    }
+                    return data;
+                }
+            },
         });
     }]);

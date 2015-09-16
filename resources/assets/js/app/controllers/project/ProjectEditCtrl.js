@@ -7,10 +7,34 @@ angular.module('app.controllers')
         function($scope, $rootScope, $location, $routeParams, Project, Client, User, Settings)
         {
             $rootScope.clearError();
-            $scope.clients = Client.query();
-            $scope.users = User.query();
-            $scope.project = new Project.get({id: $routeParams.id});
+            $scope.project = Project.get({id: $routeParams.id});
             $scope.status = Settings.project.status;
+
+            /**
+             * TYPEAHEAD
+             */
+            $scope.formatLabel = function (model) {
+                if (model) {
+                    return model.name;
+                }
+                return '';
+            };
+
+            $scope.getOwners = function(search) {
+                return User.all({'search': search}).$promise;
+            };
+
+            $scope.onSelectedOwner = function ($item) {
+                $scope.project.owner_id = $item.id;
+            };
+
+            $scope.getClients = function(search) {
+                return Client.all({'search': search}).$promise;
+            };
+
+            $scope.onSelectedClient = function ($item) {
+                $scope.project.client_id = $item.id;
+            };
 
             $scope.save = function(){
                 if($scope.formProject.$valid)

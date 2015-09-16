@@ -13,10 +13,20 @@
 <div class="form-group" ng-class="{'has-error': !formProject.owner_id.$valid && formProject.owner_id.$touched}">
     <label class="col-lg-2 control-label">Responsável *</label>
     <div class="col-lg-10">
-        <select required name="owner_id" class="form-control" ng-model="project.owner_id">
-            <option value="">--Selecione--</option>
-            <option ng-repeat="o in users" value="[[ o.id ]]">[[ o.name ]]</option>
-        </select>
+        
+        <input type="text" required name="owner_id" class="form-control" placeholder="Responsável" 
+         ng-model="project.owner"
+         typeahead="o as o.name for o in getOwners($viewValue)" 
+         typeahead-wait-ms="200"
+         typeahead-editable="false"
+         typeahead-loading="ownersLoading"
+         typeahead-no-results="ownersNoResults"
+         typeahead-on-select="onSelectedOwner($item)" 
+         typeahead-input-formatter="formatLabel($model)"/>
+
+        <div class="help-block" ng-show="ownersLoading"><i class="fa fa-spinner fa-pulse"></i></div>
+        <div class="help-block" ng-show="ownersNoResults"><i class="fa fa-remove"></i>Nenhum registro encontrado</div>
+
         <div ng-messages="formProject.owner_id.$error" class="help-block" ng-show="!formProject.owner_id.$valid && formProject.owner_id.$touched">
             <span ng-message="required">Campo obrigatório</span>
         </div>
@@ -26,12 +36,19 @@
 <div class="form-group" ng-class="{'has-error': !formProject.client_id.$valid && formProject.client_id.$touched}">
     <label class="col-lg-2 control-label">Cliente *</label>
     <div class="col-lg-10">
-        <input type="text" required name="client_id" class="form-control" ng-model="project.client_id" />
+        <input type="text" required name="client_id" class="form-control" placeholder="Cliente" 
+         ng-model="project.client"
+         typeahead="c as c.name for c in getClients($viewValue)" 
+         typeahead-wait-ms="200"
+         typeahead-editable="false"
+         typeahead-loading="clientsLoading"
+         typeahead-no-results="clientsNoResults"
+         typeahead-on-select="onSelectedClient($item)" 
+         typeahead-input-formatter="formatLabel($model)" />
 
-        <select required name="client_id" class="form-control" ng-model="project.client_id" ng-options="c.id as c.name for c in clients">
-            <option value="">--Selecione--</option>
-            <option ng-repeat="c in clients" value="[[ c.id ]]">[[ c.name ]]</option>
-        </select>
+        <div class="help-block" ng-show="clientsLoading"><i class="fa fa-spinner fa-pulse"></i></div>
+        <div class="help-block" ng-show="clientsNoResults"><i class="fa fa-remove"></i>Nenhum registro encontrado</div>
+
         <div ng-messages="formProject.client_id.$error" class="help-block" ng-show="!formProject.client_id.$valid && formProject.client_id.$touched">
             <span ng-message="required">Campo obrigatório</span>
         </div>
@@ -55,7 +72,7 @@
     <div class="col-lg-10">
         
         <div slider ng-model="project.progress" step=1 start=1 end=100></div>
-        <div class="m-t">Project completed in <strong>[[ project.progress ]]%</strong></div>
+        <div class="m-t">Projeto em <strong>[[ project.progress ]]%</strong></div>
 
         <div ng-messages="formProject.progress.$error" class="help-block" ng-show="!formProject.progress.$valid && formProject.progress.$touched">
             <span ng-message="required">Campo obrigatório</span>
