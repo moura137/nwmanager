@@ -11,10 +11,10 @@
 <table class="table" ng-show="files.length">
 <thead>
     <tr>
-        <th>
+        <th width="1">
             <input type="checkbox" ng-click="checkedAll($event)">
         </th>
-        <th>&nbsp;</th>
+        <th width="1">&nbsp;</th>
         <th>Descrição</th>
         <th>Ext.</th>
         <th>Tam.</th>
@@ -29,11 +29,12 @@
             <input type="checkbox" class="chkfile" ng-model="file.checked" value="[[ file.id ]]" ng-change="chkDelete()" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id">
         </td>
         <td>
-            <a ng-click="downloadFile(file)">
+            <a ng-click="downloadFile(file)" class="btn btn-xs btn-white" title="Download">
                 <big><i class="fa [[ file.extension | iconFile ]]"></i></big>
             </a>
         </td>
-        <td>[[ file.description ]]</td>
+        <td>
+        [[ file.description ]]</td>
         <td>[[ file.extension ]]</td>
         <td>[[ file.size | formatSize ]]</td>
         <td>[[ file.created_at | formatDateTime ]]</td>
