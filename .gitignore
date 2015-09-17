@@ -25,4 +25,5 @@
 *~
 *.swp
 [Tt]humbs.db
+[Tt]humbs.db:encryptable
 _notes/

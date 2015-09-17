@@ -20,15 +20,14 @@
          typeahead-wait-ms="200"
          typeahead-editable="false"
          typeahead-loading="ownersLoading"
-         typeahead-no-results="ownersNoResults"
          typeahead-on-select="onSelectedOwner($item)" 
          typeahead-input-formatter="formatLabel($model)"/>
 
         <div class="help-block" ng-show="ownersLoading"><i class="fa fa-spinner fa-pulse"></i></div>
-        <div class="help-block" ng-show="ownersNoResults"><i class="fa fa-remove"></i>Nenhum registro encontrado</div>
 
         <div ng-messages="formProject.owner_id.$error" class="help-block" ng-show="!formProject.owner_id.$valid && formProject.owner_id.$touched">
             <span ng-message="required">Campo obrigatório</span>
+            <span ng-message="editable">Selecione um Usuário válido</span>
         </div>
     </div>
 </div>
@@ -42,15 +41,14 @@
          typeahead-wait-ms="200"
          typeahead-editable="false"
          typeahead-loading="clientsLoading"
-         typeahead-no-results="clientsNoResults"
          typeahead-on-select="onSelectedClient($item)" 
          typeahead-input-formatter="formatLabel($model)" />
 
         <div class="help-block" ng-show="clientsLoading"><i class="fa fa-spinner fa-pulse"></i></div>
-        <div class="help-block" ng-show="clientsNoResults"><i class="fa fa-remove"></i>Nenhum registro encontrado</div>
 
         <div ng-messages="formProject.client_id.$error" class="help-block" ng-show="!formProject.client_id.$valid && formProject.client_id.$touched">
             <span ng-message="required">Campo obrigatório</span>
+            <span ng-message="editable">Selecione um cliente válido</span>
         </div>
     </div>
 </div>

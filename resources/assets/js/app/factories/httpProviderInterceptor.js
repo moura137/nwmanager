@@ -1,5 +1,5 @@
 angular.module('app.factories')
-.factory('httpErrorInterceptor', ['$q', '$location', function($q, $location) {
+.factory('httpProviderInterceptor', ['$q', '$location', function($q, $location) {
     return {
       responseError: function(response) {
         if(response.status === 404) {
@@ -32,5 +32,8 @@ angular.module('app.factories')
     };
 }])
 .config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('httpErrorInterceptor');
+    $httpProvider.interceptors.push('httpProviderInterceptor');
+    $httpProvider.defaults.headers.common["Accept"] = 'application/json';
+    $httpProvider.defaults.headers.put["Content-type"] = 'application/x-www-form-urlencoded;chartset=utf-8';
+    $httpProvider.defaults.headers.post["Content-type"] = 'application/x-www-form-urlencoded;chartset=utf-8';
 }]);

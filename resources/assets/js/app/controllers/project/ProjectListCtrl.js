@@ -27,6 +27,7 @@ angular.module('app.controllers')
 
             $scope.pageChanged = function() {
                 $scope.search($scope.pagination.current_page);
+                $('body').scrollTop(0);
             };
 
             $scope.clear();

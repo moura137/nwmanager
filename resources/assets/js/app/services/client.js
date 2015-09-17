@@ -15,17 +15,7 @@ angular.module('app.services')
                 url: Settings.baseUrl + '/client',
                 method: 'GET',
                 isArray: true,
-                transformResponse: function(data, headersGetter) {
-                    var headers = headersGetter();
-                    if (headers['content-type'] == 'application/json' || headers['content-type'] == 'text/json') {
-                      dataJson = JSON.parse(data);
-                      if (dataJson.hasOwnProperty('data')) {
-                        dataJson = dataJson.data;
-                      }
-                      return dataJson;
-                    }
-                    return data;
-                }
+                transformResponse: Settings.utils.responseRemoveData
             },
         });
     }]);

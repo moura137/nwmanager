@@ -16,6 +16,7 @@
         <link href="{{ asset('build/vendor/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/nouislider.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/animate.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/css/inspinia.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/styles.css') }}" rel="stylesheet" />
     @else
         <link href="{{ elixir('css/all.css') }}" rel="stylesheet" />
@@ -97,13 +98,14 @@
         <script src="{{ asset('build/js/app/services/project-file.js') }}"></script>
 
         <!-- Factories -->
-        <script src="{{ asset('build/js/app/factories/httpErrorInterceptor.js') }}"></script>
+        <script src="{{ asset('build/js/app/factories/httpProviderInterceptor.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
 
         <!-- Directives -->
         <script src="{{ asset('build/js/app/directives/format-dates.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/input-file.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/upload-ng-thumb.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/loading.js') }}"></script>
 
         <!-- Filters -->
         <script src="{{ asset('build/js/app/filters/app-filters.js') }}"></script>
@@ -117,5 +119,9 @@
     @endif
 
     @yield('scripts')
+    <div class="back-loading" class="ng-hide" loading>
+        <div class="backdrop"></div>
+        <div class="text-top"><i class="fa fa-spinner fa-pulse"></i>&nbsp;Carregando...</div>
+    </div>
 </body>
 </html>

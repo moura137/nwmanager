@@ -28,6 +28,7 @@ angular.module('app.controllers')
 
             $scope.pageChanged = function() {
                 $scope.search($scope.notes_pagination.current_page);
+                $('body').scrollTop(0);
             };
 
             $scope.clear();

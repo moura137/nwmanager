@@ -10,17 +10,6 @@ angular.module('app.controllers')
             $scope.file = new ProjectFile();
             $scope.file.project_id = $routeParams.id;
             
-            //listen for the file selected event
-            $scope.$on("fileSelected", function (event, args) {
-                $scope.$apply(function () {
-                    if (args.file) {
-                        $scope.file.file = args.file;
-                    } else {
-                        delete $scope.file.file;
-                    }
-                });
-            });
-
             $scope.save = function(){
                 if($scope.formProjectFile.$valid)
                 {

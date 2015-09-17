@@ -19,6 +19,11 @@ angular.module('app.factories', []);
 angular.module('app.directives', []);
 angular.module('app.filters', []);
 
+App.config(['$interpolateProvider', function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+}]);
+
 /**
  * ------ Providers ------------
  */
@@ -35,6 +40,19 @@ App.provider('Settings',
                     { value: '2', label: 'Fechado', style: 'danger' },
                     { value: '3', label: 'Pausado', style: 'warning' }
                 ]
+            },
+            utils : {
+                responseRemoveData: function(data, headersGetter) {
+                    var headers = headersGetter();
+                    if (headers['content-type'] == 'application/json' || headers['content-type'] == 'text/json') {
+                      dataJson = JSON.parse(data);
+                      if (dataJson.hasOwnProperty('data')) {
+                        dataJson = dataJson.data;
+                      }
+                      return dataJson;
+                    }
+                    return data;
+                }
             }
         };
 
@@ -188,16 +206,6 @@ App.config(['$routeProvider',
             redirectTo: '/not-found',
             access: { requiredLogin: false }
         });
-    }
-]);
-
-App.config([
-    '$httpProvider', '$interpolateProvider',
-    function($httpProvider, $interpolateProvider) {
-        $httpProvider.defaults.headers.common["Accept"] = 'application/json';
-
-        $interpolateProvider.startSymbol('[[');
-        $interpolateProvider.endSymbol(']]');
     }
 ]);
 
