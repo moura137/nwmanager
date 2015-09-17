@@ -57,13 +57,13 @@ class Upload
     }
 
     /**
-     * Get File
+     * Read File
      *
      * @param string $name
      *
-     * @return bool
+     * @return string
      */
-    public function getFile($name = null, $folder)
+    public function readFile($name = null, $folder)
     {
         try {
             $filename = $this->parseFilename($name, $folder);

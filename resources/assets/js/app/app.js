@@ -276,6 +276,8 @@ App.run([
             if ((nextRoute.access === undefined || nextRoute.access.requiredAuth===true) && !OAuth.isAuthenticated()) {
                 return $window.location.href = '/login?error_reason=' + rejection.data.error;
             }
+
+            $('body').scrollTop(0);
         });
 
         $rootScope.logout = function() {

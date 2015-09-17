@@ -29,7 +29,7 @@ class ProjectFileController extends Controller
         $this->service = $service;
         $this->withRelations = ['user', 'project'];
         $this->orderBy = 'description ASC';
-        $this->middleware('project.member', ['except' => ['destroy', 'display']]);
+        $this->middleware('project.member', ['except' => ['destroy']]);
         $this->middleware('project-file.user', ['only' => ['destroy']]);
     }
     
@@ -140,21 +140,6 @@ class ProjectFileController extends Controller
 
         return response()
                 ->json(['result' => $result], 200);
-    }
-
-    /**
-     * Display File
-     *
-     * @param  int  $project_id
-     * @param  int  $id
-     * @return Response
-     */
-    public function display($project_id, $id)
-    {
-        $file = $this->service->getFile($id, ['project_id' => $project_id]);
-
-        return response($file['file'], 200)
-            ->header('Content-Type', $file['mime']);
     }
 
     /**

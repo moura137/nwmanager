@@ -187,16 +187,19 @@ class ProjectFileService extends AbstractService
                 ->find($id);
 
             $folder = $this->makeFolder($project_id);
-            $file = $this->upload->getFile($entity->file, $folder);
+            $file = $this->upload->readFile($entity->file, $folder);
 
             if (!$file) {
                 abort(404);
             }
 
             $mime = $this->upload->mimeType($entity->file, $folder);
-            $filename = $entity->file;
 
-            return compact('file', 'mime', 'filename');
+            return [
+                'file' => $file,
+                'mime' => $mime,
+                'filename' => $entity->file,
+            ];
 
         } catch (ModelNotFoundException $e) {
             throw $e;

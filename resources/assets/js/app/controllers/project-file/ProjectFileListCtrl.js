@@ -149,28 +149,4 @@ angular.module('app.controllers')
                     });
                 });
             };
-
-            $scope.displayFile = function(file) {
-                $scope.currentFile = file;
-
-                ProjectFile.displayFile({id: file.project_id, idFile: file.id}, {},
-                function (res, headers) {
-                    var data = res.data;
-                    var type = headers('content-type');
-                    if (type == 'image/jpeg' || type == 'image/jpg' || type == 'image/gif' || type == 'image/png') {
-                        var src = "data:"+type+";base64," + arrayBufferToBase64(data);
-                        var img = document.getElementById("displayImg");
-                        img.src = src;
-                        $('#previewImg').modal('show');
-                    } else {
-                        $scope.downloadFile(file);
-                    }
-                }, function (res, headers) {
-                    window.swal({
-                        title: "Error!",
-                        text: 'Erro ao tentar efetuar o download',
-                        type: "error"
-                    });
-                });
-            };
         }]);

@@ -46,8 +46,6 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::delete('project/{project}/files',             ['uses' => 'ProjectFileController@destroyAll','as' => 'project.file.destroy_all']);
         Route::get('project/{project}/file/{file}/download', ['uses' => 'ProjectFileController@download',  'as' => 'project.file.download']);
     });
-
-    Route::get('project/{project}/file/{file}/display',  ['uses' => 'ProjectFileController@display',   'as' => 'project.file.display']);
     
     Route::any('/{uri?}', function () {
         throw new \Symfony\Component\HttpKernel\Exception\HttpException(404, 'Method Not Allowed');

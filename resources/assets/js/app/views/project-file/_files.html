@@ -29,7 +29,7 @@
             <input type="checkbox" class="chkfile" ng-model="file.checked" value="[[ file.id ]]" ng-change="chkDelete()" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id">
         </td>
         <td>
-            <a ng-click="displayFile(file)">
+            <a ng-click="downloadFile(file)">
                 <big><i class="fa [[ file.extension | iconFile ]]"></i></big>
             </a>
         </td>
