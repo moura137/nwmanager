@@ -4,7 +4,7 @@ namespace NwManager\Services;
 
 use NwManager\Repositories\Contracts\ProjectFileRepository;
 use NwManager\Validators\ProjectFileValidator;
-use NwManager\Upload\Upload;
+use NwManager\FileStorage\FileStorageManager;
 use NwManager\Repositories\Criterias\InputCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,20 +17,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProjectFileService extends AbstractService
 {
     /**
-     * @var Upload
+     * @var FileStorageManager
      */
-    protected $upload;
+    protected $storage;
     
     /**
      * Construct
      *
      * @param ProjectFileRepository $repository
      */
-    public function __construct(ProjectFileRepository $repository, ProjectFileValidator $validator, Upload $upload)
+    public function __construct(ProjectFileRepository $repository, ProjectFileValidator $validator, FileStorageManager $storage)
     {
         $this->repository = $repository;
         $this->validator = $validator;
-        $this->upload = $upload;
+        $this->storage = $storage;
     }
 
     /**
@@ -62,7 +62,7 @@ class ProjectFileService extends AbstractService
             $project_id = $data['project_id'];
             $file       = $data['file'];
             $folder     = $this->makeFolder($project_id);
-            $dataFile   = $this->upload->parseFile($file, null, $folder);
+            $dataFile   = $this->storage->parseFile($file, null, $folder);
 
             $attributes = [
                 'project_id'    => $project_id,
@@ -76,7 +76,7 @@ class ProjectFileService extends AbstractService
 
             // Upload File
             $name = sprintf("%06d/", $entity->id);
-            $dataFile = $this->upload->uploadFile($file, $name, $folder);
+            $dataFile = $this->storage->uploadFile($file, $name, $folder);
 
             $entity->file = $dataFile['name'];
             $entity->save();
@@ -120,7 +120,7 @@ class ProjectFileService extends AbstractService
 
             if ($success) {
                 $folder = $this->makeFolder($project_id);
-                $this->upload->deleteFile($entity->file, $folder);
+                $this->storage->deleteFile($entity->file, $folder);
             }
 
             return $success;
@@ -187,13 +187,13 @@ class ProjectFileService extends AbstractService
                 ->find($id);
 
             $folder = $this->makeFolder($project_id);
-            $file = $this->upload->readFile($entity->file, $folder);
+            $file = $this->storage->readFile($entity->file, $folder);
 
             if (!$file) {
                 abort(404);
             }
 
-            $mime = $this->upload->mimeType($entity->file, $folder);
+            $mime = $this->storage->mimeType($entity->file, $folder);
 
             return [
                 'file' => $file,

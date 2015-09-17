@@ -1,12 +1,12 @@
 <?php
 
-namespace NwManager\Upload;
+namespace NwManager\FileStorage;
 
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class Upload
+class FileStorageManager
 {
     /**
      * Construct
@@ -27,6 +27,15 @@ class Upload
      *
      * @return bool
      */
+    /**
+     * UploadFile
+     *
+     * @param UploadedFile $file
+     * @param string       $name
+     * @param string       $folder
+     *
+     * @return bool
+     */
     public function uploadFile(UploadedFile $file, $name = null, $folder = null)
     {
         $data = $this->parseFile($file, $name, $folder);
@@ -44,6 +53,7 @@ class Upload
      * Delete File
      *
      * @param string $name
+     * @param string $folder
      *
      * @return bool
      */
@@ -60,6 +70,7 @@ class Upload
      * Read File
      *
      * @param string $name
+     * @param string $folder
      *
      * @return string
      */
@@ -76,9 +87,10 @@ class Upload
     }
 
     /**
-     * Get MimeType
+     * Get MimeType File
      *
      * @param string $name
+     * @param string $folder
      *
      * @return bool
      */
@@ -98,6 +110,7 @@ class Upload
      * Get Meta Data
      *
      * @param string $name
+     * @param string $folder
      *
      * @return bool
      */
@@ -133,9 +146,9 @@ class Upload
     /**
      * Parse Filename
      *
-     * @param UploadedFile  $file
-     * @param string        $name
-     * @param string        $folder
+     * @param UploadedFile $file
+     * @param string       $name
+     * @param string       $folder
      *
      * @return bool|array
      */
