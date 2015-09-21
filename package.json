@@ -6,6 +6,7 @@
   "dependencies": {
     "gulp-livereload": "^3.8.0",
     "gulp-ng-constant": "^0.3.0",
+    "gulp-notify": "^2.2.0",
     "laravel-elixir": "^2.0.0",
     "rimraf": "^2.4.2"
   }

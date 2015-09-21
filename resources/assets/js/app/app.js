@@ -1,20 +1,22 @@
 /** APP-JS */
 var App = angular.module('App', [
-    'app.env.config', 
-    'app.controllers', 
-    'app.services', 
+    'app.env.config',
+    'app.controllers',
+    'app.services',
     'app.factories',
+    'app.providers',
     'app.directives',
     'app.filters',
     'angularFileUpload',
     'nouislider',
     'ngSanitize',
-    'ngRoute', 
+    'ngRoute',
     'angular-oauth2']);
 
 /** Modules **/
 angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap', 'ui.bootstrap.tpls']);
 angular.module('app.services', ['ngResource']);
+angular.module('app.providers', []);
 angular.module('app.factories', []);
 angular.module('app.directives', []);
 angular.module('app.filters', []);
@@ -23,46 +25,6 @@ App.config(['$interpolateProvider', function($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 }]);
-
-/**
- * ------ Providers ------------
- */
-App.provider('Settings', 
-    ['API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 
-    function(API_URL, CLIENT_ID, CLIENT_SECRET){
-        var config = {
-            apiUrl: API_URL,
-            clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET,
-            project : {
-                status: [
-                    { value: '1', label: 'Aberto', style: 'primary'  },
-                    { value: '2', label: 'Fechado', style: 'danger' },
-                    { value: '3', label: 'Pausado', style: 'warning' }
-                ]
-            },
-            utils : {
-                responseRemoveData: function(data, headersGetter) {
-                    var headers = headersGetter();
-                    if (headers['content-type'] == 'application/json' || headers['content-type'] == 'text/json') {
-                      dataJson = JSON.parse(data);
-                      if (dataJson.hasOwnProperty('data')) {
-                        dataJson = dataJson.data;
-                      }
-                      return dataJson;
-                    }
-                    return data;
-                }
-            }
-        };
-
-        return {
-            config: config,
-            $get: function(){
-                return config;
-            }
-        };
-    }]);
 
 /**
  * ------ Routes ------------
@@ -241,7 +203,7 @@ App.run([
         $rootScope.refreshToken = false;
 
         $rootScope.$on('oauth:error', function(event, rejection, deferred) {
-            
+
             // Refresh token when a `invalid_token` error occurs.
             if ('access_denied' === rejection.data.error)
             {
@@ -272,7 +234,7 @@ App.run([
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             $rootScope.clearError();
             $rootScope.getAuthUser();
-            
+
             if ((nextRoute.access === undefined || nextRoute.access.requiredAuth===true) && !OAuth.isAuthenticated()) {
                 return $window.location.href = '/login?error_reason=' + rejection.data.error;
             }

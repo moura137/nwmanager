@@ -103,6 +103,9 @@
         <script src="{{ asset('build/js/app/factories/httpProviderInterceptor.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
 
+        <!-- Providers -->
+        <script src="{{ asset('build/js/app/providers/settings-provider.js') }}"></script>
+
         <!-- Directives -->
         <script src="{{ asset('build/js/app/directives/format-dates.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/input-file.js') }}"></script>

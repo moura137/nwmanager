@@ -4,6 +4,33 @@ var rimraf = require('rimraf');
 var gulp = require('gulp');
 var ngConstant = require('gulp-ng-constant');
 var fs = require('fs');
+var gulpNotify = require('gulp-notify');
+
+var notify = {
+    title: 'NwManager',
+
+    message : function(message) {
+        console.log(__dirname);
+        return gulpNotify({
+            title: this.title,
+            message: message,
+            icon: __dirname + '/node_modules/laravel-elixir/icons/laravel.png',
+            onLast: true
+        });
+    },
+
+    error : function(e, message) {
+        gulpNotify.onError({
+            title: this.title,
+            message: message + ': <%= error.message %>',
+            icon: __dirname + '/node_modules/laravel-elixir/icons/fail.png'
+        })(e);
+
+        // We'll spit out the error, just in case it's useful
+        // for the user.
+        console.log(e);
+    }
+};
 
 var paths = {
     'public': 'public',
@@ -142,6 +169,8 @@ gulp.task('copy-map', function(){
  */
 gulp.task('default-dev', ['clean-build'], function(){
     gulp.start(['config', 'copy-css', 'copy-js', 'copy-html', 'copy-map']);
+
+    gulp.src('./').pipe(notify.message('Compiled-Dev Executed'));
 });
 
 /**
@@ -167,6 +196,8 @@ gulp.task('default', ['clean-build'], function(){
             paths.public_js + '/all.js', './');
 
         mix.version([paths.public_css + '/all.css', paths.public_js + '/all.js']);
+
+        gulp.src('./').pipe(notify.message('Compiled-Prod Executed'));
     });
 });
 
