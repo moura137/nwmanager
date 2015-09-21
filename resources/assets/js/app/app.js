@@ -31,7 +31,7 @@ App.provider('Settings',
     ['API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 
     function(API_URL, CLIENT_ID, CLIENT_SECRET){
         var config = {
-            baseUrl: API_URL,
+            apiUrl: API_URL,
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             project : {
@@ -217,7 +217,7 @@ App.config([
     function(OAuthProvider, OAuthTokenProvider, SettingsProvider)
     {
         OAuthProvider.configure({
-          baseUrl: SettingsProvider.config.baseUrl,
+          apiUrl: SettingsProvider.config.apiUrl,
           clientId: SettingsProvider.config.clientId,
           clientSecret: SettingsProvider.config.clientSecret,
           grantPath: '/oauth/access-token',

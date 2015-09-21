@@ -4,7 +4,7 @@
  */
 angular.module('app.services')
     .service('Project', ['$resource', 'Settings', function($resource, Settings) {
-        return $resource(Settings.baseUrl + '/project/:id', {id: '@id'}, {
+        return $resource(Settings.apiUrl + '/project/:id', {id: '@id'}, {
             query: {
                 isArray: false
             },
@@ -14,19 +14,19 @@ angular.module('app.services')
             },
 
             members: {
-                url: Settings.baseUrl + '/project/:id/members',
+                url: Settings.apiUrl + '/project/:id/members',
                 method: 'GET',
                 isArray: true
             },
 
             addMember: {
-                url: Settings.baseUrl + '/project/:id/members/add',
+                url: Settings.apiUrl + '/project/:id/members/add',
                 method: 'POST',
                 isArray: true
             },
 
             removeMember: {
-                url: Settings.baseUrl + '/project/:id/members/remove',
+                url: Settings.apiUrl + '/project/:id/members/remove',
                 method: 'POST',
                 isArray: true
             },

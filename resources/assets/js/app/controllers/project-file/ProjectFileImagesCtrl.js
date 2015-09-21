@@ -105,7 +105,7 @@ angular.module('app.controllers')
             };
 
             var uploader = $scope.uploader = new FileUploader({
-                url: Settings.baseUrl + '/project/'+$routeParams.id+'/file',
+                url: Settings.apiUrl + '/project/'+$routeParams.id+'/file',
                 formData: [{'description': 'Imagem'}],
                 //autoUpload: true,
                 headers: {Authorization: OAuthToken.getAuthorizationHeader()},

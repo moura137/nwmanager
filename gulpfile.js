@@ -62,6 +62,7 @@ paths.vendor_css_map = [];
 gulp.task('config', function() {
   var fileEnvConfig = './env-config.json';
   var constants = {
+    BASE_PATH: 'http://localhost:8000',
     API_URL: 'http://localhost:8000',
     CLIENT_ID: 'ANGULAR_APP',
     CLIENT_SECRET: ''

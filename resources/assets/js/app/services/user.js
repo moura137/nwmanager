@@ -4,7 +4,7 @@
  */
 angular.module('app.services')
     .service('User', ['$resource', 'Settings', function($resource, Settings) {
-        return $resource(Settings.baseUrl + '/user/:id', {id: '@id'}, {
+        return $resource(Settings.apiUrl + '/user/:id', {id: '@id'}, {
             query: {
                 isArray: false
             },
@@ -12,7 +12,7 @@ angular.module('app.services')
                 method: 'PUT'
             },
             all: {
-                url: Settings.baseUrl + '/user',
+                url: Settings.apiUrl + '/user',
                 method: 'GET',
                 isArray: true,
                 transformResponse: Settings.utils.responseRemoveData

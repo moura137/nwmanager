@@ -86,6 +86,8 @@
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileDeleteCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/ForgotCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/ResetCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
         

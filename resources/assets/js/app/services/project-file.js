@@ -4,7 +4,7 @@
  */
 angular.module('app.services')
     .service('ProjectFile', ['$resource', 'Settings', function($resource, Settings) {
-        return $resource(Settings.baseUrl + '/project/:id/file/:idFile', {
+        return $resource(Settings.apiUrl + '/project/:id/file/:idFile', {
             id: '@id',
             idFile: '@idFile'
         }, {
@@ -34,7 +34,7 @@ angular.module('app.services')
             },
             
             downloadFile: {
-                url: Settings.baseUrl + '/project/:id/file/:idFile/download',
+                url: Settings.apiUrl + '/project/:id/file/:idFile/download',
                 method: 'GET',
                 responseType: 'arraybuffer',
                 transformResponse: function(data, headersGetter) {
@@ -43,7 +43,7 @@ angular.module('app.services')
             },
             
             displayFile: {
-                url: Settings.baseUrl + '/project/:id/file/:idFile/display',
+                url: Settings.apiUrl + '/project/:id/file/:idFile/display',
                 method: 'GET',
                 responseType: 'arraybuffer',
                 transformResponse: function(data, headersGetter) {
@@ -56,7 +56,7 @@ angular.module('app.services')
             },
 
             deleteAll: {
-                url: Settings.baseUrl + '/project/:id/files',
+                url: Settings.apiUrl + '/project/:id/files',
                 method: 'POST',
             }
         });
