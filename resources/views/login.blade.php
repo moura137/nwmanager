@@ -27,10 +27,11 @@
                     <span ng-message="required">Campo obrigatório</span>
                 </div>
             </div>
+            
             <button type="submit" class="btn btn-primary block full-width m-b">Entrar</button>
 
             <div align="center">
-                <a href="#"><small>Esqueceu sua senha?</small></a>
+                <a href="/forgot"><small>Esqueceu sua senha?</small></a>
             </div>
         </form>
         

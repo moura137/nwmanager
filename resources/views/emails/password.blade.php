@@ -11,11 +11,10 @@
             esta sendo enviado link para finalizar o processo de geraçãp da nova senha.
         </p>
         <p>
-            <a href="{{ url('password/reset/'.$token) }}" target="_blank">Link para Recuperar a Senha</a>
+            <a href="{{ route('password.reset', ['token' => $token, 'email' => $user->email]) }}" target="_blank">Clique aqui para Recuperar a Senha</a>
         </p>
         <p>
-            Por favor, clique imediatamente no link acima, 
-            pois o mesmo será válido até a data de {{ \Carbon\Carbon::now()->addMinutes(60) }}.
+            Por favor, clique imediatamente no link acima, pois o mesmo será expirar.
         </p>
         </div>
     </body>

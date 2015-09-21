@@ -2,6 +2,8 @@
 
 namespace NwManager\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 /**
  * Class HomeController
  *
@@ -23,5 +25,23 @@ class HomeController extends Controller
     public function login()
     {
         return view('login');
+    }
+
+    /**
+     * Action Forgot
+     */
+    public function forgot()
+    {
+        return view('forgot');
+    }
+
+    /**
+     * Action Reset
+     */
+    public function reset(Request $request)
+    {
+        $data = $request->only('token', 'email');
+
+        return view('reset', $data);
     }
 }

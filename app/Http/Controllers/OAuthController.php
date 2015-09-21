@@ -54,6 +54,23 @@ class OAuthController extends Controller
     }
 
     /**
+     * Get Reset
+     *
+     * @return ResponseJson
+     */
+    public function token(PasswordService $service, Request $request)
+    {
+        $user = $service->passwordToken($request);
+
+        if (!$user) {
+            $errors = $service->errors();
+            return response()->json($errors, 422);
+        }
+
+        return response()->json($user->presenter(), 200);
+    }
+
+    /**
      * Reset
      *
      * @return ResponseJson

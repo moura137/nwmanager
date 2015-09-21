@@ -49,6 +49,9 @@
   position: fixed;
   top: 0;
   left: 50%;
+  width: 180px;
+  text-align: center;
+  margin-left: -90px;
   z-index: 2540;
   background-color:#e9eeee;
   font-size: 16px;

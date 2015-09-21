@@ -3,8 +3,10 @@
 /**
  * FrontEnd
  */
-Route::get('/',      ['uses' => 'HomeController@index']);
-Route::get('/login', ['uses' => 'HomeController@login']);
+Route::get('/',      ['uses' => 'HomeController@index',  'as' => 'home']);
+Route::get('/login', ['uses' => 'HomeController@login',  'as' => 'login']);
+Route::get('/forgot',['uses' => 'HomeController@forgot', 'as' => 'forgot']);
+Route::get('/reset', ['uses' => 'HomeController@reset',  'as' => 'password.reset']);
 
 /**
  * API
@@ -13,11 +15,12 @@ Route::group(['middleware' => 'accept.json'], function() {
 
     Route::post('oauth/access-token', 'OAuthController@access');
     Route::post('oauth/forgot', 'OAuthController@forgot');
+    Route::post('oauth/token', 'OAuthController@token');
     Route::post('oauth/reset', 'OAuthController@reset');
     
-    Route::group(['middleware' => 'api.oauth', 'where' => ['id' => '\d+', 'project' => '\d+']], function() {
+    Route::group(['middleware' => 'api.oauth', 'where' => ['project' => '\d+'], 'as' => 'api.'], function() {
 
-        Route::get('oauth/user', 'OAuthController@user');
+        Route::get('oauth/user', ['uses' => 'OAuthController@user', 'as' => 'oauth.user']);
 
         Route::resource('user',         'UserController',        ['except' => ['create', 'edit']]);
         Route::resource('client',       'ClientController',      ['except' => ['create', 'edit']]);
