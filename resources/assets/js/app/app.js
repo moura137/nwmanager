@@ -217,7 +217,7 @@ App.config([
     function(OAuthProvider, OAuthTokenProvider, SettingsProvider)
     {
         OAuthProvider.configure({
-          apiUrl: SettingsProvider.config.apiUrl,
+          baseUrl: SettingsProvider.config.apiUrl,
           clientId: SettingsProvider.config.clientId,
           clientSecret: SettingsProvider.config.clientSecret,
           grantPath: '/oauth/access-token',
