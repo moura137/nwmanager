@@ -96,11 +96,11 @@ gulp.task('config', function() {
   };
 
   if( ! fs.existsSync(fileEnvConfig)) {
-    
+
     var fd = fs.openSync(fileEnvConfig, 'w');
     fs.writeSync(fd, JSON.stringify(constants));
     fs.closeSync(fd);
-    
+
   } else {
     gulp.src(fileEnvConfig)
         .pipe(ngConstant({

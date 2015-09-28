@@ -24,14 +24,12 @@
     </tr>
 </thead>
 <tbody>
-    <tr ng-repeat="file in files">        
+    <tr ng-repeat="file in files">
         <td>
             <input type="checkbox" class="chkfile" ng-model="file.checked" value="[[ file.id ]]" ng-change="chkDelete()" ng-show="AuthUser.id==file.user_id||AuthUser.id==project.owner_id">
         </td>
         <td>
-            <a ng-click="downloadFile(file)" class="btn btn-xs btn-white" title="Download">
-                <big><i class="fa [[ file.extension | iconFile ]]"></i></big>
-            </a>
+            <project-file-download id-file="[[ file.id ]]" project-id="[[ file.project_id ]]"></project-file-download>
         </td>
         <td>
         [[ file.description ]]</td>
@@ -55,16 +53,16 @@
     NENHUM ARQUIVO
 </div>
 
-<pagination 
+<pagination
     ng-show="files_pagination.total_pages>1"
     ng-change="pageChanged()"
-    boundary-links="true" 
-    total-items="files_pagination.total" 
+    boundary-links="true"
+    total-items="files_pagination.total"
     items-per-page="files_pagination.per_page"
-    ng-model="files_pagination.current_page" 
-    class="pagination-sm" 
-    previous-text="&lsaquo;" 
-    next-text="&rsaquo;" 
-    first-text="&laquo;" 
+    ng-model="files_pagination.current_page"
+    class="pagination-sm"
+    previous-text="&lsaquo;"
+    next-text="&rsaquo;"
+    first-text="&laquo;"
     last-text="&raquo;">
 </pagination>

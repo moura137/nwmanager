@@ -111,6 +111,7 @@
         <script src="{{ asset('build/js/app/directives/input-file.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/upload-ng-thumb.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/loading.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/project-file-download.js') }}"></script>
 
         <!-- Filters -->
         <script src="{{ asset('build/js/app/filters/app-filters.js') }}"></script>

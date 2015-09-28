@@ -20,7 +20,7 @@ class ProjectFileService extends AbstractService
      * @var FileStorageManager
      */
     protected $storage;
-    
+
     /**
      * Construct
      *
@@ -57,7 +57,7 @@ class ProjectFileService extends AbstractService
             $this->validator
                 ->with($data)
                 ->passesOrFail();
-            
+
             // Insert Database
             $project_id = $data['project_id'];
             $file       = $data['file'];
@@ -88,9 +88,13 @@ class ProjectFileService extends AbstractService
             return $entity;
 
         } catch (\Exception $e) {
-            
+
             if (isset($entity) && $entity->exists) {
                 $entity->delete();
+            }
+
+            if (isset($dataFile['name']) && isset($folder)) {
+                $this->storage->deleteFile($dataFile['name'], $folder);
             }
 
             $this->errors = $this->parseError($e);
@@ -196,14 +200,14 @@ class ProjectFileService extends AbstractService
             $mime = $this->storage->mimeType($entity->file, $folder);
 
             return [
-                'file' => $file,
+                'file' => base64_encode($file),
                 'mime' => $mime,
                 'filename' => $entity->file,
             ];
 
         } catch (ModelNotFoundException $e) {
             throw $e;
-            
+
         } catch (NotFoundHttpException $e) {
             throw $e;
 

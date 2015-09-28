@@ -3,9 +3,10 @@
  */
 angular.module('app.providers')
 .provider('Settings',
-    ['API_URL', 'CLIENT_ID', 'CLIENT_SECRET',
-    function(API_URL, CLIENT_ID, CLIENT_SECRET){
+    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET',
+    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET){
         var config = {
+            basePath: BASE_PATH,
             apiUrl: API_URL,
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,

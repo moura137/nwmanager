@@ -60,8 +60,9 @@ class FileStorageManager
     public function deleteFile($name = null, $folder)
     {
         try {
+
             $filename = $this->parseFilename($name, $folder);
-            
+
             return $this->storage->delete($filename);
         } catch (\Exception $e) { }
     }
@@ -77,10 +78,11 @@ class FileStorageManager
     public function readFile($name = null, $folder)
     {
         try {
+
             $filename = $this->parseFilename($name, $folder);
-            
+
             return $this->storage->get($filename);
-            
+
         } catch (\Exception $e) {
             return null;
         }
@@ -97,8 +99,9 @@ class FileStorageManager
     public function mimeType($name = null, $folder)
     {
         try {
+
             $filename = $this->parseFilename($name, $folder);
-            
+
             return $this->storage->mimeType($filename);
 
         } catch (\Exception $e) {
@@ -117,6 +120,7 @@ class FileStorageManager
     public function metaData($name = null, $folder)
     {
         try {
+
             $filename = $this->parseFilename($name, $folder);
 
             return $this->storage->getMetadata($filename);

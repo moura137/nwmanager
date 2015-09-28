@@ -151,10 +151,9 @@ class ProjectFileController extends Controller
      */
     public function download($project_id, $id)
     {
-        $file = $this->service->getFile($id, ['project_id' => $project_id]);
+        $data = $this->service->getFile($id, ['project_id' => $project_id]);
 
-        return response($file['file'], 200)
-            ->header('Content-Type', $file['mime'])
-            ->header('Content-Disposition', 'attachment; filename="'.$file['filename'].'"');
+        return response()
+                ->json(['data' => $data], 200);
     }
 }

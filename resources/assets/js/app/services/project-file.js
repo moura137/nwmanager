@@ -32,16 +32,12 @@ angular.module('app.services')
                     return formData;
                 },
             },
-            
+
             downloadFile: {
                 url: Settings.apiUrl + '/project/:id/file/:idFile/download',
-                method: 'GET',
-                responseType: 'arraybuffer',
-                transformResponse: function(data, headersGetter) {
-                    return { data : data };
-                }
+                method: 'GET'
             },
-            
+
             displayFile: {
                 url: Settings.apiUrl + '/project/:id/file/:idFile/display',
                 method: 'GET',
