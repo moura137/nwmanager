@@ -86,6 +86,13 @@ paths.vendor_js_map = [
 
 paths.vendor_css_map = [];
 
+function merge_options(obj1,obj2){
+    var obj3 = {};
+    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+    return obj3;
+}
+
 gulp.task('config', function() {
   var fileEnvConfig = './env-config.json';
   var constants = {
@@ -100,14 +107,15 @@ gulp.task('config', function() {
     var fd = fs.openSync(fileEnvConfig, 'w');
     fs.writeSync(fd, JSON.stringify(constants));
     fs.closeSync(fd);
+  }
 
-  } else {
-    gulp.src(fileEnvConfig)
-        .pipe(ngConstant({
-          name: 'app.env.config'
-        }))
-        .pipe(gulp.dest(paths.build_js));
-      }
+  var envConfig = require(fileEnvConfig);
+  ngConstant({
+      name: 'app.env.config',
+      constants: merge_options(constants, envConfig),
+      stream: true
+  })
+  .pipe(gulp.dest(paths.build_js));
 });
 
 /**

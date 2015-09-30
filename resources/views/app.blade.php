@@ -57,7 +57,7 @@
         <script src="{{ asset('build/js/app/libraries/angular-oauth2.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/jquery.fileDownload.js') }}"></script>
-        <script src="{{ asset('build/js/env-config.js') }}"></script>
+        <script src="{{ asset('build/js/constants.js') }}"></script>
 
         <script src="{{ asset('build/js/app/app.js') }}"></script>
         
@@ -121,7 +121,7 @@
 
     @else
         <script src="{{ elixir('js/all.js') }}"></script>
-        <script src="{{ asset('build/js/env-config.js') }}"></script>
+        <script src="{{ asset('build/js/constants.js') }}"></script>
     @endif
 
     @yield('scripts')
