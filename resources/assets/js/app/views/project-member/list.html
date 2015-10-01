@@ -25,7 +25,50 @@
                 </div>
                 <div class="ibox-content">
 
-                    <div ng-include src="'build/views/project-member/_members.html'"></div>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <form id="formProjectTask" name="formProjectMember" class="form-inline" ng-submit="addMember()" ng-hide="AuthUser.id!=project.owner_id">
+                                <div class="form-group">
+                                    <label class="control-label">Adicionar Membro </label>
+                                    <input type="text" required class="form-control"
+                                     placeholder="Usuário"
+                                     ng-model="member_select"
+                                     typeahead="o as o.name for o in getMembers($viewValue)"
+                                     typeahead-wait-ms="200"
+                                     typeahead-editable="false"
+                                     typeahead-loading="membersLoading"
+                                     typeahead-input-formatter="formatLabel($model)" >
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" data-loading-text="Carregando..." class="btn btn-primary">Adicionar</button>
+                                    <span ng-show="membersLoading"><i class="fa fa-spinner fa-pulse"></i></<span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <table class="table" ng-show="project.members.data.length">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="member in project.members.data">
+                            <td>[[ member.name ]] <span class="label label-warning" ng-show="project.owner_id==member.member_id">Dono</span></td>
+                            <td>[[ member.email ]]</td>
+                            <td><a ng-click="removeMember(member)" class="btn btn-danger btn-xs" ng-hide="project.owner_id==member.member_id||AuthUser.id!=project.owner_id"><i class="fa fa-trash"></i> Excluir</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+
+                    <div ng-hide="project.members.data.length" align="center">
+                        NENHUM MEMBRO
+                    </div>
 
                 </div>
             </div>

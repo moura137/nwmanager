@@ -2,11 +2,10 @@
  * Controller Reset
  */
 angular.module('app.controllers')
-    .controller('ResetCtrl', 
-        ['$scope', '$rootScope', '$http', 'Settings', 
+    .controller('ResetCtrl',
+        ['$scope', '$rootScope', '$http', 'Settings',
         function($scope, $rootScope, $http, Settings)
         {
-            $rootScope.clearError();
             $rootScope.logout();
 
             $scope.user = null;
@@ -32,7 +31,7 @@ angular.module('app.controllers')
                 if($scope.formReset.$valid)
                 {
                     $("button[type=submit]").button('loading');
-                    
+
                     $http.post(Settings.apiUrl + '/oauth/reset', $scope.data)
                         .then(function(response) {
                             $scope.success = true;

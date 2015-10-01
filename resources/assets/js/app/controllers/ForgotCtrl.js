@@ -2,11 +2,10 @@
  * Controller Forgot
  */
 angular.module('app.controllers')
-    .controller('ForgotCtrl', 
-        ['$scope', '$rootScope', '$http', 'Settings', 
+    .controller('ForgotCtrl',
+        ['$scope', '$rootScope', '$http', 'Settings',
         function($scope, $rootScope, $http, Settings)
         {
-            $rootScope.clearError();
             $rootScope.logout();
 
             $scope.user = {
@@ -17,7 +16,7 @@ angular.module('app.controllers')
                 if($scope.formForgot.$valid)
                 {
                     $("button[type=submit]").button('loading');
-                    
+
                     $http.post(Settings.apiUrl + '/oauth/forgot', $scope.user)
                         .then(function(response) {
                             window.swal('Email enviado com Sucesso!', null, 'success');

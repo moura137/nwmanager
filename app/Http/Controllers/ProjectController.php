@@ -7,7 +7,7 @@ use NwManager\Services\ProjectService;
 use Illuminate\Http\Request;
 use NwManager\Repositories\Criterias\InputCriteria;
 use NwManager\Repositories\Criterias\ProjectMemberCriteria;
-
+use NwManager\Presenters\ProjectMemberPresenter;
 /**
  * Class ProjectController
  *
@@ -65,7 +65,8 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
-        return $this->repo->find($id)->members;
+        $members = $this->repo->find($id)->members;
+        return with(new ProjectMemberPresenter)->present($members);
     }
 
     /**
@@ -84,7 +85,8 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
-        return $this->repo->find($id)->members;
+        $members = $this->repo->find($id)->members;
+        return with(new ProjectMemberPresenter)->present($members);
     }
 
     /**
@@ -103,6 +105,7 @@ class ProjectController extends Controller
             return response()->json($errors, 422);
         }
 
-        return $this->repo->find($id)->members;
+        $members = $this->repo->find($id)->members;
+        return with(new ProjectMemberPresenter)->present($members);
     }
 }

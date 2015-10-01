@@ -9,7 +9,7 @@ angular.module('app.factories')
         else if(response.status === 403) {
           $location.url('forbidden');
         }
-        
+
         return $q.reject(response);
       },
 
@@ -26,7 +26,7 @@ angular.module('app.factories')
             response.data = data.data;
           }
         }
-        
+
         return response;
       }
     };

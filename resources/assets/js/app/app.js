@@ -212,8 +212,8 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
-    function($rootScope, $window, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
+    '$rootScope', '$window', '$location', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
+    function($rootScope, $window, $location, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
     {
         $rootScope.refreshToken = false;
 
@@ -242,17 +242,19 @@ App.run([
 
             } else {
                 httpBuffer.clear();
-                return $window.location.href = '/login?error_reason=' + rejection.data.error;
+                return $window.location.href = '/login';
             }
         });
 
-        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute, rejection) {
+            if ((nextRoute.access === undefined || nextRoute.access.requiredLogin===true) && !OAuth.isAuthenticated()) {
+                event.preventDefault();
+                $window.location.href = '/login';
+                return false;
+            }
+
             $rootScope.clearError();
             $rootScope.getAuthUser();
-
-            if ((nextRoute.access === undefined || nextRoute.access.requiredAuth===true) && !OAuth.isAuthenticated()) {
-                return $window.location.href = '/login?error_reason=' + rejection.data.error;
-            }
 
             $('body').scrollTop(0);
         });

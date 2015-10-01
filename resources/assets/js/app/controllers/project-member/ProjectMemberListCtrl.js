@@ -2,13 +2,37 @@
  * Controller ProjectMember List
  */
 angular.module('app.controllers')
-    .controller('ProjectMemberListCtrl', 
-        ['$scope', '$rootScope', '$routeParams', 'Project', 
-        function($scope, $rootScope, $routeParams, Project) {
-            
+    .controller('ProjectMemberListCtrl',
+        ['$scope', '$rootScope', '$routeParams', 'Project', 'User',
+        function($scope, $rootScope, $routeParams, Project, User) {
+
+            $scope.member_select = null;
+
             $scope.query = function(search) {
                 $rootScope.clearError();
                 $scope.project = Project.get({id: $routeParams.id});
+            };
+
+            /**
+             * TYPEAHEAD MEMBERS
+             */
+            $scope.formatLabel = function (model) {
+                if (model) {
+                    return model.name;
+                }
+                return '';
+            };
+            $scope.getMembers = function(search) {
+                return User.all({'search': search}).$promise;
+            };
+
+            $scope.addMember = function() {
+                if ($scope.member_select) {
+                    Project.addMember({id: $routeParams.id}, {members: $scope.member_select.id}, function(response){
+                        $scope.project.members.data = JSON.parse(angular.toJson(response));
+                    });
+                    $scope.member_select = null;
+                }
             };
 
             $scope.removeMember = function(member) {
@@ -22,15 +46,9 @@ angular.module('app.controllers')
 
                 }, function(){
                     Project.removeMember({id: $routeParams.id}, {members: member.member_id}, function(response){
-                        
-                        $scope.query();
+                        $scope.project.members.data = JSON.parse(angular.toJson(response));
 
-                        window.swal({
-                            title: "Removido!",
-                            text: "Membro removido com sucesso!",
-                            type: "success",
-                            timer: 1000,
-                        });
+                        window.swal.close();
 
                     }, function(response){
                         window.swal({
