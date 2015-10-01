@@ -13,7 +13,6 @@ class ProjectFileTransformer extends AbstractTransformer
 {
     protected $defaultIncludes = [
         'user',
-        // 'project',
     ];
 
     /**
@@ -48,15 +47,5 @@ class ProjectFileTransformer extends AbstractTransformer
     public function includeUser(ProjectFile $file)
     {
         return $this->item($file->user, new UserTransformer(true), true);
-    }
-
-    /**
-     * Include Project
-     *
-     * @return League\Fractal\Resource\Item
-     */
-    public function includeProject(ProjectFile $file)
-    {
-        return $this->item($file->project, new ProjectTransformer(true), true);
     }
 }
