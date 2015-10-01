@@ -85,6 +85,10 @@
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-file/ProjectFileDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskNewCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskEditCtrl.js') }}"></script>
+
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ForgotCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ResetCtrl.js') }}"></script>
@@ -98,6 +102,7 @@
         <script src="{{ asset('build/js/app/services/project.js') }}"></script>
         <script src="{{ asset('build/js/app/services/project-note.js') }}"></script>
         <script src="{{ asset('build/js/app/services/project-file.js') }}"></script>
+        <script src="{{ asset('build/js/app/services/project-task.js') }}"></script>
 
         <!-- Factories -->
         <script src="{{ asset('build/js/app/factories/httpProviderInterceptor.js') }}"></script>

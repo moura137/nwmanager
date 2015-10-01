@@ -25,16 +25,16 @@
                     <div ng-include src="'build/views/_errors.html'"></div>
 
                     <h3>Tem certeza que deseja Excluir?</h3>
-                    
+
                     <ul>
                         <li><strong>Titulo: </strong> [[ note.title ]]</li>
                         <li><strong>Note: </strong> 
                             [[ note.note | limitTo:50 ]]<span ng-show="note.note.length > 50">...</span>
                         </li>
                     </ul>
-                    
+
                     <button type="button" class="btn btn-danger" ng-click="delete()">Excluir</button>
-                    <a ng-href="#/project/[[ note.project_id ]]/show" class="btn btn-white">Cancelar</a>
+                    <a ng-href="#/project/[[ note.project_id ]]/show?tab=tab-note" class="btn btn-white">Cancelar</a>
                 </div>
             </div>
         </div>

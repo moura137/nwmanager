@@ -33,8 +33,21 @@ class FakerOAuth2Seeder extends Seeder
         $this->command->info("APP_ID: {$clientId}");
         $this->command->info("SECRET: {$secret}");
 
-        $constants = '{"API_URL":"http://localhost:8000","CLIENT_ID":"'.$clientId.'","CLIENT_SECRET":"'.$secret.'"}';
-        File::put(base_path('env-config.json'), $constants);
+        $constants = [
+            'BASE_PATH' => 'http://localhost:8000',
+            'API_URL' => 'http://localhost:8000',
+        ];
+
+        $path = base_path('env-config.json');
+        if (File::exists($path)) {
+            $atual = (array) @json_decode(File::get($path));
+            $constants = array_merge($constants, $atual);
+        }
+
+        $constants['CLIENT_ID'] = $clientId;
+        $constants['CLIENT_SECRET'] = $secret;
+
+        File::put(base_path('env-config.json'), str_replace('\\', '', json_encode($constants)));
 
         // Grant
         $grantId = 'password';

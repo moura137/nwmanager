@@ -17,6 +17,12 @@ angular.module('app.providers')
                     { value: '3', label: 'Pausado', style: 'warning' }
                 ]
             },
+            projectTask : {
+                status: [
+                    { value: '0', label: 'Incompleta', style: 'warning' },
+                    { value: '1', label: 'Completa', style: 'success' },
+                ]
+            },
             utils : {
                 responseRemoveData: function(data, headersGetter) {
                     var headers = headersGetter();

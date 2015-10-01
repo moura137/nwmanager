@@ -77,17 +77,15 @@
                     </dl>
                 </div>
             </div>
-            
-            
-            <div class="row m-t-sm" ng-controller="ProjectNoteListCtrl">
-                <div class="col-lg-12" ng-controller="ProjectFileListCtrl">
+            <div class="row m-t-sm">
+                <div class="col-lg-12">
                     <div class="panel blank-panel">
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a ng-click="tab('tab-note')" data-toggle="tab" rel="tab-note"><i class="fa fa-file-text-o"></i> Anotações ([[ notes_pagination.total ]])</a></li>
-                                    <li class=""><a ng-click="tab('tab-file')" data-toggle="tab" rel="tab-file"><i class="fa fa-file"></i> Arquivos ([[ files_pagination.total ]])</a></li>
-                                    <li class=""><a ng-click="tab('tab-task')" data-toggle="tab" rel="tab-task"><i class="fa fa-tasks"></i> Tarefas ([[ project.count_tasks ]])</a></li>
+                                    <li class="active"><a ng-click="tab('tab-note')" data-toggle="tab" rel="tab-note"><i class="fa fa-file-text-o"></i> Anotações</a></li>
+                                    <li class=""><a ng-click="tab('tab-file')" data-toggle="tab" rel="tab-file"><i class="fa fa-file"></i> Arquivos</a></li>
+                                    <li class=""><a ng-click="tab('tab-task')" data-toggle="tab" rel="tab-task"><i class="fa fa-tasks"></i> Tarefas</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -95,15 +93,15 @@
                         <div class="panel-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab-note">
-                                    <div class="feed-activity-list">
+                                    <div class="feed-activity-list" ng-controller="ProjectNoteListCtrl">
                                         <div ng-include src="'build/views/project-note/_notes.html'"></div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="tab-file">
+                                <div class="tab-pane" id="tab-file" ng-controller="ProjectFileListCtrl">
                                     <div ng-include src="'build/views/project-file/_files.html'"></div>
                                 </div>
-                                <div class="tab-pane" id="tab-task">
-                                    
+                                <div class="tab-pane" id="tab-task" ng-controller="ProjectTaskListCtrl">
+                                    <div ng-include src="'build/views/project-task/_tasks.html'"></div>
                                 </div>
                             </div>
                         </div>
@@ -112,24 +110,4 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="previewImg">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Imagem</h4>
-      </div>
-      
-      <div class="modal-body">
-        <img ng-src="" id="displayImg" class="img-responsive" />
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-      </div
-    </div>
-  </div>
 </div>

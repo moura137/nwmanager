@@ -49,7 +49,7 @@ class ProjectTaskController extends Controller
      *
      * @param  Request  $request
      * @param  int      $project_id
-     * 
+     *
      * @return Response
      */
     public function index(Request $request, $project_id)
@@ -61,6 +61,9 @@ class ProjectTaskController extends Controller
             ->skipPresenter(false)
             ->with($this->withRelations)
             ->pushCriteria(new InputCriteria($data))
+            ->orderBy('status', 'ASC')
+            ->orderBy('due_date', 'ASC')
+            ->orderBy('id', 'DESC')
             ->paginate();
     }
 

@@ -1,0 +1,58 @@
+<div ng-include src="'build/views/_errors.html'"></div>
+
+<form name="formProjectTask" class="form-horizontal" ng-submit="save()">
+
+    <div class="form-group" ng-class="{'has-error': !formProjectTask.name.$valid && formProjectTask.name.$touched}">
+        <label class="col-lg-2 control-label">Descrição *</label>
+        <div class="col-lg-10">
+            <input type="text" required maxlength="255" name="name" class="form-control" placeholder="Descrição" ng-model="task.name">
+            <div ng-messages="formProjectTask.name.$error" class="help-block" ng-show="!formProjectTask.name.$valid && formProjectTask.name.$touched">
+                <span ng-message="required">Campo obrigatório</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !formProject.start_date.$valid && formProject.start_date.$touched}">
+        <label class="col-lg-2 control-label">Data Início *</label>
+        <div class="col-lg-10">
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" maxlength="10" name="start_date" class="form-control" placeholder="Data de Entrega" ng-model="task.start_date" data-mask="99/99/9999" format-date />
+            </div>
+            <div ng-messages="formProject.start_date.$error" class="help-block" ng-show="!formProject.start_date.$valid && formProject.start_date.$touched">
+                <span ng-message="required">Campo obrigatório</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !formProject.due_date.$valid && formProject.due_date.$touched}">
+        <label class="col-lg-2 control-label">Previsão Entrega *</label>
+        <div class="col-lg-10">
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" maxlength="10" name="due_date" class="form-control" placeholder="Data de Entrega" ng-model="task.due_date" data-mask="99/99/9999" format-date />
+            </div>
+            <div ng-messages="formProject.due_date.$error" class="help-block" ng-show="!formProject.due_date.$valid && formProject.due_date.$touched">
+                <span ng-message="required">Campo obrigatório</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-show="task.id" ng-class="{'has-error': !formProject.status.$valid && formProject.status.$touched}">
+        <label class="col-lg-2 control-label">Status *</label>
+        <div class="col-lg-10">
+            <select required name="status" class="form-control" ng-model="task.status" ng-options="o.value as o.label for o in status">
+                <option value="">-- Selecione --</option>
+            </select>
+            <div ng-messages="formProject.status.$error" class="help-block" ng-show="!formProject.status.$valid && formProject.status.$touched">
+                <span ng-message="required">Campo obrigatório</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" data-loading-text="Carregando..." class="btn btn-primary">Salvar</button>
+            <a ng-href="#/project/[[ task.project_id ]]/show?tab=tab-task" class="btn btn-white">Cancelar</a>
+        </div>
+    </div>
+
+</form>

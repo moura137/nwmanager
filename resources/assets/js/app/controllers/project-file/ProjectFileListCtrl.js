@@ -3,8 +3,8 @@
  */
 angular.module('app.controllers')
     .controller('ProjectFileListCtrl', 
-        ['$scope', '$rootScope', '$routeParams', '$filter', 'ProjectFile', 
-        function($scope, $rootScope, $routeParams, $filter, ProjectFile) {
+        ['$scope', '$rootScope', '$routeParams', 'ProjectFile', 
+        function($scope, $rootScope, $routeParams, ProjectFile) {
             $scope.project_id = $routeParams.id;
             
             $scope.search = function(page) {

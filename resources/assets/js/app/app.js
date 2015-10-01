@@ -147,6 +147,21 @@ App.config(['$routeProvider',
             controller: 'ProjectFileDeleteCtrl'
         })
 
+        .when('/project/:id/tasks', {
+            templateUrl: 'build/views/project-task/list.html',
+            controller: 'ProjectTaskListCtrl'
+        })
+
+        .when('/project/:id/tasks/new', {
+            templateUrl: 'build/views/project-task/new.html',
+            controller: 'ProjectTaskNewCtrl'
+        })
+
+        .when('/project/:id/tasks/:idTask/edit', {
+            templateUrl: 'build/views/project-task/edit.html',
+            controller: 'ProjectTaskEditCtrl'
+        })
+
         .when('/', {
             templateUrl: 'build/views/home.html',
             controller: 'HomeCtrl'

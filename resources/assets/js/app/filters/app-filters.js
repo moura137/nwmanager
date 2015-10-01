@@ -1,7 +1,7 @@
 angular.module('app.filters')
 .filter('nl2br', function() {
   return function(input) {
-    if (input !== void 0) {
+    if (input != null) {
       return input.replace(/\n/g, '<br>');
     }
   };
@@ -9,7 +9,7 @@ angular.module('app.filters')
 
 .filter('formatSize', function() {
   return function(input) {
-    if (input !== void 0) {
+    if (input != null) {
         suffix = ' bytes';
         if (input >= 1024) {
             suffix = ' KB';
@@ -35,7 +35,7 @@ angular.module('app.filters')
 
 .filter('strpad', function() {
   return function(input, n, c) {
-    if (input !== void 0) {
+    if (input != null) {
         n = parseInt(n);
         if (c == undefined) {
             c = '0';
@@ -49,7 +49,7 @@ angular.module('app.filters')
 
 .filter('dateToISO', function() {
   return function(input) {
-    if (input !== void 0) {
+    if (input != null) {
         input = input.replace(/ /, "T");
         return new Date(input).toISOString();
     }
@@ -58,7 +58,7 @@ angular.module('app.filters')
 
 .filter('formatDateTime', ['$filter', function($filter) {
   return function(input) {
-    if (input !== void 0) {
+    if (input != null) {
         input = $filter('dateToISO')(input);
         input = $filter('date')(input, 'dd/MM/yyyy HH:mm:ss', '+0000');
         return input;
@@ -68,7 +68,7 @@ angular.module('app.filters')
 
 .filter('formatDate', ['$filter', function($filter) {
   return function(input) {
-    if (input !== void 0) {
+    if (input != null) {
         input = $filter('dateToISO')(input);
         input = $filter('date')(input, 'dd/MM/yyyy', '+0000');
         return input;
@@ -78,7 +78,7 @@ angular.module('app.filters')
 
 .filter('formatTime', ['$filter', function($filter) {
   return function(input) {
-    if (input !== void 0) {
+    if (input != null) {
         input = $filter('dateToISO')(input);
         input = $filter('date')(input, 'HH:mm:ss', '+0000');
         return input;

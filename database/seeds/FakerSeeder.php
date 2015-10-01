@@ -16,10 +16,9 @@ class FakerSeeder extends Seeder
     public function run()
     {
         $this->call(FakerOAuth2Seeder::class);
-        
+
         Model::unguard();
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        
         $faker = app('Faker\Generator');
 
         // Users
@@ -35,7 +34,7 @@ class FakerSeeder extends Seeder
         // Clients
         Entities\Client::truncate();
         factory(Entities\Client::class, 5)->create();
-        
+
         // Projects
         Entities\Project::truncate();
         factory(Entities\Project::class, 10)->create();
@@ -54,7 +53,7 @@ class FakerSeeder extends Seeder
         // Projects Task
         Entities\ProjectTask::truncate();
         factory(Entities\ProjectTask::class, 50)->create();
-        
+
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         Model::reguard();
     }
