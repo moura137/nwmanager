@@ -49,12 +49,12 @@
         <script src="{{ asset('build/vendor/js/navbar.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-cookies.js') }}"></script>
         <script src="{{ asset('build/vendor/js/query-string.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/angular-oauth2.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.pt-BR.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/nouislider.js') }}"></script>
         <script src="{{ asset('build/js/app/libraries/angular-nouislider.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-file-upload.min.js') }}"></script>
-        <script src="{{ asset('build/js/app/libraries/angular-oauth2.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/jquery.fileDownload.js') }}"></script>
         <script src="{{ asset('build/js/constants.js') }}"></script>
@@ -62,6 +62,7 @@
         <script src="{{ asset('build/js/app/app.js') }}"></script>
         
         <!-- Controllers -->
+        <script src="{{ asset('build/js/app/controllers/home/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientShowCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientNewCtrl.js') }}"></script>
@@ -92,7 +93,6 @@
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ForgotCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ResetCtrl.js') }}"></script>
-        <script src="{{ asset('build/js/app/controllers/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
         
         <!-- Services -->
@@ -105,6 +105,7 @@
         <script src="{{ asset('build/js/app/services/project-task.js') }}"></script>
 
         <!-- Factories -->
+        <script src="{{ asset('build/js/app/factories/OAuthFixInterceptor.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/httpProviderInterceptor.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
 

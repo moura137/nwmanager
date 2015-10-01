@@ -212,10 +212,10 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', '$location', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
-    function($rootScope, $window, $location, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
+    '$rootScope', '$window', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
+    function($rootScope, $window, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
     {
-        $rootScope.refreshToken = false;
+        $rootScope.isRefreshingToken = false;
 
         $rootScope.$on('oauth:error', function(event, rejection, deferred) {
 
@@ -224,17 +224,17 @@ App.run([
             {
                 httpBuffer.add(rejection.config, deferred);
 
-                if (!$rootScope.refreshToken) {
-                    $rootScope.refreshToken = true;
+                if (!$rootScope.isRefreshingToken) {
+                    $rootScope.isRefreshingToken = true;
 
                     OAuth.getRefreshToken().then(function(response)
                     {
                         httpBuffer.retryAll();
-                        $rootScope.refreshToken = false;
+                        $rootScope.isRefreshingToken = false;
 
                     }, function(response) {
                         httpBuffer.rejectAll();
-                        $rootScope.refreshToken = false;
+                        $rootScope.isRefreshingToken = false;
                     });
                 }
 

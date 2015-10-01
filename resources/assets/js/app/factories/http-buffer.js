@@ -1,6 +1,6 @@
 angular.module('app.factories')
 .factory('httpBuffer', ['$injector', function($injector) {
-    
+
     //Requests buffer
     var buffer = [];
 
@@ -35,19 +35,13 @@ angular.module('app.factories')
         /**
          * Retries all the buffered requests clears the buffer.
          */
-        retryAll: function() {
+        retryAll: function(configUpdater) {
+            var updater = configUpdater || function(config) {return config;};
             for (var i = 0; i < buffer.length; ++i) {
-                retryHttpRequest(buffer[i].config, buffer[i].deferred);
+                retryHttpRequest(updater(buffer[i].config), buffer[i].deferred);
             }
 
             this.clear();
-        },
-
-        /**
-         * Clear the buffer (without rejecting requests)
-         */
-        clear: function() {
-            buffer = [];
         },
 
         /**
@@ -61,6 +55,13 @@ angular.module('app.factories')
 
             //Clear the buffer
             this.clear();
+        },
+
+        /**
+         * Clear the buffer (without rejecting requests)
+         */
+        clear: function() {
+            buffer = [];
         },
     };
 }]);
