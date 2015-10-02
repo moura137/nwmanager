@@ -3,13 +3,14 @@
  */
 angular.module('app.providers')
 .provider('Settings',
-    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET',
-    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET){
+    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE',
+    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE){
         var config = {
             basePath: BASE_PATH,
             apiUrl: API_URL,
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
+            secure: AUTH_SECURE,
             project : {
                 status: [
                     { value: '1', label: 'Aberto', style: 'primary'  },

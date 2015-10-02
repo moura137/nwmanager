@@ -30,10 +30,4 @@ angular.module('app.factories')
         return response;
       }
     };
-}])
-.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('httpProviderInterceptor');
-    $httpProvider.defaults.headers.common["Accept"] = 'application/json';
-    $httpProvider.defaults.headers.put["Content-type"] = 'application/x-www-form-urlencoded;chartset=utf-8';
-    $httpProvider.defaults.headers.post["Content-type"] = 'application/x-www-form-urlencoded;chartset=utf-8';
 }]);

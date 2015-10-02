@@ -16,8 +16,6 @@ angular.module('app.controllers')
             $scope.login = function() {
                 if($scope.formLogin.$valid)
                 {
-                    $("button[type=submit]").button('loading');
-
                     OAuth.getAccessToken($scope.user)
                     .then(function(response) {
                         $rootScope.isRefreshingToken = false;
@@ -25,7 +23,6 @@ angular.module('app.controllers')
                         $modalInstance.close();
                     })
                     .catch(function(response){
-                        $("button[type=submit]").button('reset');
                         $rootScope.showError(response.status, response.data);
                     });
                 }

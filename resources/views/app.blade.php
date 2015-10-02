@@ -60,7 +60,8 @@
         <script src="{{ asset('build/js/constants.js') }}"></script>
 
         <script src="{{ asset('build/js/app/app.js') }}"></script>
-        
+        <script src="{{ asset('build/js/app/routes/route-app.js') }}"></script>
+
         <!-- Controllers -->
         <script src="{{ asset('build/js/app/controllers/home/HomeCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientListCtrl.js') }}"></script>

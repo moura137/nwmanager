@@ -24,7 +24,4 @@ angular.module('app.factories')
             return $q.reject(rejection);
         }
     };
-}])
-.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('OAuthFixInterceptor');
 }]);
