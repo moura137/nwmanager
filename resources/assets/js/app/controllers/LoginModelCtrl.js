@@ -29,7 +29,6 @@ angular.module('app.controllers')
             };
 
             $scope.cancel = function() {
-                $rootScope.isRefreshingToken = false;
                 httpBuffer.rejectAll();
                 $window.location.href = '/login';
                 $modalInstance.dismiss('cancel');

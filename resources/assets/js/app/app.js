@@ -30,7 +30,6 @@ App.config(['$interpolateProvider', function($interpolateProvider) {
 App.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.splice(0);
     $httpProvider.interceptors.push('OAuthFixInterceptor');
-    $httpProvider.interceptors.push('httpProviderInterceptor');
 
     $httpProvider.defaults.headers.common["Accept"] = 'application/json';
     $httpProvider.defaults.headers.put["Content-type"] = 'application/x-www-form-urlencoded;chartset=utf-8';
@@ -63,42 +62,50 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', '$modal', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
-    function($rootScope, $window, $modal, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
+    '$rootScope', '$window', '$location', '$modal', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings',
+    function($rootScope, $window, $location, $modal, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
     {
-        $rootScope.isRefreshingToken = false;
+        $rootScope.$on('event:http-notfound', function(event, rejection) {
+            $location.url('not-found');
+        });
 
-        $rootScope.$on('oauth:error', function(event, rejection, deferred) {
+        $rootScope.$on('event:http-forbidden', function(event, rejection) {
+            $location.url('forbidden');
+        });
 
-            // Refresh token when a `invalid_token` error occurs.
-            if ('access_denied' === rejection.data.error)
-            {
-                httpBuffer.add(rejection.config, deferred);
-
-                if (!$rootScope.isRefreshingToken) {
-                    $rootScope.isRefreshingToken = true;
-
-                    OAuth.getRefreshToken().then(function(response)
-                    {
-                        httpBuffer.retryAll();
-                        $rootScope.isRefreshingToken = false;
-
-                    }, function(response) {
-                        var modalInstance = $modal.open({
-                            templateUrl: Settings.basePath + '/build/views/templates/login-modal.html',
-                            controller: 'LoginModelCtrl',
-                            size: 'sm',
-                            backdrop: 'static'
-                        });
-                    });
-                }
-
-                return deferred.promise;
+        $rootScope.$on('event:http-error', function(event, rejection) {
+            if (rejection.status >= 500) {
+                $location.url('server-error');
             }
         });
 
-        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute, rejection) {
-            if ((nextRoute.access === undefined || nextRoute.access.requiredLogin===true) && !OAuth.isAuthenticated()) {
+        $rootScope.isRefreshingToken = false;
+        $rootScope.$on('oauth:error', function(event, rejection, deferred)
+        {
+            httpBuffer.add(rejection.config, deferred);
+
+            if (!$rootScope.isRefreshingToken) {
+                $rootScope.isRefreshingToken = true;
+
+                OAuth.getRefreshToken().then(function(response) {
+                    httpBuffer.retryAll();
+                    $rootScope.isRefreshingToken = false;
+
+                }, function(response) {
+                    var modalInstance = $modal.open({
+                        templateUrl: Settings.basePath + '/build/views/templates/login-modal.html',
+                        controller: 'LoginModelCtrl',
+                        size: 'sm',
+                        backdrop: 'static'
+                    });
+                });
+            }
+            return deferred.promise;
+        });
+
+        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute, rejection)
+        {
+            if (!OAuth.isAuthenticated() && (!nextRoute.access || nextRoute.access.requiredLogin===true)) {
                 event.preventDefault();
                 $window.location.href = '/login';
                 return false;
@@ -122,7 +129,7 @@ App.run([
 
         $rootScope.error = null;
 
-        function explodeError(messages) {
+        var explodeError = function (messages) {
             angular.forEach(messages, function(value, key) {
                 if (typeof value == 'object') {
                     explodeError(value);

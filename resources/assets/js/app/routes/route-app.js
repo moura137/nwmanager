@@ -152,6 +152,12 @@ angular.module('app.routes', ['ngRoute'])
             access: { requiredLogin: false }
         })
 
+        .when('/server-error', {
+            templateUrl: 'build/views/500.html',
+            controller: 'ErrorCtrl',
+            access: { requiredLogin: false }
+        })
+
         .otherwise({
             redirectTo: '/not-found',
             access: { requiredLogin: false }

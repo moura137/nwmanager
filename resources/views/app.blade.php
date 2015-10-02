@@ -108,7 +108,6 @@
 
         <!-- Factories -->
         <script src="{{ asset('build/js/app/factories/OAuthFixInterceptor.js') }}"></script>
-        <script src="{{ asset('build/js/app/factories/httpProviderInterceptor.js') }}"></script>
         <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
 
         <!-- Providers -->
