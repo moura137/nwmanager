@@ -212,8 +212,8 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
-    function($rootScope, $window, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
+    '$rootScope', '$window', '$modal', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings', 
+    function($rootScope, $window, $modal, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
     {
         $rootScope.isRefreshingToken = false;
 
@@ -233,16 +233,16 @@ App.run([
                         $rootScope.isRefreshingToken = false;
 
                     }, function(response) {
-                        httpBuffer.rejectAll();
-                        $rootScope.isRefreshingToken = false;
+                        var modalInstance = $modal.open({
+                            templateUrl: Settings.basePath + '/build/views/templates/login-modal.html',
+                            controller: 'LoginModelCtrl',
+                            size: 'sm',
+                            backdrop: 'static'
+                        });
                     });
                 }
 
                 return deferred.promise;
-
-            } else {
-                httpBuffer.clear();
-                return $window.location.href = '/login';
             }
         });
 

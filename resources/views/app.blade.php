@@ -91,10 +91,11 @@
         <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskEditCtrl.js') }}"></script>
 
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/LoginModelCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ForgotCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ResetCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
-        
+
         <!-- Services -->
         <script src="{{ asset('build/js/app/services/auth-user.js') }}"></script>
         <script src="{{ asset('build/js/app/services/client.js') }}"></script>
@@ -113,6 +114,7 @@
         <script src="{{ asset('build/js/app/providers/settings-provider.js') }}"></script>
 
         <!-- Directives -->
+        <script src="{{ asset('build/js/app/directives/include-scope.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/format-dates.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/input-file.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/upload-ng-thumb.js') }}"></script>

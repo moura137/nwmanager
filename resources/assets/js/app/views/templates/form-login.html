@@ -1,0 +1,17 @@
+<div ng-include src="'build/views/_errors.html'"></div>
+
+<form name="formLogin" ng-submit="login()">
+    <div class="form-group" ng-class="{'has-error': !formLogin.username.$valid && formLogin.username.$touched}">
+        <input type="text" required name="username" class="form-control" placeholder="Usuário" ng-model="user.username" />
+        <div ng-messages="formLogin.username.$error" class="help-block" ng-show="formLogin.username.$touched">
+            <span ng-message="required">Campo obrigatório</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !formLogin.password.$valid && formLogin.password.$touched}">
+        <input type="password" required name="password" class="form-control" placeholder="Senha" ng-model="user.password">
+        <div ng-messages="formLogin.password.$error" class="help-block" ng-show="formLogin.password.$touched">
+            <span ng-message="required">Campo obrigatório</span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary block full-width">Entrar</button>
+</form>

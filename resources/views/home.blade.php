@@ -40,7 +40,7 @@
         <div class="row border-bottom">
         </div>
 
-        <div id="content" ng-view></div>
+        <div id="content" ng-view ng-hide="isRefreshingToken"></div>
 
         <div class="footer">
             <div>
