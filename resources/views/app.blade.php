@@ -50,6 +50,7 @@
         <script src="{{ asset('build/vendor/js/angular-cookies.js') }}"></script>
         <script src="{{ asset('build/vendor/js/query-string.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-oauth2.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/http-auth-interceptor.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.pt-BR.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/nouislider.js') }}"></script>
@@ -108,7 +109,6 @@
 
         <!-- Factories -->
         <script src="{{ asset('build/js/app/factories/OAuthFixInterceptor.js') }}"></script>
-        <script src="{{ asset('build/js/app/factories/http-buffer.js') }}"></script>
 
         <!-- Providers -->
         <script src="{{ asset('build/js/app/providers/settings-provider.js') }}"></script>

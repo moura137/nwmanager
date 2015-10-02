@@ -39,7 +39,7 @@
         <div class="row border-bottom">
         </div>
 
-        <div id="content" ng-view ng-hide="isRefreshingToken"></div>
+        <div id="content" ng-view ng-hide="isLoggedin"></div>
 
         <div class="footer">
             <div>

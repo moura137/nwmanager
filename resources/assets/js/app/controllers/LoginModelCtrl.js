@@ -3,24 +3,28 @@
  */
 angular.module('app.controllers')
     .controller('LoginModelCtrl',
-        ['$scope', '$rootScope', '$window', '$modalInstance', 'httpBuffer', 'OAuth',
-        function($scope, $rootScope, $window, $modalInstance, httpBuffer, OAuth)
+        ['$scope', '$rootScope', '$window', '$modalInstance', 'authService', 'OAuth',
+        function($scope, $rootScope, $window, $modalInstance, authService, OAuth)
         {
-            $rootScope.logout();
-
             $scope.user = {
                 username: '',
                 password: ''
             };
+
+            $rootScope.$on('event:auth-loginConfirmed', function(event, data) {
+                $modalInstance.dismiss('cancel');
+            });
+
+            $rootScope.$on('event:auth-loginCancelled', function(event, data) {
+                $window.location.href = '/login';
+            });
 
             $scope.login = function() {
                 if($scope.formLogin.$valid)
                 {
                     OAuth.getAccessToken($scope.user)
                     .then(function(response) {
-                        $rootScope.isRefreshingToken = false;
-                        httpBuffer.retryAll();
-                        $modalInstance.close();
+                        authService.loginConfirmed(response);
                     })
                     .catch(function(response){
                         $rootScope.showError(response.status, response.data);
@@ -29,8 +33,6 @@ angular.module('app.controllers')
             };
 
             $scope.cancel = function() {
-                httpBuffer.rejectAll();
-                $window.location.href = '/login';
-                $modalInstance.dismiss('cancel');
+                authService.loginCancelled()
             };
         }]);

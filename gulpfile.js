@@ -72,6 +72,7 @@ paths.vendor_js = [
     paths.bower + '/angular-cookies/angular-cookies.js',
     paths.bower + '/query-string/query-string.js',
     paths.bower + '/angular-oauth2/dist/angular-oauth2.js',
+    paths.bower + '/angular-http-auth/src/http-auth-interceptor.js',
     paths.bower + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     paths.bower + '/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js',
     paths.bower + '/nouislider/distribute/nouislider.js',

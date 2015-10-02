@@ -1,6 +1,6 @@
 angular.module('app.factories')
 .factory('OAuthFixInterceptor',
-    ['$q', '$rootScope', 'OAuthToken', function($q, $rootScope, OAuthToken) {
+    ['$q', '$rootScope', 'httpBuffer', 'OAuthToken', function($q, $rootScope, httpBuffer, OAuthToken) {
     return {
         request: function(config) {
             if (OAuthToken.getAuthorizationHeader()) {
@@ -11,8 +11,6 @@ angular.module('app.factories')
         },
 
         responseError: function(rejection) {
-            var deferred = $q.defer();
-
             if (404 === rejection.status) {
                 $rootScope.$broadcast('event:http-notfound', rejection);
             }
@@ -26,6 +24,8 @@ angular.module('app.factories')
             }
 
             else if (401 === rejection.status && rejection.data && ("access_denied" === rejection.data.error || "invalid_token" === rejection.data.error)) {
+                var deferred = $q.defer();
+                httpBuffer.append(rejection.config, deferred);
                 $rootScope.$broadcast("oauth:error", rejection, deferred);
                 return deferred.promise;
 

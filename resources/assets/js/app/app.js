@@ -11,7 +11,8 @@ var App = angular.module('App', [
     'angularFileUpload',
     'nouislider',
     'ngSanitize',
-    'angular-oauth2']);
+    'angular-oauth2',
+    'http-auth-interceptor']);
 
 /** Modules **/
 angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap', 'ui.bootstrap.tpls']);
@@ -62,8 +63,8 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', '$location', '$modal', 'AuthUser', 'httpBuffer', 'OAuthToken', 'OAuth', 'Settings',
-    function($rootScope, $window, $location, $modal, AuthUser, httpBuffer, OAuthToken, OAuth, Settings)
+    '$rootScope', '$window', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings',
+    function($rootScope, $window, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings)
     {
         $rootScope.$on('event:http-notfound', function(event, rejection) {
             $location.url('not-found');
@@ -79,17 +80,21 @@ App.run([
             }
         });
 
-        $rootScope.isRefreshingToken = false;
+        $rootScope.$on('event:auth-loginConfirmed', function(event, data) {
+            $rootScope.isLoggedin = false;
+        });
+
+        $rootScope.$on('event:auth-loginCancelled', function(event, data) {
+            $rootScope.isLoggedin = false;
+        });
+
         $rootScope.$on('oauth:error', function(event, rejection, deferred)
         {
-            httpBuffer.add(rejection.config, deferred);
+            if (!$rootScope.isLoggedin) {
+                $rootScope.isLoggedin = true;
 
-            if (!$rootScope.isRefreshingToken) {
-                $rootScope.isRefreshingToken = true;
-
-                OAuth.getRefreshToken().then(function(response) {
-                    httpBuffer.retryAll();
-                    $rootScope.isRefreshingToken = false;
+                OAuth.getRefreshToken().then(function(response){
+                    authService.loginConfirmed(response);
 
                 }, function(response) {
                     var modalInstance = $modal.open({
