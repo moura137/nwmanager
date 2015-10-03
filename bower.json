@@ -14,6 +14,7 @@
     "angular-route": "~1.4.3",
     "angular-sanitize": "~1.4.4",
     "angular-strap": "~2.3.1",
+    "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5",
     "bootstrap-datepicker": "~1.4.0",
     "jasny-bootstrap": "~3.1.3",

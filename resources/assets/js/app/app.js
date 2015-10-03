@@ -63,8 +63,8 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$window', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings',
-    function($rootScope, $window, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings)
+    '$rootScope', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings',
+    function($rootScope, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings)
     {
         $rootScope.$on('event:http-notfound', function(event, rejection) {
             $location.url('not-found');
@@ -108,21 +108,28 @@ App.run([
             return deferred.promise;
         });
 
-        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute, rejection)
+        $rootScope.$on("$stateChangeStart", function(event, nextState, nextParams, fromState, fromParams)
         {
-            if (!OAuth.isAuthenticated() && (!nextRoute.access || nextRoute.access.requiredLogin===true)) {
-                event.preventDefault();
-                $window.location.href = '/login';
-                return false;
+            $rootScope.bgLayout = nextState.bgLayout;
+
+            if (!OAuth.isAuthenticated()) {
+                if (!nextState.access || nextState.access.requiredLogin===true) {
+                    event.preventDefault();
+                    $rootScope.bgLayout = fromState.bgLayout;
+                    return $location.url('/login');
+                }
+            } else {
+                $rootScope.getAuthUser();
             }
+        });
 
+        $rootScope.$on("$stateChangeSuccess", function(event, nextState, nextParams, fromState, fromParams)
+        {
             $rootScope.clearError();
-            $rootScope.getAuthUser();
-
             $('body').scrollTop(0);
         });
 
-        $rootScope.logout = function() {
+        $rootScope.removeToken = function() {
             OAuthToken.removeToken();
         };
 

@@ -3,17 +3,17 @@
  */
 angular.module('app.controllers')
     .controller('ProjectFileImagesCtrl', 
-        ['$scope', '$rootScope', '$routeParams', '$filter', 'Settings', 'OAuthToken', 'ProjectFile', 'FileUploader', 
-        function($scope, $rootScope, $routeParams, $filter, Settings, OAuthToken, ProjectFile, FileUploader) {
-            $scope.project_id = $routeParams.id;
+        ['$scope', '$rootScope', '$stateParams', '$filter', 'Settings', 'OAuthToken', 'ProjectFile', 'FileUploader', 
+        function($scope, $rootScope, $stateParams, $filter, Settings, OAuthToken, ProjectFile, FileUploader) {
+            $scope.project_id = $stateParams.id;
             $scope.files = [];
             $scope.deleting = [];
             $scope.limitSize = 2; // MB
             $scope.error_add = [];
-            
+
             $scope.query = function(search) {
                 $rootScope.clearError();
-                $scope.files = ProjectFile.query(search, {id: $routeParams.id});
+                $scope.files = ProjectFile.query(search, {id: $stateParams.id});
                 $scope.deleting = [];
             };
 
@@ -34,7 +34,7 @@ angular.module('app.controllers')
 
                 }, function(){
                     ProjectFile.deleteFile({id: file.project_id, idFile: file.id}, {}, function(){
-                        
+
                         $scope.query();
 
                         window.swal({
@@ -83,8 +83,8 @@ angular.module('app.controllers')
                     showLoaderOnConfirm: true,
 
                 }, function(){
-                    ProjectFile.deleteAll({id: $routeParams.id}, {'_method': 'DELETE', 'files' : $scope.deleting}, function(response){
-                        
+                    ProjectFile.deleteAll({id: $stateParams.id}, {'_method': 'DELETE', 'files' : $scope.deleting}, function(response){
+
                         $scope.query();
 
                         window.swal({
@@ -105,7 +105,7 @@ angular.module('app.controllers')
             };
 
             var uploader = $scope.uploader = new FileUploader({
-                url: Settings.apiUrl + '/project/'+$routeParams.id+'/file',
+                url: Settings.apiUrl + '/project/'+$stateParams.id+'/file',
                 formData: [{'description': 'Imagem'}],
                 //autoUpload: true,
                 headers: {Authorization: OAuthToken.getAuthorizationHeader()},
@@ -131,7 +131,7 @@ angular.module('app.controllers')
 
             // CALLBACKS
             uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-                
+
                 var error = '';
                 switch(filter.name){
                     case 'imageType':
@@ -148,7 +148,6 @@ angular.module('app.controllers')
                 error += ' (<em><b>Arquivo:</b> ' + item.name + ' - <b>Size:</b> '+size+' - <b>Type:</b> '+item.type+'</em>)';
 
                 $scope.error_add.push(error);
-                console.log('onWhenAddingFileFailed', item, filter, options);
             };
 
             uploader.onProgressItem = function(fileItem, progress) {

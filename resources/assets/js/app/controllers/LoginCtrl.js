@@ -3,10 +3,10 @@
  */
 angular.module('app.controllers')
     .controller('LoginCtrl',
-        ['$scope', '$rootScope', '$window', 'OAuth',
-        function($scope, $rootScope, $window, OAuth)
+        ['$scope', '$rootScope', '$location', 'OAuth',
+        function($scope, $rootScope, $location, OAuth)
         {
-            $rootScope.logout();
+            $rootScope.removeToken();
 
             $scope.user = {
                 username: '',
@@ -18,7 +18,7 @@ angular.module('app.controllers')
                 {
                     OAuth.getAccessToken($scope.user)
                     .then(function(response) {
-                        return $window.location.href = '/';
+                        $location.url('/');
                     })
                     .catch(function(response){
                         $rootScope.showError(response.status, response.data);

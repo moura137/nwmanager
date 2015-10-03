@@ -3,11 +3,11 @@
  */
 angular.module('app.controllers')
     .controller('ProjectEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'Project', 'Client', 'User', 'Settings', 
-        function($scope, $rootScope, $location, $routeParams, Project, Client, User, Settings)
+        ['$scope', '$rootScope', '$location', '$stateParams', 'Project', 'Client', 'User', 'Settings', 
+        function($scope, $rootScope, $location, $stateParams, Project, Client, User, Settings)
         {
             $rootScope.clearError();
-            $scope.project = Project.get({id: $routeParams.id});
+            $scope.project = Project.get({id: $stateParams.id});
             $scope.status = Settings.project.status;
 
             /**
@@ -42,7 +42,7 @@ angular.module('app.controllers')
                     $("button[type=submit]").button('loading');
 
                     Project.update({id: $scope.project.id}, $scope.project, function(){
-                        $location.path('project/'+$routeParams.id+'/show');
+                        $location.path('project/'+$stateParams.id+'/show');
 
                     }, function(response){
                         $("button[type=submit]").button('reset');

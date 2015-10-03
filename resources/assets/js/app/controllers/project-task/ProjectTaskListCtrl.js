@@ -3,9 +3,9 @@
  */
 angular.module('app.controllers')
     .controller('ProjectTaskListCtrl', 
-        ['$scope', '$rootScope', '$routeParams', 'Settings', 'ProjectTask', 
-        function($scope, $rootScope, $routeParams, Settings, ProjectTask) {
-            $scope.project_id = $routeParams.id;
+        ['$scope', '$rootScope', '$stateParams', 'Settings', 'ProjectTask', 
+        function($scope, $rootScope, $stateParams, Settings, ProjectTask) {
+            $scope.project_id = $stateParams.id;
 
             $scope.search = function(page) {
                 $scope.query({'search': $scope.q, 'page': page});
@@ -14,7 +14,7 @@ angular.module('app.controllers')
 
             $scope.query = function(search) {
                 $rootScope.clearError();
-                ProjectTask.query(search, {id: $routeParams.id}, function(res) {
+                ProjectTask.query(search, {id: $stateParams.id}, function(res) {
                     $scope.tasks = res.data;
                     $scope.tasks_pagination = res.meta.pagination;
                 });
@@ -58,7 +58,7 @@ angular.module('app.controllers')
             $scope.saveTask = function(){
                 $scope.task.status = Settings.projectTask.status[0].value;
 
-                $scope.task.$save({id: $routeParams.id}).then(function(){
+                $scope.task.$save({id: $stateParams.id}).then(function(){
                     $scope.query();
 
                 }).catch(function(response){

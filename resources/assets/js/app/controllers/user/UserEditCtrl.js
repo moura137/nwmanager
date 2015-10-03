@@ -3,11 +3,11 @@
  */
 angular.module('app.controllers')
     .controller('UserEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'User', 
-        function($scope, $rootScope, $location, $routeParams, User)
+        ['$scope', '$rootScope', '$location', '$stateParams', 'User', 
+        function($scope, $rootScope, $location, $stateParams, User)
         {
             $rootScope.clearError();
-            $scope.user = new User.get({id: $routeParams.id});
+            $scope.user = new User.get({id: $stateParams.id});
 
             $scope.save = function(){
                 if($scope.formUser.$valid)

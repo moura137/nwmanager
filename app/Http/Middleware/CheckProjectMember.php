@@ -42,7 +42,7 @@ class CheckProjectMember
      */
     public function handle($request, Closure $next)
     {
-        $projectId = intval($request->project);
+        $projectId = intval($request->route('project'));
         $userId = $this->auth->id();
 
         $project = $this->repository->find($projectId);

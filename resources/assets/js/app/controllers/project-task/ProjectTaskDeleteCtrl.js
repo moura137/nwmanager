@@ -3,17 +3,17 @@
  */
 angular.module('app.controllers')
     .controller('ProjectTaskDeleteCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'ProjectTask', 
-        function($scope, $rootScope, $location, $routeParams, ProjectTask)
+        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectTask', 
+        function($scope, $rootScope, $location, $stateParams, ProjectTask)
         {
             $rootScope.clearError();
-            $scope.task = new ProjectTask.get({id: $routeParams.id, idTask: $routeParams.idTask});
+            $scope.task = new ProjectTask.get({id: $stateParams.id, idTask: $stateParams.idTask});
 
             $scope.delete = function(){
                 $("button.btn-danger").button('loading');
 
-                $scope.task.$delete({id: $routeParams.id, idTask: $scope.task.id}).then(function(){
-                    $location.path('project/'+$routeParams.id+'/show?tab=tab-task');
+                $scope.task.$delete({id: $stateParams.id, idTask: $scope.task.id}).then(function(){
+                    $location.path('project/'+$stateParams.id+'/show?tab=tab-task');
 
                 }).catch(function(response){
                     $("button.btn-danger").button('reset');

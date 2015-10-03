@@ -3,14 +3,14 @@
  */
 angular.module('app.controllers')
     .controller('ProjectMemberListCtrl',
-        ['$scope', '$rootScope', '$routeParams', 'Project', 'User',
-        function($scope, $rootScope, $routeParams, Project, User) {
+        ['$scope', '$rootScope', '$stateParams', 'Project', 'User',
+        function($scope, $rootScope, $stateParams, Project, User) {
 
             $scope.member_select = null;
 
             $scope.query = function(search) {
                 $rootScope.clearError();
-                $scope.project = Project.get({id: $routeParams.id});
+                $scope.project = Project.get({id: $stateParams.id});
             };
 
             /**
@@ -28,7 +28,7 @@ angular.module('app.controllers')
 
             $scope.addMember = function() {
                 if ($scope.member_select) {
-                    Project.addMember({id: $routeParams.id}, {members: $scope.member_select.id}, function(response){
+                    Project.addMember({id: $stateParams.id}, {members: $scope.member_select.id}, function(response){
                         $scope.project.members.data = JSON.parse(angular.toJson(response));
                     });
                     $scope.member_select = null;
@@ -45,7 +45,7 @@ angular.module('app.controllers')
                     showLoaderOnConfirm: true,
 
                 }, function(){
-                    Project.removeMember({id: $routeParams.id}, {members: member.member_id}, function(response){
+                    Project.removeMember({id: $stateParams.id}, {members: member.member_id}, function(response){
                         $scope.project.members.data = JSON.parse(angular.toJson(response));
 
                         window.swal.close();

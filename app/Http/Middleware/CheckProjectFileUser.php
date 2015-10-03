@@ -42,7 +42,7 @@ class CheckProjectFileUser
      */
     public function handle($request, Closure $next)
     {
-        $fileId = intval($request->file);
+        $fileId = intval($request->route('file'));
         $userId = $this->auth->id();
 
         $file = $this->repository->find($fileId);

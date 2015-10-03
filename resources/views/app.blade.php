@@ -29,9 +29,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-class="{'gray-bg': bgLayout=='gray-bg'}">
     
-    @yield('content')
+    <div ui-view></div>
 
     <!-- Scripts -->
     @if(config('app.debug'))
@@ -39,7 +39,7 @@
         <script src="{{ asset('build/vendor/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/jasny-bootstrap.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular.js') }}"></script>
-        <script src="{{ asset('build/vendor/js/angular-route.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/angular-ui-router.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-sanitize.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-resource.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-animate.js') }}"></script>

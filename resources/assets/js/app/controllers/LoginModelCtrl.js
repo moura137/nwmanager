@@ -3,9 +3,11 @@
  */
 angular.module('app.controllers')
     .controller('LoginModelCtrl',
-        ['$scope', '$rootScope', '$window', '$modalInstance', 'authService', 'OAuth',
-        function($scope, $rootScope, $window, $modalInstance, authService, OAuth)
+        ['$scope', '$rootScope', '$location', '$modalInstance', 'authService', 'OAuth',
+        function($scope, $rootScope, $location, $modalInstance, authService, OAuth)
         {
+            $rootScope.removeToken();
+
             $scope.user = {
                 username: '',
                 password: ''
@@ -16,7 +18,8 @@ angular.module('app.controllers')
             });
 
             $rootScope.$on('event:auth-loginCancelled', function(event, data) {
-                $window.location.href = '/login';
+                $modalInstance.dismiss('cancel');
+                $location.url('/login');
             });
 
             $scope.login = function() {

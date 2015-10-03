@@ -3,17 +3,17 @@
  */
 angular.module('app.controllers')
     .controller('ProjectFileDeleteCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'ProjectFile', 
-        function($scope, $rootScope, $location, $routeParams, ProjectFile)
+        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectFile', 
+        function($scope, $rootScope, $location, $stateParams, ProjectFile)
         {
             $rootScope.clearError();
-            $scope.file = new ProjectFile.get({id: $routeParams.id, idFile: $routeParams.idFile});
+            $scope.file = new ProjectFile.get({id: $stateParams.id, idFile: $stateParams.idFile});
 
             $scope.delete = function(){
                 $("button.btn-danger").button('loading');
                 
-                $scope.file.$delete({id: $routeParams.id, idFile: $scope.file.id}).then(function(){
-                    $location.path('project/'+$routeParams.id+'/show?tab=tab-file');
+                $scope.file.$delete({id: $stateParams.id, idFile: $scope.file.id}).then(function(){
+                    $location.path('project/'+$stateParams.id+'/show?tab=tab-file');
 
                 }).catch(function(response){
                     $("button.btn-danger").button('reset');

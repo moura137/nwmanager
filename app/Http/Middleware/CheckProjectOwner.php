@@ -42,7 +42,7 @@ class CheckProjectOwner
      */
     public function handle($request, Closure $next)
     {
-        $projectId = intval($request->project);
+        $projectId = intval($request->route('project'));
         $userId = $this->auth->id();
 
         $isOwner = $this->repository->isOwner($projectId, $userId);

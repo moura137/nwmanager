@@ -42,7 +42,7 @@
                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                   <div class="form-control" data-trigger="fileinput"><i class="fa fa-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
                                   <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Selecione</span><span class="fileinput-exists">Alterar</span><input input-file ng-max-size="2" required type="file" name="file" id="file" ng-model="file.file"></span>
-                                  <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
+                                  <a ng-href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
                                 </div>
 
                                 <div ng-messages="formProjectFile.file.$error" class="help-block" ng-show="!formProjectFile.file.$valid && formProjectFile.file.$touched">

@@ -61,7 +61,7 @@ paths.vendor_js = [
     paths.bower + '/bootstrap/dist/js/bootstrap.min.js',
     paths.bower + '/jasny-bootstrap/dist/js/jasny-bootstrap.js',
     paths.bower + '/angular/angular.js',
-    paths.bower + '/angular-route/angular-route.js',
+    paths.bower + '/angular-ui-router/release/angular-ui-router.js',
     paths.bower + '/angular-sanitize/angular-sanitize.js',
     paths.bower + '/angular-resource/angular-resource.js',
     paths.bower + '/angular-animate/angular-animate.js',

@@ -16,32 +16,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    /**
-     * Action Login
-     */
-    public function login()
-    {
-        return view('login');
-    }
-
-    /**
-     * Action Forgot
-     */
-    public function forgot()
-    {
-        return view('forgot');
-    }
-
-    /**
-     * Action Reset
-     */
-    public function reset(Request $request)
-    {
-        $data = $request->only('token', 'email');
-
-        return view('reset', $data);
+        return view('app');
     }
 }

@@ -6,7 +6,7 @@ angular.module('app.controllers')
         ['$scope', '$rootScope', '$http', 'Settings',
         function($scope, $rootScope, $http, Settings)
         {
-            $rootScope.logout();
+            $rootScope.removeToken();
 
             $scope.user = {
                 email: '',

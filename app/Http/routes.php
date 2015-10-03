@@ -4,9 +4,6 @@
  * FrontEnd
  */
 Route::get('/',      ['uses' => 'HomeController@index',  'as' => 'home']);
-Route::get('/login', ['uses' => 'HomeController@login',  'as' => 'login']);
-Route::get('/forgot',['uses' => 'HomeController@forgot', 'as' => 'forgot']);
-Route::get('/reset', ['uses' => 'HomeController@reset',  'as' => 'password.reset']);
 
 /**
  * API

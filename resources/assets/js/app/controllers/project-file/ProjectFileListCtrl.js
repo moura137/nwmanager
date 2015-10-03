@@ -3,9 +3,9 @@
  */
 angular.module('app.controllers')
     .controller('ProjectFileListCtrl', 
-        ['$scope', '$rootScope', '$routeParams', 'ProjectFile', 
-        function($scope, $rootScope, $routeParams, ProjectFile) {
-            $scope.project_id = $routeParams.id;
+        ['$scope', '$rootScope', '$stateParams', 'ProjectFile', 
+        function($scope, $rootScope, $stateParams, ProjectFile) {
+            $scope.project_id = $stateParams.id;
             
             $scope.search = function(page) {
                 $scope.query({'search': $scope.q, 'page': page});
@@ -15,7 +15,7 @@ angular.module('app.controllers')
             $scope.query = function(search) {
                 $rootScope.clearError();
                 $scope.deleting = [];
-                ProjectFile.query(search, {id: $routeParams.id}, function(res) {
+                ProjectFile.query(search, {id: $stateParams.id}, function(res) {
                     $scope.files = res.data;
                     $scope.files_pagination = res.meta.pagination;
                 });
@@ -88,7 +88,7 @@ angular.module('app.controllers')
                     showLoaderOnConfirm: true,
 
                 }, function(){
-                    ProjectFile.deleteAll({id: $routeParams.id}, {'_method': 'DELETE', 'files' : $scope.deleting}, function(response){
+                    ProjectFile.deleteAll({id: $stateParams.id}, {'_method': 'DELETE', 'files' : $scope.deleting}, function(response){
 
                         $scope.query();
 

@@ -42,7 +42,7 @@ class CheckProjectNoteUser
      */
     public function handle($request, Closure $next)
     {
-        $noteId = intval($request->note);
+        $noteId = intval($request->route('note'));
         $userId = $this->auth->id();
 
         $note = $this->repository->find($noteId);

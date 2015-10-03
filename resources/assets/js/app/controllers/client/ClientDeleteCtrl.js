@@ -3,11 +3,11 @@
  */
 angular.module('app.controllers')
     .controller('ClientDeleteCtrl', 
-        ['$scope', '$rootScope', '$location', '$routeParams', 'Client', 
-        function($scope, $rootScope, $location, $routeParams, Client)
+        ['$scope', '$rootScope', '$location', '$stateParams', 'Client', 
+        function($scope, $rootScope, $location, $stateParams, Client)
         {
             $rootScope.clearError();
-            $scope.client = new Client.get({id: $routeParams.id});
+            $scope.client = new Client.get({id: $stateParams.id});
 
             $scope.delete = function(){
                 $("button.btn-danger").button('loading');

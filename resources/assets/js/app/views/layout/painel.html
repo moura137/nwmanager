@@ -1,6 +1,3 @@
-@extends('app')
-
-@section('content')
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
@@ -15,7 +12,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="/login">Sair</a></li>
+                        <li><a ng-href="/#/logout">Sair</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -39,13 +36,12 @@
         <div class="row border-bottom">
         </div>
 
-        <div id="content" ng-view ng-hide="isLoggedin"></div>
+        <div id="content" ui-view ng-hide="isLoggedin"></div>
 
         <div class="footer">
             <div>
-                <strong>Copyright</strong> {{ date('Y') }}
+                <strong>&copy; Copyright</strong>
             </div>
         </div>
     </div>
 </div>
-@endsection

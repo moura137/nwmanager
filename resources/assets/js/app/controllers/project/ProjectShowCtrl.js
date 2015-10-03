@@ -3,12 +3,12 @@
  */
 angular.module('app.controllers')
     .controller('ProjectShowCtrl', 
-        ['$scope', '$rootScope', '$routeParams', 'Project', 'ProjectFile', 
-        function($scope, $rootScope, $routeParams, Project, ProjectFile)
+        ['$scope', '$rootScope', '$stateParams', 'Project', 'ProjectFile', 
+        function($scope, $rootScope, $stateParams, Project, ProjectFile)
         {
             $rootScope.clearError();
             $scope.currentFile = null;
-            $scope.project = new Project.get({id: $routeParams.id});
+            $scope.project = new Project.get({id: $stateParams.id});
 
             $scope.tab = function(tab) {
                 $(".tab-content .tab-pane, .nav.nav-tabs li").removeClass('active');
@@ -16,7 +16,7 @@ angular.module('app.controllers')
                 $('.nav.nav-tabs li a[rel='+tab+']').closest('li').addClass('active');
             }
 
-            if ($routeParams.tab) {
-                $scope.tab($routeParams.tab);
+            if ($stateParams.tab) {
+                $scope.tab($stateParams.tab);
             }
         }]);
