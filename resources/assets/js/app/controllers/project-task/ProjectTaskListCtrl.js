@@ -2,8 +2,8 @@
  * Controller ProjectTask List
  */
 angular.module('app.controllers')
-    .controller('ProjectTaskListCtrl', 
-        ['$scope', '$rootScope', '$stateParams', 'Settings', 'ProjectTask', 
+    .controller('ProjectTaskListCtrl',
+        ['$scope', '$rootScope', '$stateParams', 'Settings', 'ProjectTask',
         function($scope, $rootScope, $stateParams, Settings, ProjectTask) {
             $scope.project_id = $stateParams.id;
 

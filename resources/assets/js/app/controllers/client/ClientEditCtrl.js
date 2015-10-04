@@ -2,8 +2,8 @@
  * Controller Client Edit
  */
 angular.module('app.controllers')
-    .controller('ClientEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'Client', 
+    .controller('ClientEditCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'Client',
         function($scope, $rootScope, $location, $stateParams, Client)
         {
             $rootScope.clearError();

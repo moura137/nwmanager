@@ -2,8 +2,8 @@
  * Controller Project Edit
  */
 angular.module('app.controllers')
-    .controller('ProjectEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'Project', 'Client', 'User', 'Settings', 
+    .controller('ProjectEditCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'Project', 'Client', 'User', 'Settings',
         function($scope, $rootScope, $location, $stateParams, Project, Client, User, Settings)
         {
             $rootScope.clearError();

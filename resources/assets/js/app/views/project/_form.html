@@ -13,14 +13,14 @@
 <div class="form-group" ng-class="{'has-error': !formProject.owner_id.$valid && formProject.owner_id.$touched}">
     <label class="col-lg-2 control-label">Responsável *</label>
     <div class="col-lg-10">
-        
-        <input type="text" required name="owner_id" class="form-control" placeholder="Responsável" 
+
+        <input type="text" required name="owner_id" class="form-control" placeholder="Responsável"
          ng-model="project.owner"
-         typeahead="o as o.name for o in getOwners($viewValue)" 
+         typeahead="o as o.name for o in getOwners($viewValue)"
          typeahead-wait-ms="200"
          typeahead-editable="false"
          typeahead-loading="ownersLoading"
-         typeahead-on-select="onSelectedOwner($item)" 
+         typeahead-on-select="onSelectedOwner($item)"
          typeahead-input-formatter="formatLabel($model)"/>
 
         <div class="help-block" ng-show="ownersLoading"><i class="fa fa-spinner fa-pulse"></i></div>
@@ -35,13 +35,13 @@
 <div class="form-group" ng-class="{'has-error': !formProject.client_id.$valid && formProject.client_id.$touched}">
     <label class="col-lg-2 control-label">Cliente *</label>
     <div class="col-lg-10">
-        <input type="text" required name="client_id" class="form-control" placeholder="Cliente" 
+        <input type="text" required name="client_id" class="form-control" placeholder="Cliente"
          ng-model="project.client"
-         typeahead="c as c.name for c in getClients($viewValue)" 
+         typeahead="c as c.name for c in getClients($viewValue)"
          typeahead-wait-ms="200"
          typeahead-editable="false"
          typeahead-loading="clientsLoading"
-         typeahead-on-select="onSelectedClient($item)" 
+         typeahead-on-select="onSelectedClient($item)"
          typeahead-input-formatter="formatLabel($model)" />
 
         <div class="help-block" ng-show="clientsLoading"><i class="fa fa-spinner fa-pulse"></i></div>
@@ -68,7 +68,7 @@
 <div class="form-group" ng-class="{'has-error': !formProject.progress.$valid && formProject.progress.$touched}">
     <label class="col-lg-2 control-label">Progresso *</label>
     <div class="col-lg-10">
-        
+
         <div slider ng-model="project.progress" step=1 start=1 end=100></div>
         <div class="m-t">Projeto em <strong>[[ project.progress ]]%</strong></div>
 

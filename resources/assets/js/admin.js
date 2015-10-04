@@ -16,7 +16,7 @@ $("body").on("click", ".input-group.date", function(){
 
     $this.datepicker("show");
 });
-    
+
 
     // Add body-small class if window less than 768px
     if ($(this).width() < 769) {

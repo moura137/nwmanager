@@ -2,8 +2,8 @@
  * Controller ProjectFile Index Upload
  */
 angular.module('app.controllers')
-    .controller('ProjectFileImagesCtrl', 
-        ['$scope', '$rootScope', '$stateParams', '$filter', 'Settings', 'OAuthToken', 'ProjectFile', 'FileUploader', 
+    .controller('ProjectFileImagesCtrl',
+        ['$scope', '$rootScope', '$stateParams', '$filter', 'Settings', 'OAuthToken', 'ProjectFile', 'FileUploader',
         function($scope, $rootScope, $stateParams, $filter, Settings, OAuthToken, ProjectFile, FileUploader) {
             $scope.project_id = $stateParams.id;
             $scope.files = [];

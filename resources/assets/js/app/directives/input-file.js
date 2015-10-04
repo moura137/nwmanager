@@ -3,7 +3,7 @@ angular.module('app.directives')
     return {
         require: 'ngModel',
         link: function (scope, el, attrs, ngModel) {
-            
+
             // Type with Pattern
             var validatePattern = function (file, attrs) {
                 if (!attrs.pattern) {

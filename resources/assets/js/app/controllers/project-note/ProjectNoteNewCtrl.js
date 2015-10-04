@@ -2,14 +2,14 @@
  * Controller ProjectNote New
  */
 angular.module('app.controllers')
-    .controller('ProjectNoteNewCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectNote', 
+    .controller('ProjectNoteNewCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectNote',
         function($scope, $rootScope, $location, $stateParams, ProjectNote)
         {
             $rootScope.clearError();
             $scope.note = new ProjectNote();
             $scope.note.project_id = $stateParams.id;
-            
+
             $scope.save = function(){
                 if($scope.formProjectNote.$valid)
                 {

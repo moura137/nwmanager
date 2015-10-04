@@ -2,10 +2,10 @@
  * Controller User List
  */
 angular.module('app.controllers')
-    .controller('UserListCtrl', 
-        ['$scope', '$rootScope', 'User', 
+    .controller('UserListCtrl',
+        ['$scope', '$rootScope', 'User',
         function($scope, $rootScope, User) {
-            
+
             $scope.search = function(page) {
                 $scope.query({'search': $scope.q, 'page': page});
                 $scope.searched = true;
@@ -18,7 +18,7 @@ angular.module('app.controllers')
             };
 
             $scope.query = function(search) {
-                $rootScope.clearError();                
+                $rootScope.clearError();
                 User.query(search, function(res) {
                     $scope.users = res.data;
                     $scope.pagination = res.meta.pagination;

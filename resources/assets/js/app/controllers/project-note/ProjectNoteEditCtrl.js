@@ -2,8 +2,8 @@
  * Controller ProjectNote Edit
  */
 angular.module('app.controllers')
-    .controller('ProjectNoteEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectNote', 
+    .controller('ProjectNoteEditCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectNote',
         function($scope, $rootScope, $location, $stateParams, ProjectNote)
         {
             $rootScope.clearError();

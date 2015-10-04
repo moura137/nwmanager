@@ -2,8 +2,8 @@
  * Controller User Edit
  */
 angular.module('app.controllers')
-    .controller('UserEditCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'User', 
+    .controller('UserEditCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'User',
         function($scope, $rootScope, $location, $stateParams, User)
         {
             $rootScope.clearError();

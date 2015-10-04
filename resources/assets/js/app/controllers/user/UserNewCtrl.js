@@ -2,8 +2,8 @@
  * Controller User New
  */
 angular.module('app.controllers')
-    .controller('UserNewCtrl', 
-        ['$scope', '$rootScope', '$location', 'User', 
+    .controller('UserNewCtrl',
+        ['$scope', '$rootScope', '$location', 'User',
         function($scope, $rootScope, $location, User)
         {
             $rootScope.clearError();

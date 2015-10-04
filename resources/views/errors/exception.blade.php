@@ -1,9 +1,9 @@
 @if (config('app.debug'))
-    
+
     <hr/>
     <h4>Display Exceptions</h4>
     @if (isset($exception) && $exception instanceof \Exception)
-        
+
         <h5>{{ get_class($exception) }}</h5>
         <dl>
             <dt>File:</dt>
@@ -19,7 +19,7 @@
                 <pre class="prettyprint linenums">{{ $exception->getTraceAsString() }}</pre>
             </dd>
         </dl>
-        
+
         <?php $e = $exception->getPrevious(); ?>
         @if($e)
             <h5>Previous Exceptions:</h5>
@@ -46,11 +46,11 @@
             @endwhile
             </ul>
         @endif
-        
+
     @else
-        
+
         <p><strong>No Exception available</strong></p>
-        
+
     @endif
 
 @endif

@@ -2,11 +2,11 @@
  * Controller ProjectFile List
  */
 angular.module('app.controllers')
-    .controller('ProjectFileListCtrl', 
-        ['$scope', '$rootScope', '$stateParams', 'ProjectFile', 
+    .controller('ProjectFileListCtrl',
+        ['$scope', '$rootScope', '$stateParams', 'ProjectFile',
         function($scope, $rootScope, $stateParams, ProjectFile) {
             $scope.project_id = $stateParams.id;
-            
+
             $scope.search = function(page) {
                 $scope.query({'search': $scope.q, 'page': page});
                 $scope.searched = true;

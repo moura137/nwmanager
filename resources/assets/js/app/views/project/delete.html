@@ -25,13 +25,13 @@
                     <div ng-include src="'build/views/_errors.html'"></div>
 
                     <h3>Tem certeza que deseja Excluir?</h3>
-                    
+
                     <ul>
                         <li><strong>Nome: </strong> [[ project.name ]]</li>
                         <li><strong>Responsável</strong> [[ project.owner.name ]]</li>
                         <li><strong>Cliente: </strong> [[ project.client.name ]]</li>
                     </ul>
-                    
+
                     <button type="button" class="btn btn-danger" ng-click="delete()">Excluir</button>
                     <a ng-href="#/project" class="btn btn-white">Cancelar</a>
                 </div>

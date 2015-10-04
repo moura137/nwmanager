@@ -2,8 +2,8 @@
  * Controller Client New
  */
 angular.module('app.controllers')
-    .controller('ClientNewCtrl', 
-        ['$scope', '$rootScope', '$location', 'Client', 
+    .controller('ClientNewCtrl',
+        ['$scope', '$rootScope', '$location', 'Client',
         function($scope, $rootScope, $location, Client)
         {
             $rootScope.clearError();

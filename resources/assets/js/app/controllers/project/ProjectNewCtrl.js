@@ -2,14 +2,14 @@
  * Controller Project New
  */
 angular.module('app.controllers')
-    .controller('ProjectNewCtrl', 
-        ['$scope', '$rootScope', '$location', 'Project', 'Client', 'User', 'Settings', 
+    .controller('ProjectNewCtrl',
+        ['$scope', '$rootScope', '$location', 'Project', 'Client', 'User', 'Settings',
         function($scope, $rootScope, $location, Project, Client, User, Settings)
         {
             $rootScope.clearError();
             $scope.project = new Project();
             $scope.status = Settings.project.status;
-            
+
             $scope.formatLabel = function (model) {
                 if (model) {
                     return model.name;

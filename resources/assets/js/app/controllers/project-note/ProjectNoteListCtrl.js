@@ -2,11 +2,11 @@
  * Controller ProjectNote List
  */
 angular.module('app.controllers')
-    .controller('ProjectNoteListCtrl', 
-        ['$scope', '$rootScope', '$stateParams', 'ProjectNote', 
+    .controller('ProjectNoteListCtrl',
+        ['$scope', '$rootScope', '$stateParams', 'ProjectNote',
         function($scope, $rootScope, $stateParams, ProjectNote) {
             $scope.project_id = $stateParams.id;
-            
+
             $scope.search = function(page) {
                 $scope.query({'search': $scope.q, 'page': page});
                 $scope.searched = true;
@@ -19,7 +19,7 @@ angular.module('app.controllers')
             };
 
             $scope.query = function(search) {
-                $rootScope.clearError();                
+                $rootScope.clearError();
                 ProjectNote.query(search, {id: $stateParams.id}, function(res) {
                     $scope.notes = res.data;
                     $scope.notes_pagination = res.meta.pagination;

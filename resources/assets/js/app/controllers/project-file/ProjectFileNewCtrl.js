@@ -2,14 +2,14 @@
  * Controller ProjectFile New
  */
 angular.module('app.controllers')
-    .controller('ProjectFileNewCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectFile', 
+    .controller('ProjectFileNewCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectFile',
         function($scope, $rootScope, $location, $stateParams, ProjectFile)
         {
             $rootScope.clearError();
             $scope.file = new ProjectFile();
             $scope.file.project_id = $stateParams.id;
-            
+
             $scope.save = function(){
                 if($scope.formProjectFile.$valid)
                 {

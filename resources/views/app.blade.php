@@ -21,7 +21,7 @@
     @else
         <link href="{{ elixir('css/all.css') }}" rel="stylesheet" />
     @endif
-    
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
     <![endif]-->
 </head>
 <body ng-class="{'gray-bg': bgLayout=='gray-bg'}">
-    
+
     <div ui-view></div>
 
     <!-- Scripts -->

@@ -2,8 +2,8 @@
  * Controller ProjectTask Delete
  */
 angular.module('app.controllers')
-    .controller('ProjectTaskDeleteCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectTask', 
+    .controller('ProjectTaskDeleteCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'ProjectTask',
         function($scope, $rootScope, $location, $stateParams, ProjectTask)
         {
             $rootScope.clearError();

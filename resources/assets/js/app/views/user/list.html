@@ -63,17 +63,17 @@
                             </tbody>
                         </table>
                         <span class="pull-right">[[ pagination.total ]] Usuários(s)</span>
-                        <pagination 
+                        <pagination
                             ng-show="pagination.total_pages>1"
                             ng-change="pageChanged()"
-                            boundary-links="true" 
-                            total-items="pagination.total" 
+                            boundary-links="true"
+                            total-items="pagination.total"
                             items-per-page="pagination.per_page"
-                            ng-model="pagination.current_page" 
-                            class="pagination-sm" 
-                            previous-text="&lsaquo;" 
-                            next-text="&rsaquo;" 
-                            first-text="&laquo;" 
+                            ng-model="pagination.current_page"
+                            class="pagination-sm"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;"
                             last-text="&raquo;">
                         </pagination>
                     </div>

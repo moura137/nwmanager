@@ -2,8 +2,8 @@
  * Controller Project Delete
  */
 angular.module('app.controllers')
-    .controller('ProjectDeleteCtrl', 
-        ['$scope', '$rootScope', '$location', '$stateParams', 'Project', 
+    .controller('ProjectDeleteCtrl',
+        ['$scope', '$rootScope', '$location', '$stateParams', 'Project',
         function($scope, $rootScope, $location, $stateParams, Project)
         {
             $rootScope.clearError();
@@ -11,7 +11,7 @@ angular.module('app.controllers')
 
             $scope.delete = function(){
                 $("button.btn-danger").button('loading');
-                
+
                 $scope.project.$delete().then(function(){
                     $location.path('/project');
 

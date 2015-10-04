@@ -24,7 +24,7 @@
                     <div ng-include src="'build/views/_errors.html'"></div>
 
                     <form id="formProjectFile" name="formProjectFile" class="form-horizontal" ng-submit="save()">
-                        
+
                         <div class="form-group" ng-class="{'has-error': !formProjectFile.description.$valid && formProjectFile.description.$touched}">
                             <label class="col-lg-3 control-label">Descrição *</label>
                             <div class="col-lg-5">
@@ -38,7 +38,7 @@
                         <div class="form-group" ng-class="{'has-error': !formProjectFile.file.$valid && formProjectFile.file.$touched}">
                             <label class="col-lg-3 control-label">Arquivo *</label>
                             <div class="col-lg-5">
-                                
+
                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                   <div class="form-control" data-trigger="fileinput"><i class="fa fa-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
                                   <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Selecione</span><span class="fileinput-exists">Alterar</span><input input-file ng-max-size="2" required type="file" name="file" id="file" ng-model="file.file"></span>

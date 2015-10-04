@@ -2,10 +2,10 @@
  * Controller Client List
  */
 angular.module('app.controllers')
-    .controller('ClientListCtrl', 
-        ['$scope', '$rootScope', 'Client', 
+    .controller('ClientListCtrl',
+        ['$scope', '$rootScope', 'Client',
         function($scope, $rootScope, Client) {
-            
+
             $scope.search = function(page) {
                 $scope.query({'search': $scope.q, 'page': page});
                 $scope.searched = true;
@@ -18,7 +18,7 @@ angular.module('app.controllers')
             };
 
             $scope.query = function(search) {
-                $rootScope.clearError();                
+                $rootScope.clearError();
                 Client.query(search, function(res) {
                     $scope.clients = res.data;
                     $scope.pagination = res.meta.pagination;

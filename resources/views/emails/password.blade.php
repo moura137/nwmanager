@@ -7,7 +7,7 @@
         <h2>Recuperação de Senha</h2>
 
         <p>
-            Conforme sua solicitação de recuperação de senha de acesso, 
+            Conforme sua solicitação de recuperação de senha de acesso,
             esta sendo enviado link para finalizar o processo de geraçãp da nova senha.
         </p>
         <p>
