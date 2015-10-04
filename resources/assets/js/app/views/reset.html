@@ -15,15 +15,13 @@
 
                 <div class="row">
                     <div class="col-lg-12" ng-show="user">
-                        <p>
+                        <h3>
                             Digite sua nova senha.
-                        </p>
+                        </h3>
                         <form class="m-t" role="form" name="formReset" ng-submit="send()">
-                            <input type="hidden" id="token" name="token" value="{{ $token }}" />
-                            <input type="hidden" id="email" name="email" value="{{ $email }}" />
 
                             <div class="form-group">
-                                <label>E-mail: </label> {{ $email }}
+                                <label>E-mail: </label> [[ data.email ]]
                             </div>
 
                             <div class="form-group" ng-class="{'has-error': !formReset.password.$valid && formReset.password.$touched}">

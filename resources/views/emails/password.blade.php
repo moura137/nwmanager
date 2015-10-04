@@ -11,7 +11,7 @@
             esta sendo enviado link para finalizar o processo de geraçãp da nova senha.
         </p>
         <p>
-            <a href="{{ route('password.reset', ['token' => $token, 'email' => $user->email]) }}" target="_blank">Clique aqui para Recuperar a Senha</a>
+            <a href="{{ route('home') }}/#/reset?{{ http_build_query(['token' => $token, 'email' => $user->email]) }}" target="_blank">Clique aqui para Recuperar a Senha</a>
         </p>
         <p>
             Por favor, clique imediatamente no link acima, pois o mesmo será expirar.

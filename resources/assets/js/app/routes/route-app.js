@@ -190,7 +190,7 @@ angular.module('app.routes', ['ui.router'])
         })
 
         .state('reset', {
-            url: '/reset',
+            url: '/reset?token&email',
             templateUrl: 'build/views/reset.html',
             controller: 'ResetCtrl',
             access: { requiredLogin: false },

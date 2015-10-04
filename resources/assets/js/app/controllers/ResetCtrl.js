@@ -3,15 +3,15 @@
  */
 angular.module('app.controllers')
     .controller('ResetCtrl',
-        ['$scope', '$rootScope', '$http', 'Settings',
-        function($scope, $rootScope, $http, Settings)
+        ['$scope', '$rootScope', '$stateParams', '$http', 'Settings',
+        function($scope, $rootScope, $stateParams, $http, Settings)
         {
             $rootScope.removeToken();
 
             $scope.user = null;
             $scope.data = {
-                email: $('input#email').val(),
-                token: $('input#token').val(),
+                email: $stateParams.email,
+                token: $stateParams.token,
                 password: '',
                 password_confirmation: '',
             };

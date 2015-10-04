@@ -2,8 +2,8 @@
  * Controller Project Show
  */
 angular.module('app.controllers')
-    .controller('ProjectShowCtrl', 
-        ['$scope', '$rootScope', '$stateParams', 'Project', 'ProjectFile', 
+    .controller('ProjectShowCtrl',
+        ['$scope', '$rootScope', '$stateParams', 'Project', 'ProjectFile',
         function($scope, $rootScope, $stateParams, Project, ProjectFile)
         {
             $rootScope.clearError();
