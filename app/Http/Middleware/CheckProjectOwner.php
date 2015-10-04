@@ -50,7 +50,7 @@ class CheckProjectOwner
         if (!$isOwner) {
              abort(403, 'Access Forbidden');
         }
-        
+
         return $next($request);
     }
 }

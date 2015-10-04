@@ -78,7 +78,7 @@ class ProjectTaskController extends Controller
     {
         $data = $request->all();
         $data['project_id'] = $project_id;
-        
+
         $entity = $this->service->create($data);
 
         if (!$entity) {

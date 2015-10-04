@@ -57,7 +57,7 @@ class InputCriteria implements CriteriaInterface
         $input = array_filter($this->input);
         $model = $query->getModel();
         $columns = $model->columns();
-        
+
         foreach ($input as $key => $value):
             // Parameter Grouping
             if ($value instanceof \Closure) {

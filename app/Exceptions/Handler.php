@@ -73,7 +73,7 @@ class Handler extends ExceptionHandler
         if (config('app.debug')) {
             $data['exception'] = sprintf("%s in %s:(%s)", get_class($e), $e->getFile(), $e->getLine());
         }
-                
+
         return response()->json($data, $statusCode);
     }
 
@@ -95,7 +95,7 @@ class Handler extends ExceptionHandler
         } else {
             $statusCode = 500;
         }
-        
+
         return $statusCode;
     }
 

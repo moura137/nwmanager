@@ -51,7 +51,7 @@ class CheckProjectFileUser
         {
              abort(403, 'Access Forbidden');
         }
-        
+
         return $next($request);
     }
 }

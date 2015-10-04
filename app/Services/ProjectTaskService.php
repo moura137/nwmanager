@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @package NwManager\Services;
  */
 class ProjectTaskService extends AbstractService
-{    
+{
     /**
      * Construct
      *
@@ -41,13 +41,13 @@ class ProjectTaskService extends AbstractService
         $entity = $this->repository->find($id)->fill($data);
 
         $data = array_merge($data, $entity->toArray());
-        
+
         try {
             $this->validator
                 ->with($data)
                 ->setId($id)
                 ->passesOrFail(ValidatorInterface::RULE_UPDATE);
-                
+
             return $this->repository
                 ->resetModel()
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
@@ -79,7 +79,7 @@ class ProjectTaskService extends AbstractService
                 ->resetModel()
                 ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
                 ->delete($id);
-            
+
         } catch (ModelNotFoundException $e) {
             throw $e;
 

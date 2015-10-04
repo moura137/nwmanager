@@ -32,7 +32,7 @@ class ProjectFile extends AbstractEntity
         'extension',
         'size',
     ];
-    
+
     /**
      * Projects
      *

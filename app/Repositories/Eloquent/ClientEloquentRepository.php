@@ -19,7 +19,7 @@ class ClientEloquentRepository extends AbstractEloquentRepository implements Cli
     protected $fieldSearchable = [
         'name' => 'like',
     ];
-    
+
     /**
      * Specify Model class name
      *

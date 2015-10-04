@@ -38,7 +38,7 @@ if (! function_exists('projectLabelStatus')) {
         }
     }
 }
-    
+
 if (! function_exists('projectClassStatus')) {
     function projectClassStatus($project)
     {
@@ -166,7 +166,7 @@ if (! function_exists('formatDateTimeFull')) {
     function formatDateTimeFull($date)
     {
         if ($date instanceof \DateTime) {
-            return sprintf('%s - %s', 
+            return sprintf('%s - %s',
                 dateFormatter($date, \IntlDateFormatter::FULL, \IntlDateFormatter::NONE),
                 dateFormatter($date, \IntlDateFormatter::NONE, \IntlDateFormatter::MEDIUM));
         }

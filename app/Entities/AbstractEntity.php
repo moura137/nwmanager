@@ -14,7 +14,7 @@ use Prettus\Repository\Traits\PresentableTrait;
 abstract class AbstractEntity extends Model implements Presentable
 {
     use PresentableTrait;
-    
+
     /**
      * Set a given attribute on the model.
      *
@@ -32,7 +32,7 @@ abstract class AbstractEntity extends Model implements Presentable
         if (empty($value) && $value != "0") {
             $value = null;
         }
-        
+
         parent::setAttribute($key, $value);
     }
 

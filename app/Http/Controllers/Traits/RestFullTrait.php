@@ -122,4 +122,3 @@ trait RestFullTrait
                 ->json(['error' => null], 204);
     }
 }
- 

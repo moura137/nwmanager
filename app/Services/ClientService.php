@@ -11,7 +11,7 @@ use NwManager\Validators\ClientValidator;
  * @package NwManager\Services;
  */
 class ClientService extends AbstractService
-{    
+{
     /**
      * Construct
      *

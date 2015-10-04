@@ -32,13 +32,13 @@ class ProjectFileController extends Controller
         $this->middleware('project.member', ['except' => ['destroy']]);
         $this->middleware('project-file.user', ['only' => ['destroy']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @param  Request  $request
      * @param  int      $project_id
-     * 
+     *
      * @return Response
      */
     public function index(Request $request, $project_id)

@@ -86,7 +86,7 @@ abstract class AbstractService
                 ->with($data)
                 ->setId($id)
                 ->passesOrFail(ValidatorInterface::RULE_UPDATE);
-                
+
             return $this->repository->update($data, $id);
 
         } catch (ModelNotFoundException $e) {
@@ -110,10 +110,10 @@ abstract class AbstractService
     {
         try {
             return $this->repository->delete($id);
-        
+
         } catch (ModelNotFoundException $e) {
             throw $e;
-            
+
         } catch (\Exception $e) {
             $this->errors = $this->parseError($e);
             return false;

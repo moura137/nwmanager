@@ -38,9 +38,9 @@ abstract class AbstractEloquentRepository extends BaseRepository implements Abst
     {
         $this->applyCriteria();
         $this->applyScope();
-        
+
         $lists = $this->model->lists($column, $key);
-        
+
         $this->resetModel();
         return $lists;
     }

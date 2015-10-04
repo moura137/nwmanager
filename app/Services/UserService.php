@@ -44,7 +44,7 @@ class UserService extends AbstractService
             ];
             return false;
         }
-        
+
         return parent::delete($entity->id, $data);
     }
 }

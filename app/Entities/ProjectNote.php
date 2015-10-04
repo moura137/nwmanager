@@ -30,7 +30,7 @@ class ProjectNote extends AbstractEntity
         'title',
         'note',
     ];
-    
+
     /**
      * Projects
      *

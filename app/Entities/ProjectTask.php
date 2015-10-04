@@ -37,7 +37,7 @@ class ProjectTask extends AbstractEntity
      * @var array
      */
     protected $dates = ['start_date', 'due_date'];
-    
+
     /**
      * Projects
      *

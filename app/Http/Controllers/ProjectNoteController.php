@@ -51,7 +51,7 @@ class ProjectNoteController extends Controller
      *
      * @param  Request  $request
      * @param  int      $project_id
-     * 
+     *
      * @return Response
      */
     public function index(Request $request, $project_id)
@@ -79,7 +79,7 @@ class ProjectNoteController extends Controller
         $data = $request->all();
         $data['project_id'] = $project_id;
         $data['user_id'] = Auth::id();
-        
+
         $entity = $this->service->create($data);
 
         if (!$entity) {

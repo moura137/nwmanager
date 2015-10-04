@@ -37,7 +37,7 @@ class ApiRequest
      *
      * @return mixed
      */
-    
+
     public function call($uri, $method = 'GET', $parameters = [], $server = [])
     {
         $cookies = array();
@@ -68,7 +68,7 @@ class ApiRequest
 
             // Make request.
             $options = [
-                'headers' => $server, 
+                'headers' => $server,
                 'body'    => http_build_query($parameters),
             ];
 

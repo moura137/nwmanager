@@ -36,7 +36,7 @@ abstract class AbstractTransformer extends TransformerAbstract
     {
         return $this->includeData;
     }
-    
+
     /**
      * Format Date
      *

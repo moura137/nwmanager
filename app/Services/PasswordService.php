@@ -96,7 +96,7 @@ class PasswordService
                 $user->password = $password;
                 $user->save();
             });
-            
+
             if ($response != Password::PASSWORD_RESET) {
                 $this->setError($response);
                 return false;

@@ -49,7 +49,7 @@ class ApiOAuthMiddleware
      * @param \Illuminate\Http\Request  $request
      * @param \Closure  $next
      * @param string|null $scopesString
-     * 
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, $scopesString = null)
@@ -66,7 +66,7 @@ class ApiOAuthMiddleware
          * ex: curl -H "Authorization: token TOKEN" https://nwmanager.localhost/oauth/user
          */
         // if (!$this->auth->check()) {
-        //     // Code    
+        //     // Code
         // }
 
         // League OAuth
@@ -88,7 +88,7 @@ class ApiOAuthMiddleware
 
     /**
      * Validate Auth Basic
-     * 
+     *
      * @param  Request $request
      * @return bool
      */

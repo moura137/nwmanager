@@ -13,7 +13,7 @@ use \Exception;
  * @package NwManager\Services;
  */
 class ProjectService extends AbstractService
-{   
+{
     /**
      * The guard instance.
      *
@@ -87,7 +87,7 @@ class ProjectService extends AbstractService
     public function removeMember($id_project, $members)
     {
         $project = $this->repository->find($id_project);
-        
+
         $members = (array) $members;
         if (($index = array_search($project->owner_id, $members)) !== false){
             unset($members[$index]);
