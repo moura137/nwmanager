@@ -7,26 +7,27 @@ angular.module('app.controllers')
         function($scope, $rootScope, $stateParams, ProjectFile) {
             $scope.project_id = $stateParams.id;
 
-            $scope.search = function(page) {
-                $scope.query({'search': $scope.q, 'page': page});
-                $scope.searched = true;
-            };
-
-            $scope.query = function(search) {
+            $scope.searchFiles = function(page) {
                 $rootScope.clearError();
                 $scope.deleting = [];
-                ProjectFile.query(search, {id: $stateParams.id}, function(res) {
-                    $scope.files = res.data;
-                    $scope.files_pagination = res.meta.pagination;
-                });
+
+                ProjectFile.query(
+                    {'search': $scope.q, 'page': page},
+                    {id: $stateParams.id},
+                    function(res) {
+                        $scope.files = res.data;
+                        $scope.files_pagination = res.meta.pagination;
+                    });
+
+                $scope.searched = ($scope.q!="")
             };
 
-            $scope.pageChanged = function() {
-                $scope.search($scope.files_pagination.current_page);
-                $('body').scrollTop(0);
+            $scope.clear = function() {
+                $scope.q = '';
+                $scope.searchFiles();
             };
 
-            $scope.query();
+            $scope.clear();
 
             $scope.deleteFile = function(file) {
                 window.swal({
@@ -40,7 +41,7 @@ angular.module('app.controllers')
                 }, function(){
                     ProjectFile.deleteFile({id: file.project_id, idFile: file.id}, {}, function(){
 
-                        $scope.query();
+                        $scope.searchFiles();
 
                         window.swal({
                             title: "Excluído!",
@@ -90,7 +91,7 @@ angular.module('app.controllers')
                 }, function(){
                     ProjectFile.deleteAll({id: $stateParams.id}, {'_method': 'DELETE', 'files' : $scope.deleting}, function(response){
 
-                        $scope.query();
+                        $scope.searchFiles();
 
                         window.swal({
                             title: "Exclusão Finalizada",

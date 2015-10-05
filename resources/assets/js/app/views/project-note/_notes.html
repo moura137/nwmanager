@@ -31,7 +31,7 @@
 
 <pagination
     ng-show="notes_pagination.total_pages>1"
-    ng-change="pageChanged()"
+    ng-change="searchNotes(notes_pagination.current_page)"
     boundary-links="true"
     total-items="notes_pagination.total"
     items-per-page="notes_pagination.per_page"

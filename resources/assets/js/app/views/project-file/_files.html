@@ -55,7 +55,7 @@
 
 <pagination
     ng-show="files_pagination.total_pages>1"
-    ng-change="pageChanged()"
+    ng-change="searchFiles(files_pagination.current_page)"
     boundary-links="true"
     total-items="files_pagination.total"
     items-per-page="files_pagination.per_page"
