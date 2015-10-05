@@ -1,0 +1,46 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Usuários</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-href="#/">Home</a>
+            </li>
+            <li>
+                <a ng-href="#/user">Usuários</a>
+            </li>
+            <li class="active">
+                <strong>Detalhes</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <a ng-href="#/user" class="btn btn-white">Voltar</a>
+            <a ng-href="#/user/[[ user.id ]]/edit" class="btn btn-primary">Editar</a>
+            <a ng-href="#/user/[[ user.id ]]/delete" class="btn btn-danger">Excluir</a>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <label class="col-lg-2 control-label">Nome</label>
+                <div class="col-lg-10">
+                    [[ user.name ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">E-mail</label>
+                <div class="col-lg-10">
+                    [[ user.email ]]
+                </div>
+            </div>
+
+            <div include-scope src="build/views/project/_projects.html"></div>
+        </div>
+    </div>
+</div>

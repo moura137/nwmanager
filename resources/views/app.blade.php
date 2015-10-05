@@ -71,6 +71,7 @@
         <script src="{{ asset('build/js/app/controllers/client/ClientEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientDeleteCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/user/UserListCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/user/UserShowCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/user/UserNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/user/UserEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/user/UserDeleteCtrl.js') }}"></script>

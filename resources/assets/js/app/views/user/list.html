@@ -49,7 +49,7 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="entity in users">
-                                <td>[[ entity.name ]]</td>
+                                <td><a ng-href="#/user/[[ entity.id ]]/show" class="text-navy">[[ entity.name ]]</a></td>
                                 <td> <i class="fa fa-envelope"> </i> [[ entity.email ]]</td>
                                 <td>
                                     <a ng-href="#/user/[[ entity.id ]]/edit"><i class="fa fa-pencil"></i> Editar</a>

@@ -60,6 +60,13 @@ angular.module('app.routes', ['ui.router'])
             title: 'Usuários | '
         })
 
+        .state('painel.user_show', {
+            url: '/user/:id/show',
+            templateUrl: 'build/views/user/show.html',
+            controller: 'UserShowCtrl',
+            title: 'Usuário | '
+        })
+
         .state('painel.user_new', {
             url: '/user/new',
             templateUrl: 'build/views/user/new.html',
