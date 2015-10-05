@@ -127,6 +127,7 @@ App.run([
         {
             $rootScope.pageTitle = nextState.title || '';
             $rootScope.clearError();
+            $(document).trigger("fix-height");
             $('body').scrollTop(0);
         });
 

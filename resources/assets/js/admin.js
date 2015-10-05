@@ -1,21 +1,21 @@
 $(document).ready(function () {
 
-$("body").on("click", ".input-group.date", function(){
+    $("body").on("click", ".input-group.date", function(){
 
-    var $this = $(this);
+        var $this = $(this);
 
-    $this.datepicker({
-        language: "pt-BR",
-        format: "dd/mm/yyyy",
-        todayBtn: "linked",
-        keyboardNavigation: false,
-        forceParse: false,
-        calendarWeeks: true,
-        autoclose: true
+        $this.datepicker({
+            language: "pt-BR",
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $this.datepicker("show");
     });
-
-    $this.datepicker("show");
-});
 
 
     // Add body-small class if window less than 768px
@@ -49,5 +49,7 @@ $("body").on("click", ".input-group.date", function(){
 
     }
 
-    fix_height();
+    $(document).on("fix-height", function(event) {
+        setTimeout(function() { fix_height(); }, 100);
+    });
 });
