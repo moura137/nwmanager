@@ -138,7 +138,9 @@ class InputCriteria implements CriteriaInterface
                 $condition  = trim(strtolower($condition));
 
                 if (!empty($search)) {
-                    $value = in_array($condition, ["like", "ilike"]) ? "%{$search}%" : $search;
+                    if (in_array($condition, ["like", "ilike"])) {
+                        $value = strpos($search, '%')===false ? "%{$search}%" : $search;
+                    }
                     $query->orWhere($field, $condition, $value);
                 }
             }

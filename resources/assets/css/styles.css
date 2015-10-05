@@ -69,3 +69,20 @@
   -moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
 }
+
+.dashboard .col-lg-1,
+.dashboard .col-lg-3,
+.dashboard .col-lg-2,
+.dashboard .col-lg-3,
+.dashboard .col-lg-4,
+.dashboard .col-lg-5,
+.dashboard .col-lg-6,
+.dashboard .col-lg-7,
+.dashboard .col-lg-8,
+.dashboard .col-lg-9,
+.dashboard .col-lg-10,
+.dashboard .col-lg-11,
+.dashboard .col-lg-12 {
+  padding-right: 5px;
+  padding-left: 5px;
+}

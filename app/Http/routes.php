@@ -15,7 +15,17 @@ Route::group(['middleware' => 'accept.json'], function() {
     Route::post('oauth/token', 'OAuthController@token');
     Route::post('oauth/reset', 'OAuthController@reset');
 
-    Route::group(['middleware' => 'api.oauth', 'where' => ['project' => '\d+']], function() {
+    Route::group([
+        'middleware' => 'api.oauth',
+        'where' => [
+            'user' => '\d+',
+            'client' => '\d+',
+            'project' => '\d+',
+            'note' => '\d+',
+            'task' => '\d+',
+            'file' => '\d+',
+        ]],
+        function() {
 
         Route::get('oauth/user', 'OAuthController@user');
 
@@ -30,6 +40,7 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::put('client/{client}',    'ClientController@update');
         Route::get('client/{client}',    'ClientController@show');
         Route::delete('client/{client}', 'ClientController@destroy');
+        Route::get('client/limit',       'ClientController@limit');
 
         Route::get('project',              'ProjectController@index');
         Route::post('project',             'ProjectController@store');

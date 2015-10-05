@@ -8,6 +8,10 @@ angular.module('app.services')
             query: {
                 isArray: false
             },
+            limit: {
+                url: Settings.apiUrl + '/client/limit',
+                isArray: false
+            },
             update: {
                 method: 'PUT'
             },

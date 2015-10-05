@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[[ pageTitle ]] NwManager</title>
+    <title>[[ pageTitle ]] | NwManager</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -65,6 +65,7 @@
 
         <!-- Controllers -->
         <script src="{{ asset('build/js/app/controllers/home/HomeCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/client/ClientDashboardCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientShowCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/client/ClientNewCtrl.js') }}"></script>
@@ -75,6 +76,7 @@
         <script src="{{ asset('build/js/app/controllers/user/UserNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/user/UserEditCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/user/UserDeleteCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectDashboardCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project/ProjectListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project/ProjectShowCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project/ProjectNewCtrl.js') }}"></script>
