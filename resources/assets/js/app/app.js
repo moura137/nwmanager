@@ -15,7 +15,7 @@ var App = angular.module('App', [
     'http-auth-interceptor']);
 
 /** Modules **/
-angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap', 'ui.bootstrap.tpls']);
+angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap', 'ui.bootstrap.tpls', 'mgcrea.ngStrap.navbar']);
 angular.module('app.services', ['ngResource']);
 angular.module('app.providers', []);
 angular.module('app.factories', []);
@@ -113,7 +113,7 @@ App.run([
             $rootScope.bgLayout = nextState.bgLayout;
 
             if (!OAuth.isAuthenticated()) {
-                if (!nextState.access || nextState.access.requiredLogin===true) {
+                if (nextState.requiredLogin===true) {
                     event.preventDefault();
                     $rootScope.bgLayout = fromState.bgLayout;
                     return $location.url('/login');
@@ -125,6 +125,7 @@ App.run([
 
         $rootScope.$on("$stateChangeSuccess", function(event, nextState, nextParams, fromState, fromParams)
         {
+            $rootScope.pageTitle = nextState.title || '';
             $rootScope.clearError();
             $('body').scrollTop(0);
         });

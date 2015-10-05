@@ -1,5 +1,5 @@
 <div id="wrapper">
-    <nav class="navbar-default navbar-static-side" role="navigation">
+    <nav class="navbar-default navbar-static-side" bs-navbar>
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
@@ -7,7 +7,7 @@
 
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <span class="clear">
-                            <span class="block m-t-xs"> <strong class="font-bold">[[ AuthUser.name ]]</strong> <b class="caret"></b></span>
+                            <span class="block m-t-xs"> <strong>[[ AuthUser.name ]]</strong> <b class="caret"></b></span>
                             <span class="text-muted text-xs block">[[ AuthUser.email ]]</span>
                         </span>
                     </a>
@@ -19,13 +19,16 @@
                     NW
                 </div>
             </li>
-            <li>
+            <li data-match-route="/$">
+                <a ng-href="#/"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+            </li>
+            <li data-match-route="/client.*">
                 <a ng-href="#/client"><i class="fa fa-group"></i> <span class="nav-label">Clientes</span></a>
             </li>
-            <li>
+            <li data-match-route="/user.*">
                 <a ng-href="#/user"><i class="fa fa-user"></i> <span class="nav-label">Usuários</span></a>
             </li>
-            <li>
+            <li data-match-route="/project.*">
                 <a ng-href="#/project"><i class="fa fa-briefcase"></i> <span class="nav-label">Projetos</span></a>
             </li>
         </ul>
