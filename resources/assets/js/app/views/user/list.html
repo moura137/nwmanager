@@ -65,7 +65,7 @@
                         <span class="pull-right">[[ pagination.total ]] Usuários(s)</span>
                         <pagination
                             ng-show="pagination.total_pages>1"
-                            ng-change="pageChanged()"
+                            ng-change="search(pagination.current_page)"
                             boundary-links="true"
                             total-items="pagination.total"
                             items-per-page="pagination.per_page"

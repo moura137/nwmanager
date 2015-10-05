@@ -7,27 +7,21 @@ angular.module('app.controllers')
         function($scope, $rootScope, Project) {
 
             $scope.search = function(page) {
-                $scope.query({'search': $scope.q, 'page': page});
-                $scope.searched = true;
+                $rootScope.clearError();
+
+                Project.query({'search': $scope.q, 'page': page}, function(res) {
+                    $scope.projects = res.data;
+                    $scope.pagination = res.meta.pagination;
+                });
+
+                $scope.searched = ($scope.q!="");
+
+                $('body').scrollTop(0);
             };
 
             $scope.clear = function() {
                 $scope.q = '';
-                $scope.searched = false;
-                $scope.query();
-            };
-
-            $scope.query = function(search) {
-                $rootScope.clearError();
-                Project.query(search, function(res) {
-                    $scope.projects = res.data;
-                    $scope.pagination = res.meta.pagination;
-                });
-            };
-
-            $scope.pageChanged = function() {
-                $scope.search($scope.pagination.current_page);
-                $('body').scrollTop(0);
+                $scope.search();
             };
 
             $scope.clear();
