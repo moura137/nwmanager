@@ -6,26 +6,28 @@ angular.module('app.controllers')
         ['$scope', '$rootScope', '$stateParams', 'Settings', 'ProjectTask',
         function($scope, $rootScope, $stateParams, Settings, ProjectTask) {
             $scope.project_id = $stateParams.id;
+            $scope.task = new ProjectTask();
 
-            $scope.search = function(page) {
-                $scope.query({'search': $scope.q, 'page': page});
-                $scope.searched = true;
-            };
-
-            $scope.query = function(search) {
+            $scope.searchTasks = function(page) {
                 $rootScope.clearError();
-                ProjectTask.query(search, {id: $stateParams.id}, function(res) {
-                    $scope.tasks = res.data;
-                    $scope.tasks_pagination = res.meta.pagination;
-                });
+
+                ProjectTask.query(
+                    {'search': $scope.q, 'page': page},
+                    {id: $stateParams.id},
+                    function(res) {
+                        $scope.tasks = res.data;
+                        $scope.tasks_pagination = res.meta.pagination;
+                    });
+
+                $scope.searched = ($scope.q!="")
             };
 
-            $scope.pageChanged = function() {
-                $scope.search($scope.tasks_pagination.current_page);
-                $('body').scrollTop(0);
+            $scope.clear = function() {
+                $scope.q = '';
+                $scope.searchTasks();
             };
 
-            $scope.query();
+            $scope.clear();
 
             $scope.deleteTask = function(task) {
                 window.swal({
@@ -39,7 +41,7 @@ angular.module('app.controllers')
                 }, function(){
                     ProjectTask.delete({id: task.project_id, idTask: task.id}, {}, function(){
 
-                        $scope.query();
+                        $scope.searchTasks();
 
                         window.swal.close();
 
@@ -53,13 +55,11 @@ angular.module('app.controllers')
                 });
             };
 
-            $scope.task = new ProjectTask();
-
             $scope.saveTask = function(){
                 $scope.task.status = Settings.projectTask.status[0].value;
 
                 $scope.task.$save({id: $stateParams.id}).then(function(){
-                    $scope.query();
+                    $scope.searchTasks();
 
                 }).catch(function(response){
                     $rootScope.showError(response.status, response.data);

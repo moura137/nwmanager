@@ -42,7 +42,7 @@
 
 <pagination
     ng-show="tasks_pagination.total_pages>1"
-    ng-change="pageChanged()"
+    ng-change="searchTasks(tasks_pagination.current_page)"
     boundary-links="true"
     total-items="tasks_pagination.total"
     items-per-page="tasks_pagination.per_page"
