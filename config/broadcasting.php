@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'pusher'),
+    'default' => env('BROADCAST_DRIVER', 'log'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,11 +28,27 @@ return [
 
     'connections' => [
 
+        'socketcluster' => [
+          'driver' => 'socketcluster',
+          'secure' => env('BROADCAST_SOCKETCLUSTER_SECURE', false),
+          'host'   => env('BROADCAST_SOCKETCLUSTER_HOST', '127.0.0.1'),
+          'port'   => env('BROADCAST_SOCKETCLUSTER_PORT', '3000'),
+          'path'   => env('BROADCAST_SOCKETCLUSTER_PATH', '/socketcluster/'),
+        ],
+
+        'fanout' => [
+            'driver' => 'fanout',
+            'realm_id' => env('BROADCAST_FANOUT_REALM_ID', ''),
+            'realm_key' => env('BROADCAST_FANOUT_REALM_KEY', ''),
+            'ssl' => true,
+            'publish_async' => false
+        ],
+
         'pusher' => [
             'driver' => 'pusher',
-            'key' => env('PUSHER_KEY'),
-            'secret' => env('PUSHER_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
+            'key' => env('BROADCAST_PUSHER_KEY'),
+            'secret' => env('BROADCAST_PUSHER_SECRET'),
+            'app_id' => env('BROADCAST_PUSHER_APP_ID'),
         ],
 
         'redis' => [
