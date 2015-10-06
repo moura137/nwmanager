@@ -4,8 +4,6 @@ namespace NwManager\Http\Controllers;
 
 use NwManager\Repositories\Contracts\ClientRepository;
 use NwManager\Services\ClientService;
-use Illuminate\Http\Request;
-use NwManager\Repositories\Criterias\InputCriteria;
 
 /**
  * Class ClientController

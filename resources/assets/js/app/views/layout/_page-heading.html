@@ -6,17 +6,6 @@
             abstract-proxy-property="data.proxy"
             template-url="uiBreadcrumbs.tpl.html">
         </breadcrumbs>
-        <div>
-            <ul class="breadcrumb">
-                <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
-                    <span class="divider">/</span>
-                    <ng-switch on="$last">
-                        <span ng-switch-when="true">[[ breadcrumb.name ]]</span>
-                        <span ng-switch-default><a href="[[ breadcrumb.path ]]">[[ breadcrumb.name ]]</a></span>
-                    </ng-switch>
-                </li>
-            </ul>
-        </div>
     </div>
     <div class="col-lg-2">
 

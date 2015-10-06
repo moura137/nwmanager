@@ -8,7 +8,7 @@
 
         <div class="ibox-content">
             <div class="row">
-                <div class="col-lg-12" align="center">
+                <div class="col-lg-12">
                     <h2>[[ project.name ]]</h2>
                 </div>
             </div>
@@ -60,6 +60,7 @@
                                     <li><a ng-click="tab('tab-file')" data-toggle="tab" rel="tab-file"><i class="fa fa-file"></i> Arquivos</a></li>
                                     <li><a ng-click="tab('tab-task')" data-toggle="tab" rel="tab-task"><i class="fa fa-tasks"></i> Tarefas</a></li>
                                     <li><a ng-click="tab('tab-detalhes')"data-toggle="tab" rel="tab-detalhes"><i class="fa fa-info-circle"></i> Detalhes</a></li>
+                                    <li><a ng-click="tab('tab-activity')"data-toggle="tab" rel="tab-activity"><i class="fa fa-feed"></i> Atividades</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -79,6 +80,9 @@
                                 </div>
                                 <div class="tab-pane" id="tab-detalhes">
                                     <div ng-bind-html="project.description | nl2br"></div>
+                                </div>
+                                <div class="tab-pane" id="tab-activity">
+
                                 </div>
                             </div>
                         </div>

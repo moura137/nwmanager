@@ -20,6 +20,7 @@ angular.module('app.routes', ['ui.router'])
         .state('painel.home', {
             url: '/',
             title: 'Project Manager',
+            icon: 'fa fa-dashboard',
             templateUrl: 'build/views/home/dashboard.html',
             controller: 'HomeCtrl',
         })
@@ -27,6 +28,7 @@ angular.module('app.routes', ['ui.router'])
         .state('painel.client', {
             url: '/client',
             title: 'Clientes',
+            icon: 'fa fa-group',
             views: {
                 '@painel': {
                     templateUrl: 'build/views/client/list.html',
@@ -93,6 +95,7 @@ angular.module('app.routes', ['ui.router'])
         .state('painel.user', {
             url: '/user',
             title: 'Usuários',
+            icon: 'fa fa-user',
             views: {
                 '@painel': {
                     templateUrl: 'build/views/user/list.html',
@@ -148,6 +151,7 @@ angular.module('app.routes', ['ui.router'])
         .state('painel.project', {
             url: '/project',
             title: 'Projetos',
+            icon: 'fa fa-briefcase',
             views: {
                 '@painel': {
                     templateUrl: 'build/views/project/list.html',

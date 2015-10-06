@@ -70,6 +70,14 @@
   box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
 }
 
+.wrapper-content {
+  padding-top: 10px;
+}
+
+.page-heading {
+  padding-bottom: 10px;
+}
+
 .dashboard .col-lg-1,
 .dashboard .col-lg-3,
 .dashboard .col-lg-2,
@@ -87,10 +95,19 @@
   padding-left: 5px;
 }
 
-.wrapper-content {
-  padding-top: 10px;
+.dashboard-home .last-activities {
+  min-height: 450px;
+  border-left: #ddd solid 1px;
 }
 
-.page-heading {
-  padding-bottom: 10px;
+.dashboard-home .last-activities .panels .panel {
+  margin-bottom: 10px;
+}
+
+.dashboard-home .list-projects {
+  border-right: #ddd solid 1px;
+}
+
+.dashboard-home .list-projects .ibox-content {
+  height: 170px;
 }

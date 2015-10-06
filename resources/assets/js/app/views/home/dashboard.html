@@ -1,3 +1,49 @@
 <div class="wrapper-content">
-    <h1>LOGADO!!</h1>
+<div class="dashboard dashboard-home">
+    <div class="row">
+        <div class="col-lg-8 list-projects">
+
+            <h3>Projetos</h3>
+
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="project in projects">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <h4>[[ project.name | limitTo:20 ]]...</h4>
+                            <h5>[[ project.client.name ]]</h5>
+
+                            <div><b>Owner:</b> <span>[[ project.owner.name ]]</span></div>
+                            <div><b>Entrega:</b> <span>[[ project.due_date | formatDate ]] </span></div>
+                            <div><b>Tarefas:</b> <span>2 </span></div>
+
+                            <div class="m-b">
+                                <span>Progresso:</span>
+                                <div class="stat-percent">[[ project.progress ]]%</div>
+                                <div class="progress progress-mini">
+                                    <div style="width: [[ project.progress ]]%;" class="progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-footer">
+                            <div class="block label label-[[ project.status | statusClassProject ]]">[[ project.status | statusProject ]]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 last-activities">
+            <h3 align="center"><i class="fa fa-feed"></i> Últimas Atividades</h3>
+
+            <div class="panels">
+                <div class="panel" ng-repeat="activity in activities">
+                    <div class="panel-body">
+                        <em ng-show="activity.entity_desc">[[ activity.entity_desc ]]<br></em>
+                        <b>[[ activity.user_name ]]</b> <small>[[ activity.diff_humans ]] </small>
+                        <br>[[ activity.event ]]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
