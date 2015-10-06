@@ -1,66 +1,46 @@
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Projetos - Arquivos</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a ng-href="#/">Home</a>
-                    </li>
-                    <li>
-                        <a ng-href="#/project/[[ file.project_id ]]/show">Projeto</a>
-                    </li>
-                    <li class="active">
-                        <strong>Novo Arquivo</strong>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-2">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div ng-include src="'build/views/_errors.html'"></div>
 
-            </div>
-        </div>
+            <form id="formProjectFile" name="formProjectFile" class="form-horizontal" ng-submit="save()">
 
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <div ng-include src="'build/views/_errors.html'"></div>
-
-                    <form id="formProjectFile" name="formProjectFile" class="form-horizontal" ng-submit="save()">
-
-                        <div class="form-group" ng-class="{'has-error': !formProjectFile.description.$valid && formProjectFile.description.$touched}">
-                            <label class="col-lg-3 control-label">Descrição *</label>
-                            <div class="col-lg-5">
-                                <input type="text" required maxlength="255" name="description" id="description" class="form-control" placeholder="Titulo" ng-model="file.description">
-                                <div ng-messages="formProjectFile.description.$error" class="help-block" ng-show="!formProjectFile.description.$valid && formProjectFile.description.$touched">
-                                    <span ng-message="required">Campo obrigatório</span>
-                                </div>
-                            </div>
+                <div class="form-group" ng-class="{'has-error': !formProjectFile.description.$valid && formProjectFile.description.$touched}">
+                    <label class="col-lg-3 control-label">Descrição *</label>
+                    <div class="col-lg-5">
+                        <input type="text" required maxlength="255" name="description" id="description" class="form-control" placeholder="Titulo" ng-model="file.description">
+                        <div ng-messages="formProjectFile.description.$error" class="help-block" ng-show="!formProjectFile.description.$valid && formProjectFile.description.$touched">
+                            <span ng-message="required">Campo obrigatório</span>
                         </div>
-
-                        <div class="form-group" ng-class="{'has-error': !formProjectFile.file.$valid && formProjectFile.file.$touched}">
-                            <label class="col-lg-3 control-label">Arquivo *</label>
-                            <div class="col-lg-5">
-
-                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                  <div class="form-control" data-trigger="fileinput"><i class="fa fa-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                  <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Selecione</span><span class="fileinput-exists">Alterar</span><input input-file ng-max-size="2" required type="file" name="file" id="file" ng-model="file.file"></span>
-                                  <a ng-href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
-                                </div>
-
-                                <div ng-messages="formProjectFile.file.$error" class="help-block" ng-show="!formProjectFile.file.$valid && formProjectFile.file.$touched">
-                                    <span ng-message="required">Campo obrigatório</span>
-                                    <span ng-message="maxSize"><p>Arquivo excede o tamanho máximo de 2 MB</p></span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-5">
-                                <button type="submit" data-loading-text="Carregando..." class="btn btn-primary">Salvar</button>
-                                <a ng-href="#/project/[[ file.project_id ]]/show?tab=tab-file" class="btn btn-white">Cancelar</a>
-                            </div>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group" ng-class="{'has-error': !formProjectFile.file.$valid && formProjectFile.file.$touched}">
+                    <label class="col-lg-3 control-label">Arquivo *</label>
+                    <div class="col-lg-5">
+
+                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                          <div class="form-control" data-trigger="fileinput"><i class="fa fa-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Selecione</span><span class="fileinput-exists">Alterar</span><input input-file ng-max-size="2" required type="file" name="file" id="file" ng-model="file.file"></span>
+                          <a ng-href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
+                        </div>
+
+                        <div ng-messages="formProjectFile.file.$error" class="help-block" ng-show="!formProjectFile.file.$valid && formProjectFile.file.$touched">
+                            <span ng-message="required">Campo obrigatório</span>
+                            <span ng-message="maxSize"><p>Arquivo excede o tamanho máximo de 2 MB</p></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-5">
+                        <button type="submit" data-loading-text="Carregando..." class="btn btn-primary">Salvar</button>
+                        <a ng-href="#/project/[[ file.project_id ]]/show?tab=tab-file" class="btn btn-white">Cancelar</a>
+                    </div>
+                </div>
+
+            </form>
         </div>
+    </div>
+</div>

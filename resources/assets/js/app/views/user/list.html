@@ -1,82 +1,65 @@
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Usuários</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a ng-href="#/">Home</a>
-                    </li>
-                    <li class="active">
-                        <strong>Usuários</strong>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-2">
-
-            </div>
-        </div>
-
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <div class="row">
-                        <div class="col-sm-1">
-                            <a class="btn btn-primary" ng-href="#/user/new"><i class="fa fa-plus"></i> Novo</a>
-                        </div>
-                        <div class="col-sm-11">
-                            <form ng-submit="search()" method="get">
-                                <div class="input-group">
-                                    <input type="text" ng-model="q" placeholder="Buscar usuários" class="input form-control">
-                                    <span class="input-group-btn" ng-show="searched">
-                                        <button style="border-left:none" ng-click="clear()" type="button" class="btn btn btn-white"> <i class="fa fa-times-circle-o"></i></button>
-                                    </span>
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <div class="row">
+                <div class="col-sm-1">
+                    <a class="btn btn-primary" ng-href="#/user/new"><i class="fa fa-plus"></i> Novo</a>
                 </div>
-                <div class="ibox-content">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>E-mail</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="entity in users">
-                                <td><a ng-href="#/user/[[ entity.id ]]/show" class="text-navy">[[ entity.name ]]</a></td>
-                                <td> <i class="fa fa-envelope"> </i> [[ entity.email ]]</td>
-                                <td>
-                                    <a ng-href="#/user/[[ entity.id ]]/edit"><i class="fa fa-pencil"></i> Editar</a>
-                                    | <a ng-href="#/user/[[ entity.id ]]/delete"><i class="fa fa-trash"></i> Excluir</a>
-                                </td>
-                            </tr>
-
-                            <tr ng-hide="users.length" align="center">
-                                <td colspan="3">NENHUM REGISTRO ENCONTRADO</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <span class="pull-right">[[ pagination.total ]] Usuários(s)</span>
-                        <pagination
-                            ng-show="pagination.total_pages>1"
-                            ng-change="search(pagination.current_page)"
-                            boundary-links="true"
-                            total-items="pagination.total"
-                            items-per-page="pagination.per_page"
-                            ng-model="pagination.current_page"
-                            class="pagination-sm"
-                            previous-text="&lsaquo;"
-                            next-text="&rsaquo;"
-                            first-text="&laquo;"
-                            last-text="&raquo;">
-                        </pagination>
-                    </div>
+                <div class="col-sm-11">
+                    <form ng-submit="search()" method="get">
+                        <div class="input-group">
+                            <input type="text" ng-model="q" placeholder="Buscar usuários" class="input form-control">
+                            <span class="input-group-btn" ng-show="searched">
+                                <button style="border-left:none" ng-click="clear()" type="button" class="btn btn btn-white"> <i class="fa fa-times-circle-o"></i></button>
+                            </span>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="entity in users">
+                        <td><a ng-href="#/user/[[ entity.id ]]/show" class="text-navy">[[ entity.name ]]</a></td>
+                        <td> <i class="fa fa-envelope"> </i> [[ entity.email ]]</td>
+                        <td>
+                            <a ng-href="#/user/[[ entity.id ]]/edit"><i class="fa fa-pencil"></i> Editar</a>
+                            | <a ng-href="#/user/[[ entity.id ]]/delete"><i class="fa fa-trash"></i> Excluir</a>
+                        </td>
+                    </tr>
+
+                    <tr ng-hide="users.length" align="center">
+                        <td colspan="3">NENHUM REGISTRO ENCONTRADO</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <span class="pull-right">[[ pagination.total ]] Usuários(s)</span>
+                <pagination
+                    ng-show="pagination.total_pages>1"
+                    ng-change="search(pagination.current_page)"
+                    boundary-links="true"
+                    total-items="pagination.total"
+                    items-per-page="pagination.per_page"
+                    ng-model="pagination.current_page"
+                    class="pagination-sm"
+                    previous-text="&lsaquo;"
+                    next-text="&rsaquo;"
+                    first-text="&laquo;"
+                    last-text="&raquo;">
+                </pagination>
+            </div>
+        </div>
+    </div>
+</div>

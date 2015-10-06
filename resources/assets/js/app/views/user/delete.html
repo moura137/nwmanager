@@ -1,38 +1,18 @@
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Usuários</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a ng-href="#/">Home</a>
-                    </li>
-                    <li>
-                        <a ng-href="#/user">Usuários</a>
-                    </li>
-                    <li class="active">
-                        <strong>Exclusão</strong>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-2">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-content">
 
-            </div>
+            <div ng-include src="'build/views/_errors.html'"></div>
+
+            <h3>Tem certeza que deseja Excluir?</h3>
+
+            <ul>
+                <li><strong>Nome: </strong> [[ user.name ]]</li>
+                <li><strong>E-mail: </strong> [[ user.email ]]</li>
+            </ul>
+
+            <button type="button" class="btn btn-danger" ng-click="delete()">Excluir</button>
+            <a ng-href="#/user" class="btn btn-white">Cancelar</a>
         </div>
-
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="ibox">
-                <div class="ibox-content">
-
-                    <div ng-include src="'build/views/_errors.html'"></div>
-
-                    <h3>Tem certeza que deseja Excluir?</h3>
-
-                    <ul>
-                        <li><strong>Nome: </strong> [[ user.name ]]</li>
-                        <li><strong>E-mail: </strong> [[ user.email ]]</li>
-                    </ul>
-
-                    <button type="button" class="btn btn-danger" ng-click="delete()">Excluir</button>
-                    <a ng-href="#/user" class="btn btn-white">Cancelar</a>
-                </div>
-            </div>
-        </div>
+    </div>
+</div>

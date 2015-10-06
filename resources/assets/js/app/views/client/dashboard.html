@@ -1,149 +1,128 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Dashboard Clientes</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a ng-href="#/">Home</a>
-            </li>
-            <li>
-                <a ng-href="#/client">Clientes</a>
-            </li>
-            <li class="active">
-                <strong>Dashboard</strong>
-            </li>
-
-        </ol>
-    </div>
-    <div class="col-lg-2">
-
-    </div>
-</div>
-
-<div class="dashboard">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-3">
-            <div class="ibox">
-            <div class="ibox-title">
-                <div class="input-group">
-                    <select ng-model="q" class="form-control" ng-change="search()">
-                        <option value="">--</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="I">I</option>
-                        <option value="J">J</option>
-                        <option value="K">K</option>
-                        <option value="L">L</option>
-                        <option value="M">M</option>
-                        <option value="N">N</option>
-                        <option value="O">O</option>
-                        <option value="P">P</option>
-                        <option value="Q">Q</option>
-                        <option value="R">R</option>
-                        <option value="S">S</option>
-                        <option value="T">T</option>
-                        <option value="U">U</option>
-                        <option value="V">V</option>
-                        <option value="W">W</option>
-                        <option value="X">X</option>
-                        <option value="Y">Y</option>
-                        <option value="Z">Z</option>
-                    </select>
-                    <span class="input-group-btn">
-                        <a ng-href="#/client" class="btn btn-white">
-                        <i class="fa fa-plus"></i>
-                        </a>
-                    </span>
-                </div>
-            </div>
-
-            <div class="ibox-content no-padding">
-
-                <a class="list-group-item" ng-click="changeClient(entity)" ng-class="{active: client.id==entity.id}" ng-repeat="entity in clients">
-                    <h3 class="list-group-item-heading">[[ entity.name ]]</h3>
-                    <p>[[ entity.email ]]</p>
-                </a>
-
-                <div align="center">
-                    <p>[[ clients_pagination.total ]] Cliente(s)</p>
-                    <pagination
-                        ng-show="clients_pagination.total_pages>1"
-                        ng-change="search(clients_pagination.current_page)"
-                        boundary-links="true"
-                        total-items="clients_pagination.total"
-                        items-per-page="clients_pagination.per_page"
-                        ng-model="clients_pagination.current_page"
-                        class="pagination-sm"
-                        style="margin:5px;"
-                        previous-text="&lsaquo;"
-                        next-text="&rsaquo;"
-                        first-text="&laquo;"
-                        last-text="&raquo;">
-                    </pagination>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <div class="col-lg-9">
-            <div class="ibox" ng-show="client">
+    <div class="dashboard">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="ibox">
                 <div class="ibox-title">
-                    <div class="btn-group pull-right">
-                        <a ng-href="#/client/[[ client.id ]]/edit" class="btn btn-white btn-sm" title="Editar">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a ng-href="#/client/[[ client.id ]]/delete" class="btn btn-danger btn-sm" title="Apagar">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                    <div class="input-group">
+                        <select ng-model="q" class="form-control" ng-change="search()">
+                            <option value="">--</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="J">J</option>
+                            <option value="K">K</option>
+                            <option value="L">L</option>
+                            <option value="M">M</option>
+                            <option value="N">N</option>
+                            <option value="O">O</option>
+                            <option value="P">P</option>
+                            <option value="Q">Q</option>
+                            <option value="R">R</option>
+                            <option value="S">S</option>
+                            <option value="T">T</option>
+                            <option value="U">U</option>
+                            <option value="V">V</option>
+                            <option value="W">W</option>
+                            <option value="X">X</option>
+                            <option value="Y">Y</option>
+                            <option value="Z">Z</option>
+                        </select>
+                        <span class="input-group-btn">
+                            <a ng-href="#/client" class="btn btn-white">
+                            <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
                     </div>
-
-                    <h3>Dados do cliente</h3>
                 </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <p>
-                                <i class="icon-inline fa fa-user"></i> [[ client.responsible ]]
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-map-marker"></i> [[ client.address ]]
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-envelope-o"></i> [[ client.email ]]
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-phone"></i> [[ client.phone ]]
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-skype"></i>
-                            </p>
-                        </div>
-                        <div class="col-xs-6">
-                            <p>
-                                <i class="icon-inline fa fa-search"></i>
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-twitter"></i>
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-facebook"></i>
-                            </p>
-                            <p>
-                                <i class="icon-inline fa fa-google-plus"></i>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div include-scope src="build/views/project/_projects.html"></div>
+                <div class="ibox-content no-padding">
+
+                    <a class="list-group-item" ng-click="changeClient(entity)" ng-class="{active: client.id==entity.id}" ng-repeat="entity in clients">
+                        <h3 class="list-group-item-heading">[[ entity.name ]]</h3>
+                        <p>[[ entity.email ]]</p>
+                    </a>
+
+                    <div align="center">
+                        <p>[[ clients_pagination.total ]] Cliente(s)</p>
+                        <pagination
+                            ng-show="clients_pagination.total_pages>1"
+                            ng-change="search(clients_pagination.current_page)"
+                            boundary-links="true"
+                            total-items="clients_pagination.total"
+                            items-per-page="clients_pagination.per_page"
+                            ng-model="clients_pagination.current_page"
+                            class="pagination-sm"
+                            style="margin:5px;"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;"
+                            last-text="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="ibox" ng-show="client">
+                    <div class="ibox-title">
+                        <div class="btn-group pull-right">
+                            <a ng-href="#/client/[[ client.id ]]/edit" class="btn btn-white btn-sm" title="Editar">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a ng-href="#/client/[[ client.id ]]/delete" class="btn btn-danger btn-sm" title="Apagar">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+
+                        <h3>Dados do cliente</h3>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p>
+                                    <i class="icon-inline fa fa-user-secret"></i> [[ client.responsible ]]
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-map-marker"></i> [[ client.address ]]
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-envelope-o"></i> [[ client.email ]]
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-phone"></i> [[ client.phone ]]
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-skype"></i>
+                                </p>
+                            </div>
+                            <div class="col-xs-6">
+                                <p>
+                                    <i class="icon-inline fa fa-search"></i>
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-twitter"></i>
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-facebook"></i>
+                                </p>
+                                <p>
+                                    <i class="icon-inline fa fa-google-plus"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div include-scope src="build/views/project/_projects.html"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>

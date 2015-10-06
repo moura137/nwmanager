@@ -31,7 +31,7 @@
 </head>
 <body ng-class="{'gray-bg': bgLayout=='gray-bg'}">
 
-    <div ui-view></div>
+    <div ui-view="main"></div>
 
     <!-- Scripts -->
     @if(config('app.debug'))
@@ -123,6 +123,7 @@
         <script src="{{ asset('build/js/app/directives/upload-ng-thumb.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/loading.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/project-file-download.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/breadcrumbs.js') }}"></script>
 
         <!-- Filters -->
         <script src="{{ asset('build/js/app/filters/app-filters.js') }}"></script>

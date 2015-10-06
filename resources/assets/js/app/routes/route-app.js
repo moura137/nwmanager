@@ -8,244 +8,378 @@ angular.module('app.routes', ['ui.router'])
 
     $stateProvider
         .state('painel', {
-            templateUrl: 'build/views/layout/painel.html'
+            abstract: true,
+            title: 'Home',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/layout/painel.html'
+                }
+            },
         })
 
         .state('painel.home', {
             url: '/',
+            title: 'Project Manager',
             templateUrl: 'build/views/home/dashboard.html',
             controller: 'HomeCtrl',
-            title: 'Dashboard',
         })
 
         .state('painel.client', {
             url: '/client',
-            templateUrl: 'build/views/client/list.html',
-            controller: 'ClientListCtrl',
             title: 'Clientes',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/client/list.html',
+                    controller: 'ClientListCtrl',
+                },
+            },
         })
 
-        .state('painel.client_dashboard', {
-            url: '/client/dashboard',
-            templateUrl: 'build/views/client/dashboard.html',
-            controller: 'ClientDashboardCtrl',
+        .state('painel.client.dashboard', {
+            url: '/dashboard',
             title: 'Dashboard Clientes',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/client/dashboard.html',
+                    controller: 'ClientDashboardCtrl',
+                },
+            },
         })
 
-        .state('painel.client_show', {
-            url: '/client/:id/show',
-            templateUrl: 'build/views/client/show.html',
-            controller: 'ClientShowCtrl',
-            title: 'Cliente',
+        .state('painel.client.show', {
+            url: '/:id/show',
+            title: 'Detalhes Cliente',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/client/show.html',
+                    controller: 'ClientShowCtrl',
+                },
+            },
         })
 
-        .state('painel.client_new', {
-            url: '/client/new',
-            templateUrl: 'build/views/client/new.html',
-            controller: 'ClientNewCtrl',
+        .state('painel.client.new', {
+            url: '/new',
             title: 'Novo Cliente',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/client/new.html',
+                    controller: 'ClientNewCtrl',
+                },
+            },
         })
 
-        .state('painel.client_edit', {
-            url: '/client/:id/edit',
-            templateUrl: 'build/views/client/edit.html',
-            controller: 'ClientEditCtrl',
+        .state('painel.client.edit', {
+            url: '/:id/edit',
             title: 'Editar Cliente',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/client/edit.html',
+                    controller: 'ClientEditCtrl',
+                },
+            },
         })
 
-        .state('painel.client_delete', {
+        .state('painel.client.delete', {
             url: '/client/:id/delete',
-            templateUrl: 'build/views/client/delete.html',
-            controller: 'ClientDeleteCtrl',
             title: 'Excluir Cliente',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/client/delete.html',
+                    controller: 'ClientDeleteCtrl',
+                },
+            },
         })
 
         .state('painel.user', {
             url: '/user',
-            templateUrl: 'build/views/user/list.html',
-            controller: 'UserListCtrl',
             title: 'Usuários',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/user/list.html',
+                    controller: 'UserListCtrl',
+                },
+            },
         })
 
-        .state('painel.user_show', {
-            url: '/user/:id/show',
-            templateUrl: 'build/views/user/show.html',
-            controller: 'UserShowCtrl',
-            title: 'Usuário',
+        .state('painel.user.show', {
+            url: '/:id/show',
+            title: 'Detalhes Usuário',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/user/show.html',
+                    controller: 'UserShowCtrl',
+                },
+            },
         })
 
-        .state('painel.user_new', {
-            url: '/user/new',
-            templateUrl: 'build/views/user/new.html',
-            controller: 'UserNewCtrl',
+        .state('painel.user.new', {
+            url: '/new',
             title: 'Novo Usuário',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/user/new.html',
+                    controller: 'UserNewCtrl',
+                },
+            },
         })
 
-        .state('painel.user_edit', {
-            url: '/user/:id/edit',
-            templateUrl: 'build/views/user/edit.html',
-            controller: 'UserEditCtrl',
+        .state('painel.user.edit', {
+            url: '/:id/edit',
             title: 'Editar Usuário',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/user/edit.html',
+                    controller: 'UserEditCtrl',
+                },
+            },
         })
 
-        .state('painel.user_delete', {
-            url: '/user/:id/delete',
-            templateUrl: 'build/views/user/delete.html',
-            controller: 'UserDeleteCtrl',
+        .state('painel.user.delete', {
+            url: '/:id/delete',
             title: 'Excluir Usuário',
-        })
-
-        .state('painel.project_dashboard', {
-            url: '/project/dashboard',
-            templateUrl: 'build/views/project/dashboard.html',
-            controller: 'ProjectDashboardCtrl',
-            title: 'Dashboard Projetos',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/user/delete.html',
+                    controller: 'UserDeleteCtrl',
+                },
+            },
         })
 
         .state('painel.project', {
             url: '/project',
-            templateUrl: 'build/views/project/list.html',
-            controller: 'ProjectListCtrl',
             title: 'Projetos',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project/list.html',
+                    controller: 'ProjectListCtrl',
+                },
+            },
         })
 
-        .state('painel.project_show', {
-            url: '/project/:id/show?tab',
-            templateUrl: 'build/views/project/show.html',
-            controller: 'ProjectShowCtrl',
-            title: 'Projeto',
+        .state('painel.project.dashboard', {
+            url: '/dashboard',
+            title: 'Dashboard Projetos',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project/dashboard.html',
+                    controller: 'ProjectDashboardCtrl',
+                },
+            },
         })
 
-        .state('painel.project_new', {
-            url: '/project/new',
-            templateUrl: 'build/views/project/new.html',
-            controller: 'ProjectNewCtrl',
+        .state('painel.project.show', {
+            url: '/:id/show?tab',
+            title: 'Detalhes Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project/show.html',
+                    controller: 'ProjectShowCtrl',
+                },
+            },
+        })
+
+        .state('painel.project.new', {
+            url: '/new',
             title: 'Novo Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project/new.html',
+                    controller: 'ProjectNewCtrl',
+                },
+            },
         })
 
-        .state('painel.project_edit', {
-            url: '/project/:id/edit',
-            templateUrl: 'build/views/project/edit.html',
-            controller: 'ProjectEditCtrl',
+        .state('painel.project.edit', {
+            url: '/:id/edit',
             title: 'Editar Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project/edit.html',
+                    controller: 'ProjectEditCtrl',
+                },
+            },
         })
 
-        .state('painel.project_delete', {
-            url: '/project/:id/delete',
-            templateUrl: 'build/views/project/delete.html',
-            controller: 'ProjectDeleteCtrl',
+        .state('painel.project.delete', {
+            url: '/:id/delete',
             title: 'Excluir Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project/delete.html',
+                    controller: 'ProjectDeleteCtrl',
+                },
+            },
         })
 
-        .state('painel.project_member', {
-            url: '/project/:id/members',
-            templateUrl: 'build/views/project-member/list.html',
-            controller: 'ProjectMemberListCtrl',
+        .state('painel.project.member', {
+            url: '/:id/members',
             title: 'Membros do Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-member/list.html',
+                    controller: 'ProjectMemberListCtrl',
+                },
+            },
         })
 
-        .state('painel.project_note', {
-            url: '/project/:id/notes',
-            templateUrl: 'build/views/project-note/list.html',
-            controller: 'ProjectNoteListCtrl',
+        .state('painel.project.note', {
+            url: '/:id/notes',
             title: 'Notas do Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-note/list.html',
+                    controller: 'ProjectNoteListCtrl',
+                },
+            },
         })
 
-        .state('painel.project_note_new', {
-            url: '/project/:id/notes/new',
-            templateUrl: 'build/views/project-note/new.html',
-            controller: 'ProjectNoteNewCtrl',
-            title: 'Nova Nota do Projeto',
+        .state('painel.project.note.new', {
+            url: '/new',
+            title: 'Nova Nota',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-note/new.html',
+                    controller: 'ProjectNoteNewCtrl',
+                },
+            },
         })
 
-        .state('painel.project_note_edit', {
-            url: '/project/:id/notes/:idNote/edit',
-            templateUrl: 'build/views/project-note/edit.html',
-            controller: 'ProjectNoteEditCtrl',
-            title: 'Editar Nota do Projeto',
+        .state('painel.project.note.edit', {
+            url: '/:idNote/edit',
+            title: 'Editar Nota',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-note/edit.html',
+                    controller: 'ProjectNoteEditCtrl',
+                },
+            },
         })
 
-        .state('painel.project_note_delete', {
-            url: '/project/:id/notes/:idNote/delete',
-            templateUrl: 'build/views/project-note/delete.html',
-            controller: 'ProjectNoteDeleteCtrl',
-            title: 'Excluir Nota do Projeto',
+        .state('painel.project.note.delete', {
+            url: '/:idNote/delete',
+            title: 'Excluir Nota',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-note/delete.html',
+                    controller: 'ProjectNoteDeleteCtrl',
+                },
+            },
         })
 
-        .state('painel.project_file_images', {
-            url: '/project/:id/files-images',
-            templateUrl: 'build/views/project-file/images.html',
-            controller: 'ProjectFileImagesCtrl',
-            title: 'Imagens do Projeto',
-        })
-
-        .state('painel.project_file', {
-            url: '/project/:id/files',
-            templateUrl: 'build/views/project-file/list.html',
-            controller: 'ProjectFileListCtrl',
+        .state('painel.project.file', {
+            url: '/:id/files',
             title: 'Arquivos do Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-file/list.html',
+                    controller: 'ProjectFileListCtrl',
+                },
+            },
         })
 
-        .state('painel.project_file_new', {
-            url: '/project/:id/files/new',
-            templateUrl: 'build/views/project-file/new.html',
-            controller: 'ProjectFileNewCtrl',
-            title: 'Novo Arquivo do Projeto',
+        .state('painel.project.file.images', {
+            url: '/images',
+            title: 'Imagens do Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-file/images.html',
+                    controller: 'ProjectFileImagesCtrl',
+                },
+            },
         })
 
-        .state('painel.project_file_delete', {
-            url: '/project/:id/files/:idFile/delete',
-            templateUrl: 'build/views/project-file/delete.html',
-            controller: 'ProjectFileDeleteCtrl',
-            title: 'Excluir Arquivo do Projeto',
+        .state('painel.project.file.new', {
+            url: '/new',
+            title: 'Novo Arquivo',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-file/new.html',
+                    controller: 'ProjectFileNewCtrl',
+                },
+            },
         })
 
-        .state('painel.project_task', {
-            url: '/project/:id/tasks',
-            templateUrl: 'build/views/project-task/list.html',
-            controller: 'ProjectTaskListCtrl',
+        .state('painel.project.file.delete', {
+            url: '/:idFile/delete',
+            title: 'Excluir Arquivo',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-file/delete.html',
+                    controller: 'ProjectFileDeleteCtrl',
+                },
+            },
+        })
+
+        .state('painel.project.task', {
+            url: '/:id/tasks',
             title: 'Tarefas do Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-task/list.html',
+                    controller: 'ProjectTaskListCtrl',
+                },
+            },
         })
 
-        .state('painel.project_task_new', {
-            url: '/project/:id/tasks/new',
-            templateUrl: 'build/views/project-task/new.html',
-            controller: 'ProjectTaskNewCtrl',
+        .state('painel.project.task.new', {
+            url: '/new',
             title: 'Nova Tarefa do Projeto',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-task/new.html',
+                    controller: 'ProjectTaskNewCtrl',
+                },
+            },
         })
 
-        .state('painel.project_task_edit', {
-            url: '/project/:id/tasks/:idTask/edit',
-            templateUrl: 'build/views/project-task/edit.html',
-            controller: 'ProjectTaskEditCtrl',
-            title: 'Editar Tarefa do Projeto',
+        .state('painel.project.task.edit', {
+            url: '/:idTask/edit',
+            title: 'Editar Tarefa',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/project-task/edit.html',
+                    controller: 'ProjectTaskEditCtrl',
+                },
+            },
         })
 
         .state('login', {
             url: '/login',
-            templateUrl: 'build/views/login.html',
-            controller: 'LoginCtrl',
+            title: 'Login',
             requiredLogin: false,
             bgLayout: 'gray-bg',
-            title: 'Login',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/login.html',
+                    controller: 'LoginCtrl',
+                }
+            },
         })
 
         .state('forgot', {
             url: '/forgot',
-            templateUrl: 'build/views/forgot.html',
-            controller: 'ForgotCtrl',
+            title: 'Esqueci a Senha',
             requiredLogin: false,
             bgLayout: 'gray-bg',
-            title: 'Esqueci a Senha',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/forgot.html',
+                    controller: 'ForgotCtrl',
+                }
+            },
         })
 
         .state('reset', {
             url: '/reset?token&email',
-            templateUrl: 'build/views/reset.html',
-            controller: 'ResetCtrl',
+            title: 'Recuperar a Senha',
             requiredLogin: false,
             bgLayout: 'gray-bg',
-            title: 'Recuperar a Senha',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/reset.html',
+                    controller: 'ResetCtrl',
+                }
+            },
         })
 
         .state('logout', {
@@ -261,28 +395,41 @@ angular.module('app.routes', ['ui.router'])
 
         .state('not-found', {
             url: '/not-found',
-            templateUrl: 'build/views/errors/404.html',
-            controller: 'ErrorCtrl',
+            title: 'Página não Encontrada',
             requiredLogin: false,
             bgLayout: 'gray-bg',
-            title: 'Página não Encontrada',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/errors/404.html',
+                    controller: 'ErrorCtrl',
+                }
+            },
         })
 
         .state('forbidden', {
             url: '/forbidden',
-            templateUrl: 'build/views/errors/403.html',
-            controller: 'ErrorCtrl',
+            title: 'Sem Autorização',
             requiredLogin: false,
-            bgLayout: 'gray-bg'
+            bgLayout: 'gray-bg',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/errors/403.html',
+                    controller: 'ErrorCtrl',
+                }
+            },
         })
 
         .state('server-error', {
             url: '/server-error',
-            templateUrl: 'build/views/errors/500.html',
-            controller: 'ErrorCtrl',
+            title: 'Server Error',
             requiredLogin: false,
             bgLayout: 'gray-bg',
-            title: 'Server Error',
+            views: {
+                'main@': {
+                    templateUrl: 'build/views/errors/500.html',
+                    controller: 'ErrorCtrl',
+                }
+            },
         });
     }
 ]);
