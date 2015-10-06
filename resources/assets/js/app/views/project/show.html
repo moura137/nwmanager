@@ -8,7 +8,7 @@
 
         <div class="ibox-content">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" align="center">
                     <h2>[[ project.name ]]</h2>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <dt>Prazo de Entrega:</dt> <dd>[[ project.due_date | formatDate ]] </dd>
                     </dl>
                 </div>
-                <div class="col-lg-7" id="cluster_info">
+                <div class="col-lg-4" id="cluster_info">
                     <dl class="dl-horizontal" >
 
                         <dt>Útima Alteração:</dt> <dd>[[ project.updated_at | formatDateTime ]]</dd>
@@ -30,26 +30,24 @@
                         <dd><a ng-href="#/project/[[ project.id ]]/members" class="text-navy"><i class="fa fa-users"></i> [[ project.members.data.length | strpad:4 ]] </a></dd>
                     </dl>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <dl class="dl-horizontal">
-                        <dt>Descrição</dt>
-                        <dd ng-bind-html="project.description | nl2br"></dd>
-                    </dl>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <dl class="dl-horizontal">
-                        <dt>Completado:</dt>
-                        <dd>
-                            <div class="progress m-b-sm">
-                                <div style="width: [[ project.progress ]]%;" class="progress-bar progress-bar-[[ project.status | statusClassProject ]]"></div>
+                <div class="col-lg-3" align="center">
+                    <div class="radial-progress radial-progress-[[ project.status | statusClassProject ]]" data-progress="[[ project.progress ]]">
+                        <div class="circle">
+                            <div class="mask full">
+                                <div class="fill"></div>
                             </div>
-                            <small>Project completed in <strong>[[ project.progress ]]%</strong></small>
-                        </dd>
-                    </dl>
+                            <div class="mask half">
+                                <div class="fill"></div>
+                                <div class="fill fix"></div>
+                            </div>
+                            <div class="shadow"></div>
+                        </div>
+                        <div class="inset">
+                            <div class="percentage">
+                                <div class="numbers">[[ project.progress ]]%</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -59,8 +57,9 @@
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a ng-click="tab('tab-note')" data-toggle="tab" rel="tab-note"><i class="fa fa-file-text-o"></i> Anotações</a></li>
-                                    <li class=""><a ng-click="tab('tab-file')" data-toggle="tab" rel="tab-file"><i class="fa fa-file"></i> Arquivos</a></li>
-                                    <li class=""><a ng-click="tab('tab-task')" data-toggle="tab" rel="tab-task"><i class="fa fa-tasks"></i> Tarefas</a></li>
+                                    <li><a ng-click="tab('tab-file')" data-toggle="tab" rel="tab-file"><i class="fa fa-file"></i> Arquivos</a></li>
+                                    <li><a ng-click="tab('tab-task')" data-toggle="tab" rel="tab-task"><i class="fa fa-tasks"></i> Tarefas</a></li>
+                                    <li><a ng-click="tab('tab-detalhes')"data-toggle="tab" rel="tab-detalhes"><i class="fa fa-info-circle"></i> Detalhes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,6 +76,9 @@
                                 </div>
                                 <div class="tab-pane" id="tab-task" ng-controller="ProjectTaskListCtrl">
                                     <div ng-include src="'build/views/project-task/_tasks.html'"></div>
+                                </div>
+                                <div class="tab-pane" id="tab-detalhes">
+                                    <div ng-bind-html="project.description | nl2br"></div>
                                 </div>
                             </div>
                         </div>

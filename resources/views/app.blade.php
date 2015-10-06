@@ -7,9 +7,8 @@
     <title>[[ pageTitle ]] | NwManager</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
     @if(config('app.debug'))
+        <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('build/vendor/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/jasny-bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/sweetalert.css') }}" rel="stylesheet" />
@@ -18,7 +17,9 @@
         <link href="{{ asset('build/css/animate.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/inspinia.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/styles.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/css/radial-progress.css') }}" rel="stylesheet" />
     @else
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link href="{{ elixir('css/all.css') }}" rel="stylesheet" />
     @endif
 

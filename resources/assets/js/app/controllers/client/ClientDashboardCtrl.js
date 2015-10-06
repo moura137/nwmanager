@@ -13,7 +13,7 @@ angular.module('app.controllers')
                 $rootScope.clearError();
                 var search = $scope.q + '%';
 
-                Client.limit({'search': search, 'page': page, 'limit': $scope.limit}, function(res) {
+                Client.query({'search': search, 'page': page, 'limit': $scope.limit}, function(res) {
                     var clients = res.data;
 
                     $scope.clients = clients;

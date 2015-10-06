@@ -80,7 +80,7 @@ angular.module('app.routes', ['ui.router'])
         })
 
         .state('painel.client.delete', {
-            url: '/client/:id/delete',
+            url: '/:id/delete',
             title: 'Excluir Cliente',
             views: {
                 '@painel': {

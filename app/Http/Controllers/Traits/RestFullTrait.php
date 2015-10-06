@@ -39,12 +39,14 @@ trait RestFullTrait
      */
     public function index(Request $request)
     {
+        $limit = $request->get('limit');
+
         return $this->repo
             ->skipPresenter(false)
             ->pushCriteria(new InputCriteria($request->all()))
             ->with($this->withRelations)
             ->orderBy($this->orderBy)
-            ->paginate();
+            ->paginate($limit);
     }
 
     /**

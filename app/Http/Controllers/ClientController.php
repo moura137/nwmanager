@@ -28,21 +28,4 @@ class ClientController extends Controller
         $this->service = $service;
         $this->orderBy = 'name ASC';
     }
-
-    /**
-     * Display a listing limitando
-     *
-     * @return Response
-     */
-    public function limit(Request $request)
-    {
-        $limit = $request->get('limit', 10);
-
-        return $this->repo
-            ->skipPresenter(false)
-            ->pushCriteria(new InputCriteria($request->all()))
-            ->with($this->withRelations)
-            ->orderBy($this->orderBy)
-            ->paginate($limit);
-    }
 }
