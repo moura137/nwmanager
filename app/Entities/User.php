@@ -96,4 +96,14 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
     {
         return $this->hasMany(ProjectNote::class, 'user_id');
     }
+
+    /**
+     * Activities
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'entity');
+    }
 }

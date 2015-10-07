@@ -86,6 +86,8 @@ class ProjectTaskController extends Controller
             return response()->json($errors, 422);
         }
 
+        activity('Criou nova tarefa', $entity);
+
         return response()->json($entity->presenter(), 201);
     }
 

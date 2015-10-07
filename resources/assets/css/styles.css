@@ -111,3 +111,199 @@
 .dashboard-home .list-projects .ibox-content {
   height: 170px;
 }
+
+.dashboard .ibox-title {
+  height: 55px;
+}
+
+.dashboard .ibox-title {
+  height: 55px;
+}
+
+.dashboard .ibox-content.no-padding-lateral {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* -- Mini timline for using with list item */
+/* Boxed Manager */
+.boxed-manager-menu-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .boxed-manager-menu-nav > li {
+    margin: 0;
+    padding: 0; }
+  .boxed-manager-menu-nav .boxed-manager-menu-nav-header {
+    padding: 10px;
+    height: 46px; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-header:before, .boxed-manager-menu-nav .boxed-manager-menu-nav-header:after {
+      content: " ";
+      display: table; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-header:after {
+      clear: both; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-header .h4 {
+      padding: 2px 0; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-header .btn {
+      color: #A0A0A0;
+      background: transparent;
+      border-color: #A0A0A0;
+      position: relative;
+      top: -3px;
+      font-size: 1em;
+      padding: 0 7px; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-header .btn-group {
+      top: -3px;
+      position: relative; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-header .btn-group .btn {
+        top: 0; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-header .btn-group .select-styled.select-styled-sm select {
+        padding-bottom: 4px; }
+  .boxed-manager-menu-nav .boxed-manager-menu-nav-item a {
+    border: 1px solid #DFDFDF;
+    border-right: 0;
+    padding: 8px;
+    background: #FFF;
+    display: block;
+    position: relative; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-item a .type-type-icon {
+      float: right;
+      font-size: 1.1em; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-item a.actived, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:hover, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:focus {
+      text-decoration: none;
+      background: #F3F8FD; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-item a.actived:before, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a.actived:after, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:hover:before, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:hover:after, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:focus:before, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:focus:after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        right: -9px;
+        margin-top: -10px;
+        z-index: 999;
+        height: 0;
+        width: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid #F3F8FD; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-item a.actived:before, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:hover:before, .boxed-manager-menu-nav .boxed-manager-menu-nav-item a:focus:before {
+        right: -10px;
+        border-left-color: #DFDFDF; }
+  .boxed-manager-menu-nav .boxed-manager-menu-nav-item .status {
+    margin: 10px 0 0; }
+  .boxed-manager-menu-nav .boxed-manager-menu-nav-item + .boxed-manager-menu-nav-item a {
+    border-top: 0; }
+  .boxed-manager-menu-nav .boxed-manager-menu-nav-search {
+    padding: 10px;
+    background-color: #DFDFDF;
+    border: 1px solid #DFDFDF;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-search .form-control {
+      background-color: transparent;
+      color: #8c8c8c;
+      border-color: #8c8c8c; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-search .form-control::-moz-placeholder {
+        color: #a6a6a6;
+        opacity: 1; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-search .form-control:-ms-input-placeholder {
+        color: #a6a6a6; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-search .form-control::-webkit-input-placeholder {
+        color: #a6a6a6; }
+      .boxed-manager-menu-nav .boxed-manager-menu-nav-search .form-control:focus {
+        -webkit-box-shadow: none;
+        box-shadow: none; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-search .btn-default {
+      background-color: #8c8c8c;
+      border-color: #8c8c8c;
+      color: #DFDFDF; }
+    .boxed-manager-menu-nav .boxed-manager-menu-nav-search + boxed-manager-menu-nav-item a {
+      border-top-color: #FFF; }
+.boxed-manager-main {
+  border-left: 0;
+  -webkit-box-shadow: -1px 0px 0 0 #DFDFDF;
+  box-shadow: -1px 0px 0 0 #DFDFDF; }
+  .boxed-manager-main.boxed-manager-main-sm {
+    width: 50%; }
+  .boxed-manager-main.boxed-manager-main-xlg {
+    width: 80%; }
+  .boxed-manager-main .boxed-manager-main-header {
+    padding: 15px 10px;
+    height: 47px;
+    border-bottom: 1px solid #DFDFDF; }
+    .boxed-manager-main .boxed-manager-main-header:before, .boxed-manager-main .boxed-manager-main-header:after {
+      content: " ";
+      display: table; }
+    .boxed-manager-main .boxed-manager-main-header:after {
+      clear: both; }
+    .boxed-manager-main .boxed-manager-main-header small {
+      font-size: .8em; }
+  .boxed-manager-main .boxed-manager-main-body {
+    border-bottom: 1px solid #DFDFDF;
+    background: #FFF;
+    padding: 25px;
+    position: relative;
+    min-height: 400px; }
+    .boxed-manager-main .boxed-manager-main-body .task-list {
+      margin: 0 -25px; }
+      .boxed-manager-main .boxed-manager-main-body .task-list .task-list-title,
+      .boxed-manager-main .boxed-manager-main-body .task-list .task-list-body > li {
+        padding-left: 25px;
+        padding-right: 25px; }
+    .boxed-manager-main .boxed-manager-main-body > .list-styled {
+      margin: 0 -25px; }
+    .boxed-manager-main .boxed-manager-main-body > .boxed-manager-main-body-fluid {
+      margin: 0 -25px; }
+  .boxed-manager-main.arrow .boxed-manager-main-body:before, .boxed-manager-main.arrow .boxed-manager-main-body:after {
+    content: " ";
+    position: absolute;
+    top: 30px;
+    right: -9px;
+    z-index: 999;
+    height: 0;
+    width: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #FFF; }
+  .boxed-manager-main.arrow .boxed-manager-main-body:before {
+    right: -10px;
+    border-left-color: #DFDFDF; }
+.boxed-manager-info {
+  border-left: 0;
+  -webkit-box-shadow: -1px 0px 0 0 #DFDFDF;
+  box-shadow: -1px 0px 0 0 #DFDFDF; }
+  .boxed-manager-info.boxed-manager-info-lg {
+    width: 30%; }
+  .boxed-manager-info .boxed-manager-info-header {
+    padding: 15px 10px;
+    height: 47px;
+    border-bottom: 1px solid #DFDFDF; }
+    .boxed-manager-info .boxed-manager-info-header:before, .boxed-manager-info .boxed-manager-info-header:after {
+      content: " ";
+      display: table; }
+    .boxed-manager-info .boxed-manager-info-header:after {
+      clear: both; }
+  .boxed-manager-info .boxed-manager-info-body {
+    padding: 25px;
+    background: #FFF;
+    border-bottom: 1px solid #DFDFDF; }
+    .boxed-manager-info .boxed-manager-info-body .boxed-manager-info-body-chart {
+      margin: -25px -25px 0;
+      padding: 15px;
+      background: #EAEBEC; }
+      .boxed-manager-info .boxed-manager-info-body .boxed-manager-info-body-chart:before, .boxed-manager-info .boxed-manager-info-body .boxed-manager-info-body-chart:after {
+        content: " ";
+        display: table; }
+      .boxed-manager-info .boxed-manager-info-body .boxed-manager-info-body-chart:after {
+        clear: both; }
+      .boxed-manager-info .boxed-manager-info-body .boxed-manager-info-body-chart .radial-progress {
+        margin: 0 auto 5px; }
+    .boxed-manager-info .boxed-manager-info-body > .list-styled {
+      margin: 0 -25px -25px; }
+    .boxed-manager-info .boxed-manager-info-body.bg-gray10 {
+      -webkit-box-shadow: 0px -1px 0 0 #e6e6e6 !important;
+      box-shadow: 0px -1px 0 0 #e6e6e6 !important; }
+  .boxed-manager-info.no-border {
+    border-color: transparent; }
+    .boxed-manager-info.no-border .boxed-manager-info-header {
+      border-bottom-color: transparent; }
+    .boxed-manager-info.no-border .boxed-manager-info-body {
+      border-bottom-color: transparent; }

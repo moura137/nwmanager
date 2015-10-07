@@ -21,6 +21,8 @@ class FakerSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         $faker = app('Faker\Generator');
 
+        Entities\Activity::truncate();
+
         // Users
         Entities\User::truncate();
         factory(Entities\User::class)->create([

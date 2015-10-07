@@ -4,6 +4,9 @@
  * FrontEnd
  */
 Route::get('/',      ['uses' => 'HomeController@index',  'as' => 'home']);
+Route::any('/status', function(){
+    return 'OK';
+});
 
 /**
  * API
@@ -70,6 +73,8 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::delete('project/{project}/file/{file}',       'ProjectFileController@destroy');
         Route::delete('project/{project}/files',             'ProjectFileController@destroyAll');
         Route::get('project/{project}/file/{file}/download', 'ProjectFileController@download');
+
+        Route::get('activities', 'ActivityController@index');
     });
 
     Route::any('/{uri?}', function () {

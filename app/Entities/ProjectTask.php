@@ -47,4 +47,14 @@ class ProjectTask extends AbstractEntity
     {
         return $this->belongsTo(Project::class);
     }
+
+    /**
+     * Activities
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'entity');
+    }
 }

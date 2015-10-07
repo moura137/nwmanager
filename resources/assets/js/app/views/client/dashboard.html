@@ -5,7 +5,7 @@
                 <div class="ibox">
                 <div class="ibox-title">
                     <div class="input-group">
-                        <select ng-model="q" class="form-control" ng-change="search()">
+                        <select ng-model="q" class="form-control input-sm" ng-change="search()">
                             <option value="">--</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -35,14 +35,14 @@
                             <option value="Z">Z</option>
                         </select>
                         <span class="input-group-btn">
-                            <a ng-href="#/client/new" class="btn btn-white">
+                            <a ng-href="#/client/new" class="btn btn-white btn-sm">
                             <i class="fa fa-plus"></i>
                             </a>
                         </span>
                     </div>
                 </div>
 
-                <div class="ibox-content no-padding">
+                <div class="ibox-content no-padding-lateral">
 
                     <a class="list-group-item" ng-click="changeClient(entity)" ng-class="{active: client.id==entity.id}" ng-repeat="entity in clients">
                         <h3 class="list-group-item-heading">[[ entity.name ]]</h3>

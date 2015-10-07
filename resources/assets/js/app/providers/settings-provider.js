@@ -3,14 +3,17 @@
  */
 angular.module('app.providers')
 .provider('Settings',
-    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE',
-    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE){
+    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE', 'PUSHER_API_KEY',
+    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE, PUSHER_API_KEY){
         var config = {
             basePath: BASE_PATH,
             apiUrl: API_URL,
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             secure: AUTH_SECURE,
+            Pusher: {
+                ApiKey: PUSHER_API_KEY
+            },
             project : {
                 status: [
                     { value: '1', label: 'Aberto', style: 'primary'  },
@@ -21,7 +24,7 @@ angular.module('app.providers')
             projectTask : {
                 status: [
                     { value: '0', label: 'Incompleta', style: 'warning' },
-                    { value: '1', label: 'Completa', style: 'success' },
+                    { value: '1', label: 'Completa', style: 'success' }
                 ]
             },
             utils : {

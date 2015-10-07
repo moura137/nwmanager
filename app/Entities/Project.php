@@ -145,6 +145,16 @@ class Project extends AbstractEntity
     }
 
     /**
+     * Activities
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'entity');
+    }
+
+    /**
      * Members
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -152,5 +162,25 @@ class Project extends AbstractEntity
     public function members()
     {
         return $this->belongsToMany(User::class, 'project_members');
+    }
+
+    public function countNotes()
+    {
+        return $this->notes()->count();
+    }
+
+    public function countFiles()
+    {
+        return $this->files()->count();
+    }
+
+    public function countTasks()
+    {
+        return $this->tasks()->count();
+    }
+
+    public function countTasksOpened()
+    {
+        return $this->tasks()->where('status', '0')->count();
     }
 }

@@ -43,6 +43,16 @@ class Client extends AbstractEntity
     }
 
     /**
+     * Activities
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'entity');
+    }
+
+    /**
      * Set Email
      *
      * @param string $value

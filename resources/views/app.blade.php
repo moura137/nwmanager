@@ -59,6 +59,9 @@
         <script src="{{ asset('build/vendor/js/angular-file-upload.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/jquery.fileDownload.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/pusher.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/pusher-angular.min.js') }}"></script>
+
         <script src="{{ asset('build/js/constants.js') }}"></script>
 
         <script src="{{ asset('build/js/app/app.js') }}"></script>
@@ -103,6 +106,7 @@
         <script src="{{ asset('build/js/app/controllers/ErrorCtrl.js') }}"></script>
 
         <!-- Services -->
+        <script src="{{ asset('build/js/app/services/activity.js') }}"></script>
         <script src="{{ asset('build/js/app/services/auth-user.js') }}"></script>
         <script src="{{ asset('build/js/app/services/client.js') }}"></script>
         <script src="{{ asset('build/js/app/services/user.js') }}"></script>

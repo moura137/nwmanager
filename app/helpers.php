@@ -1,4 +1,13 @@
 <?php
+
+if (! function_exists('activity')) {
+
+    function activity($event, $entity = null)
+    {
+        return app('NwManager\Services\ActivityService')->createActivity($event, $entity);
+    }
+}
+
 if (! function_exists('avatar')) {
     /**
      * Avatar do User

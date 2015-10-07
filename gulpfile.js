@@ -79,6 +79,8 @@ paths.vendor_js = [
     paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js',
     paths.bower + '/sweetalert/dist/sweetalert.min.js',
     paths.bower + '/jquery-file-download/src/Scripts/jquery.fileDownload.js',
+    paths.bower + '/pusher/dist/pusher.min.js',
+    paths.bower + '/pusher-angular/lib/pusher-angular.min.js',
 ];
 
 paths.vendor_js_map = [
@@ -99,8 +101,10 @@ gulp.task('config', function() {
   var constants = {
     BASE_PATH: 'http://localhost:8000',
     API_URL: 'http://localhost:8000',
+    AUTH_SECURE: false,
     CLIENT_ID: 'ANGULAR_APP',
-    CLIENT_SECRET: ''
+    CLIENT_SECRET: '',
+    PUSHER_API_KEY: '',
   };
 
   if( ! fs.existsSync(fileEnvConfig)) {
@@ -111,6 +115,7 @@ gulp.task('config', function() {
   }
 
   var envConfig = require(fileEnvConfig);
+  console.log(constants, envConfig, merge_options(constants, envConfig));
   ngConstant({
       name: 'app.env.config',
       constants: merge_options(constants, envConfig),

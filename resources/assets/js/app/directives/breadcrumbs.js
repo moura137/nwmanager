@@ -23,8 +23,7 @@ angular.module('app.directives')
                 while(currentState && currentState.self.name !== '')
                 {
                     breadcrumbs.push({
-                        'route': currentState.self.name,
-                        'url': currentState.self.url || '/',
+                        'route': currentState.self.name+'.home',
                         'title': currentState.self.title
                     });
                     currentState = currentState.parent;

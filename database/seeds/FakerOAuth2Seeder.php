@@ -37,6 +37,7 @@ class FakerOAuth2Seeder extends Seeder
             'BASE_PATH' => 'http://localhost:8000',
             'API_URL' => 'http://localhost:8000',
             'AUTH_SECURE' => false,
+            'PUSHER_API_KEY' => '',
         ];
 
         $path = base_path('env-config.json');

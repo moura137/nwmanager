@@ -47,8 +47,8 @@ angular.module('app.directives')
                 });
             },
             controller: [
-                '$timeout', '$scope', '$element', '$attrs', 'ProjectFile',
-                function($timeout, $scope, $element, $attrs, ProjectFile) {
+                '$scope', '$element', '$attrs', 'ProjectFile',
+                function($scope, $element, $attrs, ProjectFile) {
 
                     var anchor = $element.children()[0];
 

@@ -388,13 +388,13 @@ angular.module('app.routes', ['ui.router'])
 
         .state('logout', {
             url: '/logout',
+            requiredLogin: false,
             resolve: {
                 logout: ['$location', 'OAuthToken', function($location, OAuthToken){
                     OAuthToken.removeToken();
                     $location.url('/login');
                 }]
             },
-            requiredLogin: false,
         })
 
         .state('not-found', {

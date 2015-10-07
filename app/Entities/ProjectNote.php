@@ -52,6 +52,16 @@ class ProjectNote extends AbstractEntity
     }
 
     /**
+     * Activities
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'entity');
+    }
+
+    /**
      * Is User
      *
      * @param int $userId
