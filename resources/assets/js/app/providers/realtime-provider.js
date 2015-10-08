@@ -17,14 +17,18 @@ angular.module('app.providers')
 }])
 
 .factory('$RealtimeFactory',
-    ['RealtimePusher',
-    function (RealtimePusher) {
+    ['RealtimePusher', 'RealtimeLog',
+    function (RealtimePusher, RealtimeLog) {
         function RealtimeFactory(driver) {
             if (!(this instanceof RealtimeFactory)) {
                 switch(driver) {
-                    default:
                     case 'pusher':
                         return RealtimePusher;
+                    break;
+                    default:
+                    case 'log':
+                        console.log('RealtimeLog')
+                        return RealtimeLog;
                     break;
                 }
             }
@@ -75,4 +79,34 @@ angular.module('app.providers')
                 return this.socket.channel(channelName);
             }
         };
-    }]);
+    }])
+
+.service('RealtimeLog', function () {
+    this.connect = function () {
+        console.log('CONNECT()');
+    };
+
+    this.disconnect = function () {
+        console.log('DICONNECT()');
+    };
+
+    this.on = function (channelName, eventName, callback, context) {
+        console.log('ON()', {
+            'channelName': channelName,
+            'eventName': eventName,
+            'callback': callback,
+            'context': context
+        });
+    };
+
+    this.off = function (channelName, eventName) {
+        console.log('OFF()', {
+            'channelName': channelName,
+            'eventName': eventName,
+        });
+    };
+
+    this.channel = function (channelName) {
+        console.log('CHANNEL()', channelName);
+    };
+});
