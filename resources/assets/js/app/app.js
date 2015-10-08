@@ -64,16 +64,9 @@ App.config([
     }
 ]);
 
-
-App.config(['RealtimeProvider',
-    function(RealtimeProvider)
-    {
-        RealtimeProvider.configure('pusher');
-    }]);
-
 App.run([
-    '$rootScope', '$location', '$modal', '$timeout', '$pusher', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings', 'Realtime',
-    function($rootScope, $location, $modal, $timeout, $pusher, AuthUser, authService, OAuthToken, OAuth, Settings, Realtime)
+    '$rootScope', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings', 'Realtime',
+    function($rootScope, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings, Realtime)
     {
         $rootScope.$on('event:http-notfound', function(event, rejection) {
             $location.url('not-found');

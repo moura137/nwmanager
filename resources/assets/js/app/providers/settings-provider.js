@@ -3,16 +3,19 @@
  */
 angular.module('app.providers')
 .provider('Settings',
-    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE', 'PUSHER_API_KEY',
-    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE, PUSHER_API_KEY){
+    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE', 'BROADCAST_DRIVER', 'PUSHER_API_KEY',
+    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE, BROADCAST_DRIVER, PUSHER_API_KEY){
         var config = {
             basePath: BASE_PATH,
             apiUrl: API_URL,
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             secure: AUTH_SECURE,
-            Pusher: {
-                ApiKey: PUSHER_API_KEY
+            broadcast: {
+                driver: BROADCAST_DRIVER,
+                pusher: {
+                    ApiKey: PUSHER_API_KEY
+                },
             },
             project : {
                 status: [

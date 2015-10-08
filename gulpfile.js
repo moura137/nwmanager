@@ -103,6 +103,7 @@ gulp.task('config', function() {
     AUTH_SECURE: false,
     CLIENT_ID: 'ANGULAR_APP',
     CLIENT_SECRET: '',
+    BROADCAST_DRIVER: 'log',
     PUSHER_API_KEY: '',
   };
 

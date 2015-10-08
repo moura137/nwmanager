@@ -37,6 +37,7 @@ class FakerOAuth2Seeder extends Seeder
             'BASE_PATH' => 'http://localhost:8000',
             'API_URL' => 'http://localhost:8000',
             'AUTH_SECURE' => false,
+            'BROADCAST_DRIVER' => 'log',
             'PUSHER_API_KEY' => '',
         ];
 

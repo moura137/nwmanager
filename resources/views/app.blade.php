@@ -44,7 +44,6 @@
         <script src="{{ asset('build/vendor/js/angular-ui-router.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-sanitize.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-resource.js') }}"></script>
-        <script src="{{ asset('build/vendor/js/angular-animate.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-messages.js') }}"></script>
         <script src="{{ asset('build/vendor/js/ui-bootstrap.js') }}"></script>
         <script src="{{ asset('build/vendor/js/ui-bootstrap-tpls.js') }}"></script>

@@ -2,17 +2,19 @@
  * ------ Providers ------------
  */
 angular.module('app.providers')
-.provider('Realtime',function() {
+
+.provider('Realtime',['SettingsProvider', function(SettingsProvider) {
     return {
-        configure: function(driver){
+        configure: function(driver) {
             this.driver = driver;
         },
 
         $get: ['$RealtimeFactory', function($RealtimeFactory) {
-            return $RealtimeFactory(this.driver);
+            var driver = this.driver || SettingsProvider.config.broadcast.driver;
+            return $RealtimeFactory(driver);
         }]
     };
-})
+}])
 
 .factory('$RealtimeFactory',
     ['RealtimePusher',
@@ -38,7 +40,7 @@ angular.module('app.providers')
 
         this.connect = function () {
             if (!this.socket) {
-                var client = new Pusher(Settings.Pusher.ApiKey);
+                var client = new Pusher(Settings.broadcast.pusher.ApiKey);
                 this.socket = $pusher(client);
             }
         };
