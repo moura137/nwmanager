@@ -3,40 +3,25 @@
  */
 angular.module('app.controllers')
     .controller('HomeCtrl',
-        ['$scope', '$rootScope', '$pusher', 'Project', 'Activity',
-        function($scope, $rootScope, $pusher, Project, Activity) {
+        ['$scope', '$rootScope', 'Notification', 'Realtime', 'Project', 'Activity',
+        function($scope, $rootScope, Notification, Realtime, Project, Activity) {
             $scope.activities = [];
 
-            var channelName = 'feed-activity';
-            var pusher = $pusher(window.client);
+            var limit = 6;
+            var channelName = 'activities';
+            var eventName = 'ActivityEvent';
 
-            pusher.unsubscribe(channelName);
-            var channel = pusher.subscribe(channelName);
-
-            channel.bind('pusher:subscription_succeeded', function(object) {
-              console.log('pusher:subscription_succeeded', object);
-            });
-
-            channel.bind('pusher:subscription_error', function(status) {
-              console.log('pusher:subscription_error', status);
-
-              if(status == 408 || status == 503){
-                // retry?
-              }
-            });
-
-            channel.bind('ActivityEvent', function(activity) {
-                console.log('ActivityEvent', activity);
-
-                var limit = 6;
+            Realtime.connect();
+            Realtime.on(channelName, eventName, function(activity) {
                 if ($scope.activities.length >= limit) {
                     $scope.activities.splice(limit-1);
                 }
                 $scope.activities.unshift(activity.data);
+                Notification.success(activity.data.event);
             });
 
             $scope.searchActivities = function(page) {
-                Activity.query({'limit': 6}, function(res) {
+                Activity.query({'limit': limit}, function(res) {
                     $scope.activities = res.data;
                 });
             };

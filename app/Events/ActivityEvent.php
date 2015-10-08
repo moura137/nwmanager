@@ -16,7 +16,12 @@ class ActivityEvent extends Event implements ShouldBroadcast
     /**
      * @var string
      */
-    protected $channel = 'feed-activity';
+    protected $channelName = 'activities';
+
+    /**
+     * @var string
+     */
+    protected $eventName = 'ActivityEvent';
 
     /**
      * Create a new event instance.
@@ -37,7 +42,7 @@ class ActivityEvent extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [$this->channel];
+        return [$this->channelName];
     }
 
     /**
@@ -50,8 +55,13 @@ class ActivityEvent extends Event implements ShouldBroadcast
         return $this->activity->presenter();
     }
 
+    /**
+     * Get Event Name
+     *
+     * @return string
+     */
     public function broadcastAs()
     {
-        return 'ActivityEvent';
+        return $this->eventName;
     }
 }

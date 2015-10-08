@@ -10,7 +10,6 @@ var notify = {
     title: 'NwManager',
 
     message : function(message) {
-        console.log(__dirname);
         return gulpNotify({
             title: this.title,
             message: message,
@@ -52,6 +51,7 @@ paths.vendor_css = [
     paths.bower + '/sweetalert/dist/sweetalert.css',
     paths.bower + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
     paths.bower + '/nouislider/distribute/nouislider.min.css',
+    paths.bower + '/angular-ui-notification/dist/angular-ui-notification.min.css',
     paths.assets + '/css/animate.css',
     paths.assets + '/css/styles.css'
 ];
@@ -81,6 +81,7 @@ paths.vendor_js = [
     paths.bower + '/jquery-file-download/src/Scripts/jquery.fileDownload.js',
     paths.bower + '/pusher/dist/pusher.min.js',
     paths.bower + '/pusher-angular/lib/pusher-angular.min.js',
+    paths.bower + '/angular-ui-notification/dist/angular-ui-notification.min.js',
 ];
 
 paths.vendor_js_map = [
@@ -115,7 +116,6 @@ gulp.task('config', function() {
   }
 
   var envConfig = require(fileEnvConfig);
-  console.log(constants, envConfig, merge_options(constants, envConfig));
   ngConstant({
       name: 'app.env.config',
       constants: merge_options(constants, envConfig),

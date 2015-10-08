@@ -4730,7 +4730,7 @@ dd.project-people {
   float: right;
   margin-left: 10px;
 }
-.message {
+/*.message {
   background-color: #fff;
   border: 1px solid #e7eaec;
   text-align: left;
@@ -4738,7 +4738,7 @@ dd.project-people {
   padding: 10px 20px;
   position: relative;
   border-radius: 4px;
-}
+}*/
 .chat-discussion .chat-message.left .message-date {
   float: right;
 }

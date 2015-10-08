@@ -13,7 +13,8 @@ var App = angular.module('App', [
     'ngSanitize',
     'angular-oauth2',
     'http-auth-interceptor',
-    'pusher-angular']);
+    'pusher-angular',
+    'ui-notification']);
 
 /** Modules **/
 angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap', 'ui.bootstrap.tpls', 'mgcrea.ngStrap.navbar']);
@@ -63,9 +64,16 @@ App.config([
     }
 ]);
 
+
+App.config(['RealtimeProvider',
+    function(RealtimeProvider)
+    {
+        RealtimeProvider.configure('pusher');
+    }]);
+
 App.run([
-    '$rootScope', '$location', '$modal', '$timeout', '$pusher', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings',
-    function($rootScope, $location, $modal, $timeout, $pusher, AuthUser, authService, OAuthToken, OAuth, Settings)
+    '$rootScope', '$location', '$modal', '$timeout', '$pusher', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings', 'Realtime',
+    function($rootScope, $location, $modal, $timeout, $pusher, AuthUser, authService, OAuthToken, OAuth, Settings, Realtime)
     {
         $rootScope.$on('event:http-notfound', function(event, rejection) {
             $location.url('not-found');
@@ -84,7 +92,6 @@ App.run([
         $rootScope.$on('event:auth-loginConfirmed', function(event, data) {
             $rootScope.isLoggedin = false;
             $rootScope.getAuthUser();
-            $rootScope.$emit("pusher-build");
         });
 
         $rootScope.$on('event:auth-loginCancelled', function(event, data) {
@@ -95,9 +102,7 @@ App.run([
         {
             if (!$rootScope.isLoggedin) {
                 $rootScope.isLoggedin = true;
-                $timeout(function() {
-                    $rootScope.$emit("pusher-destroy");
-                });
+                Realtime.disconnect();
 
                 OAuth.getRefreshToken().then(function(response){
                     authService.loginConfirmed(response);
@@ -114,46 +119,36 @@ App.run([
             return deferred.promise;
         });
 
-        $rootScope.$on("pusher-build", function(event)
-        {
-            if (!window.client) {
-                window.client = new Pusher(Settings.Pusher.ApiKey);
-                var pusher = $pusher(window.client);
+        // $rootScope.$on("pusher-build", function(event)
+        // {
+        //     if (!window.client) {
+        //         window.client = new Pusher(Settings.Pusher.ApiKey);
+        //         var pusher = $pusher(window.client);
 
-                pusher.connection.bind('state_change', function(states) {
-                  console.log('state_change', states);
-                });
+        //         pusher.connection.bind('state_change', function(states) {
+        //           console.log('state_change', states);
+        //         });
 
-                pusher.connection.bind('connected', function(socket) {
-                  console.log('connected', socket);
-                });
+        //         pusher.connection.bind('connected', function(socket) {
+        //           console.log('connected', socket);
+        //         });
 
-                pusher.connection.bind('error', function(err) {
-                  console.log('ERROR', err);
+        //         pusher.connection.bind('error', function(err) {
+        //           console.log('ERROR', err);
 
-                  if( err.data.code === 4004 ) {
-                    console.log('>>> Limite Excedido');
-                  }
-                });
-            }
-        });
-
-        $rootScope.$on("pusher-destroy", function(event)
-        {
-            if (window.client) {
-                window.client.disconnect();
-                window.client = null;
-            }
-        });
+        //           if( err.data.code === 4004 ) {
+        //             console.log('>>> Limite Excedido');
+        //           }
+        //         });
+        //     }
+        // });
 
         $rootScope.$on("$stateChangeStart", function(event, nextState, nextParams, fromState, fromParams)
         {
             $rootScope.bgLayout = nextState.bgLayout;
 
             if (!OAuth.isAuthenticated()) {
-                $timeout(function() {
-                    $rootScope.$emit("pusher-destroy");
-                });
+                Realtime.disconnect();
 
                 if (nextState.requiredLogin!==false) {
                     $rootScope.bgLayout = fromState.bgLayout;
@@ -161,7 +156,6 @@ App.run([
                 }
             } else {
                 $rootScope.getAuthUser();
-                $rootScope.$emit("pusher-build");
             }
         });
 

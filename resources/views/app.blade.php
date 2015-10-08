@@ -14,6 +14,7 @@
         <link href="{{ asset('build/vendor/css/sweetalert.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/vendor/css/nouislider.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/vendor/css/angular-ui-notification.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/animate.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/inspinia.css') }}" rel="stylesheet" />
         <link href="{{ asset('build/css/styles.css') }}" rel="stylesheet" />
@@ -61,6 +62,7 @@
         <script src="{{ asset('build/vendor/js/jquery.fileDownload.js') }}"></script>
         <script src="{{ asset('build/vendor/js/pusher.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/pusher-angular.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/angular-ui-notification.min.js') }}"></script>
 
         <script src="{{ asset('build/js/constants.js') }}"></script>
 
@@ -120,6 +122,7 @@
 
         <!-- Providers -->
         <script src="{{ asset('build/js/app/providers/settings-provider.js') }}"></script>
+        <script src="{{ asset('build/js/app/providers/realtime-provider.js') }}"></script>
 
         <!-- Directives -->
         <script src="{{ asset('build/js/app/directives/include-scope.js') }}"></script>
