@@ -119,30 +119,6 @@ App.run([
             return deferred.promise;
         });
 
-        // $rootScope.$on("pusher-build", function(event)
-        // {
-        //     if (!window.client) {
-        //         window.client = new Pusher(Settings.Pusher.ApiKey);
-        //         var pusher = $pusher(window.client);
-
-        //         pusher.connection.bind('state_change', function(states) {
-        //           console.log('state_change', states);
-        //         });
-
-        //         pusher.connection.bind('connected', function(socket) {
-        //           console.log('connected', socket);
-        //         });
-
-        //         pusher.connection.bind('error', function(err) {
-        //           console.log('ERROR', err);
-
-        //           if( err.data.code === 4004 ) {
-        //             console.log('>>> Limite Excedido');
-        //           }
-        //         });
-        //     }
-        // });
-
         $rootScope.$on("$stateChangeStart", function(event, nextState, nextParams, fromState, fromParams)
         {
             $rootScope.bgLayout = nextState.bgLayout;
