@@ -129,6 +129,20 @@
   padding-right: 0px;
 }
 
+.dashboard .ibox-content.no-padding-lateral a.list-group-item.active:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: -9px;
+  margin-top: -10px;
+  z-index: 999;
+  height: 0;
+  width: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #1ab394;
+}
+
 /* -- Mini timline for using with list item */
 /* Boxed Manager */
 .boxed-manager-menu-nav {
