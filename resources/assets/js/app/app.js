@@ -73,20 +73,28 @@ App.run([
             Realtime.connect();
             Realtime.on(channelName, 'NewTaskEvent', function(task) {
                 var msg = '';
-                msg += 'Tarefa "';
-                msg += task.name;
-                msg += '" Criada, ';
-                msg += '\n<br />No Projeto "' + task.project.name + '"';
+                msg += 'Tarefa "' + task.name + '" Criada, ';
+                if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
+                msg += '\n<br>No Projeto "' + task.project.name + '"';
                 Notification.success(msg);
             });
 
             Realtime.on(channelName, 'EditTaskEvent', function(task) {
                 var msg = '';
-                msg += 'Tarefa "';
-                msg += task.name;
-                msg += '" Alterada, ';
-                msg += '\n<br />No Projeto "' + task.project.name + '"';
-                Notification.warning(msg);
+                if (task.status == '1') {
+                    msg += 'Tarefa "' + task.name + '" Finalizada, ';
+                    if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
+                    if (task.due_date) msg += '\n<br>Previsão "' + task.due_date;
+                    msg += '\n<br>No Projeto "' + task.project.name + '"';
+                    Notification.success(msg);
+
+                } else {
+                    msg += 'Tarefa "' + task.name + '" Alterada, ';
+                    if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
+                    if (task.due_date)msg += '\n<br>Previsão "' + task.due_date;
+                    msg += '\n<br>No Projeto "' + task.project.name + '"';
+                    Notification.warning(msg);
+                }
             });
         });
 
