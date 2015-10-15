@@ -1,0 +1,33 @@
+<div align="right">
+    <span>[[ activity_pagination.total ]] Atividades (s)</span>
+</div>
+
+<table class="table" ng-show="activities.length">
+<tbody>
+    <tr ng-repeat="activity in activities">
+        <td>
+            <em ng-show="activity.entity_desc">[[ activity.entity_desc ]]<br></em>
+            <b>[[ activity.user_name ]]</b> <small>[[ activity.diff_humans ]] </small>
+            <br>[[ activity.event ]]
+        </td>
+    </tr>
+</tbody>
+</table>
+
+<div ng-hide="activities.length" align="center">
+    NENHUMA ATIVIDADE NO MOMENTO
+</div>
+
+<pagination
+    ng-show="activity_pagination.total_pages>1"
+    ng-change="searchActivities(activity_pagination.current_page)"
+    boundary-links="true"
+    total-items="activity_pagination.total"
+    items-per-page="activity_pagination.per_page"
+    ng-model="activity_pagination.current_page"
+    class="pagination-sm"
+    previous-text="&lsaquo;"
+    next-text="&rsaquo;"
+    first-text="&laquo;"
+    last-text="&raquo;">
+</pagination>

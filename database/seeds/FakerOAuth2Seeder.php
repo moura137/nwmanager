@@ -39,6 +39,7 @@ class FakerOAuth2Seeder extends Seeder
             'AUTH_SECURE' => false,
             'BROADCAST_DRIVER' => config('broadcasting.default'),
             'PUSHER_API_KEY' => config('broadcasting.connections.pusher.key'),
+            'FANOUT_REALM_ID' => config('broadcasting.connections.fanout.realm_id'),
         ];
 
         $path = base_path('env-config.json');

@@ -5,6 +5,7 @@ namespace NwManager\Services;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use NwManager\Repositories\Criterias\InputCriteria;
 
 /**
  * Class AbstractService
@@ -72,10 +73,11 @@ abstract class AbstractService
      *
      * @param Entity|int $id
      * @param array      $data
+     * @param array      $criterias
      *
      * @return Model
      */
-    public function update($id, array $data = [])
+    public function update($id, array $data = [], $criterias = [])
     {
         $entity = $this->repository->find($id)->fill($data);
 
@@ -87,7 +89,10 @@ abstract class AbstractService
                 ->setId($id)
                 ->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            return $this->repository->update($data, $id);
+            return $this->repository
+                ->resetModel()
+                ->pushCriteria(new InputCriteria($criterias))
+                ->update($data, $id);
 
         } catch (ModelNotFoundException $e) {
             throw $e;
@@ -103,13 +108,17 @@ abstract class AbstractService
      *
      * @param Entity|int $id
      * @param array      $data
+     * @param array      $criterias
      *
      * @return bool
      */
-    public function delete($id, array $data = array())
+    public function delete($id, array $data = [], $criterias = [])
     {
         try {
-            return $this->repository->delete($id);
+            return $this->repository
+                ->resetModel()
+                ->pushCriteria(new InputCriteria($criterias))
+                ->delete($id);
 
         } catch (ModelNotFoundException $e) {
             throw $e;

@@ -65,9 +65,31 @@ App.config([
 ]);
 
 App.run([
-    '$rootScope', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings', 'Realtime',
-    function($rootScope, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings, Realtime)
+    '$rootScope', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings', 'Realtime', 'Notification',
+    function($rootScope, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings, Realtime, Notification)
     {
+        $rootScope.$on('realtime:build', function(event) {
+            var channelName = 'activities';
+            Realtime.connect();
+            Realtime.on(channelName, 'NewTaskEvent', function(task) {
+                var msg = '';
+                msg += 'Tarefa "';
+                msg += task.name;
+                msg += '" Criada, ';
+                msg += '\n<br />No Projeto "' + task.project.name + '"';
+                Notification.success(msg);
+            });
+
+            Realtime.on(channelName, 'EditTaskEvent', function(task) {
+                var msg = '';
+                msg += 'Tarefa "';
+                msg += task.name;
+                msg += '" Alterada, ';
+                msg += '\n<br />No Projeto "' + task.project.name + '"';
+                Notification.warning(msg);
+            });
+        });
+
         $rootScope.$on('event:http-notfound', function(event, rejection) {
             $location.url('not-found');
         });
@@ -85,6 +107,7 @@ App.run([
         $rootScope.$on('event:auth-loginConfirmed', function(event, data) {
             $rootScope.isLoggedin = false;
             $rootScope.getAuthUser();
+            $rootScope.$emit('realtime:build');
         });
 
         $rootScope.$on('event:auth-loginCancelled', function(event, data) {
@@ -124,7 +147,7 @@ App.run([
                     return $location.url('login');
                 }
             } else {
-                $rootScope.getAuthUser();
+                $rootScope.$emit('event:auth-loginConfirmed');
             }
         });
 

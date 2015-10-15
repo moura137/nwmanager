@@ -3,21 +3,19 @@
  */
 angular.module('app.controllers')
     .controller('HomeCtrl',
-        ['$scope', '$rootScope', 'Notification', 'Realtime', 'Project', 'Activity',
-        function($scope, $rootScope, Notification, Realtime, Project, Activity) {
+        ['$scope', '$rootScope', 'Realtime', 'Project', 'Activity',
+        function($scope, $rootScope, Realtime, Project, Activity) {
             $scope.activities = [];
 
             var limit = 6;
             var channelName = 'activities';
-            var eventName = 'ActivityEvent';
 
             Realtime.connect();
-            Realtime.on(channelName, eventName, function(activity) {
+            Realtime.on(channelName, 'ActivityEvent', function(activity) {
                 if ($scope.activities.length >= limit) {
                     $scope.activities.splice(limit-1);
                 }
-                $scope.activities.unshift(activity.data);
-                Notification.success(activity.data.event);
+                $scope.activities.unshift(activity);
             });
 
             $scope.searchActivities = function(page) {

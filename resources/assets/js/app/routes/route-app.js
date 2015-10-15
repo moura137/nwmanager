@@ -347,6 +347,17 @@ angular.module('app.routes', ['ui.router'])
             },
         })
 
+        .state('painel.project.activities', {
+            url: '/:id/activities',
+            title: 'Atividades',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/activities/list.html',
+                    controller: 'ProjectActivityListCtrl',
+                },
+            },
+        })
+
         .state('login', {
             url: '/login',
             title: 'Login',

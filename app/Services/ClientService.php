@@ -28,10 +28,11 @@ class ClientService extends AbstractService
      *
      * @param Entity|int $id
      * @param array      $data
+     * @param array      $criterias
      *
      * @return bool
      */
-    public function delete($id, array $data = array())
+    public function delete($id, array $data = [], $criterias = [])
     {
         $entity = $this->repository->find($id);
 
@@ -45,6 +46,6 @@ class ClientService extends AbstractService
             return false;
         }
 
-        return parent::delete($entity->id, $data);
+        return parent::delete($entity->id, $data, $criterias);
     }
 }

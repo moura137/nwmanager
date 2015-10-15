@@ -3,8 +3,8 @@
  */
 angular.module('app.providers')
 .provider('Settings',
-    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE', 'BROADCAST_DRIVER', 'PUSHER_API_KEY',
-    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE, BROADCAST_DRIVER, PUSHER_API_KEY){
+    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE', 'BROADCAST_DRIVER', 'PUSHER_API_KEY', 'FANOUT_REALM_ID',
+    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE, BROADCAST_DRIVER, PUSHER_API_KEY, FANOUT_REALM_ID){
         var config = {
             basePath: BASE_PATH,
             apiUrl: API_URL,
@@ -15,6 +15,18 @@ angular.module('app.providers')
                 driver: BROADCAST_DRIVER,
                 pusher: {
                     ApiKey: PUSHER_API_KEY
+                },
+                fanout: {
+                    realmId: FANOUT_REALM_ID
+                },
+                faye: {
+                    url: 'http://localhost:8001/faye'
+                },
+                socketcluster: {
+                    secure: false,
+                    port: 8001,
+                    hostname: 'localhost',
+                    path: '/socketcluster/'
                 },
             },
             project : {

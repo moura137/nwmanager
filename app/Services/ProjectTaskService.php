@@ -7,6 +7,9 @@ use NwManager\Validators\ProjectTaskValidator;
 use NwManager\Repositories\Criterias\InputCriteria;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use NwManager\Entities\ProjectTask;
+use NwManager\Events\NewTaskEvent;
+use NwManager\Events\EditTaskEvent;
 
 /**
  * Class ProjectTaskService
@@ -27,65 +30,71 @@ class ProjectTaskService extends AbstractService
     }
 
     /**
-     * Update
+     * Finaliza a Tarefa Update
      *
      * @param Entity|int $id
      * @param array      $data
      *
      * @return Model
      */
-    public function update($id, array $data = [])
+    public function finishTask(ProjectTask $task)
     {
-        $project_id = isset($data['project_id']) ? $data['project_id'] : 0;
-
-        $entity = $this->repository->find($id)->fill($data);
-
-        $data = array_merge($data, $entity->toArray());
-
         try {
-            $this->validator
-                ->with($data)
-                ->setId($id)
-                ->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            if ($task->status == '1') {
+                return true;
+            }
 
-            return $this->repository
-                ->resetModel()
-                ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
-                ->update($data, $id);
+            $task->final_date = date('Y-m-d H:i:s');
+            $task->status = '1';
+            $success = (bool) $task->save();
 
-        } catch (ModelNotFoundException $e) {
-            throw $e;
+            if ($success) {
+                event(new EditTaskEvent($task));
+            }
+
+            return $success;
 
         } catch (\Exception $e) {
-            $this->errors = $this->parseError($e);
+            $task->setRawAttributes($task->getOriginal());
             return false;
         }
     }
 
     /**
-     * Delete
+     * Create
+     *
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function create(array $data)
+    {
+        $task = parent::create($data);
+
+        if ($task) {
+            event(new NewTaskEvent($task));
+        }
+
+        return $task;
+    }
+
+    /**
+     * Update
      *
      * @param Entity|int $id
      * @param array      $data
+     * @param array      $criterias
      *
-     * @return bool
+     * @return Model
      */
-    public function delete($id, array $data = array())
+    public function update($id, array $data = [], $criterias = [])
     {
-        try {
-            $project_id = isset($data['project_id']) ? $data['project_id'] : 0;
+        $task = parent::update($id, $data, $criterias);
 
-            return $this->repository
-                ->resetModel()
-                ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
-                ->delete($id);
-
-        } catch (ModelNotFoundException $e) {
-            throw $e;
-
-        } catch (\Exception $e) {
-            $this->errors = $this->parseError($e);
-            return false;
+        if ($task) {
+            event(new EditTaskEvent($task));
         }
+
+        return $task;
     }
 }

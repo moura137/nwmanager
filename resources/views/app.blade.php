@@ -58,9 +58,10 @@
         <script src="{{ asset('build/js/app/libraries/angular-nouislider.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-file-upload.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
-        <script src="{{ asset('build/vendor/js/pusher.min.js') }}"></script>
-        <script src="{{ asset('build/vendor/js/pusher-angular.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-ui-notification.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/pusher.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/pusher-angular.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/faye-browser.js') }}"></script>
 
         <script src="{{ asset('build/js/constants.js') }}"></script>
 
@@ -98,6 +99,7 @@
         <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskListCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskNewCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/project-task/ProjectTaskEditCtrl.js') }}"></script>
+        <script src="{{ asset('build/js/app/controllers/project/ProjectActivityListCtrl.js') }}"></script>
 
         <script src="{{ asset('build/js/app/controllers/LoginCtrl.js') }}"></script>
         <script src="{{ asset('build/js/app/controllers/LoginModelCtrl.js') }}"></script>

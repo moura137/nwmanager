@@ -43,6 +43,7 @@ var paths = {
     'build_vendor': './public/build/vendor',
     'assets': './resources/assets',
     'bower': './bower_components',
+    'node': './node_modules',
 };
 
 paths.vendor_css = [
@@ -77,9 +78,10 @@ paths.vendor_js = [
     paths.bower + '/nouislider/distribute/nouislider.js',
     paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js',
     paths.bower + '/sweetalert/dist/sweetalert.min.js',
-    paths.bower + '/pusher/dist/pusher.min.js',
-    paths.bower + '/pusher-angular/lib/pusher-angular.min.js',
     paths.bower + '/angular-ui-notification/dist/angular-ui-notification.min.js',
+    paths.bower + '/pusher/dist/pusher.js',
+    paths.bower + '/pusher-angular/lib/pusher-angular.js',
+    paths.node + '/faye/browser/faye-browser.js',
 ];
 
 paths.vendor_js_map = [
@@ -105,6 +107,7 @@ gulp.task('config', function() {
     CLIENT_SECRET: '',
     BROADCAST_DRIVER: 'log',
     PUSHER_API_KEY: '',
+    FANOUT_REALM_ID: '',
   };
 
   if( ! fs.existsSync(fileEnvConfig)) {

@@ -21,13 +21,13 @@
 <tbody>
     <tr ng-repeat="task in tasks" ng-class="{'active': task.status==1}">
         <td>
-            <i class="fa fa-circle-o" ng-show="task.status==0"></i>
+            <i class="fa fa-circle-o cursor_pointer" ng-show="task.status==0" ng-click="finishTask($index)"></i>
             <i class="fa fa-check-circle-o" ng-show="task.status==1"></i>
         </td>
         <td>[[ task.name ]]</td>
         <td>[[ task.start_date | formatDate ]]</td>
         <td>[[ task.due_date | formatDate ]]</td>
-        <td>-</td>
+        <td>[[ task.final_date | formatDateTime ]]</td>
         <td>
         <a ng-href="#/project/[[ task.project_id ]]/tasks/[[ task.id ]]/edit" class="btn btn-xs btn-white"><i class="fa fa-pencil"></i> Editar</a>
         <button type="button" ng-click="deleteTask(task)" ng-show="AuthUser.id==project.owner_id" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</button>

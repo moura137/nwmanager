@@ -94,7 +94,7 @@ class ActivityService
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
                 $data['project_id'] = $entity->project->id;
-                $data['project_id'] = $entity->project->name;
+                $data['project_name'] = $entity->project->name;
                 break;
 
             case $entity instanceof Entities\ProjectNote:
@@ -102,7 +102,7 @@ class ActivityService
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
                 $data['project_id'] = $entity->project->id;
-                $data['project_id'] = $entity->project->name;
+                $data['project_name'] = $entity->project->name;
                 break;
 
             case $entity instanceof Entities\ProjectTask:
@@ -110,7 +110,7 @@ class ActivityService
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
                 $data['project_id'] = $entity->project->id;
-                $data['project_id'] = $entity->project->name;
+                $data['project_name'] = $entity->project->name;
                 break;
 
             case $entity instanceof Entities\ProjectMember:
@@ -118,7 +118,7 @@ class ActivityService
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
                 $data['project_id'] = $entity->project->id;
-                $data['project_id'] = $entity->project->name;
+                $data['project_name'] = $entity->project->name;
                 break;
         }
 

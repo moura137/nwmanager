@@ -121,7 +121,9 @@ class ProjectTaskController extends Controller
         $data = $request->all();
         $data['project_id'] = $project_id;
 
-        $entity = $this->service->update($id, $data);
+        $criterias = ['project_id' => $project_id];
+
+        $entity = $this->service->update($id, $data, $criterias);
 
         if (!$entity) {
             $errors = $this->service->errors();
@@ -145,7 +147,9 @@ class ProjectTaskController extends Controller
         $data = $request->all();
         $data['project_id'] = $project_id;
 
-        $success = $this->service->delete($id, $data);
+        $criterias = ['project_id' => $project_id];
+
+        $success = $this->service->delete($id, $data, $criterias);
 
         if (!$success) {
             $errors = $this->service->errors();
@@ -154,5 +158,32 @@ class ProjectTaskController extends Controller
 
         return response()
                 ->json(['error' => null], 204);
+    }
+
+    /**
+     * Update for finish Task
+     *
+     * @param Request $request
+     * @param int     $project_id
+     * @param int     $id
+     *
+     * @return Response
+     */
+    public function finish(Request $request, $project_id, $id)
+    {
+        $task = $this->repo
+            ->with($this->withRelations)
+            ->pushCriteria(new InputCriteria(['project_id' => $project_id]))
+            ->find($id);
+
+        $success = $this->service->finishTask($task);
+
+        $data = ['success' => $success, 'task' => $task->presenter()['data']];
+
+        if (!$success) {
+            return response()->json($data, 422);
+        }
+
+        return response()->json($data);
     }
 }

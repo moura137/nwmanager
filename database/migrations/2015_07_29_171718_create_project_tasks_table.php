@@ -21,7 +21,7 @@ class CreateProjectTasksTable extends Migration
             $table->string('name');
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
-            $table->date('final_date')->nullable();
+            $table->timestamp('final_date')->nullable();
             $table->smallInteger('status')->unsigned();
             $table->timestamps();
         });

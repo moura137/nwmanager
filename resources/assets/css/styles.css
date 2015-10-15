@@ -18,6 +18,10 @@
   margin: 1px 0px;
 }
 
+.cursor_pointer {
+  cursor: pointer;
+}
+
 /**
  * Styles Custom
  */

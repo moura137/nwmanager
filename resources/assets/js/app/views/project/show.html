@@ -81,8 +81,8 @@
                                 <div class="tab-pane" id="tab-detalhes">
                                     <div ng-bind-html="project.description | nl2br"></div>
                                 </div>
-                                <div class="tab-pane" id="tab-activity">
-
+                                <div class="tab-pane" id="tab-activity" ng-controller="ProjectActivityListCtrl">
+                                    <div ng-include src="'build/views/activities/_activities.html'"></div>
                                 </div>
                             </div>
                         </div>

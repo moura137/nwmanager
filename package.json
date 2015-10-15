@@ -4,6 +4,9 @@
     "gulp": "^3.8.8"
   },
   "dependencies": {
+    "double-ended-queue": "^0.9.7",
+    "faye": "^1.1.2",
+    "faye-redis": "^0.2.0",
     "gulp-livereload": "^3.8.0",
     "gulp-ng-constant": "^0.3.0",
     "gulp-notify": "^2.2.0",

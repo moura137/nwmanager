@@ -13,6 +13,10 @@ angular.module('app.services')
             },
             update: {
                 method: 'PUT'
+            },
+            finish: {
+                url: Settings.apiUrl + '/project/:id/task/:idTask/finish',
+                method: 'POST'
             }
         });
     }]);

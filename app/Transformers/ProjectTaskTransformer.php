@@ -29,6 +29,7 @@ class ProjectTaskTransformer extends AbstractTransformer
             'name'          => $task->name,
             'start_date'    => $this->formatDate($task->start_date, 'Y-m-d'),
             'due_date'      => $this->formatDate($task->due_date, 'Y-m-d'),
+            'final_date'    => $this->formatDate($task->final_date, 'Y-m-d H:i:s'),
             'status'        => $task->status,
             'created_at'    => $this->formatDate($task->created_at, 'Y-m-d H:i:s'),
             'updated_at'    => $this->formatDate($task->updated_at, 'Y-m-d H:i:s'),

@@ -17,17 +17,26 @@ angular.module('app.providers')
 }])
 
 .factory('$RealtimeFactory',
-    ['RealtimePusher', 'RealtimeLog',
-    function (RealtimePusher, RealtimeLog) {
+    ['RealtimePusher', 'RealtimeFanout', 'RealtimeFaye', 'RealtimeSocketCluster', 'RealtimeLog',
+    function (RealtimePusher, RealtimeFanout, RealtimeFaye, RealtimeSocketCluster, RealtimeLog) {
         function RealtimeFactory(driver) {
             if (!(this instanceof RealtimeFactory)) {
                 switch(driver) {
                     case 'pusher':
                         return RealtimePusher;
                     break;
+                    case 'fanout':
+                        return RealtimeFanout;
+                    break;
+                    case 'faye':
+                        return RealtimeFaye;
+                    break;
+                    case 'socketcluster':
+                        return RealtimeSocketCluster;
+                    break;
                     default:
                     case 'log':
-                        console.log('RealtimeLog')
+                        console.log('RealtimeLog');
                         return RealtimeLog;
                     break;
                 }
@@ -37,46 +46,247 @@ angular.module('app.providers')
         return RealtimeFactory;
     }])
 
+
 .service('RealtimePusher',
     ['$pusher', 'Settings',
     function ($pusher, Settings) {
         this.socket = null;
 
-        this.connect = function () {
-            if (!this.socket) {
-                var client = new Pusher(Settings.broadcast.pusher.ApiKey);
-                this.socket = $pusher(client);
-            }
-        };
+        var self = this;
+        return {
+            connect: function () {
+                if (!this.socket) {
+                    var client = new Pusher(Settings.broadcast.pusher.ApiKey);
+                    this.socket = $pusher(client);
+                }
+            },
 
-        this.disconnect = function () {
-            if (this.socket) {
-                this.socket.disconnect();
-                this.socket = null;
-            }
-        };
+            disconnect: function () {
+                if (this.socket) {
+                    this.socket.disconnect();
+                    this.socket = null;
+                }
+            },
 
-        this.on = function (channelName, eventName, callback, context) {
-            if (this.socket) {
-                var channel = this.socket.subscribe(channelName);
-                channel.unbind(eventName);
-                channel.bind(eventName, callback, context);
-            }
-        };
+            bind: function (channelName, eventName, callback) {
+                if (this.socket) {
+                    var channel = this.socket.subscribe(channelName);
+                    channel.bind(eventName, callback);
+                }
+            },
 
-        this.off = function (channelName, eventName) {
-            if (this.socket) {
-                if (eventName) {
-                    this.channel(channelName).unbind(eventName);
-                } else {
-                    this.socket.unsubscribe(channelName);
+            on: function (channelName, eventName, callback) {
+                if (this.socket) {
+                    var channel = this.socket.subscribe(channelName);
+                    channel.unbind(eventName);
+                    channel.bind(eventName, callback);
+                }
+            },
+
+            once: function (channelName, eventName, callback) {
+                if (this.socket) {
+                    var channel = this.socket.subscribe(channelName);
+
+                    channel.bind(eventName, function g() {
+                        channel.unbind(eventName, g);
+                        callback.apply(this, arguments);
+                    });
+                }
+            },
+
+            off: function (channelName, eventName) {
+                if (this.socket) {
+                    if (eventName) {
+                        this.socket.channel(channelName).unbind(eventName);
+                    } else {
+                        this.socket.unsubscribe(channelName);
+                    }
                 }
             }
         };
+    }])
 
-        this.channel = function (channelName) {
-            if (this.socket) {
-                return this.socket.channel(channelName);
+.service('RealtimeFanout',
+    ['Settings',
+    function (Settings) {
+        this.socket = null;
+
+        var self = this;
+        return {
+            connect: function () {
+                if (!self.socket) {
+                    var url = 'https://'+Settings.broadcast.fanout.realmId+'.fanoutcdn.com/bayeux';
+                    self.socket = new Faye.Client(url);
+                }
+            },
+
+            disconnect: function () {
+                if (self.socket) {
+                    self.socket.disconnect();
+                    self.socket = null;
+                }
+            },
+
+            bind: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    var channel = self.socket.subscribe('/'+channelName, function(data) {
+                        if (data.event == eventName) {
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            on: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    self.socket.unsubscribe('/'+channelName);
+
+                    var channel = self.socket.subscribe('/'+channelName, function(data) {
+                        if (data.event == eventName) {
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            once:  function (channelName, eventName, callback) {
+                if (self.socket) {
+                    var channel = self.socket.subscribe('/'+channelName, function g(data) {
+                        if (data.event == eventName) {
+                            self.socket.unsubscribe('/'+channelName, g);
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            off: function (channelName, eventName) {
+                if (self.socket) {
+                    self.socket.unsubscribe('/'+channelName);
+                }
+            }
+        };
+    }])
+
+
+.service('RealtimeFaye',
+    ['Settings',
+    function (Settings) {
+        this.socket = null;
+
+        var self = this;
+        return {
+            connect: function () {
+                if (!self.socket) {
+                    self.socket = new Faye.Client(Settings.broadcast.faye.url);
+                }
+            },
+
+            disconnect: function () {
+                if (self.socket) {
+                    self.socket.disconnect();
+                    self.socket = null;
+                }
+            },
+
+            bind: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    var channel = self.socket.subscribe('/'+channelName, function(data) {
+                        if (data.event == eventName) {
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            on: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    self.socket.unsubscribe('/'+channelName);
+
+                    var channel = self.socket.subscribe('/'+channelName, function(data) {
+                        if (data.event == eventName) {
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            once:  function (channelName, eventName, callback) {
+                if (self.socket) {
+                    var channel = self.socket.subscribe('/'+channelName, function g(data) {
+                        if (data.event == eventName) {
+                            self.socket.unsubscribe('/'+channelName, g);
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            off: function (channelName, eventName) {
+                if (self.socket) {
+                    self.socket.unsubscribe('/'+channelName);
+                }
+            }
+        };
+    }])
+
+.service('RealtimeSocketCluster',
+    ['Settings',
+    function (Settings) {
+        this.socket = null;
+
+        var self = this;
+        return {
+            connect: function () {
+                if (!this.socket) {
+                    this.socket = socketCluster.connect(Settings.broadcast.socketcluster);
+                }
+            },
+
+            disconnect: function () {
+                if (this.socket) {
+                    this.socket.disconnect();
+                    this.socket = null;
+                }
+            },
+
+            bind: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    self.socket.watch(channelName, function(data) {
+                        if (data.event == eventName) {
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            on: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    self.socket.unwatch(channelName);
+
+                    self.socket.watch(channelName, function(data) {
+                        if (data.event == eventName) {
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            once: function (channelName, eventName, callback) {
+                if (self.socket) {
+                    self.socket.watch(channelName, function g(data) {
+                        if (data.event == eventName) {
+                            self.socket.unwatch(channelName, g);
+                            callback(data.data);
+                        }
+                    });
+                }
+            },
+
+            off: function (channelName, eventName) {
+                if (this.socket) {
+                    self.socket.unwatch(channelName);
+                }
             }
         };
     }])
@@ -90,12 +300,27 @@ angular.module('app.providers')
         console.log('DICONNECT()');
     };
 
-    this.on = function (channelName, eventName, callback, context) {
+    this.bind = function (channelName, eventName, callback) {
+        console.log('BIND()', {
+            'channelName': channelName,
+            'eventName': eventName,
+            'callback': callback
+        });
+    };
+
+    this.on = function (channelName, eventName, callback) {
         console.log('ON()', {
             'channelName': channelName,
             'eventName': eventName,
-            'callback': callback,
-            'context': context
+            'callback': callback
+        });
+    };
+
+    this.once = function (channelName, eventName, callback) {
+        console.log('ONCE()', {
+            'channelName': channelName,
+            'eventName': eventName,
+            'callback': callback
         });
     };
 
@@ -104,9 +329,5 @@ angular.module('app.providers')
             'channelName': channelName,
             'eventName': eventName,
         });
-    };
-
-    this.channel = function (channelName) {
-        console.log('CHANNEL()', channelName);
     };
 });

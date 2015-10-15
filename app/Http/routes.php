@@ -66,6 +66,7 @@ Route::group(['middleware' => 'accept.json'], function() {
         Route::get('project/{project}/task/{task}',     'ProjectTaskController@show');
         Route::put('project/{project}/task/{task}',     'ProjectTaskController@update');
         Route::delete('project/{project}/task/{task}',  'ProjectTaskController@destroy');
+        Route::post('project/{project}/task/{task}/finish',  'ProjectTaskController@finish');
 
         Route::get('project/{project}/file',                 'ProjectFileController@index');
         Route::post('project/{project}/file',                'ProjectFileController@store');

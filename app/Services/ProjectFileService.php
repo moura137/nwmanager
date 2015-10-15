@@ -103,14 +103,15 @@ class ProjectFileService extends AbstractService
     }
 
     /**
-     * Delete File
+     * Delete
      *
      * @param Entity|int $id
      * @param array      $data
+     * @param array      $criterias
      *
      * @return bool
      */
-    public function delete($id, array $data = array())
+    public function delete($id, array $data = [], $criterias = [])
     {
         try {
             $project_id = isset($data['project_id']) ? $data['project_id'] : 0;

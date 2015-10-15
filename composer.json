@@ -2,9 +2,9 @@
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "license": "proprietary",
     "type": "project",
-    "minimun-stability": "dev",
+    "minimun-stability": "stable",
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "^6.0",
         "league/fractal": "^0.12.0",
         "league/flysystem-aws-s3-v3": "~1.0",
-        "pusher/pusher-php-server": "^2.2"
+        "pusher/pusher-php-server": "^2.2",
+        "fanout/laravel-fanout": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

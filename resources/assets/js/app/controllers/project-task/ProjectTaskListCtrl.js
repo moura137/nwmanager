@@ -68,4 +68,22 @@ angular.module('app.controllers')
                     $scope.task = new ProjectTask();
                 });
             };
+
+            $scope.finishTask = function(index){
+                var task = $scope.tasks[index];
+                ProjectTask.finish({id: task.project_id, idTask: task.id}, {}, function(response){
+                        task.name = response.task.name;
+                        task.status = response.task.status;
+                        task.due_date = response.task.due_date;
+                        task.start_date = response.task.start_date;
+                        task.final_date = response.task.final_date;
+
+                    }, function(response){
+                        window.swal({
+                            title: "Error!",
+                            text: 'Erro ao tentar finalizar a tarefa!',
+                            type: "error"
+                        });
+                    });
+            };
         }]);

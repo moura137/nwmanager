@@ -26,10 +26,12 @@ class Activity extends AbstractEntity
     protected $fillable = [
         'user_id',
         'user_name',
-        'event',
-        'entity_desc',
+        'project_id',
+        'project_name',
         'entity_id',
         'entity_type',
+        'entity_desc',
+        'event',
 	];
 
     /**

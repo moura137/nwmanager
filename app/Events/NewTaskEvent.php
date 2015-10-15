@@ -3,15 +3,15 @@
 namespace NwManager\Events;
 
 use NwManager\Events\Event;
-use NwManager\Entities\Activity;
+use NwManager\Entities\ProjectTask;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ActivityEvent extends Event implements ShouldBroadcast
+class NewTaskEvent extends Event implements ShouldBroadcast
 {
     /**
-     * @var Activity
+     * @var ProjectTask
      */
-    protected $activity;
+    protected $task;
 
     /**
      * @var string
@@ -21,18 +21,18 @@ class ActivityEvent extends Event implements ShouldBroadcast
     /**
      * @var string
      */
-    protected $eventName = 'ActivityEvent';
+    protected $eventName = 'NewTaskEvent';
 
     /**
      * Create a new event instance.
      *
-     * @param Activity $activity
+     * @param ProjectTask $task
      *
      * @return void
      */
-    public function __construct(Activity $activity)
+    public function __construct(ProjectTask $task)
     {
-        $this->activity = $activity;
+        $this->task = $task;
     }
 
     /**
@@ -52,7 +52,7 @@ class ActivityEvent extends Event implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return $this->activity->presenter()['data'];
+        return $this->task->presenter()['data'];
     }
 
     /**
