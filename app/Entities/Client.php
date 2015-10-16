@@ -29,6 +29,11 @@ class Client extends AbstractEntity
         'email',
         'phone',
         'address',
+        'site',
+        'facebook',
+        'twitter',
+        'googleplus',
+        'skype',
         'obs',
     ];
 

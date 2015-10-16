@@ -17,5 +17,10 @@ class ClientValidator extends AbstractValidator
         'email'         => 'required|max:255|email',
         'phone'         => 'required|max:255',
         'address'       => 'required|max:255',
+        'site'          => 'max:255',
+        'facebook'      => 'max:255',
+        'twitter'       => 'max:255',
+        'googleplus'    => 'max:255',
+        'skype'         => 'max:255',
     ];
 }

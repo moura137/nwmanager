@@ -124,6 +124,14 @@
   height: 55px;
 }
 
+.dashboard .ibox-content.contents {
+  min-height: 460px;
+}
+
+.dashboard .ibox-content .table {
+  margin: 0px;
+}
+
 .dashboard .ibox-content.no-padding-lateral {
   padding-left: 0px;
   padding-right: 0px;

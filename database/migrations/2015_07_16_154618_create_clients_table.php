@@ -16,9 +16,14 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('responsible');
-            $table->string('email');    
+            $table->string('email');
             $table->string('phone');
             $table->string('address');
+            $table->string('site');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('googleplus');
+            $table->string('skype');
             $table->text('obs');
             $table->timestamps();
         });

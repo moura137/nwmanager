@@ -30,6 +30,11 @@ $factory->define(Entities\Client::class, function ($faker) {
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'obs' => $faker->text,
+        'site' => $faker->url,
+        'facebook' => 'facebook.com/'.$faker->username,
+        'twitter' => '@'.$faker->username,
+        'googleplus' => 'googleplus.com/'.$faker->username,
+        'skype' => $faker->username,
     ];
 });
 

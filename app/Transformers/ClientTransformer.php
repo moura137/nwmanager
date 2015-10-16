@@ -27,6 +27,11 @@ class ClientTransformer extends AbstractTransformer
             'email'         => $client->email,
             'phone'         => $client->phone,
             'address'       => $client->address,
+            'site'          => $client->site,
+            'facebook'      => $client->facebook,
+            'twitter'       => $client->twitter,
+            'googleplus'    => $client->googleplus,
+            'skype'         => $client->skype,
             'obs'           => $client->obs,
         ];
 
