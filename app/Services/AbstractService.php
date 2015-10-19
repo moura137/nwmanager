@@ -144,7 +144,7 @@ abstract class AbstractService
 
         return [
             'error' => 'error_internal',
-            'error_description' => $e->getMessage(),
+            'error_description' => sprintf("%s, %s in %s:(%s)", $e->getMessage(), get_class($e), $e->getFile(), $e->getLine()),
         ];
     }
 }

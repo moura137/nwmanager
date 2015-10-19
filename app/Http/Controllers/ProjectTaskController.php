@@ -86,8 +86,6 @@ class ProjectTaskController extends Controller
             return response()->json($errors, 422);
         }
 
-        activity('Criou nova tarefa', $entity);
-
         return response()->json($entity->presenter(), 201);
     }
 
@@ -178,11 +176,11 @@ class ProjectTaskController extends Controller
 
         $success = $this->service->finishTask($task);
 
-        $data = ['success' => $success, 'task' => $task->presenter()['data']];
-
         if (!$success) {
-            return response()->json($data, 422);
+            return response()->json($this->service->errors(), 422);
         }
+
+        $data = ['success' => $success, 'task' => $task->presenter()['data']];
 
         return response()->json($data);
     }

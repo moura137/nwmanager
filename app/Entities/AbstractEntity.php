@@ -16,6 +16,13 @@ abstract class AbstractEntity extends Model implements Presentable
     use PresentableTrait;
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    abstract public function getName();
+
+    /**
      * Set a given attribute on the model.
      *
      * @param  string  $key

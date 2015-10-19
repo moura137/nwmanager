@@ -22,6 +22,31 @@ class UserEloquentRepository extends AbstractEloquentRepository implements UserR
     ];
 
     /**
+     * Boot
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $presenter = $this->makePresenter();
+
+        User::created(function($user) use($presenter) {
+            $user->setPresenter($presenter);
+            activity('Criado Novo Usuário', $user);
+        });
+
+        User::updated(function($user) use($presenter) {
+            $user->setPresenter($presenter);
+            activity('Alterado Usuário', $user);
+        });
+
+        User::deleted(function($user) use($presenter) {
+            $user->setPresenter($presenter);
+            activity('Excluído Usuário', $user);
+        });
+    }
+
+    /**
      * Specify Model class name
      *
      * @return string

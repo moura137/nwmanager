@@ -34,6 +34,16 @@ class ProjectFile extends AbstractEntity
     ];
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->description;
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

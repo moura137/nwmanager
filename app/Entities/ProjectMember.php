@@ -44,6 +44,16 @@ class ProjectMember extends AbstractEntity
 	];
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->user->name;
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -6,8 +6,8 @@ use NwManager\Repositories\Contracts\ActivityRepository;
 use NwManager\Validators\ActivityValidator;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Model;
-use NwManager\Entities;
 use NwManager\Events\ActivityEvent;
+use NwManager\Entities;
 
 /**
  * Class ActivityService
@@ -34,7 +34,15 @@ class ActivityService
         $this->validator = $validator;
     }
 
-    public function createActivity($event, $entity = null)
+    /**
+     * Create Activity
+     *
+     * @param string         $event
+     * @param AbstractEntity $entity
+     *
+     * @return Activity
+     */
+    public function createActivity($event, Entities\AbstractEntity $entity = null)
     {
         try {
             $user = $this->auth->user();
@@ -50,16 +58,20 @@ class ActivityService
             return $activity;
 
         } catch (Exception $e) {
-            app('log')->error($e->getMessage());
-            return false;
+            app('log')->error(sprintf("%s, %s in %s:(%s)", $e->getMessage(), get_class($e), $e->getFile(), $e->getLine()));
         }
+
+        return false;
     }
 
-    protected function makeData($event, $user, $entity)
+    protected function makeData($event, Entities\User $user = null, Entities\AbstractEntity $entity = null)
     {
+        $user_id = $user ? $user->getKey() : null;
+        $user_name = $user ? $user->getName() : null;
+
         $data = [
-            'user_id'      => $user->id,
-            'user_name'    => $user->name,
+            'user_id'      => $user_id,
+            'user_name'    => $user_name,
             'project_id'   => null,
             'project_name' => null,
             'entity_id'    => null,
@@ -70,55 +82,55 @@ class ActivityService
 
         switch (true) {
             case $entity instanceof Entities\User:
-                $data['entity_desc'] = 'Usuário ' . $entity->name;
+                $data['entity_desc'] = 'Usuário ' . $entity->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
                 break;
 
             case $entity instanceof Entities\Client:
-                $data['entity_desc'] = 'Cliente ' . $entity->name;
+                $data['entity_desc'] = 'Cliente ' . $entity->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
                 break;
 
             case $entity instanceof Entities\Project:
-                $data['entity_desc'] = 'Projeto ' . $entity->name;
+                $data['entity_desc'] = 'Projeto ' . $entity->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
-                $data['project_id'] = $entity->id;
-                $data['project_id'] = $entity->name;
+                $data['project_id'] = $entity->getKey();
+                $data['project_id'] = $entity->getName();
                 break;
 
             case $entity instanceof Entities\ProjectFile:
-                $data['entity_desc'] = 'Arquivo ' . $entity->file . ' no projeto ' . $entity->project->name;
+                $data['entity_desc'] = 'Arquivo ' . $entity->file . ' no projeto ' . $entity->project->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
-                $data['project_id'] = $entity->project->id;
-                $data['project_name'] = $entity->project->name;
+                $data['project_id'] = $entity->project->getKey();
+                $data['project_name'] = $entity->project->getName();
                 break;
 
             case $entity instanceof Entities\ProjectNote:
-                $data['entity_desc'] = 'Nota ' . $entity->title . ' no projeto ' . $entity->project->name;
+                $data['entity_desc'] = 'Nota ' . $entity->title . ' no projeto ' . $entity->project->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
-                $data['project_id'] = $entity->project->id;
-                $data['project_name'] = $entity->project->name;
+                $data['project_id'] = $entity->project->getKey();
+                $data['project_name'] = $entity->project->getName();
                 break;
 
             case $entity instanceof Entities\ProjectTask:
-                $data['entity_desc'] = 'Task ' . $entity->name . ' no projeto ' . $entity->project->name;
+                $data['entity_desc'] = 'Task ' . $entity->getName() . ' no projeto ' . $entity->project->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
-                $data['project_id'] = $entity->project->id;
-                $data['project_name'] = $entity->project->name;
+                $data['project_id'] = $entity->project->getKey();
+                $data['project_name'] = $entity->project->getName();
                 break;
 
             case $entity instanceof Entities\ProjectMember:
-                $data['entity_desc'] = 'Membro ' . $entity->user->name . ' no projeto ' . $entity->project->name;
+                $data['entity_desc'] = 'Membro ' . $entity->getName() . ' no projeto ' . $entity->project->getName();
                 $data['entity_id']   = $entity->getKey();
                 $data['entity_type'] = get_class($entity);
-                $data['project_id'] = $entity->project->id;
-                $data['project_name'] = $entity->project->name;
+                $data['project_id'] = $entity->project->getKey();
+                $data['project_name'] = $entity->project->getName();
                 break;
         }
 

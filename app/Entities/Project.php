@@ -61,6 +61,16 @@ class Project extends AbstractEntity
     ];
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Is Ativo
      *
      * @return boolean

@@ -46,7 +46,7 @@ class RepositoriesServiceProvider extends ServiceProvider
     protected function registerRepositories()
     {
         foreach ($this->repositories as $abstract => $concrete) {
-            $this->app->bind($abstract, $concrete);
+            $this->app->singleton($abstract, $concrete);
         }
     }
 }

@@ -21,6 +21,31 @@ class ProjectEloquentRepository extends AbstractEloquentRepository implements Pr
     ];
 
     /**
+     * Boot
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $presenter = $this->makePresenter();
+
+        Project::created(function($project) use($presenter) {
+            $project->setPresenter($presenter);
+            activity('Criado Novo Projeto', $project);
+        });
+
+        Project::updated(function($project) use($presenter) {
+            $project->setPresenter($presenter);
+            activity('Alterado Projeto', $project);
+        });
+
+        Project::deleted(function($project) use($presenter) {
+            $project->setPresenter($presenter);
+            activity('Excluído Projeto', $project);
+        });
+    }
+
+    /**
      * Specify Model class name
      *
      * @return string

@@ -40,6 +40,16 @@ class User extends AbstractEntity implements AuthenticatableContract, CanResetPa
     protected $hidden = ['password', 'remember_token'];
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set Password somente se não estiver vazio e criptografa
      *
      * @param string $value

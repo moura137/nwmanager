@@ -21,6 +21,31 @@ class ClientEloquentRepository extends AbstractEloquentRepository implements Cli
     ];
 
     /**
+     * Boot
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $presenter = $this->makePresenter();
+
+        Client::created(function($client) use($presenter) {
+            $client->setPresenter($presenter);
+            activity('Criado Novo Cliente', $client);
+        });
+
+        Client::updated(function($client) use($presenter) {
+            $client->setPresenter($presenter);
+            activity('Alterado Cliente', $client);
+        });
+
+        Client::deleted(function($client) use($presenter) {
+            $client->setPresenter($presenter);
+            activity('Excluído Cliente', $client);
+        });
+    }
+
+    /**
      * Specify Model class name
      *
      * @return string

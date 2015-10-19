@@ -32,6 +32,16 @@ class ProjectNote extends AbstractEntity
     ];
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->title;
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

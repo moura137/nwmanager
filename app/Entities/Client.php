@@ -38,6 +38,16 @@ class Client extends AbstractEntity
     ];
 
     /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

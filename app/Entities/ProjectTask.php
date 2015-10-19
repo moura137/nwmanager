@@ -40,6 +40,26 @@ class ProjectTask extends AbstractEntity
     protected $dates = ['start_date', 'due_date', 'final_date'];
 
     /**
+     * Event Boot
+     *
+     * @return bool
+     */
+    public static function boot()
+    {
+        parent::boot();
+    }
+
+    /**
+     * Description Entity
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Projects
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
