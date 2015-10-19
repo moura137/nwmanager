@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[[ pageTitle ]] | NwManager</title>
 
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en" rel="stylesheet">
+
     <!-- CSS -->
     @if(config('app.debug'))
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -55,7 +57,6 @@
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('build/vendor/js/bootstrap-datepicker.pt-BR.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/nouislider.js') }}"></script>
-        <script src="{{ asset('build/js/app/libraries/angular-nouislider.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-file-upload.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-ui-notification.min.js') }}"></script>
@@ -132,6 +133,7 @@
         <script src="{{ asset('build/js/app/directives/loading.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/project-file-download.js') }}"></script>
         <script src="{{ asset('build/js/app/directives/breadcrumbs.js') }}"></script>
+        <script src="{{ asset('build/js/app/directives/angular-nouislider.js') }}"></script>
 
         <!-- Filters -->
         <script src="{{ asset('build/js/app/filters/app-filters.js') }}"></script>

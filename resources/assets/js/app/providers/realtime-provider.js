@@ -3,14 +3,14 @@
  */
 angular.module('app.providers')
 
-.provider('Realtime',['SettingsProvider', function(SettingsProvider) {
+.provider('Realtime',['BROADCAST_DRIVER', function(BROADCAST_DRIVER) {
     return {
         configure: function(driver) {
             this.driver = driver;
         },
 
         $get: ['$RealtimeFactory', function($RealtimeFactory) {
-            var driver = this.driver || SettingsProvider.config.broadcast.driver;
+            var driver = this.driver || BROADCAST_DRIVER;
             return $RealtimeFactory(driver);
         }]
     };

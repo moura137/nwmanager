@@ -46,15 +46,20 @@ var paths = {
     'node': './node_modules',
 };
 
+paths.assets_css = [
+    paths.assets + '/css/animate.css',
+    paths.assets + '/css/inspinia.css',
+    paths.assets + '/css/radial-progress.css',
+    paths.assets + '/css/styles.css'
+];
+
 paths.vendor_css = [
     paths.bower + '/bootstrap/dist/css/bootstrap.min.css',
     paths.bower + '/jasny-bootstrap/dist/css/jasny-bootstrap.min.css',
     paths.bower + '/sweetalert/dist/sweetalert.css',
     paths.bower + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
     paths.bower + '/nouislider/distribute/nouislider.min.css',
-    paths.bower + '/angular-ui-notification/dist/angular-ui-notification.min.css',
-    paths.assets + '/css/animate.css',
-    paths.assets + '/css/styles.css'
+    paths.bower + '/angular-ui-notification/dist/angular-ui-notification.min.css'
 ];
 
 paths.vendor_js = [
@@ -130,15 +135,13 @@ gulp.task('config', function() {
  * Copia os Style para o Build
  */
 gulp.task('copy-css', function(){
-    gulp.src([
-        paths.assets + '/css/**/*.css'
-    ])
-    .pipe(gulp.dest(paths.build_css))
-    .pipe(livereload());
+    gulp.src(paths.assets_css)
+        .pipe(gulp.dest(paths.build_css))
+        .pipe(livereload());
 
     gulp.src(paths.vendor_css)
-    .pipe(gulp.dest(paths.build_vendor+'/css'))
-    .pipe(livereload());
+        .pipe(gulp.dest(paths.build_vendor+'/css'))
+        .pipe(livereload());
 });
 
 /**
@@ -205,7 +208,7 @@ gulp.task('default', ['clean-build'], function(){
     gulp.start(['config', 'copy-html', 'copy-map']);
 
     elixir(function(mix) {
-        mix.styles(paths.vendor_css.concat([paths.assets + '/css/**/*.css']),
+        mix.styles(paths.vendor_css.concat(paths.assets_css),
             paths.public_css + '/all.css', './');
 
         mix.scripts(paths.vendor_js.concat([paths.assets + '/js/**/*.js']),

@@ -1,5 +1,6 @@
 'use strict';
-angular.module('nouislider', []).directive('slider', [
+angular.module('nouislider', [])
+.directive('slider', [
   '$timeout',
   function ($timeout) {
     return {
