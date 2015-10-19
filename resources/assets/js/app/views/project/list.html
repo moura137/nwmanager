@@ -1,11 +1,14 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="ibox">
         <div class="ibox-title">
-            <div class="row">
-                <div class="col-sm-1">
-                    <a class="btn btn-primary" ng-href="#/project/new"><i class="fa fa-plus"></i> Novo</a>
-                </div>
-                <div class="col-sm-11">
+            <table width="100%">
+            <tr>
+                <td nowrap="nowrap">
+                    <div class="m-r">
+                        <a class="btn btn-primary" ng-href="#/project/new"><i class="fa fa-plus"></i> Novo</a>
+                    </div>
+                </td>
+                <td>
                     <form ng-submit="search()" method="get">
                         <div class="input-group">
                             <input type="text" ng-model="q" placeholder="Buscar Projetos" class="input form-control">
@@ -17,8 +20,9 @@
                             </span>
                         </div>
                     </form>
-                </div>
-            </div>
+                </td>
+            </tr>
+            </table>
         </div>
         <div class="ibox-content">
             <div class="project-list table-responsive">

@@ -18,20 +18,29 @@ angular.module('app.directives')
             function updateBreadcrumbsArray()
             {
                 var breadcrumbs = [];
+
                 var currentState = $state.$current;
                 var x = 0;
-                while(currentState && currentState.self.name !== '')
+                while(currentState && currentState.self.name !== '' && !currentState.self.abstract)
                 {
                     breadcrumbs.push({
-                        'route': currentState.self.name+'.home',
+                        'route': currentState.self.name,
                         'title': currentState.self.title
                     });
                     currentState = currentState.parent;
                     if (x>10) { break; } x++;
                 }
 
-                breadcrumbs.reverse();
-                scope.breadcrumbs = breadcrumbs;
+                if (breadcrumbs.length > 1) {
+                    breadcrumbs.push({
+                        'route': 'painel.home',
+                        'title': 'Home'
+                    });
+                    breadcrumbs.reverse();
+                    scope.breadcrumbs = breadcrumbs;
+                } else {
+                    scope.breadcrumbs = [];
+                }
             }
         }
     };

@@ -1,44 +1,46 @@
 <hr>
-<div class="table-responsive" ng-show="projects.length">
+<div ng-show="projects.length">
     <h3>Projetos</h3>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Descrição</th>
-                <th ng-if="!client">Cliente</th>
-                <th ng-if="!user">Responsável</th>
-                <th>Previsão</th>
-                <th>Status</th>
+    <div class="table-responsive" ng-show="projects.length">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Descrição</th>
+                    <th ng-if="!client">Cliente</th>
+                    <th ng-if="!user">Responsável</th>
+                    <th>Previsão</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entity in projects">
+                <td>[[ entity.id ]]</td>
+                <td><a ng-href="#/project/[[ entity.id ]]/show" class="text-navy">[[ entity.name | limitTo:30 ]]...</a></td>
+                <td ng-if="!client">[[ entity.client.name ]]</td>
+                <td ng-if="!user">[[ entity.owner.name ]]</td>
+                <td>[[ entity.due_date | formatDate ]]</td>
+                <td><span class="label label-[[ entity.status | statusClassProject ]]">[[ entity.status | statusProject ]]</span></td>
             </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="entity in projects">
-            <td>[[ entity.id ]]</td>
-            <td><a ng-href="#/project/[[ entity.id ]]/show" class="text-navy">[[ entity.name | limitTo:30 ]]...</a></td>
-            <td ng-if="!client">[[ entity.client.name ]]</td>
-            <td ng-if="!user">[[ entity.owner.name ]]</td>
-            <td>[[ entity.due_date | formatDate ]]</td>
-            <td><span class="label label-[[ entity.status | statusClassProject ]]">[[ entity.status | statusProject ]]</span></td>
-        </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <span class="pull-right">[[ projects_pagination.total ]] Projetos(s)</span>
+        <span class="pull-right">[[ projects_pagination.total ]] Projetos(s)</span>
 
-    <pagination
-        ng-show="projects_pagination.total_pages>1"
-        ng-change="searchProjects(projects_pagination.current_page)"
-        boundary-links="true"
-        total-items="projects_pagination.total"
-        items-per-page="projects_pagination.per_page"
-        ng-model="projects_pagination.current_page"
-        class="pagination-sm"
-        previous-text="&lsaquo;"
-        next-text="&rsaquo;"
-        first-text="&laquo;"
-        last-text="&raquo;">
-    </pagination>
+        <pagination
+            ng-show="projects_pagination.total_pages>1"
+            ng-change="searchProjects(projects_pagination.current_page)"
+            boundary-links="true"
+            total-items="projects_pagination.total"
+            items-per-page="projects_pagination.per_page"
+            ng-model="projects_pagination.current_page"
+            class="pagination-sm"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;">
+        </pagination>
+    </div>
 </div>
 
 <p ng-hide="projects.length" align="center">

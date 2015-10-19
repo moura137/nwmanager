@@ -31,7 +31,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-class="{'gray-bg': bgLayout=='gray-bg'}">
+<body class="fixed-sidebar" ng-class="{'gray-bg': bgLayout=='gray-bg'}">
 
     <div ui-view="main"></div>
 

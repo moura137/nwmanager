@@ -42,9 +42,50 @@
             </div>
 
             <div class="row">
+                <label class="col-lg-2 control-label">Site</label>
+                <div class="col-lg-10">
+                    [[ client.site ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Skype</label>
+                <div class="col-lg-10">
+                    [[ client.skype ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Facebook</label>
+                <div class="col-lg-10">
+                    [[ client.facebook ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Twitter</label>
+                <div class="col-lg-10">
+                    [[ client.twitter ]]
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-lg-2 control-label">Google Plus</label>
+                <div class="col-lg-10">
+                    [[ client.googleplus ]]
+                </div>
+            </div>
+
+            <div class="row">
                 <label class="col-lg-2 control-label">Observação</label>
                 <div class="col-lg-10">
-                    <span ng-bind-html="client.obs | nl2br"></span>
+                    <p ng-bind-html="client.obs | nl2br"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <i class="icon-inline fa fa-clock-o"></i> <em>Última alteração em [[ client.updated_at | formatDateTime ]]</em>
                 </div>
             </div>
 

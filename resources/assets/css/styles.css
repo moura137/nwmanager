@@ -78,8 +78,19 @@
   padding-top: 10px;
 }
 
+.wrapper-content .ibox {
+  overflow: hidden;
+}
+
 .page-heading {
   padding-bottom: 10px;
+  min-width: 150px;
+}
+
+.slimScrollDiv {
+  overflow: auto;
+  height: 100%;
+
 }
 
 .dashboard .col-lg-1,

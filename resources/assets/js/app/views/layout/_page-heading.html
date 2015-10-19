@@ -1,5 +1,10 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+<div class="wrapper border-bottom white-bg page-heading">
+    <div class="row">
+    <div class="col-lg-12">
+        <a ng-href="#/logout" title="Sair do Sistema" class="navbar-logout pull-right btn btn-white">
+            <i class="fa fa-sign-out"></i> Sair
+        </a>
+        <button class="navbar-minimalize minimalize-styl-2 btn btn-primary "><i class="fa fa-bars"></i> </button>
         <h2>[[ pageTitle ]]</h2>
         <breadcrumbs
             displayname-property="data.displayName"
@@ -7,7 +12,5 @@
             template-url="uiBreadcrumbs.tpl.html">
         </breadcrumbs>
     </div>
-    <div class="col-lg-2">
-
     </div>
 </div>

@@ -17,6 +17,11 @@ $(document).ready(function () {
         $this.datepicker("show");
     });
 
+    // Minimalize menu
+    $("body").on("click", ".navbar-minimalize", function (e) {
+        e.preventDefault();
+        $("body").toggleClass("mini-navbar");
+    });
 
     // Add body-small class if window less than 768px
     if ($(this).width() < 769) {

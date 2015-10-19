@@ -21,8 +21,12 @@ angular.module('app.routes', ['ui.router'])
             url: '/',
             title: 'Project Manager',
             icon: 'fa fa-dashboard',
-            templateUrl: 'build/views/home/dashboard.html',
-            controller: 'HomeCtrl',
+            views: {
+                '@painel': {
+                    templateUrl: 'build/views/home/dashboard.html',
+                    controller: 'HomeCtrl',
+                },
+            },
         })
 
         .state('painel.client', {
