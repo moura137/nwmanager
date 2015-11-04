@@ -21,7 +21,7 @@ angular.module('app.controllers')
             };
 
             $scope.getOwners = function(search) {
-                return User.all({'search': search}).$promise;
+                return User.all({'search': search, 'typeahead': true}).$promise;
             };
 
             $scope.onSelectedOwner = function ($item) {
@@ -29,7 +29,7 @@ angular.module('app.controllers')
             };
 
             $scope.getClients = function(search) {
-                return Client.all({'search': search}).$promise;
+                return Client.all({'search': search, 'typeahead': true}).$promise;
             };
 
             $scope.onSelectedClient = function ($item) {

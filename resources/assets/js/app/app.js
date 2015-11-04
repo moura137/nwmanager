@@ -68,34 +68,40 @@ App.run([
     '$rootScope', '$location', '$modal', 'AuthUser', 'authService', 'OAuthToken', 'OAuth', 'Settings', 'Realtime', 'Notification',
     function($rootScope, $location, $modal, AuthUser, authService, OAuthToken, OAuth, Settings, Realtime, Notification)
     {
-        $rootScope.$on('realtime:build', function(event) {
-            var channelName = 'activities';
-            Realtime.connect();
-            Realtime.on(channelName, 'NewTaskEvent', function(task) {
-                var msg = '';
-                msg += 'Tarefa "' + task.name + '" Criada, ';
-                if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
-                msg += '\n<br>No Projeto "' + task.project.name + '"';
-                Notification.success(msg);
-            });
+        $rootScope.realtimeBuild = false;
 
-            Realtime.on(channelName, 'EditTaskEvent', function(task) {
-                var msg = '';
-                if (task.status == '1') {
-                    msg += 'Tarefa "' + task.name + '" Finalizada, ';
+        $rootScope.$on('realtime:build', function(event) {
+            if (!$rootScope.realtimeBuild) {
+                $rootScope.realtimeBuild = true;
+
+                var channelName = 'activities';
+                Realtime.connect();
+                Realtime.on(channelName, 'NewTaskEvent', function(task) {
+                    var msg = '';
+                    msg += 'Tarefa "' + task.name + '" Criada, ';
                     if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
-                    if (task.due_date) msg += '\n<br>Previsão "' + task.due_date;
                     msg += '\n<br>No Projeto "' + task.project.name + '"';
                     Notification.success(msg);
+                });
 
-                } else {
-                    msg += 'Tarefa "' + task.name + '" Alterada, ';
-                    if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
-                    if (task.due_date)msg += '\n<br>Previsão "' + task.due_date;
-                    msg += '\n<br>No Projeto "' + task.project.name + '"';
-                    Notification.warning(msg);
-                }
-            });
+                Realtime.on(channelName, 'EditTaskEvent', function(task) {
+                    var msg = '';
+                    if (task.status == '1') {
+                        msg += 'Tarefa "' + task.name + '" Finalizada, ';
+                        if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
+                        if (task.due_date) msg += '\n<br>Previsão "' + task.due_date;
+                        msg += '\n<br>No Projeto "' + task.project.name + '"';
+                        Notification.success(msg);
+
+                    } else {
+                        msg += 'Tarefa "' + task.name + '" Alterada, ';
+                        if (task.start_date) msg += '\n<br>Inicio "' + task.start_date;
+                        if (task.due_date)msg += '\n<br>Previsão "' + task.due_date;
+                        msg += '\n<br>No Projeto "' + task.project.name + '"';
+                        Notification.warning(msg);
+                    }
+                });
+            }
         });
 
         $rootScope.$on('event:http-notfound', function(event, rejection) {
@@ -120,12 +126,14 @@ App.run([
 
         $rootScope.$on('event:auth-loginCancelled', function(event, data) {
             $rootScope.isLoggedin = false;
+            $rootScope.realtimeBuild = false;
         });
 
         $rootScope.$on('oauth:error', function(event, rejection, deferred)
         {
             if (!$rootScope.isLoggedin) {
                 $rootScope.isLoggedin = true;
+                $rootScope.realtimeBuild = false;
                 Realtime.disconnect();
 
                 OAuth.getRefreshToken().then(function(response){
@@ -148,6 +156,7 @@ App.run([
             $rootScope.bgLayout = nextState.bgLayout;
 
             if (!OAuth.isAuthenticated()) {
+                $rootScope.realtimeBuild = false;
                 Realtime.disconnect();
 
                 if (nextState.requiredLogin!==false) {

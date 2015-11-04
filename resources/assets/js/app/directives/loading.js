@@ -4,8 +4,17 @@ angular.module('app.directives')
       restrict: 'A',
       link: function (scope, element, attrs) {
         scope.isLoading = function () {
-          return $http.pendingRequests.length > 0;
+          var isLoading = false;
+          $http.pendingRequests.forEach(function(object,b){
+            if (!object.params || !object.params.hasOwnProperty('typeahead')) {
+              isLoading = true;
+              return;
+            }
+          });
+
+          return isLoading;
         };
+
         scope.$watch(scope.isLoading, function (value) {
           if (value) {
             element.removeClass('ng-hide');

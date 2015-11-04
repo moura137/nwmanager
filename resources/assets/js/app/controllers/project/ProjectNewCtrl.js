@@ -20,7 +20,7 @@ angular.module('app.controllers')
              * TYPEAHEAD OWNER
              */
             $scope.getOwners = function(search) {
-                return User.all({'search': search}).$promise;
+                return User.all({'search': search, 'typeahead': true}).$promise;
             };
             $scope.onSelectedOwner = function ($item, $model, $label) {
                 $scope.project.owner_id = $item.id;
@@ -30,7 +30,7 @@ angular.module('app.controllers')
              * TYPEAHEAD CLIENT
              */
             $scope.getClients = function(search) {
-                return Client.all({'search': search}).$promise;
+                return Client.all({'search': search, 'typeahead': true}).$promise;
             };
             $scope.onSelectedClient = function ($item, $model, $label) {
                 $scope.project.client_id = $item.id;
