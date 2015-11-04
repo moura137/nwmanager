@@ -59,6 +59,7 @@
         <script src="{{ asset('build/vendor/js/nouislider.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-file-upload.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('build/vendor/js/blob-util.js') }}"></script>
         <script src="{{ asset('build/vendor/js/angular-ui-notification.min.js') }}"></script>
         <script src="{{ asset('build/vendor/js/pusher.js') }}"></script>
         <script src="{{ asset('build/vendor/js/pusher-angular.js') }}"></script>

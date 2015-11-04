@@ -57,7 +57,7 @@ class FileStorageManager
      *
      * @return bool
      */
-    public function deleteFile($name = null, $folder)
+    public function deleteFile($name, $folder)
     {
         try {
 
@@ -75,7 +75,7 @@ class FileStorageManager
      *
      * @return string
      */
-    public function readFile($name = null, $folder)
+    public function readFile($name, $folder)
     {
         try {
 
@@ -96,13 +96,34 @@ class FileStorageManager
      *
      * @return bool
      */
-    public function mimeType($name = null, $folder)
+    public function mimeType($name, $folder)
     {
         try {
 
             $filename = $this->parseFilename($name, $folder);
 
             return $this->storage->mimeType($filename);
+
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Get Size
+     *
+     * @param string $name
+     * @param string $folder
+     *
+     * @return bool
+     */
+    public function size($name, $folder)
+    {
+        try {
+
+            $filename = $this->parseFilename($name, $folder);
+
+            return $this->storage->size($filename);
 
         } catch (\Exception $e) {
             return null;
@@ -117,7 +138,7 @@ class FileStorageManager
      *
      * @return bool
      */
-    public function metaData($name = null, $folder)
+    public function metaData($name, $folder)
     {
         try {
 
@@ -138,7 +159,7 @@ class FileStorageManager
      *
      * @return string
      */
-    protected function parseFilename($name = null, $folder)
+    protected function parseFilename($name, $folder)
     {
         $folder = trim($folder, '/');
         $folder = $folder ? "{$folder}/" : "";

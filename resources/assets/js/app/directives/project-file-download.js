@@ -29,9 +29,12 @@ angular.module('app.directives')
                 scope.$on('save-file', function(event, data) {
                     scope.$emit('enable-button');
 
-                    var newAchor = $(anchor)
+                    // Convert Base64 to Blob
+                    blobUtil.base64StringToBlob(data.file, data.mime).then(function (blob) {
+                      // success
+                      var newAchor = $(anchor)
                         .clone()
-                        .attr('href', 'data:application-octet-stream;base64,'+ data.file)
+                        .attr('href', blobUtil.createObjectURL(blob))
                         .attr('download', data.filename)
                         .find('i')
                         .removeClass('fa-download')
@@ -39,10 +42,15 @@ angular.module('app.directives')
                         .end()
                         .appendTo($(anchor).parent());
 
-                    $(anchor).remove();
+                        $(anchor).remove();
 
-                    $timeout(function() {
-                        $(newAchor)[0].click();
+                        $timeout(function() {
+                            $(newAchor)[0].click();
+                        });
+
+                    }).catch(function (err) {
+                      // error
+                      console.log(err);
                     });
                 });
             },

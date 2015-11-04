@@ -203,6 +203,7 @@ class ProjectFileService extends AbstractService
             return [
                 'file' => base64_encode($file),
                 'mime' => $mime,
+                'size' => $entity->size,
                 'filename' => $entity->file,
             ];
 

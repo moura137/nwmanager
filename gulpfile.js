@@ -83,6 +83,7 @@ paths.vendor_js = [
     paths.bower + '/nouislider/distribute/nouislider.js',
     paths.bower + '/angular-file-upload/dist/angular-file-upload.min.js',
     paths.bower + '/sweetalert/dist/sweetalert.min.js',
+    paths.bower + '/blob-util/dist/blob-util.js',
     paths.bower + '/angular-ui-notification/dist/angular-ui-notification.min.js',
     paths.bower + '/pusher/dist/pusher.js',
     paths.bower + '/pusher-angular/lib/pusher-angular.js',
