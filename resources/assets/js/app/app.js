@@ -48,10 +48,7 @@ App.config([
     {
         OAuthProvider.configure({
           baseUrl: SettingsProvider.config.apiUrl,
-          clientId: SettingsProvider.config.clientId,
-          clientSecret: SettingsProvider.config.clientSecret,
-          grantPath: '/oauth/access-token',
-          revokePath: '/oauth/access-token'
+          grantPath: '/auth/token'
         });
 
         OAuthTokenProvider.configure({

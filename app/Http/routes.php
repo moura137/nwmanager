@@ -12,6 +12,9 @@ Route::any('/status', function(){
  * API
  */
 Route::group(['middleware' => 'accept.json'], function() {
+    // Proxy
+    Route::post('auth/token', 'ProxyController@token');
+    Route::post('auth/refresh', 'ProxyController@refresh');
 
     Route::post('oauth/access-token', 'OAuthController@access');
     Route::post('oauth/forgot', 'OAuthController@forgot');

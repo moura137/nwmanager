@@ -30,8 +30,6 @@ class FakerOAuth2Seeder extends Seeder
                 'updated_at' => $datetime,
             ]);
         }
-        $this->command->info("APP_ID: {$clientId}");
-        $this->command->info("SECRET: {$secret}");
 
         $constants = [
             'BASE_PATH' => 'http://localhost:8000',
@@ -47,9 +45,6 @@ class FakerOAuth2Seeder extends Seeder
             $atual = (array) @json_decode(File::get($path));
             $constants = array_merge($constants, $atual);
         }
-
-        $constants['CLIENT_ID'] = $clientId;
-        $constants['CLIENT_SECRET'] = $secret;
 
         File::put(base_path('env-config.json'), str_replace('\\', '', json_encode($constants)));
 

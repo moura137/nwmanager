@@ -109,8 +109,6 @@ gulp.task('config', function() {
     BASE_PATH: 'http://localhost:8000',
     API_URL: 'http://localhost:8000',
     AUTH_SECURE: false,
-    CLIENT_ID: 'ANGULAR_APP',
-    CLIENT_SECRET: '',
     BROADCAST_DRIVER: 'log',
     PUSHER_API_KEY: '',
     FANOUT_REALM_ID: '',
