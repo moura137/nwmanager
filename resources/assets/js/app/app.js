@@ -8,8 +8,6 @@ var App = angular.module('App', [
     'app.directives',
     'app.filters',
     'app.routes',
-    'angularFileUpload',
-    'nouislider',
     'ngSanitize',
     'angular-oauth2',
     'http-auth-interceptor',
@@ -17,7 +15,13 @@ var App = angular.module('App', [
     'ui-notification']);
 
 /** Modules **/
-angular.module('app.controllers', ['angular-oauth2', 'ngMessages', 'ui.bootstrap', 'ui.bootstrap.tpls', 'mgcrea.ngStrap.navbar']);
+angular.module('app.controllers', [
+    'ngMessages',
+    'ui.bootstrap',
+    'ui.bootstrap.tpls',
+    'mgcrea.ngStrap.navbar',
+    'angularFileUpload',
+    'nouislider']);
 angular.module('app.services', ['ngResource']);
 angular.module('app.providers', []);
 angular.module('app.factories', []);
