@@ -48,6 +48,7 @@ App.config([
     {
         OAuthProvider.configure({
           baseUrl: SettingsProvider.config.apiUrl,
+          clientId: 'ANGULAR_APP',
           grantPath: '/auth/token'
         });
 

@@ -3,8 +3,8 @@
  */
 angular.module('app.controllers')
     .controller('ProjectNoteListCtrl',
-        ['$scope', '$rootScope', '$stateParams', 'ProjectNote',
-        function($scope, $rootScope, $stateParams, ProjectNote) {
+        ['$scope', '$rootScope', '$stateParams', '$compile', '$timeout', '$http', '$window', 'ProjectNote',
+        function($scope, $rootScope, $stateParams, $compile, $timeout, $http, $window, ProjectNote) {
             $scope.project_id = $stateParams.id;
 
             $scope.searchNotes = function(page) {
@@ -24,6 +24,21 @@ angular.module('app.controllers')
             $scope.clear = function() {
                 $scope.q = '';
                 $scope.searchNotes();
+            };
+
+            $scope.print = function(note) {
+                $http.get('/build/views/project-note/printNote.html').then(function(response){
+                    $scope.note = note;
+                    console.log(note);
+                    var div = $('<div />');
+                    div.html($compile(response.data)($scope));
+                    $timeout(function() {
+                        var frame = $window.open('', '_blank', 'width=500,height=500,scrollbar=yes');
+                        frame.document.open();
+                        frame.document.write(div.html());
+                        frame.document.close();
+                    }, 100);
+                });
             };
 
             $scope.clear();

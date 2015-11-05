@@ -3,13 +3,11 @@
  */
 angular.module('app.providers')
 .provider('Settings',
-    ['BASE_PATH', 'API_URL', 'CLIENT_ID', 'CLIENT_SECRET', 'AUTH_SECURE', 'BROADCAST_DRIVER', 'PUSHER_API_KEY', 'FANOUT_REALM_ID',
-    function(BASE_PATH, API_URL, CLIENT_ID, CLIENT_SECRET, AUTH_SECURE, BROADCAST_DRIVER, PUSHER_API_KEY, FANOUT_REALM_ID){
+    ['BASE_PATH', 'API_URL', 'AUTH_SECURE', 'BROADCAST_DRIVER', 'PUSHER_API_KEY', 'FANOUT_REALM_ID',
+    function(BASE_PATH, API_URL, AUTH_SECURE, BROADCAST_DRIVER, PUSHER_API_KEY, FANOUT_REALM_ID){
         var config = {
             basePath: BASE_PATH,
             apiUrl: API_URL,
-            clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET,
             secure: AUTH_SECURE,
             broadcast: {
                 driver: BROADCAST_DRIVER,

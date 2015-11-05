@@ -12,8 +12,11 @@
     <div class="media-body ">
         <small class="pull-right">
         [[ note.diff_humans ]] &nbsp;
-        <a ng-href="#/project/[[ note.project_id ]]/notes/[[ note.id ]]/edit" class="btn btn-xs btn-white" ng-show="AuthUser.id==note.user_id||AuthUser.id==project.owner_id"><i class="fa fa-pencil"></i> Editar</a>
-        <a ng-href="#/project/[[ note.project_id ]]/notes/[[ note.id ]]/delete" class="btn btn-xs btn-danger" ng-show="AuthUser.id==note.user_id||AuthUser.id==project.owner_id"><i class="fa fa-trash"></i> Excluir</a>
+        <a href="javascript:void(0)" ng-click="print(note)" class="btn btn-xs btn-white"><i class="fa fa-print"></i> Imprimir</a>
+        <span ng-show="AuthUser.id==note.user_id||AuthUser.id==project.owner_id">
+            <a ng-href="#/project/[[ note.project_id ]]/notes/[[ note.id ]]/edit" class="btn btn-xs btn-white"><i class="fa fa-pencil"></i> Editar</a>
+            <a ng-href="#/project/[[ note.project_id ]]/notes/[[ note.id ]]/delete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+        </span>
         </small>
         <strong>[[ note.user.name ]]</strong> -
         <small class="text-muted">[[ note.updated_at | formatDateTime ]]</small>
